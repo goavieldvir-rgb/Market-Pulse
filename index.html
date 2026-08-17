@@ -317,6 +317,37 @@
     margin-top: 14px;
   }
  
+  /* ---------- Mini range meter ---------- */
+  .mini-meter { margin-top: 14px; }
+  .mini-meter-track {
+    position: relative;
+    height: 6px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--warm) 0%, #4B5470 50%, var(--cool) 100%);
+    opacity: 0.9;
+  }
+  .mini-meter-marker {
+    position: absolute;
+    top: 50%;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--text);
+    border: 2px solid var(--bg);
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 0 1px rgba(255,255,255,0.25), 0 2px 6px rgba(0,0,0,0.5);
+  }
+  .mini-meter-labels {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 6px;
+    font-size: 0.66rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--text-faint);
+  }
+ 
   footer {
     margin-top: 32px;
     padding-top: 20px;
@@ -505,10 +536,21 @@ function statusTag(status) {
   return `<span class="status-tag ${status}"><span class="sdot"></span>${map[status] || "Neutral"}</span>`;
 }
  
-function card({ title, code, status, valueHTML, note, subMetrics = [], asOf }) {
+function miniMeter(score, leftLabel = "Caution", rightLabel = "Opportunity") {
+  if (score === null || score === undefined || Number.isNaN(score)) return "";
+  const pct = clamp(((score + 100) / 200) * 100, 2, 98);
+  return `
+  <div class="mini-meter">
+    <div class="mini-meter-track"><div class="mini-meter-marker" style="left:${pct}%"></div></div>
+    <div class="mini-meter-labels"><span>${leftLabel}</span><span>${rightLabel}</span></div>
+  </div>`;
+}
+ 
+function card({ title, code, status, valueHTML, note, subMetrics = [], asOf, meterScore = null, meterLabels = ["Caution", "Opportunity"] }) {
   const sub = subMetrics.length
     ? `<div class="sub-metrics">${subMetrics.map(s => `<div class="sub-metric"><div class="k">${s.k}</div><div class="v">${s.v}</div></div>`).join("")}</div>`
     : "";
+  const meter = meterScore !== null ? miniMeter(meterScore, meterLabels[0], meterLabels[1]) : "";
   return `
   <div class="card">
     <div class="card-head">
@@ -516,6 +558,7 @@ function card({ title, code, status, valueHTML, note, subMetrics = [], asOf }) {
       ${statusTag(status)}
     </div>
     ${valueHTML}
+    ${meter}
     ${sub}
     <p class="card-note">${note}</p>
     ${asOf ? `<div class="as-of">as of ${asOf}</div>` : ""}
@@ -542,17 +585,20 @@ function card({ title, code, status, valueHTML, note, subMetrics = [], asOf }) {
   {
     const spy = fast?.spy, qqq = fast?.qqq;
     const d = spy?.distance_from_sma150_pct;
-    let status = "neutral";
+    let status = "neutral", score = null;
     if (d !== null && d !== undefined) {
       if (d > 8) status = "caution";
       else if (d < -3) status = "opportunity";
-      scores.push(clamp(-d * 6, -100, 100));
+      score = clamp(-d * 6, -100, 100);
+      scores.push(score);
     }
     cards.push(card({
       title: "Trend: Distance from SMA150",
       code: "SPY / QQQ vs 150-day average",
       status,
       valueHTML: `<div class="metric-row"><span class="metric-value ${status}">${fmtPct(d)}</span><span class="metric-unit">SPY vs SMA150</span></div>`,
+      meterScore: score,
+      meterLabels: ["Extended (caution)", "Below trend (opportunity)"],
       subMetrics: [
         { k: "SPY close", v: spy?.close ?? "—" },
         { k: "SPY SMA150", v: spy?.sma150 ?? "—" },
@@ -586,17 +632,20 @@ function card({ title, code, status, valueHTML, note, subMetrics = [], asOf }) {
   // --- 3. AAII sentiment ---
   {
     const spread = aaii?.bull_bear_spread;
-    let status = "neutral";
+    let status = "neutral", score = null;
     if (spread !== null && spread !== undefined) {
       if (spread > 10) status = "caution";
       else if (spread < -10) status = "opportunity";
-      scores.push(clamp(-spread * 3, -100, 100));
+      score = clamp(-spread * 3, -100, 100);
+      scores.push(score);
     }
     cards.push(card({
       title: "AAII Investor Sentiment",
       code: "Bull − Bear spread",
       status,
       valueHTML: `<div class="metric-row"><span class="metric-value ${status}">${spread !== null && spread !== undefined ? fmtPct(spread, 1) : "—"}</span><span class="metric-unit">spread</span></div>`,
+      meterScore: score,
+      meterLabels: ["More bulls (caution)", "More bears (opportunity)"],
       subMetrics: [
         { k: "Bullish", v: aaii?.bullish_pct !== undefined ? `${aaii.bullish_pct}%` : "—" },
         { k: "Neutral", v: aaii?.neutral_pct !== undefined && aaii?.neutral_pct !== null ? `${aaii.neutral_pct}%` : "—" },
@@ -610,17 +659,20 @@ function card({ title, code, status, valueHTML, note, subMetrics = [], asOf }) {
   // --- 4. VIX ---
   {
     const vix = fast?.vix?.close;
-    let status = "neutral";
+    let status = "neutral", score = null;
     if (vix !== null && vix !== undefined) {
       if (vix < 14) status = "caution";
       else if (vix > 25) status = "opportunity";
-      scores.push(clamp((vix - 18) * 5, -100, 100));
+      score = clamp((vix - 18) * 5, -100, 100);
+      scores.push(score);
     }
     cards.push(card({
       title: "VIX — Volatility Index",
       code: "CBOE",
       status,
       valueHTML: `<div class="metric-row"><span class="metric-value ${status}">${fmtNum(vix, 2)}</span></div>`,
+      meterScore: score,
+      meterLabels: ["Calm (caution)", "Fearful (opportunity)"],
       note: "High VIX = fear priced in, historically a better entry window. Low VIX = complacency, everyone's comfortable — worth being cautious.",
       asOf: fast?.generated_at ? timeAgo(fast.generated_at) : null,
     }));
@@ -629,17 +681,20 @@ function card({ title, code, status, valueHTML, note, subMetrics = [], asOf }) {
   // --- 5. Participation (RSP vs SPY) ---
   {
     const rel = fast?.participation?.rsp_minus_spy_20d_pct;
-    let status = "neutral";
+    let status = "neutral", score = null;
     if (rel !== null && rel !== undefined) {
       if (rel < -2) status = "caution";
       else if (rel > 1) status = "opportunity";
-      scores.push(clamp(rel * 12, -100, 100));
+      score = clamp(rel * 12, -100, 100);
+      scores.push(score);
     }
     cards.push(card({
       title: "Market Participation",
       code: "Equal-weight (RSP) vs cap-weight (SPY), 20d",
       status,
       valueHTML: `<div class="metric-row"><span class="metric-value ${status}">${fmtPct(rel, 2)}</span><span class="metric-unit">RSP − SPY</span></div>`,
+      meterScore: score,
+      meterLabels: ["Narrow (caution)", "Broad (healthy)"],
       note: "A proxy for how broad the rally is. When equal-weight badly lags cap-weight, gains are concentrated in a handful of mega-caps rather than the average stock — a narrower, more fragile advance.",
       asOf: fast?.generated_at ? timeAgo(fast.generated_at) : null,
     }));
@@ -648,17 +703,20 @@ function card({ title, code, status, valueHTML, note, subMetrics = [], asOf }) {
   // --- 6. Breadth (S5FI proxy) ---
   {
     const pct = breadth?.pct_above_sma50;
-    let status = "neutral";
+    let status = "neutral", score = null;
     if (pct !== null && pct !== undefined) {
       if (pct >= 70) status = "caution";
       else if (pct <= 15) status = "opportunity";
-      scores.push(clamp((45 - pct) * 3, -100, 100));
+      score = clamp((45 - pct) * 3, -100, 100);
+      scores.push(score);
     }
     cards.push(card({
       title: "% of S&P 500 Above 50-day SMA",
       code: "S5FI-style breadth proxy",
       status,
       valueHTML: `<div class="metric-row"><span class="metric-value ${status}">${pct !== null && pct !== undefined ? pct + "%" : "—"}</span></div>`,
+      meterScore: score,
+      meterLabels: ["Overextended (caution)", "Oversold (opportunity)"],
       note: "Above ~70%: most stocks already extended — danger zone, be cautious. Below ~14–15%: severe, broad-based fear — historically a strong buying-opportunity zone.",
       asOf: breadth?.generated_at ? timeAgo(breadth.generated_at) + " · daily" : null,
     }));
@@ -668,16 +726,19 @@ function card({ title, code, status, valueHTML, note, subMetrics = [], asOf }) {
   {
     const rot = fast?.sector_rotation;
     const spread = rot?.defensive_minus_cyclical_5d_pct;
-    let status = "neutral";
+    let status = "neutral", score = null;
     if (spread !== null && spread !== undefined) {
       if (spread > 2) status = "caution";
       else if (spread < -2) status = "opportunity";
+      score = clamp(-spread * 15, -100, 100);
     }
     cards.push(card({
       title: "Defensive Sector Rotation",
       code: "XLU/XLP vs XLY, 5-day",
       status,
       valueHTML: `<div class="metric-row"><span class="metric-value ${status}">${fmtPct(spread, 2)}</span><span class="metric-unit">defensive − cyclical</span></div>`,
+      meterScore: score,
+      meterLabels: ["Rotating defensive (caution)", "Risk-on (opportunity)"],
       subMetrics: [
         { k: "XLU 5d", v: fmtPct(fast?.sectors?.XLU?.return_5d_pct) },
         { k: "XLP 5d", v: fmtPct(fast?.sectors?.XLP?.return_5d_pct) },
@@ -691,17 +752,20 @@ function card({ title, code, status, valueHTML, note, subMetrics = [], asOf }) {
   // --- 8. CNN Fear & Greed ---
   {
     const fg = fast?.fear_greed;
-    let status = "neutral";
+    let status = "neutral", score = null;
     if (fg?.score !== null && fg?.score !== undefined) {
       if (fg.score >= 70) status = "caution";
       else if (fg.score <= 25) status = "opportunity";
-      scores.push(clamp((50 - fg.score) * 2.2, -100, 100));
+      score = clamp((50 - fg.score) * 2.2, -100, 100);
+      scores.push(score);
     }
     cards.push(card({
       title: "CNN Fear & Greed Index",
       code: "Composite sentiment, 0–100",
       status,
       valueHTML: `<div class="metric-row"><span class="metric-value ${status}">${fg?.score ?? "—"}</span><span class="metric-unit">${fg?.rating ?? ""}</span></div>`,
+      meterScore: score,
+      meterLabels: ["Extreme greed (caution)", "Extreme fear (opportunity)"],
       note: "CNN's blend of momentum, breadth, options, volatility, junk-bond demand and safe-haven flows into one read. Extreme Fear has historically marked better entry windows; Extreme Greed has often preceded pullbacks.",
       asOf: fast?.generated_at ? timeAgo(fast.generated_at) : null,
     }));
@@ -729,3 +793,4 @@ if ("serviceWorker" in navigator) {
 </script>
 </body>
 </html>
+ 
