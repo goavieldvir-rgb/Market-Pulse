@@ -1,8 +1,9 @@
 {
-  "generated_at": null,
-  "bullish_pct": null,
-  "neutral_pct": null,
-  "bearish_pct": null,
-  "bull_bear_spread": null,
-  "_note": "Placeholder. Populated by .github/workflows/update-slow.yml after first run."
+  "generated_at": "2026-08-17T05:42:27.354885+00:00",
+  "bullish_pct": 75.0,
+  "neutral_pct": 27.4,
+  "bearish_pct": 70.3,
+  "bull_bear_spread": 4.7,
+  "source": "https://www.aaii.com/sentimentsurvey",
+  "note": "AAII updates this survey weekly (Thursdays). Scraped best-effort from AAII's public page."
 }
