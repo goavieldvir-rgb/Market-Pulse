@@ -1,0 +1,11 @@
+{
+  "generated_at": null,
+  "spy": null,
+  "qqq": null,
+  "vix": null,
+  "sectors": { "XLP": null, "XLU": null, "XLY": null },
+  "participation": { "RSP": null, "SPY": null },
+  "fear_greed": null,
+  "sector_rotation": null,
+  "_note": "Placeholder. Populated by .github/workflows/update-fast.yml after first run."
+}

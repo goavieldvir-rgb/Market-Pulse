@@ -1,0 +1,679 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Market Pulse — SPY / QQQ Health Dashboard</title>
+<meta name="description" content="A read at a glance: trend, sentiment, breadth, volatility and rotation across SPY/QQQ." />
+<link rel="manifest" href="manifest.json" />
+<link rel="icon" href="icons/icon-192.png" />
+<link rel="apple-touch-icon" href="icons/icon-192.png" />
+<meta name="theme-color" content="#0B1220" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="MktPulse" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0B1220;
+    --bg-elev: #101A2E;
+    --bg-elev-2: #142238;
+    --line: #22314D;
+    --text: #E7ECF7;
+    --text-dim: #93A2C2;
+    --text-faint: #5D6C8A;
+    --cool: #4DA3FF;      /* fear / opportunity */
+    --cool-soft: #1B3358;
+    --warm: #FF9F1C;      /* greed / danger */
+    --warm-soft: #4A3413;
+    --green: #35C48F;
+    --red: #FF5C6C;
+    --radius: 14px;
+    --font-display: 'Space Grotesk', system-ui, sans-serif;
+    --font-body: 'Inter', system-ui, sans-serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: radial-gradient(1200px 600px at 50% -10%, #16213A 0%, var(--bg) 55%);
+    color: var(--text);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    padding: 20px 16px 48px;
+    max-width: 1080px;
+    margin: 0 auto;
+  }
+
+  a { color: var(--cool); }
+
+  header.top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 22px;
+    flex-wrap: wrap;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .brand .mark {
+    width: 34px; height: 34px;
+    border-radius: 9px;
+    background: linear-gradient(145deg, var(--cool), #2C6FC7);
+    display: flex; align-items: center; justify-content: center;
+    flex: none;
+  }
+  .brand .mark svg { width: 20px; height: 20px; }
+
+  .brand h1 {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin: 0;
+    letter-spacing: -0.01em;
+  }
+  .brand p {
+    margin: 1px 0 0;
+    font-size: 0.78rem;
+    color: var(--text-dim);
+  }
+
+  .updated-badge {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--text-faint);
+    background: var(--bg-elev);
+    border: 1px solid var(--line);
+    padding: 7px 10px;
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+  }
+  .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); flex: none; }
+  .dot.stale { background: var(--text-faint); }
+
+  /* ---------- Hero gauge ---------- */
+  .hero {
+    background: linear-gradient(180deg, var(--bg-elev) 0%, var(--bg-elev-2) 100%);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    padding: 28px 20px 20px;
+    text-align: center;
+    margin-bottom: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    margin-bottom: 6px;
+  }
+
+  #gauge-wrap { max-width: 340px; margin: 0 auto; }
+  #gauge-wrap svg { width: 100%; height: auto; display: block; }
+
+  .gauge-readout {
+    margin-top: -8px;
+  }
+  .gauge-score {
+    font-family: var(--font-display);
+    font-size: 2.1rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  .gauge-label {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-top: 2px;
+  }
+  .gauge-sub {
+    font-size: 0.82rem;
+    color: var(--text-dim);
+    max-width: 480px;
+    margin: 8px auto 0;
+    line-height: 1.5;
+  }
+
+  .scale-labels {
+    display: flex;
+    justify-content: space-between;
+    max-width: 340px;
+    margin: 2px auto 0;
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    color: var(--text-faint);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  /* ---------- Grid ---------- */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 12px;
+  }
+
+  .card {
+    background: var(--bg-elev);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 16px 16px 14px;
+    position: relative;
+    border-left: 3px solid var(--text-faint);
+  }
+  .card.status-opportunity { border-left-color: var(--cool); }
+  .card.status-caution { border-left-color: var(--warm); }
+  .card.status-neutral { border-left-color: var(--text-faint); }
+
+  .card-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+  .card-title {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.92rem;
+  }
+  .card-code {
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    color: var(--text-faint);
+    display: block;
+    margin-top: 1px;
+  }
+
+  .badge {
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 3px 8px;
+    border-radius: 999px;
+    white-space: nowrap;
+    flex: none;
+  }
+  .badge.status-opportunity { color: var(--cool); background: var(--cool-soft); }
+  .badge.status-caution { color: var(--warm); background: var(--warm-soft); }
+  .badge.status-neutral { color: var(--text-dim); background: #1B2740; }
+
+  .metric-row {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 6px;
+  }
+  .metric-value {
+    font-family: var(--font-mono);
+    font-size: 1.7rem;
+    font-weight: 700;
+    line-height: 1;
+  }
+  .metric-unit {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--text-dim);
+  }
+  .metric-delta {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--text-dim);
+  }
+  .metric-delta.up { color: var(--green); }
+  .metric-delta.down { color: var(--red); }
+
+  .card-note {
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    line-height: 1.45;
+    margin-top: 8px;
+  }
+
+  .sub-metrics {
+    display: flex;
+    gap: 14px;
+    margin-top: 4px;
+    flex-wrap: wrap;
+  }
+  .sub-metric .k { font-size: 0.68rem; color: var(--text-faint); text-transform: uppercase; letter-spacing: .04em; }
+  .sub-metric .v { font-family: var(--font-mono); font-size: 0.92rem; font-weight: 600; margin-top: 1px; }
+
+  .as-of {
+    font-family: var(--font-mono);
+    font-size: 0.64rem;
+    color: var(--text-faint);
+    margin-top: 10px;
+  }
+
+  footer {
+    margin-top: 26px;
+    padding-top: 16px;
+    border-top: 1px solid var(--line);
+    font-size: 0.76rem;
+    color: var(--text-faint);
+    line-height: 1.6;
+  }
+  footer p { margin: 4px 0; }
+  footer code { font-family: var(--font-mono); color: var(--text-dim); }
+
+  .install-hint {
+    background: var(--bg-elev);
+    border: 1px dashed var(--line);
+    border-radius: 12px;
+    padding: 10px 14px;
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    margin-top: 18px;
+  }
+
+  @media (max-width: 480px) {
+    .gauge-score { font-size: 1.7rem; }
+    .metric-value { font-size: 1.45rem; }
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="brand">
+    <div class="mark">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="12" cy="12" r="8.5" stroke="white" stroke-width="1.6"/>
+        <path d="M12 12 L16 7" stroke="white" stroke-width="1.8" stroke-linecap="round"/>
+        <circle cx="12" cy="12" r="1.4" fill="white"/>
+      </svg>
+    </div>
+    <div>
+      <h1>Market Pulse</h1>
+      <p>SPY / QQQ health, at a glance</p>
+    </div>
+  </div>
+  <div class="updated-badge" id="updated-badge">
+    <span class="dot" id="updated-dot"></span>
+    <span id="updated-text">Loading…</span>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="eyebrow">Composite contrarian read</div>
+  <div id="gauge-wrap"></div>
+  <div class="scale-labels">
+    <span>Caution</span>
+    <span>Neutral</span>
+    <span>Opportunity</span>
+  </div>
+  <div class="gauge-readout">
+    <div class="gauge-score" id="gauge-score">—</div>
+    <div class="gauge-label" id="gauge-label">Loading data…</div>
+    <p class="gauge-sub">A simple, contrarian-leaning blend of the signals below — not a forecast.
+      Skewed toward "Opportunity" when fear/pessimism/oversold conditions dominate, and toward
+      "Caution" when comfort, greed, or crowding dominate.</p>
+  </div>
+</section>
+
+<section class="grid" id="card-grid"></section>
+
+<div class="install-hint">
+  📲 <strong>Add to your home screen:</strong> on iPhone, tap the Share icon → "Add to Home Screen".
+  On Android/Chrome, tap the menu (⋮) → "Add to Home screen" or "Install app".
+</div>
+
+<footer>
+  <p><strong>Not financial advice.</strong> This dashboard summarizes public market data for
+    informational purposes only. Composite scoring is a simplified heuristic, not a signal to
+    buy or sell anything.</p>
+  <p>Data: Yahoo Finance (price/SMA/VIX/sectors), CNN Fear &amp; Greed (unofficial public endpoint),
+    AAII.com (weekly sentiment survey), a community-maintained S&amp;P 500 constituent list for breadth.
+    Some figures are best-effort approximations of proprietary index tickers (e.g. the S5FI-style
+    breadth reading) — see each card's note.</p>
+  <p>Refreshed automatically roughly every 15 minutes on trading days via GitHub Actions.
+    Source: <code>github.com/&lt;your-username&gt;/&lt;your-repo&gt;</code></p>
+</footer>
+
+<script>
+const $ = (sel) => document.querySelector(sel);
+
+function fmtPct(v, digits = 2) {
+  if (v === null || v === undefined || Number.isNaN(v)) return "—";
+  const sign = v > 0 ? "+" : "";
+  return `${sign}${v.toFixed(digits)}%`;
+}
+function fmtNum(v, digits = 2) {
+  if (v === null || v === undefined || Number.isNaN(v)) return "—";
+  return v.toFixed(digits);
+}
+function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
+
+function timeAgo(iso) {
+  if (!iso) return "no data yet";
+  const then = new Date(iso).getTime();
+  const diffMin = Math.round((Date.now() - then) / 60000);
+  if (diffMin < 1) return "just now";
+  if (diffMin < 60) return `${diffMin}m ago`;
+  const h = Math.floor(diffMin / 60);
+  const m = diffMin % 60;
+  if (h < 24) return `${h}h ${m}m ago`;
+  const d = Math.floor(h / 24);
+  return `${d}d ago`;
+}
+
+async function loadJSON(path) {
+  try {
+    const res = await fetch(path + "?t=" + Date.now());
+    if (!res.ok) throw new Error(res.status);
+    return await res.json();
+  } catch (e) {
+    console.warn("Failed to load", path, e);
+    return null;
+  }
+}
+
+// ---------- Gauge (semicircle) ----------
+function renderGauge(score) {
+  // score in [-100, 100]; map to angle -90deg .. +90deg (left to right) on a semicircle
+  const wrap = $("#gauge-wrap");
+  const w = 340, h = 190, cx = w / 2, cy = 170, r = 140;
+  const clamped = clamp(score ?? 0, -100, 100);
+  const angleDeg = -90 + ((clamped + 100) / 200) * 180; // -90..+90
+  const angleRad = (angleDeg * Math.PI) / 180;
+  const nx = cx + r * 0.86 * Math.sin(angleRad);
+  const ny = cy - r * 0.86 * Math.cos(angleRad);
+
+  const arcPath = (startDeg, endDeg, color) => {
+    const toXY = (deg) => {
+      const rad = (deg * Math.PI) / 180;
+      return [cx + r * Math.sin(rad), cy - r * Math.cos(rad)];
+    };
+    const [x1, y1] = toXY(startDeg);
+    const [x2, y2] = toXY(endDeg);
+    const large = endDeg - startDeg > 180 ? 1 : 0;
+    return `<path d="M ${x1} ${y1} A ${r} ${r} 0 ${large} 1 ${x2} ${y2}" stroke="${color}" stroke-width="16" fill="none" stroke-linecap="round"/>`;
+  };
+
+  const svg = `
+  <svg viewBox="0 0 ${w} ${h + 10}" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="arcGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="#FF9F1C"/>
+        <stop offset="50%" stop-color="#5D6C8A"/>
+        <stop offset="100%" stop-color="#4DA3FF"/>
+      </linearGradient>
+    </defs>
+    <path d="M ${cx - r} ${cy} A ${r} ${r} 0 0 1 ${cx + r} ${cy}" stroke="url(#arcGrad)" stroke-width="16" fill="none" stroke-linecap="round" opacity="0.85"/>
+    <circle cx="${cx}" cy="${cy}" r="7" fill="#E7ECF7"/>
+    <line x1="${cx}" y1="${cy}" x2="${nx}" y2="${ny}" stroke="#E7ECF7" stroke-width="4" stroke-linecap="round"/>
+  </svg>`;
+  wrap.innerHTML = svg;
+}
+
+function gaugeLabel(score) {
+  if (score === null) return { label: "Not enough data", cls: "" };
+  if (score >= 55) return { label: "Extreme Fear — Opportunity Zone" };
+  if (score >= 20) return { label: "Leaning Opportunity" };
+  if (score > -20) return { label: "Neutral / Mixed Signals" };
+  if (score > -55) return { label: "Leaning Caution" };
+  return { label: "Extreme Comfort — Caution Zone" };
+}
+
+// ---------- Card builder ----------
+function statusBadge(status) {
+  const map = {
+    opportunity: "Opportunity",
+    caution: "Caution",
+    neutral: "Neutral",
+  };
+  return `<span class="badge status-${status}">${map[status] || "Neutral"}</span>`;
+}
+
+function card({ title, code, status, valueHTML, note, subMetrics = [], asOf }) {
+  const sub = subMetrics.length
+    ? `<div class="sub-metrics">${subMetrics.map(s => `<div class="sub-metric"><div class="k">${s.k}</div><div class="v">${s.v}</div></div>`).join("")}</div>`
+    : "";
+  return `
+  <div class="card status-${status}">
+    <div class="card-head">
+      <div><div class="card-title">${title}</div>${code ? `<span class="card-code">${code}</span>` : ""}</div>
+      ${statusBadge(status)}
+    </div>
+    ${valueHTML}
+    ${sub}
+    <p class="card-note">${note}</p>
+    ${asOf ? `<div class="as-of">as of ${asOf}</div>` : ""}
+  </div>`;
+}
+
+// ---------- Main ----------
+(async function main() {
+  const [fast, breadth, aaii] = await Promise.all([
+    loadJSON("data/fast.json"),
+    loadJSON("data/breadth.json"),
+    loadJSON("data/aaii.json"),
+  ]);
+
+  const scores = []; // collect for composite
+  const cards = [];
+
+  // Freshest overall timestamp for header badge
+  const timestamps = [fast?.generated_at, breadth?.generated_at, aaii?.generated_at].filter(Boolean);
+  const latest = timestamps.sort().reverse()[0];
+  $("#updated-text").textContent = latest ? `Updated ${timeAgo(latest)}` : "Waiting for first data run";
+  $("#updated-dot").classList.toggle("stale", !latest);
+
+  // --- 1. Trend: distance from SMA150 ---
+  {
+    const spy = fast?.spy, qqq = fast?.qqq;
+    const d = spy?.distance_from_sma150_pct;
+    let status = "neutral";
+    if (d !== null && d !== undefined) {
+      if (d > 8) status = "caution";
+      else if (d < -3) status = "opportunity";
+      else status = "neutral";
+      scores.push(clamp(-d * 6, -100, 100));
+    }
+    cards.push(card({
+      title: "Trend: Distance from SMA150",
+      code: "SPY / QQQ vs 150-day average",
+      status,
+      valueHTML: `<div class="metric-row"><span class="metric-value">${fmtPct(d)}</span><span class="metric-unit">SPY vs SMA150</span></div>`,
+      subMetrics: [
+        { k: "SPY close", v: spy?.close ?? "—" },
+        { k: "SPY SMA150", v: spy?.sma150 ?? "—" },
+        { k: "QQQ vs SMA150", v: fmtPct(qqq?.distance_from_sma150_pct) },
+      ],
+      note: "Price well above its 150-day average often means the trend is extended and due a pause; well below can flag long-term trend damage, but far-below-average dips are also where mean-reversion buyers tend to step in.",
+      asOf: fast?.generated_at ? timeAgo(fast.generated_at) : null,
+    }));
+  }
+
+  // --- 2. Momentum streak ---
+  {
+    const spy = fast?.spy, qqq = fast?.qqq;
+    const dir = spy?.streak_direction;
+    const cnt = spy?.streak_count ?? 0;
+    const status = "neutral";
+    const dirLabel = dir === "green" ? "green days in a row" : dir === "red" ? "red days in a row" : "flat";
+    cards.push(card({
+      title: "Momentum Streak",
+      code: "Consecutive up/down closes",
+      status,
+      valueHTML: `<div class="metric-row"><span class="metric-value" style="color:${dir === 'green' ? 'var(--green)' : dir === 'red' ? 'var(--red)' : 'var(--text)'}">${cnt}</span><span class="metric-unit">${dirLabel} (SPY)</span></div>`,
+      subMetrics: [
+        { k: "QQQ streak", v: qqq ? `${qqq.streak_count} ${qqq.streak_direction === 'green' ? '🟢' : qqq.streak_direction === 'red' ? '🔴' : ''}` : "—" },
+        { k: "SPY 5d return", v: fmtPct(spy?.return_5d_pct) },
+      ],
+      note: "Long streaks in either direction tend to mean-revert — useful context, not a signal on its own.",
+      asOf: fast?.generated_at ? timeAgo(fast.generated_at) : null,
+    }));
+  }
+
+  // --- 3. AAII sentiment ---
+  {
+    const spread = aaii?.bull_bear_spread;
+    let status = "neutral";
+    if (spread !== null && spread !== undefined) {
+      if (spread > 10) status = "caution";
+      else if (spread < -10) status = "opportunity";
+      scores.push(clamp(-spread * 3, -100, 100));
+    }
+    cards.push(card({
+      title: "AAII Investor Sentiment",
+      code: "Bull − Bear spread",
+      status,
+      valueHTML: `<div class="metric-row"><span class="metric-value">${spread !== null && spread !== undefined ? fmtPct(spread, 1) : "—"}</span><span class="metric-unit">spread</span></div>`,
+      subMetrics: [
+        { k: "Bullish", v: aaii?.bullish_pct !== undefined ? `${aaii.bullish_pct}%` : "—" },
+        { k: "Neutral", v: aaii?.neutral_pct !== undefined && aaii?.neutral_pct !== null ? `${aaii.neutral_pct}%` : "—" },
+        { k: "Bearish", v: aaii?.bearish_pct !== undefined ? `${aaii.bearish_pct}%` : "—" },
+      ],
+      note: "More bulls than bears means the public is getting comfortable — a classic contrarian caution flag. More bears than bulls has historically preceded strength.",
+      asOf: aaii?.generated_at ? timeAgo(aaii.generated_at) + " · weekly (Thu)" : null,
+    }));
+  }
+
+  // --- 4. VIX ---
+  {
+    const vix = fast?.vix?.close;
+    let status = "neutral";
+    if (vix !== null && vix !== undefined) {
+      if (vix < 14) status = "caution";
+      else if (vix > 25) status = "opportunity";
+      scores.push(clamp((vix - 18) * 5, -100, 100));
+    }
+    cards.push(card({
+      title: "VIX — Volatility Index",
+      code: "CBOE",
+      status,
+      valueHTML: `<div class="metric-row"><span class="metric-value">${fmtNum(vix, 2)}</span></div>`,
+      note: "High VIX = fear priced in, historically a better entry window. Low VIX = complacency, everyone's comfortable — worth being cautious.",
+      asOf: fast?.generated_at ? timeAgo(fast.generated_at) : null,
+    }));
+  }
+
+  // --- 5. Participation (RSP vs SPY) ---
+  {
+    const rel = fast?.participation?.rsp_minus_spy_20d_pct;
+    let status = "neutral";
+    if (rel !== null && rel !== undefined) {
+      if (rel < -2) status = "caution";
+      else if (rel > 1) status = "opportunity";
+      scores.push(clamp(rel * 12, -100, 100));
+    }
+    cards.push(card({
+      title: "Market Participation",
+      code: "Equal-weight (RSP) vs cap-weight (SPY), 20d",
+      status,
+      valueHTML: `<div class="metric-row"><span class="metric-value">${fmtPct(rel, 2)}</span><span class="metric-unit">RSP − SPY</span></div>`,
+      note: "A proxy for how broad the rally is. When equal-weight badly lags cap-weight, gains are concentrated in a handful of mega-caps rather than the average stock — a narrower, more fragile advance.",
+      asOf: fast?.generated_at ? timeAgo(fast.generated_at) : null,
+    }));
+  }
+
+  // --- 6. Breadth (S5FI proxy) ---
+  {
+    const pct = breadth?.pct_above_sma50;
+    let status = "neutral";
+    if (pct !== null && pct !== undefined) {
+      if (pct >= 70) status = "caution";
+      else if (pct <= 15) status = "opportunity";
+      scores.push(clamp((45 - pct) * 3, -100, 100));
+    }
+    cards.push(card({
+      title: "% of S&P 500 Above 50-day SMA",
+      code: "S5FI-style breadth proxy",
+      status,
+      valueHTML: `<div class="metric-row"><span class="metric-value">${pct !== null && pct !== undefined ? pct + "%" : "—"}</span></div>`,
+      note: "Above ~70%: most stocks already extended — danger zone, be cautious. Below ~14–15%: severe, broad-based fear — historically a strong buying-opportunity zone.",
+      asOf: breadth?.generated_at ? timeAgo(breadth.generated_at) + " · daily" : null,
+    }));
+  }
+
+  // --- 7. Sector rotation ---
+  {
+    const rot = fast?.sector_rotation;
+    const spread = rot?.defensive_minus_cyclical_5d_pct;
+    let status = "neutral";
+    if (spread !== null && spread !== undefined) {
+      if (spread > 2) status = "caution";
+      else if (spread < -2) status = "opportunity";
+    }
+    cards.push(card({
+      title: "Defensive Sector Rotation",
+      code: "XLU/XLP vs XLY, 5-day",
+      status,
+      valueHTML: `<div class="metric-row"><span class="metric-value">${fmtPct(spread, 2)}</span><span class="metric-unit">defensive − cyclical</span></div>`,
+      subMetrics: [
+        { k: "XLU 5d", v: fmtPct(fast?.sectors?.XLU?.return_5d_pct) },
+        { k: "XLP 5d", v: fmtPct(fast?.sectors?.XLP?.return_5d_pct) },
+        { k: "XLY 5d", v: fmtPct(fast?.sectors?.XLY?.return_5d_pct) },
+      ],
+      note: "When Utilities/Staples (defensive) are quietly outrunning Discretionary (cyclical), money is rotating toward safety — often an early warning sign under the surface of a still-calm index.",
+      asOf: fast?.generated_at ? timeAgo(fast.generated_at) : null,
+    }));
+  }
+
+  // --- 8. CNN Fear & Greed ---
+  {
+    const fg = fast?.fear_greed;
+    let status = "neutral";
+    if (fg?.score !== null && fg?.score !== undefined) {
+      if (fg.score >= 70) status = "caution";
+      else if (fg.score <= 25) status = "opportunity";
+      scores.push(clamp((50 - fg.score) * 2.2, -100, 100));
+    }
+    cards.push(card({
+      title: "CNN Fear & Greed Index",
+      code: "Composite sentiment, 0–100",
+      status,
+      valueHTML: `<div class="metric-row"><span class="metric-value">${fg?.score ?? "—"}</span><span class="metric-unit">${fg?.rating ?? ""}</span></div>`,
+      note: "CNN's blend of momentum, breadth, options, volatility, junk-bond demand and safe-haven flows into one read. Extreme Fear has historically marked better entry windows; Extreme Greed has often preceded pullbacks.",
+      asOf: fast?.generated_at ? timeAgo(fast.generated_at) : null,
+    }));
+  }
+
+  $("#card-grid").innerHTML = cards.join("");
+
+  // --- Composite gauge ---
+  if (scores.length) {
+    const composite = scores.reduce((a, b) => a + b, 0) / scores.length;
+    renderGauge(composite);
+    $("#gauge-score").textContent = (composite > 0 ? "+" : "") + composite.toFixed(0);
+    $("#gauge-label").textContent = gaugeLabel(composite).label;
+  } else {
+    renderGauge(0);
+    $("#gauge-score").textContent = "—";
+    $("#gauge-label").textContent = "Waiting for first data run";
+  }
+})();
+
+// Register service worker for installability (best-effort, ignore failures e.g. on file://)
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("sw.js").catch(() => {});
+  });
+}
+</script>
+</body>
+</html>
