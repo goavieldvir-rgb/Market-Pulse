@@ -1,33 +1,36 @@
 name: Update slow market data
-
+ 
 on:
   schedule:
+    # Once a day, weekdays, ~5:30pm UTC (after the US close year-round even
+    # accounting for DST). Breadth barely moves within a day and AAII only
+    # updates weekly, so daily is plenty.
     - cron: '30 21 * * 1-5'
   workflow_dispatch: {}
-
+ 
 permissions:
   contents: write
-
+ 
 concurrency:
   group: update-slow
   cancel-in-progress: true
-
+ 
 jobs:
   update:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
+ 
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-
+ 
       - name: Fetch breadth (S5FI proxy)
         run: python scripts/fetch_breadth.py
-
+ 
       - name: Fetch AAII sentiment
         run: python scripts/fetch_aaii.py
-
+ 
       - name: Commit and push if changed
         run: |
           git config user.name "market-dashboard-bot"
@@ -37,5 +40,10 @@ jobs:
             echo "No changes to commit"
           else
             git commit -m "chore: update breadth & sentiment data [skip ci]"
-            git push
+            for i in 1 2 3 4 5; do
+              git pull --rebase origin main && git push && break
+              echo "Push attempt $i failed (remote moved on) - retrying..."
+              sleep 5
+            done
           fi
+ 
