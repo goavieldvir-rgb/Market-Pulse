@@ -35,9 +35,9 @@
     --font-body: 'Inter', system-ui, sans-serif;
     --font-mono: 'JetBrains Mono', ui-monospace, monospace;
   }
-
+ 
   * { box-sizing: border-box; }
-
+ 
   html, body {
     margin: 0;
     padding: 0;
@@ -46,15 +46,15 @@
     font-family: var(--font-body);
     -webkit-font-smoothing: antialiased;
   }
-
+ 
   body {
     padding: 20px 16px 48px;
     max-width: 1080px;
     margin: 0 auto;
   }
-
+ 
   a { color: var(--cool); }
-
+ 
   header.top {
     display: flex;
     align-items: flex-start;
@@ -63,13 +63,13 @@
     margin-bottom: 22px;
     flex-wrap: wrap;
   }
-
+ 
   .brand {
     display: flex;
     align-items: center;
     gap: 10px;
   }
-
+ 
   .brand .mark {
     width: 34px; height: 34px;
     border-radius: 9px;
@@ -78,7 +78,7 @@
     flex: none;
   }
   .brand .mark svg { width: 20px; height: 20px; }
-
+ 
   .brand h1 {
     font-family: var(--font-display);
     font-size: 1.25rem;
@@ -91,7 +91,7 @@
     font-size: 0.78rem;
     color: var(--text-dim);
   }
-
+ 
   .updated-badge {
     font-family: var(--font-mono);
     font-size: 0.72rem;
@@ -107,7 +107,7 @@
   }
   .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); flex: none; }
   .dot.stale { background: var(--text-faint); }
-
+ 
   /* ---------- Hero gauge ---------- */
   .hero {
     background: linear-gradient(180deg, var(--bg-elev) 0%, var(--bg-elev-2) 100%);
@@ -119,7 +119,7 @@
     position: relative;
     overflow: hidden;
   }
-
+ 
   .hero .eyebrow {
     font-family: var(--font-mono);
     font-size: 0.7rem;
@@ -128,10 +128,10 @@
     color: var(--text-faint);
     margin-bottom: 6px;
   }
-
+ 
   #gauge-wrap { max-width: 340px; margin: 0 auto; }
   #gauge-wrap svg { width: 100%; height: auto; display: block; }
-
+ 
   .gauge-readout {
     margin-top: -8px;
   }
@@ -153,7 +153,7 @@
     margin: 8px auto 0;
     line-height: 1.5;
   }
-
+ 
   .scale-labels {
     display: flex;
     justify-content: space-between;
@@ -165,14 +165,14 @@
     text-transform: uppercase;
     letter-spacing: 0.06em;
   }
-
+ 
   /* ---------- Grid ---------- */
   .grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     gap: 12px;
   }
-
+ 
   .card {
     background: var(--bg-elev);
     border: 1px solid var(--line);
@@ -184,13 +184,14 @@
   .card.status-opportunity { border-left-color: var(--cool); }
   .card.status-caution { border-left-color: var(--warm); }
   .card.status-neutral { border-left-color: var(--text-faint); }
-
+ 
   .card-head {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
     gap: 8px;
     margin-bottom: 10px;
+    flex-wrap: wrap;
   }
   .card-title {
     font-family: var(--font-display);
@@ -204,7 +205,7 @@
     display: block;
     margin-top: 1px;
   }
-
+ 
   .badge {
     font-family: var(--font-mono);
     font-size: 0.62rem;
@@ -218,7 +219,7 @@
   .badge.status-opportunity { color: var(--cool); background: var(--cool-soft); }
   .badge.status-caution { color: var(--warm); background: var(--warm-soft); }
   .badge.status-neutral { color: var(--text-dim); background: #1B2740; }
-
+ 
   .metric-row {
     display: flex;
     align-items: baseline;
@@ -244,14 +245,14 @@
   }
   .metric-delta.up { color: var(--green); }
   .metric-delta.down { color: var(--red); }
-
+ 
   .card-note {
     font-size: 0.78rem;
     color: var(--text-dim);
     line-height: 1.45;
     margin-top: 8px;
   }
-
+ 
   .sub-metrics {
     display: flex;
     gap: 14px;
@@ -260,14 +261,14 @@
   }
   .sub-metric .k { font-size: 0.68rem; color: var(--text-faint); text-transform: uppercase; letter-spacing: .04em; }
   .sub-metric .v { font-family: var(--font-mono); font-size: 0.92rem; font-weight: 600; margin-top: 1px; }
-
+ 
   .as-of {
     font-family: var(--font-mono);
     font-size: 0.64rem;
     color: var(--text-faint);
     margin-top: 10px;
   }
-
+ 
   footer {
     margin-top: 26px;
     padding-top: 16px;
@@ -278,7 +279,7 @@
   }
   footer p { margin: 4px 0; }
   footer code { font-family: var(--font-mono); color: var(--text-dim); }
-
+ 
   .install-hint {
     background: var(--bg-elev);
     border: 1px dashed var(--line);
@@ -288,15 +289,26 @@
     color: var(--text-dim);
     margin-top: 18px;
   }
-
+ 
   @media (max-width: 480px) {
     .gauge-score { font-size: 1.7rem; }
     .metric-value { font-size: 1.45rem; }
+    body { padding: 14px 12px 40px; }
+    .hero { padding: 22px 14px 16px; border-radius: 16px; }
+    .card { padding: 14px 14px 12px; }
+    .gauge-sub { font-size: 0.78rem; }
+    .card-title { font-size: 0.88rem; }
+  }
+ 
+  @media (max-width: 360px) {
+    .gauge-score { font-size: 1.5rem; }
+    #gauge-wrap { max-width: 280px; }
+    .scale-labels { max-width: 280px; }
   }
 </style>
 </head>
 <body>
-
+ 
 <header class="top">
   <div class="brand">
     <div class="mark">
@@ -316,7 +328,7 @@
     <span id="updated-text">Loading…</span>
   </div>
 </header>
-
+ 
 <section class="hero">
   <div class="eyebrow">Composite contrarian read</div>
   <div id="gauge-wrap"></div>
@@ -333,14 +345,14 @@
       "Caution" when comfort, greed, or crowding dominate.</p>
   </div>
 </section>
-
+ 
 <section class="grid" id="card-grid"></section>
-
+ 
 <div class="install-hint">
   📲 <strong>Add to your home screen:</strong> on iPhone, tap the Share icon → "Add to Home Screen".
   On Android/Chrome, tap the menu (⋮) → "Add to Home screen" or "Install app".
 </div>
-
+ 
 <footer>
   <p><strong>Not financial advice.</strong> This dashboard summarizes public market data for
     informational purposes only. Composite scoring is a simplified heuristic, not a signal to
@@ -352,10 +364,10 @@
   <p>Refreshed automatically roughly every 15 minutes on trading days via GitHub Actions.
     Source: <code>github.com/&lt;your-username&gt;/&lt;your-repo&gt;</code></p>
 </footer>
-
+ 
 <script>
 const $ = (sel) => document.querySelector(sel);
-
+ 
 function fmtPct(v, digits = 2) {
   if (v === null || v === undefined || Number.isNaN(v)) return "—";
   const sign = v > 0 ? "+" : "";
@@ -366,7 +378,7 @@ function fmtNum(v, digits = 2) {
   return v.toFixed(digits);
 }
 function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
-
+ 
 function timeAgo(iso) {
   if (!iso) return "no data yet";
   const then = new Date(iso).getTime();
@@ -379,7 +391,7 @@ function timeAgo(iso) {
   const d = Math.floor(h / 24);
   return `${d}d ago`;
 }
-
+ 
 async function loadJSON(path) {
   try {
     const res = await fetch(path + "?t=" + Date.now());
@@ -390,7 +402,7 @@ async function loadJSON(path) {
     return null;
   }
 }
-
+ 
 // ---------- Gauge (semicircle) ----------
 function renderGauge(score) {
   // score in [-100, 100]; map to angle -90deg .. +90deg (left to right) on a semicircle
@@ -401,7 +413,7 @@ function renderGauge(score) {
   const angleRad = (angleDeg * Math.PI) / 180;
   const nx = cx + r * 0.86 * Math.sin(angleRad);
   const ny = cy - r * 0.86 * Math.cos(angleRad);
-
+ 
   const arcPath = (startDeg, endDeg, color) => {
     const toXY = (deg) => {
       const rad = (deg * Math.PI) / 180;
@@ -412,7 +424,7 @@ function renderGauge(score) {
     const large = endDeg - startDeg > 180 ? 1 : 0;
     return `<path d="M ${x1} ${y1} A ${r} ${r} 0 ${large} 1 ${x2} ${y2}" stroke="${color}" stroke-width="16" fill="none" stroke-linecap="round"/>`;
   };
-
+ 
   const svg = `
   <svg viewBox="0 0 ${w} ${h + 10}" xmlns="http://www.w3.org/2000/svg">
     <defs>
@@ -428,7 +440,7 @@ function renderGauge(score) {
   </svg>`;
   wrap.innerHTML = svg;
 }
-
+ 
 function gaugeLabel(score) {
   if (score === null) return { label: "Not enough data", cls: "" };
   if (score >= 55) return { label: "Extreme Fear — Opportunity Zone" };
@@ -437,7 +449,7 @@ function gaugeLabel(score) {
   if (score > -55) return { label: "Leaning Caution" };
   return { label: "Extreme Comfort — Caution Zone" };
 }
-
+ 
 // ---------- Card builder ----------
 function statusBadge(status) {
   const map = {
@@ -447,7 +459,7 @@ function statusBadge(status) {
   };
   return `<span class="badge status-${status}">${map[status] || "Neutral"}</span>`;
 }
-
+ 
 function card({ title, code, status, valueHTML, note, subMetrics = [], asOf }) {
   const sub = subMetrics.length
     ? `<div class="sub-metrics">${subMetrics.map(s => `<div class="sub-metric"><div class="k">${s.k}</div><div class="v">${s.v}</div></div>`).join("")}</div>`
@@ -464,7 +476,7 @@ function card({ title, code, status, valueHTML, note, subMetrics = [], asOf }) {
     ${asOf ? `<div class="as-of">as of ${asOf}</div>` : ""}
   </div>`;
 }
-
+ 
 // ---------- Main ----------
 (async function main() {
   const [fast, breadth, aaii] = await Promise.all([
@@ -472,16 +484,16 @@ function card({ title, code, status, valueHTML, note, subMetrics = [], asOf }) {
     loadJSON("data/breadth.json"),
     loadJSON("data/aaii.json"),
   ]);
-
+ 
   const scores = []; // collect for composite
   const cards = [];
-
+ 
   // Freshest overall timestamp for header badge
   const timestamps = [fast?.generated_at, breadth?.generated_at, aaii?.generated_at].filter(Boolean);
   const latest = timestamps.sort().reverse()[0];
   $("#updated-text").textContent = latest ? `Updated ${timeAgo(latest)}` : "Waiting for first data run";
   $("#updated-dot").classList.toggle("stale", !latest);
-
+ 
   // --- 1. Trend: distance from SMA150 ---
   {
     const spy = fast?.spy, qqq = fast?.qqq;
@@ -507,7 +519,7 @@ function card({ title, code, status, valueHTML, note, subMetrics = [], asOf }) {
       asOf: fast?.generated_at ? timeAgo(fast.generated_at) : null,
     }));
   }
-
+ 
   // --- 2. Momentum streak ---
   {
     const spy = fast?.spy, qqq = fast?.qqq;
@@ -528,7 +540,7 @@ function card({ title, code, status, valueHTML, note, subMetrics = [], asOf }) {
       asOf: fast?.generated_at ? timeAgo(fast.generated_at) : null,
     }));
   }
-
+ 
   // --- 3. AAII sentiment ---
   {
     const spread = aaii?.bull_bear_spread;
@@ -552,7 +564,7 @@ function card({ title, code, status, valueHTML, note, subMetrics = [], asOf }) {
       asOf: aaii?.generated_at ? timeAgo(aaii.generated_at) + " · weekly (Thu)" : null,
     }));
   }
-
+ 
   // --- 4. VIX ---
   {
     const vix = fast?.vix?.close;
@@ -571,7 +583,7 @@ function card({ title, code, status, valueHTML, note, subMetrics = [], asOf }) {
       asOf: fast?.generated_at ? timeAgo(fast.generated_at) : null,
     }));
   }
-
+ 
   // --- 5. Participation (RSP vs SPY) ---
   {
     const rel = fast?.participation?.rsp_minus_spy_20d_pct;
@@ -590,7 +602,7 @@ function card({ title, code, status, valueHTML, note, subMetrics = [], asOf }) {
       asOf: fast?.generated_at ? timeAgo(fast.generated_at) : null,
     }));
   }
-
+ 
   // --- 6. Breadth (S5FI proxy) ---
   {
     const pct = breadth?.pct_above_sma50;
@@ -609,7 +621,7 @@ function card({ title, code, status, valueHTML, note, subMetrics = [], asOf }) {
       asOf: breadth?.generated_at ? timeAgo(breadth.generated_at) + " · daily" : null,
     }));
   }
-
+ 
   // --- 7. Sector rotation ---
   {
     const rot = fast?.sector_rotation;
@@ -633,7 +645,7 @@ function card({ title, code, status, valueHTML, note, subMetrics = [], asOf }) {
       asOf: fast?.generated_at ? timeAgo(fast.generated_at) : null,
     }));
   }
-
+ 
   // --- 8. CNN Fear & Greed ---
   {
     const fg = fast?.fear_greed;
@@ -652,9 +664,9 @@ function card({ title, code, status, valueHTML, note, subMetrics = [], asOf }) {
       asOf: fast?.generated_at ? timeAgo(fast.generated_at) : null,
     }));
   }
-
+ 
   $("#card-grid").innerHTML = cards.join("");
-
+ 
   // --- Composite gauge ---
   if (scores.length) {
     const composite = scores.reduce((a, b) => a + b, 0) / scores.length;
@@ -667,7 +679,7 @@ function card({ title, code, status, valueHTML, note, subMetrics = [], asOf }) {
     $("#gauge-label").textContent = "Waiting for first data run";
   }
 })();
-
+ 
 // Register service worker for installability (best-effort, ignore failures e.g. on file://)
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
