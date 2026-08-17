@@ -39,20 +39,47 @@
  
   * { box-sizing: border-box; }
  
-  html, body {
+  html {
+    background: var(--bg);
+  }
+ 
+  body {
     margin: 0;
-    padding: 0;
-    background: radial-gradient(1100px 560px at 50% -8%, #16203B 0%, var(--bg) 58%);
+    padding: 28px 20px 56px;
+    max-width: 1040px;
+    margin-left: auto;
+    margin-right: auto;
     color: var(--text);
     font-family: var(--font-body);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    position: relative;
+    isolation: isolate;
   }
  
-  body {
-    padding: 28px 20px 56px;
-    max-width: 1040px;
-    margin: 0 auto;
+  /* Layered, fixed backdrop: base colour + soft colour glows + a faint grid,
+     so the page reads as a proper "console" rather than a flat dark panel. */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    background: var(--bg);
+  }
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background:
+      radial-gradient(900px 520px at 12% -6%, rgba(91,156,255,0.16), transparent 60%),
+      radial-gradient(760px 480px at 100% 8%, rgba(255,171,60,0.09), transparent 55%),
+      radial-gradient(1000px 700px at 50% 115%, rgba(91,156,255,0.08), transparent 60%),
+      repeating-linear-gradient(0deg, rgba(255,255,255,0.028) 0px, rgba(255,255,255,0.028) 1px, transparent 1px, transparent 64px),
+      repeating-linear-gradient(90deg, rgba(255,255,255,0.028) 0px, rgba(255,255,255,0.028) 1px, transparent 1px, transparent 64px);
+    -webkit-mask-image: radial-gradient(1200px 900px at 50% 0%, black 40%, transparent 92%);
+    mask-image: radial-gradient(1200px 900px at 50% 0%, black 40%, transparent 92%);
   }
  
   a { color: var(--cool); }
@@ -111,7 +138,20 @@
     padding: 36px 24px 28px;
     text-align: center;
     margin-bottom: 22px;
-    box-shadow: var(--shadow);
+    box-shadow: var(--shadow), 0 0 90px -30px rgba(91,156,255,0.35);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: "";
+    position: absolute;
+    top: -60%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 140%;
+    height: 220px;
+    background: radial-gradient(closest-side, rgba(91,156,255,0.22), transparent 70%);
+    pointer-events: none;
   }
  
   .hero .eyebrow {
@@ -168,12 +208,14 @@
   }
  
   .card {
-    background: var(--surface);
+    background: linear-gradient(165deg, #141B32 0%, var(--surface) 45%);
     border: 1px solid var(--border);
     border-radius: 18px;
     padding: 20px 20px 18px;
     box-shadow: var(--shadow);
+    transition: border-color 0.15s ease;
   }
+  .card:hover { border-color: rgba(255,255,255,0.13); }
  
   .card-head {
     display: flex;
