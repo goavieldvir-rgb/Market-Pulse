@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-18T08:29:29.951182+00:00",
+  "generated_at": "2026-08-18T09:05:03.774699+00:00",
   "spy": {
     "symbol": "SPY",
     "date": "2026-08-14",
@@ -25,13 +25,13 @@
   "vix": {
     "symbol": "^VIX",
     "date": "2026-08-18",
-    "close": 16.01,
-    "sma150": 18.94,
-    "distance_from_sma150_pct": -15.48,
+    "close": 15.89,
+    "sma150": 18.97,
+    "distance_from_sma150_pct": -16.24,
     "streak_direction": "green",
     "streak_count": 1,
-    "return_5d_pct": 3.56,
-    "return_20d_pct": 2.17
+    "return_5d_pct": 2.78,
+    "return_20d_pct": -14.8
   },
   "sectors": {
     "XLP": {
@@ -60,12 +60,12 @@
       "symbol": "XLY",
       "date": "2026-08-14",
       "close": 118.2,
-      "sma150": 116.6,
-      "distance_from_sma150_pct": 1.37,
+      "sma150": 116.51,
+      "distance_from_sma150_pct": 1.45,
       "streak_direction": "red",
       "streak_count": 1,
       "return_5d_pct": -1.38,
-      "return_20d_pct": 1.03
+      "return_20d_pct": 2.39
     }
   },
   "participation": {
