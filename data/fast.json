@@ -1,105 +1,105 @@
 {
-  "generated_at": "2026-08-18T15:25:27.782793+00:00",
+  "generated_at": "2026-08-18T15:56:02.708595+00:00",
   "spy": {
     "symbol": "SPY",
     "date": "2026-08-18",
-    "close": 767.54,
-    "sma150": 714.47,
-    "distance_from_sma150_pct": 7.43,
+    "close": 768.37,
+    "sma150": 715.0,
+    "distance_from_sma150_pct": 7.46,
     "streak_direction": "red",
-    "streak_count": 2,
-    "return_5d_pct": -0.71,
-    "return_20d_pct": 3.43
+    "streak_count": 3,
+    "return_5d_pct": -0.28,
+    "return_20d_pct": 2.68
   },
   "qqq": {
     "symbol": "QQQ",
     "date": "2026-08-18",
-    "close": 717.46,
-    "sma150": 662.47,
-    "distance_from_sma150_pct": 8.3,
+    "close": 718.9,
+    "sma150": 663.16,
+    "distance_from_sma150_pct": 8.4,
     "streak_direction": "red",
-    "streak_count": 2,
-    "return_5d_pct": -0.47,
-    "return_20d_pct": 3.07
+    "streak_count": 3,
+    "return_5d_pct": 0.06,
+    "return_20d_pct": 1.4
   },
   "vix": {
     "symbol": "^VIX",
     "date": "2026-08-18",
-    "close": 15.83,
+    "close": 15.91,
     "sma150": 18.94,
-    "distance_from_sma150_pct": -16.42,
+    "distance_from_sma150_pct": -15.99,
     "streak_direction": "green",
-    "streak_count": 1,
-    "return_5d_pct": 2.39,
-    "return_20d_pct": 1.02
+    "streak_count": 2,
+    "return_5d_pct": 4.12,
+    "return_20d_pct": -4.9
   },
   "sectors": {
     "XLP": {
       "symbol": "XLP",
       "date": "2026-08-18",
-      "close": 85.89,
-      "sma150": 84.33,
-      "distance_from_sma150_pct": 1.86,
-      "streak_direction": "red",
+      "close": 85.74,
+      "sma150": 84.36,
+      "distance_from_sma150_pct": 1.64,
+      "streak_direction": "green",
       "streak_count": 1,
-      "return_5d_pct": 1.11,
-      "return_20d_pct": 1.22
+      "return_5d_pct": 1.24,
+      "return_20d_pct": 2.0
     },
     "XLU": {
       "symbol": "XLU",
       "date": "2026-08-18",
-      "close": 44.37,
-      "sma150": 45.13,
-      "distance_from_sma150_pct": -1.69,
+      "close": 44.42,
+      "sma150": 45.15,
+      "distance_from_sma150_pct": -1.6,
       "streak_direction": "green",
-      "streak_count": 5,
-      "return_5d_pct": 2.88,
-      "return_20d_pct": -1.27
+      "streak_count": 1,
+      "return_5d_pct": 1.82,
+      "return_20d_pct": -1.1
     },
     "XLY": {
       "symbol": "XLY",
       "date": "2026-08-18",
-      "close": 117.24,
-      "sma150": 116.57,
-      "distance_from_sma150_pct": 0.57,
-      "streak_direction": "red",
-      "streak_count": 2,
-      "return_5d_pct": -2.03,
-      "return_20d_pct": -0.09
+      "close": 117.25,
+      "sma150": 116.41,
+      "distance_from_sma150_pct": 0.72,
+      "streak_direction": "green",
+      "streak_count": 1,
+      "return_5d_pct": -1.67,
+      "return_20d_pct": 2.07
     }
   },
   "participation": {
     "RSP": {
       "symbol": "RSP",
       "date": "2026-08-18",
-      "close": 220.62,
-      "sma150": 204.91,
-      "distance_from_sma150_pct": 7.67,
-      "streak_direction": "red",
+      "close": 220.84,
+      "sma150": 204.85,
+      "distance_from_sma150_pct": 7.81,
+      "streak_direction": "green",
       "streak_count": 1,
-      "return_5d_pct": 0.18,
-      "return_20d_pct": 3.86
+      "return_5d_pct": 0.07,
+      "return_20d_pct": 3.5
     },
     "SPY": {
       "symbol": "SPY",
       "date": "2026-08-18",
-      "close": 767.54,
-      "sma150": 714.47,
-      "distance_from_sma150_pct": 7.43,
+      "close": 768.37,
+      "sma150": 715.0,
+      "distance_from_sma150_pct": 7.46,
       "streak_direction": "red",
-      "streak_count": 2,
-      "return_5d_pct": -0.71,
-      "return_20d_pct": 3.43
+      "streak_count": 3,
+      "return_5d_pct": -0.28,
+      "return_20d_pct": 2.68
     },
-    "rsp_minus_spy_20d_pct": 0.43
+    "rsp_minus_spy_20d_pct": 0.82
   },
   "fear_greed": {
-    "score": 55.3,
-    "rating": "greed"
+    "score": 54.7,
+    "rating": "neutral"
   },
   "sector_rotation": {
-    "defensive_avg_return_5d_pct": 2.0,
-    "cyclical_return_5d_pct": -2.03,
-    "defensive_minus_cyclical_5d_pct": 4.03
+    "defensive_avg_return_5d_pct": 1.53,
+    "cyclical_return_5d_pct": -1.67,
+    "defensive_minus_cyclical_5d_pct": 3.2
   }
 }
