@@ -36,13 +36,13 @@
     --font-mono: 'JetBrains Mono', ui-monospace, monospace;
     --shadow: 0 1px 0 rgba(255,255,255,0.03) inset, 0 16px 32px -20px rgba(0,0,0,0.65);
   }
- 
+
   * { box-sizing: border-box; }
- 
+
   html {
     background: var(--bg);
   }
- 
+
   body {
     margin: 0;
     padding: 28px 20px 56px;
@@ -56,7 +56,7 @@
     position: relative;
     isolation: isolate;
   }
- 
+
   /* Layered, fixed backdrop: base colour + soft colour glows + a faint grid,
      so the page reads as a proper "console" rather than a flat dark panel. */
   body::before {
@@ -81,9 +81,9 @@
     -webkit-mask-image: radial-gradient(1200px 900px at 50% 0%, black 40%, transparent 92%);
     mask-image: radial-gradient(1200px 900px at 50% 0%, black 40%, transparent 92%);
   }
- 
+
   a { color: var(--cool); }
- 
+
   /* ---------- Header ---------- */
   header.top {
     display: flex;
@@ -93,9 +93,9 @@
     margin-bottom: 24px;
     flex-wrap: wrap;
   }
- 
+
   .brand { display: flex; align-items: center; gap: 12px; }
- 
+
   .brand .mark {
     width: 38px; height: 38px;
     border-radius: 11px;
@@ -105,7 +105,7 @@
     box-shadow: 0 6px 16px -6px rgba(91,156,255,0.55);
   }
   .brand .mark svg { width: 21px; height: 21px; }
- 
+
   .brand h1 {
     font-family: var(--font-display);
     font-size: 1.3rem;
@@ -118,7 +118,7 @@
     font-size: 0.82rem;
     color: var(--text-faint);
   }
- 
+
   .updated-badge {
     font-size: 0.78rem;
     color: var(--text-faint);
@@ -129,7 +129,7 @@
   }
   .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); flex: none; box-shadow: 0 0 0 3px rgba(52,211,153,0.15); }
   .dot.stale { background: var(--text-faint); box-shadow: none; }
- 
+
   /* ---------- Hero gauge ---------- */
   .hero {
     background: linear-gradient(175deg, var(--surface) 0%, var(--surface-2) 100%);
@@ -153,7 +153,7 @@
     background: radial-gradient(closest-side, rgba(91,156,255,0.22), transparent 70%);
     pointer-events: none;
   }
- 
+
   .hero .eyebrow {
     font-size: 0.76rem;
     font-weight: 600;
@@ -162,10 +162,10 @@
     color: var(--text-faint);
     margin-bottom: 14px;
   }
- 
+
   #gauge-wrap { max-width: 300px; margin: 0 auto; }
   #gauge-wrap svg { width: 100%; height: auto; display: block; }
- 
+
   .gauge-readout { margin-top: 6px; }
   .gauge-score {
     font-family: var(--font-mono);
@@ -187,7 +187,7 @@
     margin: 12px auto 0;
     line-height: 1.6;
   }
- 
+
   .scale-labels {
     display: flex;
     justify-content: space-between;
@@ -198,15 +198,30 @@
     color: var(--text-faint);
     text-transform: uppercase;
     letter-spacing: 0.05em;
+    line-height: 1.6;
   }
- 
+  .scale-labels b {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--text-dim);
+    text-transform: none;
+    letter-spacing: 0;
+  }
+  .gauge-scale-hint {
+    font-size: 0.72rem;
+    color: var(--text-faint);
+    margin-top: 2px;
+  }
+
   /* ---------- Grid ---------- */
   .grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 14px;
   }
- 
+
   .card {
     background: linear-gradient(165deg, #141B32 0%, var(--surface) 45%);
     border: 1px solid var(--border);
@@ -216,7 +231,7 @@
     transition: border-color 0.15s ease;
   }
   .card:hover { border-color: rgba(255,255,255,0.13); }
- 
+
   .card-head {
     display: flex;
     justify-content: space-between;
@@ -238,7 +253,7 @@
     margin-top: 3px;
     line-height: 1.3;
   }
- 
+
   .status-tag {
     display: flex;
     align-items: center;
@@ -258,7 +273,7 @@
   .status-tag.caution .sdot { background: var(--warm); }
   .status-tag.neutral { color: var(--text-faint); }
   .status-tag.neutral .sdot { background: var(--text-faint); }
- 
+
   .metric-row {
     display: flex;
     align-items: baseline;
@@ -280,14 +295,14 @@
     color: var(--text-faint);
     font-weight: 500;
   }
- 
+
   .card-note {
     font-size: 0.85rem;
     color: var(--text-dim);
     line-height: 1.6;
     margin-top: 12px;
   }
- 
+
   .sub-metrics {
     display: flex;
     gap: 20px;
@@ -310,13 +325,13 @@
     margin-top: 3px;
     color: var(--text);
   }
- 
+
   .as-of {
     font-size: 0.7rem;
     color: var(--text-faint);
     margin-top: 14px;
   }
- 
+
   /* ---------- Mini range meter ---------- */
   .mini-meter { margin-top: 14px; }
   .mini-meter-track {
@@ -347,7 +362,7 @@
     letter-spacing: 0.04em;
     color: var(--text-faint);
   }
- 
+
   footer {
     margin-top: 32px;
     padding-top: 20px;
@@ -359,7 +374,7 @@
   footer p { margin: 6px 0; }
   footer strong { color: var(--text-dim); }
   footer code { font-family: var(--font-mono); color: var(--text-dim); font-size: 0.78rem; }
- 
+
   .install-hint {
     background: var(--surface);
     border: 1px solid var(--border);
@@ -371,7 +386,24 @@
     line-height: 1.55;
   }
   .install-hint strong { color: var(--text); }
- 
+
+  /* ---------- Data health banner (only appears when something's actually stale) ---------- */
+  .health-banner {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    background: var(--warm-dim);
+    border: 1px solid rgba(255,171,60,0.35);
+    border-radius: 14px;
+    padding: 12px 16px;
+    margin-bottom: 18px;
+    font-size: 0.82rem;
+    color: #FFD9A8;
+    line-height: 1.5;
+  }
+  .health-banner .hb-icon { flex: none; font-size: 1rem; line-height: 1.4; }
+  .health-banner b { color: #FFEBCB; }
+
   @media (max-width: 480px) {
     body { padding: 18px 14px 44px; }
     .hero { padding: 26px 18px 20px; border-radius: 20px; }
@@ -383,7 +415,7 @@
     .gauge-sub { font-size: 0.8rem; }
     .grid { gap: 12px; }
   }
- 
+
   @media (max-width: 360px) {
     #gauge-wrap { max-width: 260px; }
     .scale-labels { max-width: 260px; }
@@ -392,7 +424,7 @@
 </style>
 </head>
 <body>
- 
+
 <header class="top">
   <div class="brand">
     <div class="mark">
@@ -412,31 +444,34 @@
     <span id="updated-text">Loading…</span>
   </div>
 </header>
- 
+
+<div id="health-banner-slot"></div>
+
 <section class="hero">
   <div class="eyebrow">Composite contrarian read</div>
   <div id="gauge-wrap"></div>
   <div class="scale-labels">
-    <span>Caution</span>
-    <span>Neutral</span>
-    <span>Opportunity</span>
+    <span>Caution<br><b>−100</b></span>
+    <span>Neutral<br><b>0</b></span>
+    <span>Opportunity<br><b>+100</b></span>
   </div>
   <div class="gauge-readout">
     <div class="gauge-score" id="gauge-score">—</div>
+    <div class="gauge-scale-hint">on a −100 (caution) to +100 (opportunity) scale</div>
     <div class="gauge-label" id="gauge-label">Loading data…</div>
     <p class="gauge-sub">A simple, contrarian-leaning blend of the signals below — not a forecast.
       Skewed toward "Opportunity" when fear, pessimism, or oversold conditions dominate, and toward
       "Caution" when comfort, greed, or crowding dominate.</p>
   </div>
 </section>
- 
+
 <section class="grid" id="card-grid"></section>
- 
+
 <div class="install-hint">
   📲 <strong>Add to your home screen:</strong> on iPhone, tap the Share icon → "Add to Home Screen".
   On Android/Chrome, tap the menu (⋮) → "Add to Home screen" or "Install app".
 </div>
- 
+
 <footer>
   <p><strong>Not financial advice.</strong> This dashboard summarizes public market data for
     informational purposes only. Composite scoring is a simplified heuristic, not a signal to
@@ -447,10 +482,10 @@
     breadth reading) — see each card's note.</p>
   <p>Refreshed automatically roughly every 15 minutes on trading days via GitHub Actions.</p>
 </footer>
- 
+
 <script>
 const $ = (sel) => document.querySelector(sel);
- 
+
 function fmtPct(v, digits = 2) {
   if (v === null || v === undefined || Number.isNaN(v)) return "—";
   const sign = v > 0 ? "+" : "";
@@ -461,7 +496,7 @@ function fmtNum(v, digits = 2) {
   return v.toFixed(digits);
 }
 function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
- 
+
 function timeAgo(iso) {
   if (!iso) return "no data yet";
   const then = new Date(iso).getTime();
@@ -474,7 +509,7 @@ function timeAgo(iso) {
   const d = Math.floor(h / 24);
   return `${d}d ago`;
 }
- 
+
 async function loadJSON(path) {
   try {
     const res = await fetch(path + "?t=" + Date.now());
@@ -485,7 +520,7 @@ async function loadJSON(path) {
     return null;
   }
 }
- 
+
 // ---------- Gauge (semicircle) ----------
 function renderGauge(score) {
   const wrap = $("#gauge-wrap");
@@ -495,7 +530,7 @@ function renderGauge(score) {
   const angleRad = (angleDeg * Math.PI) / 180;
   const nx = cx + r * 0.82 * Math.sin(angleRad);
   const ny = cy - r * 0.82 * Math.cos(angleRad);
- 
+
   const svg = `
   <svg viewBox="0 0 ${w} ${h + 8}" xmlns="http://www.w3.org/2000/svg">
     <defs>
@@ -519,7 +554,7 @@ function renderGauge(score) {
   </svg>`;
   wrap.innerHTML = svg;
 }
- 
+
 function gaugeLabel(score) {
   if (score === null) return { label: "Not enough data" };
   if (score >= 55) return { label: "Extreme Fear — Opportunity Zone" };
@@ -528,13 +563,13 @@ function gaugeLabel(score) {
   if (score > -55) return { label: "Leaning Caution" };
   return { label: "Extreme Comfort — Caution Zone" };
 }
- 
+
 // ---------- Card builder ----------
 function statusTag(status) {
   const map = { opportunity: "Opportunity", caution: "Caution", neutral: "Neutral" };
   return `<span class="status-tag ${status}"><span class="sdot"></span>${map[status] || "Neutral"}</span>`;
 }
- 
+
 function miniMeter(score, leftLabel = "Caution", rightLabel = "Opportunity") {
   if (score === null || score === undefined || Number.isNaN(score)) return "";
   const pct = clamp(((score + 100) / 200) * 100, 2, 98);
@@ -544,7 +579,7 @@ function miniMeter(score, leftLabel = "Caution", rightLabel = "Opportunity") {
     <div class="mini-meter-labels"><span>${leftLabel}</span><span>${rightLabel}</span></div>
   </div>`;
 }
- 
+
 function card({ title, code, status, valueHTML, note, subMetrics = [], asOf, meterScore = null, meterLabels = ["Caution", "Opportunity"] }) {
   const sub = subMetrics.length
     ? `<div class="sub-metrics">${subMetrics.map(s => `<div class="sub-metric"><div class="k">${s.k}</div><div class="v">${s.v}</div></div>`).join("")}</div>`
@@ -563,7 +598,7 @@ function card({ title, code, status, valueHTML, note, subMetrics = [], asOf, met
     ${asOf ? `<div class="as-of">as of ${asOf}</div>` : ""}
   </div>`;
 }
- 
+
 // ---------- Main ----------
 (async function main() {
   const [fast, breadth, aaii] = await Promise.all([
@@ -571,15 +606,39 @@ function card({ title, code, status, valueHTML, note, subMetrics = [], asOf, met
     loadJSON("data/breadth.json"),
     loadJSON("data/aaii.json"),
   ]);
- 
+
   const scores = [];
   const cards = [];
- 
+
   const timestamps = [fast?.generated_at, breadth?.generated_at, aaii?.generated_at].filter(Boolean);
   const latest = timestamps.sort().reverse()[0];
   $("#updated-text").textContent = latest ? `Updated ${timeAgo(latest)}` : "Waiting for first data run";
   $("#updated-dot").classList.toggle("stale", !latest);
- 
+
+  // --- Data health check ---
+  // All three sources refresh on a weekday-only schedule, so a flat threshold has to be
+  // generous enough to absorb a normal weekend (or a long weekend) without false-alarming.
+  // 96h comfortably covers Fri close -> Tue open. Anything older than that on a source
+  // that's supposed to run daily/every-15-min means something's actually broken upstream
+  // (e.g. AAII or CNN changed their page and the scrape is silently failing) rather than
+  // just "it's Sunday" - worth a visible nudge instead of quietly going stale for months.
+  const STALE_HOURS = 96;
+  const hoursSince = (iso) => iso ? (Date.now() - new Date(iso).getTime()) / 3600000 : Infinity;
+  const staleSources = [
+    { label: "Price/VIX/sector data", iso: fast?.generated_at },
+    { label: "S&P 500 breadth", iso: breadth?.generated_at },
+    { label: "AAII sentiment", iso: aaii?.generated_at },
+  ].filter(s => hoursSince(s.iso) > STALE_HOURS);
+
+  if (staleSources.length) {
+    const names = staleSources.map(s => `<b>${s.label}</b> (${timeAgo(s.iso)})`).join(", ");
+    $("#health-banner-slot").innerHTML = `
+      <div class="health-banner">
+        <span class="hb-icon">⚠️</span>
+        <span>Heads up: ${names} hasn't refreshed in over ${STALE_HOURS / 24} days — likely a broken data source upstream, not just a quiet weekend. The numbers below may be outdated until it's fixed.</span>
+      </div>`;
+  }
+
   // --- 1. Trend: distance from SMA150 ---
   {
     const spy = fast?.spy, qqq = fast?.qqq;
@@ -607,7 +666,7 @@ function card({ title, code, status, valueHTML, note, subMetrics = [], asOf, met
       asOf: fast?.generated_at ? timeAgo(fast.generated_at) : null,
     }));
   }
- 
+
   // --- 2. Momentum streak ---
   {
     const spy = fast?.spy, qqq = fast?.qqq;
@@ -627,7 +686,7 @@ function card({ title, code, status, valueHTML, note, subMetrics = [], asOf, met
       asOf: fast?.generated_at ? timeAgo(fast.generated_at) : null,
     }));
   }
- 
+
   // --- 3. AAII sentiment ---
   {
     const spread = aaii?.bull_bear_spread;
@@ -654,7 +713,7 @@ function card({ title, code, status, valueHTML, note, subMetrics = [], asOf, met
       asOf: aaii?.generated_at ? timeAgo(aaii.generated_at) + " · weekly (Thu)" : null,
     }));
   }
- 
+
   // --- 4. VIX ---
   {
     const vix = fast?.vix?.close;
@@ -676,7 +735,7 @@ function card({ title, code, status, valueHTML, note, subMetrics = [], asOf, met
       asOf: fast?.generated_at ? timeAgo(fast.generated_at) : null,
     }));
   }
- 
+
   // --- 5. Participation (RSP vs SPY) ---
   {
     const rel = fast?.participation?.rsp_minus_spy_20d_pct;
@@ -698,7 +757,7 @@ function card({ title, code, status, valueHTML, note, subMetrics = [], asOf, met
       asOf: fast?.generated_at ? timeAgo(fast.generated_at) : null,
     }));
   }
- 
+
   // --- 6. Breadth (S5FI proxy) ---
   {
     const pct = breadth?.pct_above_sma50;
@@ -720,7 +779,7 @@ function card({ title, code, status, valueHTML, note, subMetrics = [], asOf, met
       asOf: breadth?.generated_at ? timeAgo(breadth.generated_at) + " · daily" : null,
     }));
   }
- 
+
   // --- 7. Sector rotation ---
   {
     const rot = fast?.sector_rotation;
@@ -747,7 +806,7 @@ function card({ title, code, status, valueHTML, note, subMetrics = [], asOf, met
       asOf: fast?.generated_at ? timeAgo(fast.generated_at) : null,
     }));
   }
- 
+
   // --- 8. CNN Fear & Greed ---
   {
     const fg = fast?.fear_greed;
@@ -769,9 +828,9 @@ function card({ title, code, status, valueHTML, note, subMetrics = [], asOf, met
       asOf: fast?.generated_at ? timeAgo(fast.generated_at) : null,
     }));
   }
- 
+
   $("#card-grid").innerHTML = cards.join("");
- 
+
   if (scores.length) {
     const composite = scores.reduce((a, b) => a + b, 0) / scores.length;
     renderGauge(composite);
@@ -783,7 +842,7 @@ function card({ title, code, status, valueHTML, note, subMetrics = [], asOf, met
     $("#gauge-label").textContent = "Waiting for first data run";
   }
 })();
- 
+
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
     navigator.serviceWorker.register("sw.js").catch(() => {});
@@ -792,4 +851,3 @@ if ("serviceWorker" in navigator) {
 </script>
 </body>
 </html>
- 
