@@ -177,10 +177,10 @@
     margin-bottom: 14px;
   }
 
-  #gauge-wrap { max-width: 300px; margin: 0 auto; }
+  #gauge-wrap { max-width: 360px; margin: 0 auto; }
   #gauge-wrap svg { width: 100%; height: auto; display: block; }
 
-  .gauge-readout { margin-top: 6px; }
+  .gauge-readout { margin-top: -6px; }
   .gauge-score {
     font-family: var(--font-mono);
     font-size: 2.6rem;
@@ -202,31 +202,6 @@
     line-height: 1.6;
   }
 
-  .scale-labels {
-    display: flex;
-    justify-content: space-between;
-    max-width: 300px;
-    margin: 6px auto 0;
-    font-size: 0.68rem;
-    font-weight: 600;
-    color: var(--text-faint);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    line-height: 1.6;
-  }
-  .scale-labels span {
-    flex: 1;
-    text-align: center;
-  }
-  .scale-labels b {
-    display: block;
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
-    font-weight: 700;
-    color: var(--text-dim);
-    text-transform: none;
-    letter-spacing: 0;
-  }
   .gauge-scale-hint {
     font-size: 0.72rem;
     color: var(--text-faint);
@@ -435,8 +410,7 @@
   }
 
   @media (max-width: 360px) {
-    #gauge-wrap { max-width: 260px; }
-    .scale-labels { max-width: 260px; }
+    #gauge-wrap { max-width: 300px; }
     .gauge-score { font-size: 1.8rem; }
   }
 </style>
@@ -468,11 +442,6 @@
 <section class="hero">
   <div class="eyebrow">Composite contrarian read</div>
   <div id="gauge-wrap"></div>
-  <div class="scale-labels">
-    <span>Caution<br><b>−100</b></span>
-    <span>Neutral<br><b>0</b></span>
-    <span>Opportunity<br><b>+100</b></span>
-  </div>
   <div class="gauge-readout">
     <div class="gauge-score" id="gauge-score">—</div>
     <div class="gauge-scale-hint">on a −100 (caution) to +100 (opportunity) scale</div>
@@ -542,33 +511,104 @@ async function loadJSON(path) {
 // ---------- Gauge (semicircle) ----------
 function renderGauge(score) {
   const wrap = $("#gauge-wrap");
-  const w = 300, h = 168, cx = w / 2, cy = 150, r = 122;
+  const w = 380, h = 230, cx = 190, cy = 200, r = 138;
   const clamped = clamp(score ?? 0, -100, 100);
-  const angleDeg = -90 + ((clamped + 100) / 200) * 180;
-  const angleRad = (angleDeg * Math.PI) / 180;
-  const nx = cx + r * 0.82 * Math.sin(angleRad);
-  const ny = cy - r * 0.82 * Math.cos(angleRad);
+
+  const scoreToAngle = (s) => -90 + ((s + 100) / 200) * 180; // degrees, -90=left..0=top..+90=right
+  const pt = (deg, radius) => {
+    const rad = (deg * Math.PI) / 180;
+    return [cx + radius * Math.sin(rad), cy - radius * Math.cos(rad)];
+  };
+
+  // Needle (tapered polygon, not a bare line)
+  const angleDeg = scoreToAngle(clamped);
+  const [tipX, tipY] = pt(angleDeg, r * 0.82);
+  const baseHalfWidth = 5;
+  // build a thin kite shape: two base points perpendicular to the needle direction, tapering to tip
+  const perpDeg = angleDeg + 90;
+  const [p1x, p1y] = pt(perpDeg, baseHalfWidth); // one side of pivot
+  const [p2x, p2y] = [cx - (p1x - cx), cy - (p1y - cy)]; // other side of pivot
+  const needlePoints = `${p1x},${p1y} ${tipX},${tipY} ${p2x},${p2y}`;
+
+  // Tick marks every 20 points; major (labelled) ticks every 50
+  const ticks = [];
+  const majorScores = [-100, -50, 0, 50, 100];
+  for (let s = -100; s <= 100; s += 20) {
+    const isMajor = majorScores.includes(s);
+    const deg = scoreToAngle(s);
+    const [ix, iy] = pt(deg, r + 14);
+    const [ox, oy] = pt(deg, r + (isMajor ? 26 : 21));
+    ticks.push(`<line x1="${ix}" y1="${iy}" x2="${ox}" y2="${oy}" stroke="${isMajor ? 'rgba(231,236,251,0.55)' : 'rgba(231,236,251,0.22)'}" stroke-width="${isMajor ? 2 : 1.3}" stroke-linecap="round"/>`);
+  }
+
+  // Geometrically-placed labels (word + numeric value), guaranteed centered on their tick
+  const labelDefs = [
+    { s: -100, word: "CAUTION", num: "−100", anchor: "start" },
+    { s: 0, word: "NEUTRAL", num: "0", anchor: "middle" },
+    { s: 100, word: "OPPORTUNITY", num: "+100", anchor: "end" },
+  ];
+  const labels = labelDefs.map(({ s, word, num, anchor }) => {
+    const deg = scoreToAngle(s);
+    let [lx, ly] = pt(deg, r + 42);
+    // nudge the outer two inward slightly so text doesn't clip the viewBox edge
+    if (anchor === "start") lx += 4;
+    if (anchor === "end") lx -= 4;
+    return `
+      <text x="${lx}" y="${ly - 3}" text-anchor="${anchor}" font-family="Inter, sans-serif" font-weight="600" font-size="10.5" letter-spacing="0.6" fill="rgba(166,175,198,0.9)">${word}</text>
+      <text x="${lx}" y="${ly + 13}" text-anchor="${anchor}" font-family="'JetBrains Mono', monospace" font-weight="700" font-size="12.5" fill="rgba(231,236,251,0.95)">${num}</text>`;
+  }).join("");
+
+  const arcPath = `M ${cx - r} ${cy} A ${r} ${r} 0 0 1 ${cx + r} ${cy}`;
 
   const svg = `
-  <svg viewBox="0 0 ${w} ${h + 8}" xmlns="http://www.w3.org/2000/svg">
+  <svg viewBox="0 0 ${w} ${h}" xmlns="http://www.w3.org/2000/svg">
     <defs>
       <linearGradient id="arcGrad" x1="0%" y1="0%" x2="100%" y2="0%">
         <stop offset="0%" stop-color="#FFAB3C"/>
         <stop offset="50%" stop-color="#4B5470"/>
         <stop offset="100%" stop-color="#5B9CFF"/>
       </linearGradient>
-      <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-        <feGaussianBlur stdDeviation="3" result="blur"/>
-        <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+      <linearGradient id="needleGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stop-color="#FFFFFF"/>
+        <stop offset="100%" stop-color="#C7CEE0"/>
+      </linearGradient>
+      <radialGradient id="hubGrad" cx="35%" cy="30%" r="75%">
+        <stop offset="0%" stop-color="#FFFFFF"/>
+        <stop offset="100%" stop-color="#AEB8D2"/>
+      </radialGradient>
+      <filter id="needleShadow" x="-60%" y="-60%" width="220%" height="220%">
+        <feDropShadow dx="0" dy="1.5" stdDeviation="2.2" flood-color="#000000" flood-opacity="0.55"/>
+      </filter>
+      <filter id="grooveInset" x="-20%" y="-20%" width="140%" height="140%">
+        <feGaussianBlur stdDeviation="2.5" result="b"/>
+        <feOffset in="b" dx="0" dy="2" result="o"/>
+        <feComposite in="o" in2="SourceGraphic" operator="arithmetic" k2="-1" k3="1" result="inset"/>
+        <feColorMatrix in="inset" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.45 0"/>
       </filter>
     </defs>
-    <path d="M ${cx - r} ${cy} A ${r} ${r} 0 0 1 ${cx + r} ${cy}"
-      stroke="#1B2340" stroke-width="20" fill="none" stroke-linecap="round"/>
-    <path d="M ${cx - r} ${cy} A ${r} ${r} 0 0 1 ${cx + r} ${cy}"
-      stroke="url(#arcGrad)" stroke-width="20" fill="none" stroke-linecap="round" opacity="0.92"/>
-    <line x1="${cx}" y1="${cy}" x2="${nx}" y2="${ny}" stroke="#F3F5FB" stroke-width="4" stroke-linecap="round" filter="url(#glow)"/>
-    <circle cx="${cx}" cy="${cy}" r="8" fill="#F3F5FB"/>
-    <circle cx="${cx}" cy="${cy}" r="3.2" fill="#080B13"/>
+
+    <!-- outer groove / bezel track -->
+    <path d="${arcPath}" stroke="#1B2340" stroke-width="24" fill="none" stroke-linecap="round"/>
+    <path d="${arcPath}" stroke="#0A0E1A" stroke-width="24" fill="none" stroke-linecap="round" filter="url(#grooveInset)" opacity="0.6"/>
+
+    <!-- value arc -->
+    <path d="${arcPath}" stroke="url(#arcGrad)" stroke-width="16" fill="none" stroke-linecap="round"/>
+    <!-- thin bright rim on top edge of the value arc, for a subtle bevel -->
+    <path d="${arcPath}" stroke="rgba(255,255,255,0.14)" stroke-width="1.5" fill="none" stroke-linecap="round" transform="translate(0,-6)"/>
+
+    <!-- tick marks -->
+    ${ticks.join("")}
+
+    <!-- labels -->
+    ${labels}
+
+    <!-- needle -->
+    <polygon points="${needlePoints}" fill="url(#needleGrad)" filter="url(#needleShadow)"/>
+
+    <!-- pivot hub -->
+    <circle cx="${cx}" cy="${cy}" r="11" fill="#0A0E1A"/>
+    <circle cx="${cx}" cy="${cy}" r="9" fill="url(#hubGrad)"/>
+    <circle cx="${cx}" cy="${cy}" r="3.4" fill="#1B2340"/>
   </svg>`;
   wrap.innerHTML = svg;
 }
