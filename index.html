@@ -167,20 +167,71 @@
     background: radial-gradient(closest-side, rgba(91,156,255,0.22), transparent 70%);
     pointer-events: none;
   }
+  .hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      repeating-linear-gradient(0deg, rgba(255,255,255,0.025) 0px, rgba(255,255,255,0.025) 1px, transparent 1px, transparent 34px),
+      repeating-linear-gradient(90deg, rgba(255,255,255,0.025) 0px, rgba(255,255,255,0.025) 1px, transparent 1px, transparent 34px);
+    -webkit-mask-image: radial-gradient(480px 320px at 50% 30%, black 30%, transparent 85%);
+    mask-image: radial-gradient(480px 320px at 50% 30%, black 30%, transparent 85%);
+  }
 
   .hero .eyebrow {
-    font-size: 0.76rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.72rem;
     font-weight: 600;
     letter-spacing: 0.09em;
     text-transform: uppercase;
-    color: var(--text-faint);
-    margin-bottom: 14px;
+    color: var(--text-dim);
+    background: rgba(91,156,255,0.08);
+    border: 1px solid rgba(91,156,255,0.25);
+    padding: 6px 14px;
+    border-radius: 999px;
+    margin-bottom: 20px;
+    position: relative;
+  }
+  .hero .eyebrow::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--cool);
+    box-shadow: 0 0 0 3px rgba(91,156,255,0.18);
   }
 
-  #gauge-wrap { max-width: 360px; margin: 0 auto; }
+  #gauge-wrap { max-width: 320px; margin: 0 auto; }
   #gauge-wrap svg { width: 100%; height: auto; display: block; }
 
-  .gauge-readout { margin-top: -6px; }
+  .scale-labels {
+    display: flex;
+    justify-content: space-between;
+    max-width: 300px;
+    margin: 22px auto 0;
+    padding-top: 2px;
+    font-size: 0.68rem;
+    font-weight: 600;
+    color: var(--text-faint);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    line-height: 1.7;
+  }
+  .scale-labels span { flex: 1; text-align: center; }
+  .scale-labels b {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    font-weight: 700;
+    color: var(--text-dim);
+    text-transform: none;
+    letter-spacing: 0;
+  }
+
+  .gauge-readout { margin-top: 18px; }
   .gauge-score {
     font-family: var(--font-mono);
     font-size: 2.6rem;
@@ -195,11 +246,18 @@
     margin-top: 6px;
   }
   .gauge-sub {
-    font-size: 0.86rem;
-    color: var(--text-dim);
-    max-width: 460px;
-    margin: 12px auto 0;
+    font-size: 0.84rem;
+    color: var(--text-faint);
+    max-width: 420px;
+    margin: 0 auto;
     line-height: 1.6;
+  }
+  .gauge-explainer {
+    margin-top: 20px;
+    padding-top: 18px;
+    border-top: 1px solid var(--border-soft);
+    position: relative;
+    z-index: 1;
   }
 
   .gauge-scale-hint {
@@ -410,7 +468,8 @@
   }
 
   @media (max-width: 360px) {
-    #gauge-wrap { max-width: 300px; }
+    #gauge-wrap { max-width: 280px; }
+    .scale-labels { max-width: 260px; }
     .gauge-score { font-size: 1.8rem; }
   }
 </style>
@@ -442,10 +501,17 @@
 <section class="hero">
   <div class="eyebrow">Composite contrarian read</div>
   <div id="gauge-wrap"></div>
+  <div class="scale-labels">
+    <span>Caution<br><b>−100</b></span>
+    <span>Neutral<br><b>0</b></span>
+    <span>Opportunity<br><b>+100</b></span>
+  </div>
   <div class="gauge-readout">
     <div class="gauge-score" id="gauge-score">—</div>
     <div class="gauge-scale-hint">on a −100 (caution) to +100 (opportunity) scale</div>
     <div class="gauge-label" id="gauge-label">Loading data…</div>
+  </div>
+  <div class="gauge-explainer">
     <p class="gauge-sub">A simple, contrarian-leaning blend of the signals below — not a forecast.
       Skewed toward "Opportunity" when fear, pessimism, or oversold conditions dominate, and toward
       "Caution" when comfort, greed, or crowding dominate.</p>
@@ -511,7 +577,7 @@ async function loadJSON(path) {
 // ---------- Gauge (semicircle) ----------
 function renderGauge(score) {
   const wrap = $("#gauge-wrap");
-  const w = 380, h = 230, cx = 190, cy = 200, r = 138;
+  const w = 340, h = 190, cx = 170, cy = 172, r = 130;
   const clamped = clamp(score ?? 0, -100, 100);
 
   const scoreToAngle = (s) => -90 + ((s + 100) / 200) * 180; // degrees, -90=left..0=top..+90=right
@@ -522,41 +588,25 @@ function renderGauge(score) {
 
   // Needle (tapered polygon, not a bare line)
   const angleDeg = scoreToAngle(clamped);
-  const [tipX, tipY] = pt(angleDeg, r * 0.82);
+  const [tipX, tipY] = pt(angleDeg, r * 0.8);
   const baseHalfWidth = 5;
-  // build a thin kite shape: two base points perpendicular to the needle direction, tapering to tip
   const perpDeg = angleDeg + 90;
-  const [p1x, p1y] = pt(perpDeg, baseHalfWidth); // one side of pivot
-  const [p2x, p2y] = [cx - (p1x - cx), cy - (p1y - cy)]; // other side of pivot
+  const [p1x, p1y] = pt(perpDeg, baseHalfWidth);
+  const [p2x, p2y] = [cx - (p1x - cx), cy - (p1y - cy)];
   const needlePoints = `${p1x},${p1y} ${tipX},${tipY} ${p2x},${p2y}`;
 
-  // Tick marks every 20 points; major (labelled) ticks every 50
+  // Tick marks every 20 points; major ticks every 50 - purely decorative texture,
+  // the actual Caution/Neutral/Opportunity labels live in HTML below the SVG so
+  // they get reliable, simple flexbox centering instead of fragile polar-coordinate math.
   const ticks = [];
   const majorScores = [-100, -50, 0, 50, 100];
   for (let s = -100; s <= 100; s += 20) {
     const isMajor = majorScores.includes(s);
     const deg = scoreToAngle(s);
-    const [ix, iy] = pt(deg, r + 14);
+    const [ix, iy] = pt(deg, r + 16);
     const [ox, oy] = pt(deg, r + (isMajor ? 26 : 21));
-    ticks.push(`<line x1="${ix}" y1="${iy}" x2="${ox}" y2="${oy}" stroke="${isMajor ? 'rgba(231,236,251,0.55)' : 'rgba(231,236,251,0.22)'}" stroke-width="${isMajor ? 2 : 1.3}" stroke-linecap="round"/>`);
+    ticks.push(`<line x1="${ix}" y1="${iy}" x2="${ox}" y2="${oy}" stroke="${isMajor ? 'rgba(231,236,251,0.5)' : 'rgba(231,236,251,0.2)'}" stroke-width="${isMajor ? 2 : 1.3}" stroke-linecap="round"/>`);
   }
-
-  // Geometrically-placed labels (word + numeric value), guaranteed centered on their tick
-  const labelDefs = [
-    { s: -100, word: "CAUTION", num: "−100", anchor: "start" },
-    { s: 0, word: "NEUTRAL", num: "0", anchor: "middle" },
-    { s: 100, word: "OPPORTUNITY", num: "+100", anchor: "end" },
-  ];
-  const labels = labelDefs.map(({ s, word, num, anchor }) => {
-    const deg = scoreToAngle(s);
-    let [lx, ly] = pt(deg, r + 42);
-    // nudge the outer two inward slightly so text doesn't clip the viewBox edge
-    if (anchor === "start") lx += 4;
-    if (anchor === "end") lx -= 4;
-    return `
-      <text x="${lx}" y="${ly - 3}" text-anchor="${anchor}" font-family="Inter, sans-serif" font-weight="600" font-size="10.5" letter-spacing="0.6" fill="rgba(166,175,198,0.9)">${word}</text>
-      <text x="${lx}" y="${ly + 13}" text-anchor="${anchor}" font-family="'JetBrains Mono', monospace" font-weight="700" font-size="12.5" fill="rgba(231,236,251,0.95)">${num}</text>`;
-  }).join("");
 
   const arcPath = `M ${cx - r} ${cy} A ${r} ${r} 0 0 1 ${cx + r} ${cy}`;
 
@@ -593,14 +643,10 @@ function renderGauge(score) {
 
     <!-- value arc -->
     <path d="${arcPath}" stroke="url(#arcGrad)" stroke-width="16" fill="none" stroke-linecap="round"/>
-    <!-- thin bright rim on top edge of the value arc, for a subtle bevel -->
     <path d="${arcPath}" stroke="rgba(255,255,255,0.14)" stroke-width="1.5" fill="none" stroke-linecap="round" transform="translate(0,-6)"/>
 
     <!-- tick marks -->
     ${ticks.join("")}
-
-    <!-- labels -->
-    ${labels}
 
     <!-- needle -->
     <polygon points="${needlePoints}" fill="url(#needleGrad)" filter="url(#needleShadow)"/>
@@ -896,7 +942,8 @@ function card({ title, code, status, valueHTML, note, subMetrics = [], asOf, met
     $("#gauge-label").textContent = gaugeLabel(composite).label;
   } else {
     renderGauge(0);
-    $("#gauge-score").textContent = "—";
+    $("#gauge-score").textContent = "N/A";
+    $("#gauge-score").style.opacity = "0.4";
     $("#gauge-label").textContent = "Waiting for first data run";
   }
 })();
