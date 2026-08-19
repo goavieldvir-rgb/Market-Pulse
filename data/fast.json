@@ -1,15 +1,15 @@
 {
-  "generated_at": "2026-08-19T06:33:55.436662+00:00",
+  "generated_at": "2026-08-19T07:24:28.288971+00:00",
   "spy": {
     "symbol": "SPY",
-    "date": "2026-08-17",
-    "close": 772.67,
-    "sma150": 714.51,
-    "distance_from_sma150_pct": 8.14,
+    "date": "2026-08-18",
+    "close": 767.45,
+    "sma150": 714.99,
+    "distance_from_sma150_pct": 7.34,
     "streak_direction": "red",
-    "streak_count": 2,
-    "return_5d_pct": -0.05,
-    "return_20d_pct": 4.12
+    "streak_count": 3,
+    "return_5d_pct": -0.4,
+    "return_20d_pct": 2.56
   },
   "qqq": {
     "symbol": "QQQ",
@@ -26,12 +26,12 @@
     "symbol": "^VIX",
     "date": "2026-08-18",
     "close": 15.84,
-    "sma150": 18.97,
-    "distance_from_sma150_pct": -16.48,
+    "sma150": 18.94,
+    "distance_from_sma150_pct": -16.36,
     "streak_direction": "green",
     "streak_count": 2,
     "return_5d_pct": 3.66,
-    "return_20d_pct": -7.1
+    "return_20d_pct": -5.32
   },
   "sectors": {
     "XLP": {
@@ -73,28 +73,28 @@
       "symbol": "RSP",
       "date": "2026-08-18",
       "close": 219.79,
-      "sma150": 205.06,
-      "distance_from_sma150_pct": 7.18,
+      "sma150": 204.84,
+      "distance_from_sma150_pct": 7.3,
       "streak_direction": "red",
       "streak_count": 2,
       "return_5d_pct": -0.41,
-      "return_20d_pct": 3.3
+      "return_20d_pct": 3.01
     },
     "SPY": {
       "symbol": "SPY",
-      "date": "2026-08-17",
-      "close": 772.67,
-      "sma150": 714.51,
-      "distance_from_sma150_pct": 8.14,
+      "date": "2026-08-18",
+      "close": 767.45,
+      "sma150": 714.99,
+      "distance_from_sma150_pct": 7.34,
       "streak_direction": "red",
-      "streak_count": 2,
-      "return_5d_pct": -0.05,
-      "return_20d_pct": 4.12
+      "streak_count": 3,
+      "return_5d_pct": -0.4,
+      "return_20d_pct": 2.56
     },
-    "rsp_minus_spy_20d_pct": -0.82
+    "rsp_minus_spy_20d_pct": 0.45
   },
   "fear_greed": {
-    "score": 54.3,
+    "score": 53.6,
     "rating": "neutral"
   },
   "sector_rotation": {
