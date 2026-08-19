@@ -1,105 +1,105 @@
 {
-  "generated_at": "2026-08-19T15:44:47.276468+00:00",
+  "generated_at": "2026-08-19T16:04:33.942510+00:00",
   "spy": {
     "symbol": "SPY",
     "date": "2026-08-19",
-    "close": 770.45,
-    "sma150": 715.5,
-    "distance_from_sma150_pct": 7.68,
+    "close": 771.22,
+    "sma150": 715.51,
+    "distance_from_sma150_pct": 7.79,
     "streak_direction": "green",
     "streak_count": 1,
-    "return_5d_pct": -0.26,
-    "return_20d_pct": 3.08
+    "return_5d_pct": -0.16,
+    "return_20d_pct": 3.19
   },
   "qqq": {
     "symbol": "QQQ",
     "date": "2026-08-19",
-    "close": 717.79,
-    "sma150": 663.76,
-    "distance_from_sma150_pct": 8.14,
+    "close": 718.82,
+    "sma150": 663.77,
+    "distance_from_sma150_pct": 8.29,
     "streak_direction": "green",
     "streak_count": 1,
-    "return_5d_pct": -0.82,
-    "return_20d_pct": 1.76
+    "return_5d_pct": -0.67,
+    "return_20d_pct": 1.91
   },
   "vix": {
     "symbol": "^VIX",
     "date": "2026-08-19",
-    "close": 15.17,
-    "sma150": 18.94,
-    "distance_from_sma150_pct": -19.92,
+    "close": 15.19,
+    "sma150": 18.96,
+    "distance_from_sma150_pct": -19.87,
     "streak_direction": "red",
     "streak_count": 1,
-    "return_5d_pct": 4.26,
-    "return_20d_pct": -19.18
+    "return_5d_pct": 4.4,
+    "return_20d_pct": -8.71
   },
   "sectors": {
     "XLP": {
       "symbol": "XLP",
       "date": "2026-08-19",
-      "close": 86.44,
+      "close": 86.36,
       "sma150": 84.39,
-      "distance_from_sma150_pct": 2.43,
+      "distance_from_sma150_pct": 2.33,
       "streak_direction": "green",
       "streak_count": 2,
-      "return_5d_pct": 1.6,
-      "return_20d_pct": 2.45
+      "return_5d_pct": 1.5,
+      "return_20d_pct": 2.35
     },
     "XLU": {
       "symbol": "XLU",
       "date": "2026-08-19",
-      "close": 43.81,
+      "close": 43.85,
       "sma150": 45.15,
-      "distance_from_sma150_pct": -2.96,
+      "distance_from_sma150_pct": -2.87,
       "streak_direction": "red",
       "streak_count": 3,
-      "return_5d_pct": -0.06,
-      "return_20d_pct": -4.6
+      "return_5d_pct": 0.03,
+      "return_20d_pct": -4.52
     },
     "XLY": {
       "symbol": "XLY",
       "date": "2026-08-19",
-      "close": 118.49,
-      "sma150": 116.49,
-      "distance_from_sma150_pct": 1.72,
+      "close": 118.52,
+      "sma150": 116.36,
+      "distance_from_sma150_pct": 1.85,
       "streak_direction": "green",
       "streak_count": 1,
-      "return_5d_pct": 0.51,
-      "return_20d_pct": 3.39
+      "return_5d_pct": 0.53,
+      "return_20d_pct": 3.95
     }
   },
   "participation": {
     "RSP": {
       "symbol": "RSP",
       "date": "2026-08-19",
-      "close": 222.4,
-      "sma150": 205.01,
-      "distance_from_sma150_pct": 8.48,
+      "close": 222.46,
+      "sma150": 205.22,
+      "distance_from_sma150_pct": 8.4,
       "streak_direction": "green",
       "streak_count": 1,
-      "return_5d_pct": 0.6,
-      "return_20d_pct": 4.7
+      "return_5d_pct": 0.62,
+      "return_20d_pct": 4.59
     },
     "SPY": {
       "symbol": "SPY",
       "date": "2026-08-19",
-      "close": 770.45,
-      "sma150": 715.5,
-      "distance_from_sma150_pct": 7.68,
+      "close": 771.22,
+      "sma150": 715.51,
+      "distance_from_sma150_pct": 7.79,
       "streak_direction": "green",
       "streak_count": 1,
-      "return_5d_pct": -0.26,
-      "return_20d_pct": 3.08
+      "return_5d_pct": -0.16,
+      "return_20d_pct": 3.19
     },
-    "rsp_minus_spy_20d_pct": 1.62
+    "rsp_minus_spy_20d_pct": 1.4
   },
   "fear_greed": {
-    "score": 58.1,
+    "score": 57.9,
     "rating": "greed"
   },
   "sector_rotation": {
     "defensive_avg_return_5d_pct": 0.77,
-    "cyclical_return_5d_pct": 0.51,
-    "defensive_minus_cyclical_5d_pct": 0.26
+    "cyclical_return_5d_pct": 0.53,
+    "defensive_minus_cyclical_5d_pct": 0.23
   }
 }
