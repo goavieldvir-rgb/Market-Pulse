@@ -273,15 +273,46 @@
     gap: 14px;
   }
 
+  @keyframes cardIn {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
   .card {
     background: linear-gradient(165deg, #141B32 0%, var(--surface) 45%);
     border: 1px solid var(--border);
     border-radius: 18px;
     padding: 20px 20px 18px;
     box-shadow: var(--shadow);
-    transition: border-color 0.15s ease;
+    transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    animation: cardIn 0.55s cubic-bezier(0.16, 0.8, 0.3, 1) both;
+    will-change: transform;
   }
-  .card:hover { border-color: rgba(255,255,255,0.13); }
+  .card:hover {
+    border-color: rgba(91,156,255,0.35);
+    transform: translateY(-4px);
+    box-shadow: var(--shadow), 0 18px 34px -18px rgba(91,156,255,0.35);
+  }
+
+  /* ---------- Skeleton loading state ---------- */
+  @keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+  .skel-line {
+    height: 12px;
+    border-radius: 6px;
+    background: linear-gradient(90deg, #1A2338 25%, #232E4C 37%, #1A2338 63%);
+    background-size: 400% 100%;
+    animation: shimmer 1.6s ease-in-out infinite;
+  }
+  .skel-card { animation: cardIn 0.5s cubic-bezier(0.16, 0.8, 0.3, 1) both; }
+  .skel-card .skel-line.title { width: 60%; height: 15px; margin-bottom: 10px; }
+  .skel-card .skel-line.tag { width: 30%; height: 10px; margin-bottom: 18px; }
+  .skel-card .skel-line.value { width: 45%; height: 26px; margin-bottom: 14px; }
+  .skel-card .skel-line.note1 { width: 100%; margin-bottom: 7px; }
+  .skel-card .skel-line.note2 { width: 92%; margin-bottom: 7px; }
+  .skel-card .skel-line.note3 { width: 70%; }
 
   .card-head {
     display: flex;
@@ -507,7 +538,7 @@
     <span>Opportunity<br><b>+100</b></span>
   </div>
   <div class="gauge-readout">
-    <div class="gauge-score" id="gauge-score">—</div>
+    <div class="gauge-score" id="gauge-score"><span class="skel-line" style="width:76px;height:34px;display:inline-block;border-radius:8px;"></span></div>
     <div class="gauge-scale-hint">on a −100 (caution) to +100 (opportunity) scale</div>
     <div class="gauge-label" id="gauge-label">Loading data…</div>
   </div>
@@ -575,36 +606,37 @@ async function loadJSON(path) {
 }
 
 // ---------- Gauge (semicircle) ----------
-function renderGauge(score) {
-  const wrap = $("#gauge-wrap");
-  const w = 340, h = 190, cx = 170, cy = 172, r = 130;
-  const clamped = clamp(score ?? 0, -100, 100);
+// Geometry constants shared between the static chrome and the needle updater.
+const GAUGE = { w: 340, h: 190, cx: 170, cy: 172, r: 130 };
+const gaugeScoreToAngle = (s) => -90 + ((s + 100) / 200) * 180; // -90=left..0=top..+90=right
+const gaugePt = (deg, radius) => {
+  const rad = (deg * Math.PI) / 180;
+  return [GAUGE.cx + radius * Math.sin(rad), GAUGE.cy - radius * Math.cos(rad)];
+};
 
-  const scoreToAngle = (s) => -90 + ((s + 100) / 200) * 180; // degrees, -90=left..0=top..+90=right
-  const pt = (deg, radius) => {
-    const rad = (deg * Math.PI) / 180;
-    return [cx + radius * Math.sin(rad), cy - radius * Math.cos(rad)];
-  };
-
-  // Needle (tapered polygon, not a bare line)
-  const angleDeg = scoreToAngle(clamped);
-  const [tipX, tipY] = pt(angleDeg, r * 0.8);
+function needlePolygonPoints(score) {
+  const { r } = GAUGE;
+  const angleDeg = gaugeScoreToAngle(clamp(score, -100, 100));
+  const [tipX, tipY] = gaugePt(angleDeg, r * 0.8);
   const baseHalfWidth = 5;
-  const perpDeg = angleDeg + 90;
-  const [p1x, p1y] = pt(perpDeg, baseHalfWidth);
-  const [p2x, p2y] = [cx - (p1x - cx), cy - (p1y - cy)];
-  const needlePoints = `${p1x},${p1y} ${tipX},${tipY} ${p2x},${p2y}`;
+  const [p1x, p1y] = gaugePt(angleDeg + 90, baseHalfWidth);
+  const [p2x, p2y] = [GAUGE.cx - (p1x - GAUGE.cx), GAUGE.cy - (p1y - GAUGE.cy)];
+  return `${p1x},${p1y} ${tipX},${tipY} ${p2x},${p2y}`;
+}
 
-  // Tick marks every 20 points; major ticks every 50 - purely decorative texture,
-  // the actual Caution/Neutral/Opportunity labels live in HTML below the SVG so
-  // they get reliable, simple flexbox centering instead of fragile polar-coordinate math.
+// Draws the static instrument (arc, groove, ticks, hub) once. The needle starts
+// pointing at neutral (0) - animateGaugeTo() sweeps it to the real value afterward.
+function renderGauge() {
+  const { w, h, cx, cy, r } = GAUGE;
+  const wrap = $("#gauge-wrap");
+
   const ticks = [];
   const majorScores = [-100, -50, 0, 50, 100];
   for (let s = -100; s <= 100; s += 20) {
     const isMajor = majorScores.includes(s);
-    const deg = scoreToAngle(s);
-    const [ix, iy] = pt(deg, r + 16);
-    const [ox, oy] = pt(deg, r + (isMajor ? 26 : 21));
+    const deg = gaugeScoreToAngle(s);
+    const [ix, iy] = gaugePt(deg, r + 16);
+    const [ox, oy] = gaugePt(deg, r + (isMajor ? 26 : 21));
     ticks.push(`<line x1="${ix}" y1="${iy}" x2="${ox}" y2="${oy}" stroke="${isMajor ? 'rgba(231,236,251,0.5)' : 'rgba(231,236,251,0.2)'}" stroke-width="${isMajor ? 2 : 1.3}" stroke-linecap="round"/>`);
   }
 
@@ -648,8 +680,8 @@ function renderGauge(score) {
     <!-- tick marks -->
     ${ticks.join("")}
 
-    <!-- needle -->
-    <polygon points="${needlePoints}" fill="url(#needleGrad)" filter="url(#needleShadow)"/>
+    <!-- needle (starts at neutral; animateGaugeTo sweeps it) -->
+    <polygon id="gauge-needle" points="${needlePolygonPoints(0)}" fill="url(#needleGrad)" filter="url(#needleShadow)"/>
 
     <!-- pivot hub -->
     <circle cx="${cx}" cy="${cy}" r="11" fill="#0A0E1A"/>
@@ -657,6 +689,32 @@ function renderGauge(score) {
     <circle cx="${cx}" cy="${cy}" r="3.4" fill="#1B2340"/>
   </svg>`;
   wrap.innerHTML = svg;
+}
+
+// Sweeps the needle from neutral to targetScore and counts the score number up
+// alongside it, both eased together over one smooth animation.
+function animateGaugeTo(targetScore) {
+  const needle = document.getElementById("gauge-needle");
+  const scoreEl = $("#gauge-score");
+  if (!needle || !scoreEl) return;
+  const duration = 1000;
+  const start = performance.now();
+  const easeOutCubic = (t) => 1 - Math.pow(1 - t, 3);
+
+  function frame(now) {
+    const t = Math.min((now - start) / duration, 1);
+    const eased = easeOutCubic(t);
+    const current = targetScore * eased;
+    needle.setAttribute("points", needlePolygonPoints(current));
+    const rounded = Math.round(current);
+    scoreEl.textContent = (rounded > 0 ? "+" : "") + rounded;
+    if (t < 1) requestAnimationFrame(frame);
+    else {
+      const finalRounded = Math.round(targetScore);
+      scoreEl.textContent = (finalRounded > 0 ? "+" : "") + finalRounded;
+    }
+  }
+  requestAnimationFrame(frame);
 }
 
 function gaugeLabel(score) {
@@ -684,13 +742,16 @@ function miniMeter(score, leftLabel = "Caution", rightLabel = "Opportunity") {
   </div>`;
 }
 
+let _cardIndex = 0;
 function card({ title, code, status, valueHTML, note, subMetrics = [], asOf, meterScore = null, meterLabels = ["Caution", "Opportunity"] }) {
   const sub = subMetrics.length
     ? `<div class="sub-metrics">${subMetrics.map(s => `<div class="sub-metric"><div class="k">${s.k}</div><div class="v">${s.v}</div></div>`).join("")}</div>`
     : "";
   const meter = meterScore !== null ? miniMeter(meterScore, meterLabels[0], meterLabels[1]) : "";
+  const delayMs = Math.min(_cardIndex * 55, 400);
+  _cardIndex++;
   return `
-  <div class="card">
+  <div class="card" style="animation-delay:${delayMs}ms">
     <div class="card-head">
       <div><div class="card-title">${title}</div>${code ? `<span class="card-code">${code}</span>` : ""}</div>
       ${statusTag(status)}
@@ -703,8 +764,27 @@ function card({ title, code, status, valueHTML, note, subMetrics = [], asOf, met
   </div>`;
 }
 
+// ---------- Skeleton loading state ----------
+function skeletonCard() {
+  return `
+  <div class="card skel-card">
+    <div class="skel-line title"></div>
+    <div class="skel-line tag"></div>
+    <div class="skel-line value"></div>
+    <div class="skel-line note1"></div>
+    <div class="skel-line note2"></div>
+    <div class="skel-line note3"></div>
+  </div>`;
+}
+
 // ---------- Main ----------
 (async function main() {
+  // Show skeleton cards + the static gauge instrument immediately, instead of a blank page.
+  $("#card-grid").innerHTML = Array.from({ length: 8 }, skeletonCard).join("");
+  $("#updated-text").textContent = "Loading…";
+  $("#gauge-label").textContent = "Loading data…";
+  renderGauge(); // static chrome only; needle sits at neutral until data resolves
+
   const [fast, breadth, aaii] = await Promise.all([
     loadJSON("data/fast.json"),
     loadJSON("data/breadth.json"),
@@ -713,6 +793,7 @@ function card({ title, code, status, valueHTML, note, subMetrics = [], asOf, met
 
   const scores = [];
   const cards = [];
+  _cardIndex = 0;
 
   const timestamps = [fast?.generated_at, breadth?.generated_at, aaii?.generated_at].filter(Boolean);
   const latest = timestamps.sort().reverse()[0];
@@ -934,14 +1015,18 @@ function card({ title, code, status, valueHTML, note, subMetrics = [], asOf, met
   }
 
   $("#card-grid").innerHTML = cards.join("");
+  // Once the entrance animation finishes, drop it entirely - a CSS animation
+  // with fill-mode:both otherwise keeps permanent authority over `transform`,
+  // which silently blocks the :hover lift transition from ever applying.
+  document.querySelectorAll("#card-grid .card").forEach((el) => {
+    el.addEventListener("animationend", () => { el.style.animation = "none"; }, { once: true });
+  });
 
   if (scores.length) {
     const composite = scores.reduce((a, b) => a + b, 0) / scores.length;
-    renderGauge(composite);
-    $("#gauge-score").textContent = (composite > 0 ? "+" : "") + composite.toFixed(0);
+    animateGaugeTo(composite);
     $("#gauge-label").textContent = gaugeLabel(composite).label;
   } else {
-    renderGauge(0);
     $("#gauge-score").textContent = "N/A";
     $("#gauge-score").style.opacity = "0.4";
     $("#gauge-label").textContent = "Waiting for first data run";
