@@ -288,10 +288,19 @@
     animation: cardIn 0.55s cubic-bezier(0.16, 0.8, 0.3, 1) both;
     will-change: transform;
   }
-  .card:hover {
-    border-color: rgba(91,156,255,0.35);
-    transform: translateY(-4px);
-    box-shadow: var(--shadow), 0 18px 34px -18px rgba(91,156,255,0.35);
+  /* Hover-lift only for devices with a real mouse. On touch, :hover either does
+     nothing useful or gets "stuck" after a tap (an iOS Safari quirk), so touch
+     devices get a tap/press feedback instead - see .card:active below. */
+  @media (hover: hover) and (pointer: fine) {
+    .card:hover {
+      border-color: rgba(91,156,255,0.35);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow), 0 18px 34px -18px rgba(91,156,255,0.35);
+    }
+  }
+  .card:active {
+    transform: scale(0.985);
+    transition: transform 0.1s ease;
   }
 
   /* ---------- Skeleton loading state ---------- */
