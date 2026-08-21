@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-21T06:42:18.873951+00:00",
+  "generated_at": "2026-08-21T07:29:15.678483+00:00",
   "spy": {
     "symbol": "SPY",
     "date": "2026-08-20",
@@ -94,7 +94,7 @@
     "rsp_minus_spy_20d_pct": 0.63
   },
   "fear_greed": {
-    "score": 52.5,
+    "score": 52.1,
     "rating": "neutral"
   },
   "sector_rotation": {
