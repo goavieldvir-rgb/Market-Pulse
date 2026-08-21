@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-21T20:18:55.682078+00:00",
+  "generated_at": "2026-08-21T20:48:04.984559+00:00",
   "spy": {
     "symbol": "SPY",
     "date": "2026-08-21",
@@ -25,13 +25,13 @@
   "vix": {
     "symbol": "^VIX",
     "date": "2026-08-21",
-    "close": 15.15,
+    "close": 15.13,
     "sma150": 18.95,
-    "distance_from_sma150_pct": -20.05,
+    "distance_from_sma150_pct": -20.16,
     "streak_direction": "red",
     "streak_count": 1,
-    "return_5d_pct": 6.32,
-    "return_20d_pct": -18.46
+    "return_5d_pct": 6.18,
+    "return_20d_pct": -18.57
   },
   "sectors": {
     "XLP": {
@@ -48,13 +48,13 @@
     "XLU": {
       "symbol": "XLU",
       "date": "2026-08-21",
-      "close": 42.76,
+      "close": 42.77,
       "sma150": 45.15,
-      "distance_from_sma150_pct": -5.29,
+      "distance_from_sma150_pct": -5.27,
       "streak_direction": "red",
       "streak_count": 2,
-      "return_5d_pct": -3.5,
-      "return_20d_pct": -7.63
+      "return_5d_pct": -3.48,
+      "return_20d_pct": -7.6
     },
     "XLY": {
       "symbol": "XLY",
@@ -94,12 +94,12 @@
     "rsp_minus_spy_20d_pct": 0.16
   },
   "fear_greed": {
-    "score": 55.3,
+    "score": 55.6,
     "rating": "greed"
   },
   "sector_rotation": {
-    "defensive_avg_return_5d_pct": -1.81,
+    "defensive_avg_return_5d_pct": -1.8,
     "cyclical_return_5d_pct": -0.15,
-    "defensive_minus_cyclical_5d_pct": -1.66
+    "defensive_minus_cyclical_5d_pct": -1.65
   }
 }
