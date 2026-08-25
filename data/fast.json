@@ -1,26 +1,26 @@
 {
-  "generated_at": "2026-08-25T12:36:21.559242+00:00",
+  "generated_at": "2026-08-25T13:34:05.717652+00:00",
   "spy": {
     "symbol": "SPY",
-    "date": "2026-08-24",
-    "close": 763.47,
-    "sma150": 716.94,
-    "distance_from_sma150_pct": 6.49,
-    "streak_direction": "red",
+    "date": "2026-08-25",
+    "close": 766.68,
+    "sma150": 717.54,
+    "distance_from_sma150_pct": 6.85,
+    "streak_direction": "green",
     "streak_count": 1,
-    "return_5d_pct": -1.19,
-    "return_20d_pct": 3.3
+    "return_5d_pct": -0.1,
+    "return_20d_pct": 3.49
   },
   "qqq": {
     "symbol": "QQQ",
-    "date": "2026-08-24",
-    "close": 706.32,
-    "sma150": 665.54,
-    "distance_from_sma150_pct": 6.13,
-    "streak_direction": "red",
+    "date": "2026-08-25",
+    "close": 712.93,
+    "sma150": 666.24,
+    "distance_from_sma150_pct": 7.01,
+    "streak_direction": "green",
     "streak_count": 1,
-    "return_5d_pct": -3.23,
-    "return_20d_pct": 3.55
+    "return_5d_pct": -0.64,
+    "return_20d_pct": 5.54
   },
   "vix": {
     "symbol": "^VIX",
@@ -36,70 +36,70 @@
   "sectors": {
     "XLP": {
       "symbol": "XLP",
-      "date": "2026-08-24",
-      "close": 87.45,
-      "sma150": 84.47,
-      "distance_from_sma150_pct": 3.52,
-      "streak_direction": "green",
-      "streak_count": 2,
-      "return_5d_pct": 3.27,
-      "return_20d_pct": 2.45
+      "date": "2026-08-25",
+      "close": 86.74,
+      "sma150": 84.5,
+      "distance_from_sma150_pct": 2.65,
+      "streak_direction": "red",
+      "streak_count": 1,
+      "return_5d_pct": 1.36,
+      "return_20d_pct": -0.37
     },
     "XLU": {
       "symbol": "XLU",
-      "date": "2026-08-24",
+      "date": "2026-08-25",
       "close": 43.22,
       "sma150": 45.15,
-      "distance_from_sma150_pct": -4.27,
+      "distance_from_sma150_pct": -4.26,
       "streak_direction": "green",
-      "streak_count": 1,
-      "return_5d_pct": -2.17,
-      "return_20d_pct": -5.39
+      "streak_count": 2,
+      "return_5d_pct": -1.81,
+      "return_20d_pct": -5.04
     },
     "XLY": {
       "symbol": "XLY",
-      "date": "2026-08-24",
-      "close": 118.3,
-      "sma150": 116.27,
-      "distance_from_sma150_pct": 1.75,
-      "streak_direction": "green",
-      "streak_count": 2,
-      "return_5d_pct": 1.33,
-      "return_20d_pct": 6.73
+      "date": "2026-08-25",
+      "close": 118.01,
+      "sma150": 116.26,
+      "distance_from_sma150_pct": 1.5,
+      "streak_direction": "red",
+      "streak_count": 1,
+      "return_5d_pct": 1.42,
+      "return_20d_pct": 4.92
     }
   },
   "participation": {
     "RSP": {
       "symbol": "RSP",
-      "date": "2026-08-24",
-      "close": 221.93,
-      "sma150": 205.66,
-      "distance_from_sma150_pct": 7.91,
-      "streak_direction": "green",
-      "streak_count": 2,
-      "return_5d_pct": 0.52,
-      "return_20d_pct": 3.14
+      "date": "2026-08-25",
+      "close": 221.71,
+      "sma150": 205.83,
+      "distance_from_sma150_pct": 7.71,
+      "streak_direction": "red",
+      "streak_count": 1,
+      "return_5d_pct": 0.87,
+      "return_20d_pct": 1.85
     },
     "SPY": {
       "symbol": "SPY",
-      "date": "2026-08-24",
-      "close": 763.47,
-      "sma150": 716.94,
-      "distance_from_sma150_pct": 6.49,
-      "streak_direction": "red",
+      "date": "2026-08-25",
+      "close": 766.68,
+      "sma150": 717.54,
+      "distance_from_sma150_pct": 6.85,
+      "streak_direction": "green",
       "streak_count": 1,
-      "return_5d_pct": -1.19,
-      "return_20d_pct": 3.3
+      "return_5d_pct": -0.1,
+      "return_20d_pct": 3.49
     },
-    "rsp_minus_spy_20d_pct": -0.16
+    "rsp_minus_spy_20d_pct": -1.64
   },
   "fear_greed": {
     "score": 54.6,
     "rating": "neutral"
   },
   "sector_rotation": {
-    "defensive_avg_return_5d_pct": 0.55,
-    "cyclical_return_5d_pct": 1.33,
-    "defensive_minus_cyclical_5d_pct": -0.78
+    "defensive_avg_return_5d_pct": -0.22,
+    "cyclical_return_5d_pct": 1.42,
+    "defensive_minus_cyclical_5d_pct": -1.65
   }
 }
