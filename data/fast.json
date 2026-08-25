@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-25T11:21:44.892057+00:00",
+  "generated_at": "2026-08-25T11:53:22.334639+00:00",
   "spy": {
     "symbol": "SPY",
     "date": "2026-08-24",
@@ -25,13 +25,13 @@
   "vix": {
     "symbol": "^VIX",
     "date": "2026-08-25",
-    "close": 15.8,
+    "close": 15.77,
     "sma150": 18.91,
-    "distance_from_sma150_pct": -16.47,
+    "distance_from_sma150_pct": -16.62,
     "streak_direction": "red",
     "streak_count": 1,
-    "return_5d_pct": -0.25,
-    "return_20d_pct": -13.23
+    "return_5d_pct": -0.44,
+    "return_20d_pct": -13.4
   },
   "sectors": {
     "XLP": {
