@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-31T03:00:54.053616+00:00",
+  "generated_at": "2026-08-31T09:41:27.779306+00:00",
   "spy": {
     "symbol": "SPY",
     "date": "2026-08-28",
@@ -24,14 +24,14 @@
   },
   "vix": {
     "symbol": "^VIX",
-    "date": "2026-08-28",
-    "close": 14.43,
-    "sma150": 18.89,
-    "distance_from_sma150_pct": -23.6,
-    "streak_direction": "red",
-    "streak_count": 4,
-    "return_5d_pct": -4.63,
-    "return_20d_pct": -9.76
+    "date": "2026-08-31",
+    "close": 15.17,
+    "sma150": 18.88,
+    "distance_from_sma150_pct": -19.65,
+    "streak_direction": "green",
+    "streak_count": 1,
+    "return_5d_pct": -4.29,
+    "return_20d_pct": -4.35
   },
   "sectors": {
     "XLP": {
