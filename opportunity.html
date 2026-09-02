@@ -178,6 +178,20 @@
   }
   .stock-row:last-child { border-bottom: none; }
   .stock-row .sym { font-family: var(--font-mono); font-weight: 700; font-size: 0.9rem; }
+  .star-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.05rem;
+    line-height: 1;
+    padding: 0 6px 0 0;
+    color: var(--text-faint);
+    vertical-align: middle;
+    transition: color 0.15s ease, transform 0.1s ease;
+  }
+  .star-btn:hover { color: #FFD24D; }
+  .star-btn.active { color: #FFD24D; }
+  .star-btn:active { transform: scale(0.85); }
   .stock-row .price { color: var(--text-faint); font-family: var(--font-mono); font-size: 0.78rem; margin-left: 8px; }
   .stock-row .metric { font-family: var(--font-mono); font-weight: 700; }
   .metric.opportunity { color: var(--cool); }
@@ -256,6 +270,10 @@
   setups worth a second look, plus official SEC insider-trading disclosures. None of this is a
   recommendation — it's a starting point for your own research, not a signal to buy or sell.
 </div>
+
+<div id="watchlist-title" class="section-title" style="display:none;"><span class="em">⭐</span> My Watchlist</div>
+<div id="watchlist-sub" class="section-sub" style="display:none;">Tap the star next to any ticker on this page to add or remove it here. Saved on this device only — no account needed.</div>
+<div id="watchlist-card" class="card" style="display:none;"></div>
 
 <div class="section-title"><span class="em">🏛️</span> Insider Buying</div>
 <div class="section-sub">Open-market stock purchases by officers, directors &amp; 10%+ owners — from official SEC Form 4 filings, refreshed every ~30 min.</div>
@@ -364,9 +382,26 @@ async function loadJSON(path) {
   }
 }
 
+// ---------- Watchlist (localStorage, no accounts needed) ----------
+const WATCHLIST_KEY = "opp-watchlist-v1";
+let watchlist = new Set();
+try {
+  watchlist = new Set(JSON.parse(localStorage.getItem(WATCHLIST_KEY) || "[]"));
+} catch (e) { /* corrupted or unavailable - start empty */ }
+
+function saveWatchlist() {
+  try { localStorage.setItem(WATCHLIST_KEY, JSON.stringify([...watchlist])); } catch (e) { /* ignore */ }
+}
+
+function starButton(sym) {
+  if (!sym) return "";
+  const active = watchlist.has(sym);
+  return `<button class="star-btn ${active ? 'active' : ''}" data-sym="${sym}" aria-label="Toggle watchlist for ${sym}">${active ? '★' : '☆'}</button>`;
+}
+
 function stockRow(sym, price, metricText, status = "neutral") {
   return `<div class="stock-row">
-    <div><span class="sym">${sym}</span><span class="price">$${price}</span></div>
+    <div>${starButton(sym)}<span class="sym">${sym}</span><span class="price">$${price}</span></div>
     <div class="metric ${status}">${metricText}</div>
   </div>`;
 }
@@ -386,6 +421,7 @@ function insiderRow(t) {
   <div class="insider-row">
     <div class="insider-left">
       <div class="sym-role">
+        ${starButton(t.symbol)}
         <span class="action-badge ${isBuy ? 'buy' : 'sell'}">${t.action}</span>
         <span class="sym">${t.symbol || "—"}</span>
         <span class="role">${t.role || ""}</span>
@@ -541,6 +577,82 @@ function insiderRow(t) {
   } else {
     renderStockScreens();
   }
+
+  // ---------- Watchlist section ----------
+  function renderWatchlistSection() {
+    const titleEl = $("#watchlist-title"), subEl = $("#watchlist-sub"), cardEl = $("#watchlist-card");
+    if (watchlist.size === 0) {
+      titleEl.style.display = "none";
+      subEl.style.display = "none";
+      cardEl.style.display = "none";
+      return;
+    }
+    titleEl.style.display = "";
+    subEl.style.display = "";
+    cardEl.style.display = "";
+
+    const buys = insiders?.buys || [];
+    const sells = insiders?.sells || [];
+
+    const rows = [...watchlist].sort().map(sym => {
+      const stock = stocks.find(s => s.symbol === sym);
+      const hadBuy = buys.some(b => b.symbol === sym);
+      const hadSell = sells.some(s => s.symbol === sym);
+      const insiderBadge = hadBuy
+        ? `<span class="action-badge buy" style="margin-left:6px;">Insider Buy</span>`
+        : hadSell
+          ? `<span class="action-badge sell" style="margin-left:6px;">Insider Sell</span>`
+          : "";
+
+      if (!stock) {
+        return `
+        <div class="insider-row">
+          <div class="insider-left">
+            <div class="sym-role">${starButton(sym)}<span class="sym">${sym}</span>${insiderBadge}</div>
+            <div class="name">Not in this scan's S&amp;P 500 / Nasdaq 100 universe</div>
+          </div>
+        </div>`;
+      }
+
+      const sma50 = stock.sma?.["50"];
+      const distSma50 = sma50 ? ((stock.price - sma50) / sma50 * 100).toFixed(2) : null;
+      const hiTxt = stock.dist_hi52_pct !== null && stock.dist_hi52_pct !== undefined ? `${stock.dist_hi52_pct}% from 52w high` : "";
+      const volTxt = stock.volume_ratio !== null && stock.volume_ratio !== undefined ? `${stock.volume_ratio}x avg volume` : "";
+
+      return `
+      <div class="insider-row">
+        <div class="insider-left">
+          <div class="sym-role">${starButton(sym)}<span class="sym">${sym}</span>${insiderBadge}</div>
+          <div class="name">$${stock.price}${distSma50 !== null ? ` · ${distSma50 >= 0 ? "+" : ""}${distSma50}% vs SMA50` : ""}</div>
+        </div>
+        <div class="insider-right">
+          <div class="detail">${hiTxt}</div>
+          <div class="detail">${volTxt}</div>
+        </div>
+      </div>`;
+    }).join("");
+
+    cardEl.innerHTML = rows;
+  }
+
+  // Single delegated listener handles star clicks anywhere on the page -
+  // simpler and more reliable than re-attaching listeners every re-render.
+  document.addEventListener("click", (e) => {
+    const btn = e.target.closest(".star-btn");
+    if (!btn) return;
+    const sym = btn.dataset.sym;
+    if (!sym) return;
+    if (watchlist.has(sym)) watchlist.delete(sym); else watchlist.add(sym);
+    saveWatchlist();
+    const active = watchlist.has(sym);
+    document.querySelectorAll(`.star-btn[data-sym="${sym}"]`).forEach((b) => {
+      b.classList.toggle("active", active);
+      b.textContent = active ? "★" : "☆";
+    });
+    renderWatchlistSection();
+  });
+
+  renderWatchlistSection();
 })();
 </script>
 </body>
