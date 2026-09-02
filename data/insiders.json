@@ -1,29 +1,18 @@
 {
-  "generated_at": "2026-09-02T13:47:55.597241+00:00",
-  "checked_filings": 24,
+  "generated_at": "2026-09-02T17:44:57.895812+00:00",
+  "checked_filings": 36,
   "feed_size": 100,
   "buys": [
     {
-      "symbol": "VST",
-      "insider": "BURKE JAMES A",
-      "role": "President and CEO",
+      "symbol": "TPL",
+      "insider": "HORIZON KINETICS ASSET MANAGEMENT LLC",
+      "role": "Insider",
       "transaction_code": "P",
       "action": "Buy",
-      "shares": 4465.0,
-      "price": 135.25,
-      "value": 603891.0,
+      "shares": 1.0,
+      "price": 369.1,
+      "value": 369.0,
       "date": "2026-09-01"
-    },
-    {
-      "symbol": "VST",
-      "insider": "BURKE JAMES A",
-      "role": "President and CEO",
-      "transaction_code": "P",
-      "action": "Buy",
-      "shares": 2200.0,
-      "price": 135.99,
-      "value": 299178.0,
-      "date": "2026-08-31"
     }
   ],
   "sells": [],
