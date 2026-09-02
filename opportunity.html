@@ -107,6 +107,50 @@
   .section-title .em { font-size: 1.2em; }
   .section-sub { font-size: 0.8rem; color: var(--text-faint); margin: -8px 0 14px; }
 
+  .controls-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 10px 16px;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+  }
+  .controls-row label {
+    font-size: 0.82rem;
+    color: var(--text-dim);
+    white-space: nowrap;
+  }
+  .controls-row label span { font-family: var(--font-mono); font-weight: 700; color: var(--text); }
+  .controls-row input[type="range"] {
+    flex: 1;
+    min-width: 120px;
+    accent-color: var(--cool);
+    height: 4px;
+    cursor: pointer;
+  }
+  .ma-card-head {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+    font-size: 0.95rem;
+  }
+  .ma-select {
+    background: var(--bg);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 4px 10px;
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: 0.85rem;
+    cursor: pointer;
+  }
+  .ma-select:hover { border-color: rgba(91,156,255,0.4); }
+
   @keyframes cardIn {
     from { opacity: 0; transform: translateY(14px); }
     to { opacity: 1; transform: translateY(0); }
@@ -227,6 +271,10 @@
 
 <div class="section-title"><span class="em">📈</span> 52-Week Highs &amp; Lows</div>
 <div class="section-sub">Highs: momentum/breakout candidates. Lows: oversold/contrarian candidates.</div>
+<div class="controls-row">
+  <label for="ctl-52w-pct">Within <span id="ctl-52w-pct-val">3.0</span>% of the 52-week extreme</label>
+  <input type="range" id="ctl-52w-pct" min="0.5" max="10" step="0.5" value="3">
+</div>
 <div class="grid-2">
   <div class="card">
     <div style="font-weight:600;margin-bottom:8px;">Near 52-Week High</div>
@@ -239,19 +287,35 @@
 </div>
 
 <div class="section-title"><span class="em">📊</span> Unusual Volume</div>
-<div class="section-sub">Today's volume at least 2x the trailing 20-day average.</div>
+<div class="section-sub">Today's volume vs. the trailing 20-day average.</div>
+<div class="controls-row">
+  <label for="ctl-vol-ratio">At least <span id="ctl-vol-ratio-val">2.0</span>x average volume</label>
+  <input type="range" id="ctl-vol-ratio" min="1.2" max="5" step="0.1" value="2">
+</div>
 <div class="card"><div class="stock-list" id="volume-list"></div></div>
 
 <div class="section-title"><span class="em">🎯</span> Testing Key Averages</div>
-<div class="section-sub">Within ~2% of the 20-day (short-term) or 150-day (long-term) moving average — classic support/resistance test zones.</div>
+<div class="section-sub">Classic support/resistance test zones — pick which moving average and how close counts as "near."</div>
+<div class="controls-row">
+  <label for="ctl-ma-pct">Within <span id="ctl-ma-pct-val">2.0</span>% of the average</label>
+  <input type="range" id="ctl-ma-pct" min="0.5" max="8" step="0.5" value="2">
+</div>
 <div class="grid-2">
   <div class="card">
-    <div style="font-weight:600;margin-bottom:8px;">Near SMA20</div>
-    <div class="stock-list" id="sma20-list"></div>
+    <div class="ma-card-head">
+      <span style="font-weight:600;">Near</span>
+      <select id="ctl-ma-period-a" class="ma-select"></select>
+      <span style="font-weight:600;">SMA</span>
+    </div>
+    <div class="stock-list" id="sma-list-a"></div>
   </div>
   <div class="card">
-    <div style="font-weight:600;margin-bottom:8px;">Near SMA150</div>
-    <div class="stock-list" id="sma150-list"></div>
+    <div class="ma-card-head">
+      <span style="font-weight:600;">Near</span>
+      <select id="ctl-ma-period-b" class="ma-select"></select>
+      <span style="font-weight:600;">SMA</span>
+    </div>
+    <div class="stock-list" id="sma-list-b"></div>
   </div>
 </div>
 
@@ -372,23 +436,111 @@ function insiderRow(t) {
       <tbody>${tbody}</tbody>` : `<tbody><tr><td class="empty-note">No data yet.</td></tr></tbody>`;
   }
 
-  renderList("hi52-list", opp?.near_52w_high,
-    (r) => stockRow(r.symbol, r.price, `${r.dist_pct}% away`, "opportunity"),
-    "No stocks currently within 3% of their 52-week high.");
-  renderList("lo52-list", opp?.near_52w_low,
-    (r) => stockRow(r.symbol, r.price, `${r.dist_pct}% away`, "caution"),
-    "No stocks currently within 3% of their 52-week low.");
+  // ---------- Interactive screens (SMA proximity, volume surge, 52w proximity) ----------
+  // Settings are remembered per-browser via localStorage - no accounts, no server round-trip.
+  const SETTINGS_KEY = "opp-scanner-settings-v1";
+  const defaultSettings = { maPct: 2.0, volRatio: 2.0, w52Pct: 3.0, maPeriodA: "20", maPeriodB: "150" };
+  let settings = { ...defaultSettings };
+  try {
+    const saved = JSON.parse(localStorage.getItem(SETTINGS_KEY) || "{}");
+    settings = { ...defaultSettings, ...saved };
+  } catch (e) { /* corrupted or unavailable - just use defaults */ }
 
-  renderList("volume-list", opp?.volume_surge,
-    (r) => stockRow(r.symbol, r.price, `${r.ratio}x avg`, "opportunity"),
-    "No unusual volume detected in the most recent scan.");
+  function saveSettings() {
+    try { localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings)); } catch (e) { /* storage unavailable, ignore */ }
+  }
 
-  renderList("sma20-list", opp?.near_sma20,
-    (r) => stockRow(r.symbol, r.price, fmtPct(r.dist_pct), r.dist_pct >= 0 ? "caution" : "opportunity"),
-    "No stocks currently near their SMA20.");
-  renderList("sma150-list", opp?.near_sma150,
-    (r) => stockRow(r.symbol, r.price, fmtPct(r.dist_pct), r.dist_pct >= 0 ? "caution" : "opportunity"),
-    "No stocks currently near their SMA150.");
+  const stocks = opp?.stocks || [];
+  const periods = opp?.sma_periods || [10, 20, 50, 100, 150, 200];
+
+  // Populate the two SMA-period dropdowns
+  const selA = $("#ctl-ma-period-a"), selB = $("#ctl-ma-period-b");
+  [selA, selB].forEach((sel, idx) => {
+    sel.innerHTML = periods.map(p => `<option value="${p}">${p}-day</option>`).join("");
+  });
+  selA.value = settings.maPeriodA;
+  selB.value = settings.maPeriodB;
+
+  // Wire up sliders to their live value labels + settings object
+  const ctl52w = $("#ctl-52w-pct"), ctl52wVal = $("#ctl-52w-pct-val");
+  const ctlVol = $("#ctl-vol-ratio"), ctlVolVal = $("#ctl-vol-ratio-val");
+  const ctlMa = $("#ctl-ma-pct"), ctlMaVal = $("#ctl-ma-pct-val");
+  ctl52w.value = settings.w52Pct; ctl52wVal.textContent = settings.w52Pct.toFixed(1);
+  ctlVol.value = settings.volRatio; ctlVolVal.textContent = settings.volRatio.toFixed(1);
+  ctlMa.value = settings.maPct; ctlMaVal.textContent = settings.maPct.toFixed(1);
+
+  function renderStockScreens() {
+    const hi52 = stocks
+      .filter(s => s.dist_hi52_pct !== null && s.dist_hi52_pct !== undefined && s.dist_hi52_pct <= settings.w52Pct)
+      .sort((a, b) => a.dist_hi52_pct - b.dist_hi52_pct)
+      .slice(0, 30);
+    renderList("hi52-list", hi52,
+      (r) => stockRow(r.symbol, r.price, `${r.dist_hi52_pct.toFixed(2)}% away`, "opportunity"),
+      `No stocks currently within ${settings.w52Pct}% of their 52-week high.`);
+
+    const lo52 = stocks
+      .filter(s => s.dist_lo52_pct !== null && s.dist_lo52_pct !== undefined && s.dist_lo52_pct <= settings.w52Pct)
+      .sort((a, b) => a.dist_lo52_pct - b.dist_lo52_pct)
+      .slice(0, 30);
+    renderList("lo52-list", lo52,
+      (r) => stockRow(r.symbol, r.price, `${r.dist_lo52_pct.toFixed(2)}% away`, "caution"),
+      `No stocks currently within ${settings.w52Pct}% of their 52-week low.`);
+
+    const volSurge = stocks
+      .filter(s => s.volume_ratio !== null && s.volume_ratio !== undefined && s.volume_ratio >= settings.volRatio)
+      .sort((a, b) => b.volume_ratio - a.volume_ratio)
+      .slice(0, 30);
+    renderList("volume-list", volSurge,
+      (r) => stockRow(r.symbol, r.price, `${r.volume_ratio.toFixed(2)}x avg`, "opportunity"),
+      `No stocks currently at ${settings.volRatio}x+ average volume.`);
+
+    [["A", selA.value, "sma-list-a"], ["B", selB.value, "sma-list-b"]].forEach(([_, period, listId]) => {
+      const near = stocks
+        .filter(s => {
+          const sma = s.sma?.[period];
+          if (!sma) return false;
+          const distPct = (s.price - sma) / sma * 100;
+          return Math.abs(distPct) <= settings.maPct;
+        })
+        .map(s => {
+          const sma = s.sma[period];
+          const distPct = (s.price - sma) / sma * 100;
+          return { ...s, distPct };
+        })
+        .sort((a, b) => Math.abs(a.distPct) - Math.abs(b.distPct))
+        .slice(0, 30);
+      renderList(listId, near,
+        (r) => stockRow(r.symbol, r.price, fmtPct(r.distPct), r.distPct >= 0 ? "caution" : "opportunity"),
+        `No stocks currently within ${settings.maPct}% of their ${period}-day SMA.`);
+    });
+  }
+
+  ctl52w.addEventListener("input", () => {
+    settings.w52Pct = parseFloat(ctl52w.value);
+    ctl52wVal.textContent = settings.w52Pct.toFixed(1);
+    renderStockScreens(); saveSettings();
+  });
+  ctlVol.addEventListener("input", () => {
+    settings.volRatio = parseFloat(ctlVol.value);
+    ctlVolVal.textContent = settings.volRatio.toFixed(1);
+    renderStockScreens(); saveSettings();
+  });
+  ctlMa.addEventListener("input", () => {
+    settings.maPct = parseFloat(ctlMa.value);
+    ctlMaVal.textContent = settings.maPct.toFixed(1);
+    renderStockScreens(); saveSettings();
+  });
+  selA.addEventListener("change", () => { settings.maPeriodA = selA.value; renderStockScreens(); saveSettings(); });
+  selB.addEventListener("change", () => { settings.maPeriodB = selB.value; renderStockScreens(); saveSettings(); });
+
+  if (!stocks.length) {
+    // No data yet (placeholder state) - show honest empty messages instead of nothing.
+    ["hi52-list", "lo52-list", "volume-list", "sma-list-a", "sma-list-b"].forEach(id => {
+      $("#" + id).innerHTML = `<div class="empty-note">No data yet.</div>`;
+    });
+  } else {
+    renderStockScreens();
+  }
 })();
 </script>
 </body>
