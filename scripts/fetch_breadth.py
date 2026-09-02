@@ -27,10 +27,10 @@ OPP_OUT = os.path.join(os.path.dirname(__file__), "..", "data", "opportunities.j
 SP500_URL = "https://raw.githubusercontent.com/datasets/s-and-p-500-companies/main/data/constituents.csv"
 NASDAQ100_URL = "https://yfiua.github.io/index-constituents/constituents-nasdaq100.csv"
 
-NEAR_MA_PCT = 2.0
-NEAR_52W_PCT = 3.0
-VOLUME_SURGE_RATIO = 2.0
-MAX_LIST_SIZE = 30
+# Note: thresholds for "near" are no longer applied server-side - the full
+# per-ticker stats are shipped and the Opportunity Scanner page lets the
+# viewer adjust these live in the browser. See SMA_PERIODS below for which
+# moving averages get precomputed.
 
 
 def normalize_symbol(sym):
@@ -94,35 +94,29 @@ def fetch_history(symbol, retries=2):
     return None
 
 
+SMA_PERIODS = [10, 20, 50, 100, 150, 200]
+
+
 def analyze(symbol, closes, volumes):
     price = closes[-1]
-    out = {"symbol": symbol, "price": round(price, 2)}
+    out = {"symbol": symbol, "price": round(price, 2), "sma": {}}
 
-    if len(closes) >= 20:
-        sma20 = sum(closes[-20:]) / 20
-        out["sma20"] = sma20
-        out["dist_sma20_pct"] = (price - sma20) / sma20 * 100
-    if len(closes) >= 50:
-        sma50 = sum(closes[-50:]) / 50
-        out["sma50"] = sma50
-    if len(closes) >= 150:
-        sma150 = sum(closes[-150:]) / 150
-        out["sma150"] = sma150
-        out["dist_sma150_pct"] = (price - sma150) / sma150 * 100
+    for period in SMA_PERIODS:
+        if len(closes) >= period:
+            sma = sum(closes[-period:]) / period
+            out["sma"][str(period)] = round(sma, 2)
 
     hist_window = closes[-252:] if len(closes) >= 252 else closes
     hi52, lo52 = max(hist_window), min(hist_window)
-    out["hi52"] = hi52
-    out["lo52"] = lo52
-    out["dist_hi52_pct"] = (hi52 - price) / hi52 * 100 if hi52 else None
-    out["dist_lo52_pct"] = (price - lo52) / lo52 * 100 if lo52 else None
+    out["hi52"] = round(hi52, 2)
+    out["lo52"] = round(lo52, 2)
+    out["dist_hi52_pct"] = round((hi52 - price) / hi52 * 100, 2) if hi52 else None
+    out["dist_lo52_pct"] = round((price - lo52) / lo52 * 100, 2) if lo52 else None
 
     if len(volumes) >= 21:
         vol_today = volumes[-1]
         avg_vol20 = sum(volumes[-21:-1]) / 20
-        out["volume_today"] = vol_today
-        out["avg_volume_20d"] = avg_vol20
-        out["volume_ratio"] = (vol_today / avg_vol20) if avg_vol20 > 0 else None
+        out["volume_ratio"] = round(vol_today / avg_vol20, 2) if avg_vol20 > 0 else None
 
     return out
 
@@ -166,8 +160,8 @@ def main():
         print("ERROR: too many failures this run - skipping writes to avoid clobbering good data", file=sys.stderr)
         sys.exit(0)
 
-    sp500_results = [r for sym, r in results.items() if sym in sp500_set and "sma50" in r]
-    above = sum(1 for r in sp500_results if r["price"] > r["sma50"])
+    sp500_results = [r for sym, r in results.items() if sym in sp500_set and "50" in r.get("sma", {})]
+    above = sum(1 for r in sp500_results if r["price"] > r["sma"]["50"])
     total_sp = len(sp500_results)
     pct_above = round((above / total_sp) * 100, 1) if total_sp else None
 
@@ -189,43 +183,35 @@ def main():
         json.dump(breadth_out, f, indent=2)
     print(f"Wrote {BREADTH_OUT}: {pct_above}% above 50DMA ({above}/{total_sp})")
 
-    near_sma20 = [r for r in results.values() if "dist_sma20_pct" in r and abs(r["dist_sma20_pct"]) <= NEAR_MA_PCT]
-    near_sma150 = [r for r in results.values() if "dist_sma150_pct" in r and abs(r["dist_sma150_pct"]) <= NEAR_MA_PCT]
-    vol_surge = [r for r in results.values() if r.get("volume_ratio") and r["volume_ratio"] >= VOLUME_SURGE_RATIO]
-    near_hi52 = [r for r in results.values() if r.get("dist_hi52_pct") is not None and r["dist_hi52_pct"] <= NEAR_52W_PCT]
-    near_lo52 = [r for r in results.values() if r.get("dist_lo52_pct") is not None and r["dist_lo52_pct"] <= NEAR_52W_PCT]
+    # Ship full per-ticker stats (not pre-filtered lists) so the Opportunity
+    # Scanner page can let the viewer adjust SMA period / closeness / volume
+    # thresholds client-side, with no server round-trip needed.
+    stocks = []
+    for r in results.values():
+        if not r.get("sma"):
+            continue
+        stocks.append({
+            "symbol": r["symbol"],
+            "price": r["price"],
+            "sma": r["sma"],
+            "hi52": r.get("hi52"),
+            "lo52": r.get("lo52"),
+            "dist_hi52_pct": r.get("dist_hi52_pct"),
+            "dist_lo52_pct": r.get("dist_lo52_pct"),
+            "volume_ratio": r.get("volume_ratio"),
+        })
 
     opp_out = {
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "universe_size": matched,
         "universe_sources": {"sp500": len(sp500), "nasdaq100": len(nasdaq100)},
-        "near_sma20": sorted(
-            [{"symbol": r["symbol"], "price": r["price"], "dist_pct": round(r["dist_sma20_pct"], 2)} for r in near_sma20],
-            key=lambda r: abs(r["dist_pct"])
-        )[:MAX_LIST_SIZE],
-        "near_sma150": sorted(
-            [{"symbol": r["symbol"], "price": r["price"], "dist_pct": round(r["dist_sma150_pct"], 2)} for r in near_sma150],
-            key=lambda r: abs(r["dist_pct"])
-        )[:MAX_LIST_SIZE],
-        "volume_surge": sorted(
-            [{"symbol": r["symbol"], "price": r["price"], "ratio": round(r["volume_ratio"], 2)} for r in vol_surge],
-            key=lambda r: r["ratio"], reverse=True
-        )[:MAX_LIST_SIZE],
-        "near_52w_high": sorted(
-            [{"symbol": r["symbol"], "price": r["price"], "dist_pct": round(r["dist_hi52_pct"], 2)} for r in near_hi52],
-            key=lambda r: r["dist_pct"]
-        )[:MAX_LIST_SIZE],
-        "near_52w_low": sorted(
-            [{"symbol": r["symbol"], "price": r["price"], "dist_pct": round(r["dist_lo52_pct"], 2)} for r in near_lo52],
-            key=lambda r: r["dist_pct"]
-        )[:MAX_LIST_SIZE],
+        "sma_periods": SMA_PERIODS,
+        "stocks": stocks,
         "note": "Scanned from S&P 500 + Nasdaq 100 (deduplicated). Not stock advice - a starting point for your own research.",
     }
     with open(OPP_OUT, "w") as f:
         json.dump(opp_out, f, indent=2)
-    print(f"Wrote {OPP_OUT}: {len(opp_out['near_sma20'])} near SMA20, "
-          f"{len(opp_out['volume_surge'])} volume surges, "
-          f"{len(opp_out['near_52w_high'])} near 52w high")
+    print(f"Wrote {OPP_OUT}: {len(stocks)} stocks with full stats")
 
 
 if __name__ == "__main__":
