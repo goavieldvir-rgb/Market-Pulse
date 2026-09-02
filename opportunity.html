@@ -1,0 +1,395 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Opportunity Scanner — Market Pulse</title>
+<meta name="description" content="Insider buying, 52-week highs/lows, volume surges, support/resistance tests, and sector breakouts across the S&P 500 + Nasdaq 100." />
+<link rel="manifest" href="manifest.json" />
+<link rel="icon" href="icons/icon-192.png" />
+<link rel="apple-touch-icon" href="icons/icon-192.png" />
+<meta name="theme-color" content="#080B13" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #080B13;
+    --surface: #12172A;
+    --surface-2: #171E35;
+    --border: rgba(255,255,255,0.07);
+    --border-soft: rgba(255,255,255,0.045);
+    --text: #F3F5FB;
+    --text-dim: #A6AFC6;
+    --text-faint: #626C85;
+    --cool: #5B9CFF;
+    --cool-dim: #2C4B85;
+    --warm: #FFAB3C;
+    --warm-dim: #7A5220;
+    --green: #34D399;
+    --red: #FB7185;
+    --font-display: 'Space Grotesk', system-ui, sans-serif;
+    --font-body: 'Inter', system-ui, sans-serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+    --shadow: 0 1px 0 rgba(255,255,255,0.03) inset, 0 16px 32px -20px rgba(0,0,0,0.65);
+  }
+  * { box-sizing: border-box; }
+  html { background: var(--bg); }
+  body {
+    margin: 0;
+    padding: 28px 20px 56px;
+    max-width: 1080px;
+    margin-left: auto;
+    margin-right: auto;
+    color: var(--text);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    position: relative;
+    isolation: isolate;
+  }
+  body::before { content: ""; position: fixed; inset: 0; z-index: -2; background: var(--bg); }
+  body::after {
+    content: "";
+    position: fixed; inset: 0; z-index: -1; pointer-events: none;
+    background:
+      radial-gradient(900px 520px at 12% -6%, rgba(91,156,255,0.14), transparent 60%),
+      radial-gradient(760px 480px at 100% 8%, rgba(255,171,60,0.08), transparent 55%),
+      repeating-linear-gradient(0deg, rgba(255,255,255,0.025) 0px, rgba(255,255,255,0.025) 1px, transparent 1px, transparent 64px),
+      repeating-linear-gradient(90deg, rgba(255,255,255,0.025) 0px, rgba(255,255,255,0.025) 1px, transparent 1px, transparent 64px);
+    -webkit-mask-image: radial-gradient(1200px 900px at 50% 0%, black 40%, transparent 92%);
+    mask-image: radial-gradient(1200px 900px at 50% 0%, black 40%, transparent 92%);
+  }
+  a { color: var(--cool); }
+
+  header.top {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 12px; margin-bottom: 20px; flex-wrap: wrap;
+  }
+  .brand { display: flex; align-items: center; gap: 12px; }
+  .brand .mark {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: linear-gradient(150deg, var(--warm), #C77A1F);
+    display: flex; align-items: center; justify-content: center; flex: none;
+    box-shadow: 0 6px 16px -6px rgba(255,171,60,0.5);
+  }
+  .brand .mark svg { width: 20px; height: 20px; }
+  .brand h1 { font-family: var(--font-display); font-size: 1.3rem; font-weight: 700; margin: 0; letter-spacing: -0.015em; }
+  .brand p { margin: 2px 0 0; font-size: 0.82rem; color: var(--text-faint); }
+
+  .back-link {
+    font-size: 0.82rem; color: var(--text-dim); text-decoration: none;
+    display: inline-flex; align-items: center; gap: 5px;
+    border: 1px solid var(--border); padding: 7px 13px; border-radius: 999px;
+    transition: border-color 0.15s ease, color 0.15s ease;
+  }
+  .back-link:hover { border-color: rgba(91,156,255,0.4); color: var(--text); }
+
+  .updated-badge {
+    font-size: 0.78rem; color: var(--text-faint);
+    display: flex; align-items: center; gap: 7px; white-space: nowrap;
+  }
+  .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 3px rgba(52,211,153,0.15); }
+  .dot.stale { background: var(--text-faint); box-shadow: none; }
+
+  .intro {
+    background: linear-gradient(175deg, var(--surface) 0%, var(--surface-2) 100%);
+    border: 1px solid var(--border); border-radius: 20px;
+    padding: 20px 22px; margin-bottom: 22px;
+    font-size: 0.86rem; color: var(--text-dim); line-height: 1.6;
+  }
+  .intro strong { color: var(--text); }
+
+  .section-title {
+    font-family: var(--font-display); font-weight: 700; font-size: 1.1rem;
+    margin: 30px 0 12px; display: flex; align-items: center; gap: 9px;
+  }
+  .section-title .em { font-size: 1.2em; }
+  .section-sub { font-size: 0.8rem; color: var(--text-faint); margin: -8px 0 14px; }
+
+  @keyframes cardIn {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .card {
+    background: linear-gradient(165deg, #141B32 0%, var(--surface) 45%);
+    border: 1px solid var(--border); border-radius: 18px;
+    padding: 18px 20px; box-shadow: var(--shadow);
+    transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    animation: cardIn 0.5s cubic-bezier(0.16, 0.8, 0.3, 1) both;
+    will-change: transform;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .card:hover { border-color: rgba(91,156,255,0.3); transform: translateY(-3px); box-shadow: var(--shadow), 0 16px 30px -18px rgba(91,156,255,0.3); }
+  }
+  .card:active { transform: scale(0.99); transition: transform 0.08s ease; }
+
+  .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 14px; }
+
+  .stock-list { display: flex; flex-direction: column; }
+  .stock-row {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 9px 0; border-bottom: 1px solid var(--border-soft);
+    font-size: 0.86rem;
+  }
+  .stock-row:last-child { border-bottom: none; }
+  .stock-row .sym { font-family: var(--font-mono); font-weight: 700; font-size: 0.9rem; }
+  .stock-row .price { color: var(--text-faint); font-family: var(--font-mono); font-size: 0.78rem; margin-left: 8px; }
+  .stock-row .metric { font-family: var(--font-mono); font-weight: 700; }
+  .metric.opportunity { color: var(--cool); }
+  .metric.caution { color: var(--warm); }
+  .metric.neutral { color: var(--text-dim); }
+  .empty-note { color: var(--text-faint); font-size: 0.84rem; padding: 6px 0; }
+
+  .sector-table { width: 100%; border-collapse: collapse; font-size: 0.86rem; }
+  .sector-table th {
+    text-align: left; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.05em;
+    color: var(--text-faint); font-weight: 600; padding: 0 10px 10px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .sector-table td { padding: 10px 10px 10px 0; border-bottom: 1px solid var(--border-soft); }
+  .sector-table tr:last-child td { border-bottom: none; }
+  .sector-table .rank { color: var(--text-faint); font-family: var(--font-mono); width: 28px; }
+  .sector-table .name { font-weight: 600; }
+  .sector-table .sym { font-family: var(--font-mono); color: var(--text-faint); font-size: 0.78rem; }
+  .sector-table .num { font-family: var(--font-mono); font-weight: 700; text-align: right; }
+
+  .insider-row {
+    display: flex; align-items: flex-start; justify-content: space-between;
+    gap: 10px; padding: 12px 0; border-bottom: 1px solid var(--border-soft);
+  }
+  .insider-row:last-child { border-bottom: none; }
+  .insider-left .sym-role { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+  .insider-left .sym { font-family: var(--font-mono); font-weight: 700; font-size: 0.95rem; }
+  .insider-left .role { font-size: 0.76rem; color: var(--text-faint); }
+  .insider-left .name { font-size: 0.84rem; color: var(--text-dim); margin-top: 2px; }
+  .insider-right { text-align: right; flex: none; }
+  .insider-right .value { font-family: var(--font-mono); font-weight: 700; font-size: 0.9rem; }
+  .insider-right .detail { font-size: 0.72rem; color: var(--text-faint); margin-top: 2px; }
+  .action-badge { font-size: 0.66rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; padding: 2px 8px; border-radius: 999px; }
+  .action-badge.buy { color: var(--cool); background: var(--cool-dim); }
+  .action-badge.sell { color: var(--warm); background: var(--warm-dim); }
+
+  footer {
+    margin-top: 32px; padding-top: 20px; border-top: 1px solid var(--border);
+    font-size: 0.8rem; color: var(--text-faint); line-height: 1.7;
+  }
+  footer p { margin: 6px 0; }
+  footer strong { color: var(--text-dim); }
+
+  @media (max-width: 480px) {
+    body { padding: 18px 14px 44px; }
+    .card { padding: 15px 16px; }
+    .section-title { font-size: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="brand">
+    <div class="mark">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M4 16l4-5 4 3 4-7 4 4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="20" cy="11" r="1.6" fill="white"/>
+      </svg>
+    </div>
+    <div>
+      <h1>Opportunity Scanner</h1>
+      <p>Insider buying, breakouts &amp; screens</p>
+    </div>
+  </div>
+  <a class="back-link" href="index.html">← Market Pulse</a>
+</header>
+
+<div class="updated-badge" id="updated-badge" style="margin-bottom:18px;">
+  <span class="dot" id="updated-dot"></span>
+  <span id="updated-text">Loading…</span>
+</div>
+
+<div class="intro">
+  <strong>What this page is:</strong> a daily scan of the S&amp;P 500 + Nasdaq 100 for technical
+  setups worth a second look, plus official SEC insider-trading disclosures. None of this is a
+  recommendation — it's a starting point for your own research, not a signal to buy or sell.
+</div>
+
+<div class="section-title"><span class="em">🏛️</span> Insider Buying</div>
+<div class="section-sub">Open-market stock purchases by officers, directors &amp; 10%+ owners — from official SEC Form 4 filings, refreshed every ~30 min.</div>
+<div class="card" id="insider-buys-card"></div>
+
+<div class="section-title"><span class="em">📉</span> Insider Selling</div>
+<div class="section-sub">Noisier signal than buying (execs sell for many reasons — taxes, diversification, planned schedules) but included for context.</div>
+<div class="card" id="insider-sells-card"></div>
+
+<div class="section-title"><span class="em">🔥</span> Sector Breakout Leaderboard</div>
+<div class="section-sub">All 11 SPDR sector ETFs, ranked by 5-day return.</div>
+<div class="card"><table class="sector-table" id="sector-table"></table></div>
+
+<div class="section-title"><span class="em">📈</span> 52-Week Highs &amp; Lows</div>
+<div class="section-sub">Highs: momentum/breakout candidates. Lows: oversold/contrarian candidates.</div>
+<div class="grid-2">
+  <div class="card">
+    <div style="font-weight:600;margin-bottom:8px;">Near 52-Week High</div>
+    <div class="stock-list" id="hi52-list"></div>
+  </div>
+  <div class="card">
+    <div style="font-weight:600;margin-bottom:8px;">Near 52-Week Low</div>
+    <div class="stock-list" id="lo52-list"></div>
+  </div>
+</div>
+
+<div class="section-title"><span class="em">📊</span> Unusual Volume</div>
+<div class="section-sub">Today's volume at least 2x the trailing 20-day average.</div>
+<div class="card"><div class="stock-list" id="volume-list"></div></div>
+
+<div class="section-title"><span class="em">🎯</span> Testing Key Averages</div>
+<div class="section-sub">Within ~2% of the 20-day (short-term) or 150-day (long-term) moving average — classic support/resistance test zones.</div>
+<div class="grid-2">
+  <div class="card">
+    <div style="font-weight:600;margin-bottom:8px;">Near SMA20</div>
+    <div class="stock-list" id="sma20-list"></div>
+  </div>
+  <div class="card">
+    <div style="font-weight:600;margin-bottom:8px;">Near SMA150</div>
+    <div class="stock-list" id="sma150-list"></div>
+  </div>
+</div>
+
+<footer>
+  <p><strong>Not financial advice.</strong> This page summarizes public technical data and official
+    SEC disclosures for informational purposes only. It is not a recommendation to buy or sell
+    any security.</p>
+  <p>Data: Yahoo Finance (price/volume/moving averages) for S&amp;P 500 + Nasdaq 100 constituents;
+    SEC EDGAR (official Form 4 insider-trading filings). Sector data refreshes ~every 15 min;
+    the technical scan and insider feed refresh on their own schedules — see each section's timestamp.</p>
+</footer>
+
+<script>
+const $ = (sel) => document.querySelector(sel);
+
+function fmtPct(v, digits = 2) {
+  if (v === null || v === undefined || Number.isNaN(v)) return "—";
+  const sign = v > 0 ? "+" : "";
+  return `${sign}${v.toFixed(digits)}%`;
+}
+function fmtMoney(v) {
+  if (v === null || v === undefined) return "—";
+  if (v >= 1e6) return "$" + (v / 1e6).toFixed(1) + "M";
+  if (v >= 1e3) return "$" + (v / 1e3).toFixed(0) + "K";
+  return "$" + v.toFixed(0);
+}
+function timeAgo(iso) {
+  if (!iso) return "no data yet";
+  const then = new Date(iso).getTime();
+  const diffMin = Math.round((Date.now() - then) / 60000);
+  if (diffMin < 1) return "just now";
+  if (diffMin < 60) return `${diffMin}m ago`;
+  const h = Math.floor(diffMin / 60);
+  const m = diffMin % 60;
+  if (h < 24) return `${h}h ${m}m ago`;
+  return `${Math.floor(h / 24)}d ago`;
+}
+async function loadJSON(path) {
+  try {
+    const res = await fetch(path + "?t=" + Date.now());
+    if (!res.ok) throw new Error(res.status);
+    return await res.json();
+  } catch (e) {
+    console.warn("Failed to load", path, e);
+    return null;
+  }
+}
+
+function stockRow(sym, price, metricText, status = "neutral") {
+  return `<div class="stock-row">
+    <div><span class="sym">${sym}</span><span class="price">$${price}</span></div>
+    <div class="metric ${status}">${metricText}</div>
+  </div>`;
+}
+
+function renderList(containerId, items, formatFn, emptyMsg) {
+  const el = $("#" + containerId);
+  if (!items || !items.length) {
+    el.innerHTML = `<div class="empty-note">${emptyMsg}</div>`;
+    return;
+  }
+  el.innerHTML = items.map(formatFn).join("");
+}
+
+function insiderRow(t) {
+  const isBuy = t.action === "Buy";
+  return `
+  <div class="insider-row">
+    <div class="insider-left">
+      <div class="sym-role">
+        <span class="action-badge ${isBuy ? 'buy' : 'sell'}">${t.action}</span>
+        <span class="sym">${t.symbol || "—"}</span>
+        <span class="role">${t.role || ""}</span>
+      </div>
+      <div class="name">${t.insider || "Unknown"}</div>
+    </div>
+    <div class="insider-right">
+      <div class="value">${fmtMoney(t.value)}</div>
+      <div class="detail">${t.shares ? Math.round(t.shares).toLocaleString() + " sh @ $" + t.price : ""}</div>
+      <div class="detail">${t.date || ""}</div>
+    </div>
+  </div>`;
+}
+
+(async function main() {
+  $("#updated-text").textContent = "Loading…";
+
+  const [fast, opp, insiders] = await Promise.all([
+    loadJSON("data/fast.json"),
+    loadJSON("data/opportunities.json"),
+    loadJSON("data/insiders.json"),
+  ]);
+
+  const timestamps = [fast?.generated_at, opp?.generated_at, insiders?.generated_at].filter(Boolean);
+  const latest = timestamps.sort().reverse()[0];
+  $("#updated-text").textContent = latest ? `Updated ${timeAgo(latest)}` : "Waiting for first data run";
+  $("#updated-dot").classList.toggle("stale", !latest);
+
+  renderList("insider-buys-card", insiders?.buys, insiderRow,
+    "No open-market insider purchases in the S&P 500 / Nasdaq 100 in the most recent scan.");
+  renderList("insider-sells-card", insiders?.sells, insiderRow,
+    "No open-market insider sales in the S&P 500 / Nasdaq 100 in the most recent scan.");
+
+  {
+    const rows = fast?.sector_breakout || [];
+    const tbody = rows.map((r, i) => {
+      const status = (r.return_5d_pct ?? 0) > 0 ? "opportunity" : (r.return_5d_pct ?? 0) < 0 ? "caution" : "neutral";
+      return `<tr>
+        <td class="rank">${i + 1}</td>
+        <td class="name">${r.name}<br><span class="sym">${r.symbol}</span></td>
+        <td class="num ${status}">${fmtPct(r.return_5d_pct)}</td>
+        <td class="num">${fmtPct(r.return_20d_pct)}</td>
+        <td class="num">${fmtPct(r.distance_from_sma150_pct)}</td>
+      </tr>`;
+    }).join("");
+    $("#sector-table").innerHTML = rows.length ? `
+      <thead><tr><th></th><th>Sector</th><th style="text-align:right">5D</th><th style="text-align:right">20D</th><th style="text-align:right">vs SMA150</th></tr></thead>
+      <tbody>${tbody}</tbody>` : `<tbody><tr><td class="empty-note">No data yet.</td></tr></tbody>`;
+  }
+
+  renderList("hi52-list", opp?.near_52w_high,
+    (r) => stockRow(r.symbol, r.price, `${r.dist_pct}% away`, "opportunity"),
+    "No stocks currently within 3% of their 52-week high.");
+  renderList("lo52-list", opp?.near_52w_low,
+    (r) => stockRow(r.symbol, r.price, `${r.dist_pct}% away`, "caution"),
+    "No stocks currently within 3% of their 52-week low.");
+
+  renderList("volume-list", opp?.volume_surge,
+    (r) => stockRow(r.symbol, r.price, `${r.ratio}x avg`, "opportunity"),
+    "No unusual volume detected in the most recent scan.");
+
+  renderList("sma20-list", opp?.near_sma20,
+    (r) => stockRow(r.symbol, r.price, fmtPct(r.dist_pct), r.dist_pct >= 0 ? "caution" : "opportunity"),
+    "No stocks currently near their SMA20.");
+  renderList("sma150-list", opp?.near_sma150,
+    (r) => stockRow(r.symbol, r.price, fmtPct(r.dist_pct), r.dist_pct >= 0 ? "caution" : "opportunity"),
+    "No stocks currently near their SMA150.");
+})();
+</script>
+</body>
+</html>

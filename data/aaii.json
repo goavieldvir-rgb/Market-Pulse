@@ -1,0 +1,8 @@
+{
+  "generated_at": null,
+  "bullish_pct": null,
+  "neutral_pct": null,
+  "bearish_pct": null,
+  "bull_bear_spread": null,
+  "_note": "Placeholder. Populated by .github/workflows/update-slow.yml after first run."
+}

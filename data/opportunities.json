@@ -1,0 +1,10 @@
+{
+  "generated_at": null,
+  "universe_size": null,
+  "near_sma20": [],
+  "near_sma150": [],
+  "volume_surge": [],
+  "near_52w_high": [],
+  "near_52w_low": [],
+  "_note": "Placeholder. Populated by .github/workflows/update-slow.yml (fetch_breadth.py) after first run."
+}
