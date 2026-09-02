@@ -1,9 +1,0 @@
-{
-  "generated_at": "2026-09-01T23:27:07.541249+00:00",
-  "bullish_pct": 75.0,
-  "neutral_pct": 22.6,
-  "bearish_pct": 70.3,
-  "bull_bear_spread": 4.7,
-  "source": "https://www.aaii.com/sentimentsurvey",
-  "note": "AAII updates this survey weekly (Thursdays). Scraped best-effort from AAII's public page."
-}
