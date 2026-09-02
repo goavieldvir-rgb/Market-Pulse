@@ -86,6 +86,16 @@ def pct_change(a, b):
     return (b - a) / a * 100.0
 
 
+def percentile_rank(values, current):
+    """What % of the trailing values are <= current. Used for 'VIX is higher
+    than X% of the past year' style context - cheap since we already have
+    the 1y history fetched for other purposes."""
+    if not values or current is None:
+        return None
+    below_or_equal = sum(1 for v in values if v <= current)
+    return round(below_or_equal / len(values) * 100, 1)
+
+
 def build_symbol_block(symbol):
     hist = fetch_history(symbol)
     if not hist:
@@ -107,6 +117,7 @@ def build_symbol_block(symbol):
         "streak_count": cnt,
         "return_5d_pct": round(ret_5d, 2) if ret_5d is not None else None,
         "return_20d_pct": round(ret_20d, 2) if ret_20d is not None else None,
+        "percentile_1y": percentile_rank(closes, last_close),
     }
 
 
