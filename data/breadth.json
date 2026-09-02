@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-09-02T09:50:10.417088+00:00",
+  "generated_at": "2026-09-02T23:33:23.461564+00:00",
   "universe_size_requested": 503,
   "universe_size_matched": 503,
-  "pct_above_sma50": 46.1,
-  "count_above_sma50": 232,
+  "pct_above_sma50": 47.9,
+  "count_above_sma50": 241,
   "note": "Approximation of the 'S5FI'-style breadth reading (% of S&P 500 constituents above their 50-day moving average), computed from a community-maintained constituent list and Yahoo Finance chart data. Not an official index value."
 }
