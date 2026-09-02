@@ -22,7 +22,7 @@ import xml.etree.ElementTree as ET
 from datetime import datetime, timezone
 
 # --- IMPORTANT: replace with a real contact before you deploy this ---
-CONTACT = "market-pulse-dashboard contact@example.com"
+CONTACT = "market-pulse-dashboard go.avieldvir+marketpulse@gmail.com"
 HEADERS = {"User-Agent": CONTACT}
 
 OUT_PATH = os.path.join(os.path.dirname(__file__), "..", "data", "insiders.json")
