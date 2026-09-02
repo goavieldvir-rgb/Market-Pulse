@@ -267,6 +267,21 @@
     margin: 0 auto;
     line-height: 1.6;
   }
+
+  .sparkline-wrap {
+    max-width: 280px;
+    margin: 14px auto 0;
+  }
+  .sparkline-label {
+    font-size: 0.66rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-faint);
+    margin-bottom: 4px;
+  }
+  .sparkline-wrap svg { width: 100%; height: 36px; display: block; }
+
   .gauge-explainer {
     margin-top: 20px;
     padding-top: 18px;
@@ -558,6 +573,7 @@
     <div class="gauge-scale-hint">on a −100 (caution) to +100 (opportunity) scale</div>
     <div class="gauge-label" id="gauge-label">Loading data…</div>
   </div>
+  <div id="sparkline-slot"></div>
   <div class="gauge-explainer">
     <p class="gauge-sub">A simple, contrarian-leaning blend of the signals below — not a forecast.
       Skewed toward "Opportunity" when fear, pessimism, or oversold conditions dominate, and toward
@@ -780,16 +796,63 @@ function skeletonCard() {
   </div>`;
 }
 
+// ---------- Composite score sparkline ----------
+function renderSparkline(history) {
+  const slot = $("#sparkline-slot");
+  const points = (history || []).filter(h => h.composite !== null && h.composite !== undefined);
+  if (points.length < 3) {
+    slot.innerHTML = ""; // not enough history yet - stay silent, no half-empty chart
+    return;
+  }
+  const w = 280, h = 36, pad = 3;
+  const values = points.map(p => p.composite);
+  const minV = Math.min(...values, -20), maxV = Math.max(...values, 20); // keep some visual range even if flat
+  const range = maxV - minV || 1;
+  const stepX = (w - pad * 2) / (points.length - 1);
+  const toXY = (i, v) => {
+    const x = pad + i * stepX;
+    const y = pad + (1 - (v - minV) / range) * (h - pad * 2);
+    return [x, y];
+  };
+  const pathD = points.map((p, i) => {
+    const [x, y] = toXY(i, p.composite);
+    return `${i === 0 ? "M" : "L"} ${x.toFixed(1)} ${y.toFixed(1)}`;
+  }).join(" ");
+  const [lastX, lastY] = toXY(points.length - 1, points[points.length - 1].composite);
+  const lastScore = points[points.length - 1].composite;
+  const dotColor = lastScore >= 0 ? "#5B9CFF" : "#FFAB3C";
+
+  slot.innerHTML = `
+    <div class="sparkline-wrap">
+      <div class="sparkline-label">Composite score — last ${points.length} days</div>
+      <svg viewBox="0 0 ${w} ${h}" xmlns="http://www.w3.org/2000/svg">
+        <line x1="${pad}" y1="${(pad + (1 - (0 - minV) / range) * (h - pad * 2)).toFixed(1)}"
+              x2="${w - pad}" y2="${(pad + (1 - (0 - minV) / range) * (h - pad * 2)).toFixed(1)}"
+              stroke="rgba(255,255,255,0.12)" stroke-width="1" stroke-dasharray="2,3"/>
+        <path d="${pathD}" fill="none" stroke="rgba(91,156,255,0.7)" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+        <circle cx="${lastX.toFixed(1)}" cy="${lastY.toFixed(1)}" r="2.6" fill="${dotColor}"/>
+      </svg>
+    </div>`;
+}
+
+// Percentile of `current` within a series of past values (what % of days were <= current)
+function percentileRank(series, current) {
+  if (!series.length || current === null || current === undefined) return null;
+  const below = series.filter(v => v <= current).length;
+  return Math.round((below / series.length) * 100);
+}
+
 (async function main() {
   $("#card-grid").innerHTML = Array.from({ length: 8 }, skeletonCard).join("");
   $("#updated-text").textContent = "Loading…";
   $("#gauge-label").textContent = "Loading data…";
   renderGauge();
 
-  const [fast, breadth, aaii] = await Promise.all([
+  const [fast, breadth, aaii, history] = await Promise.all([
     loadJSON("data/fast.json"),
     loadJSON("data/breadth.json"),
     loadJSON("data/aaii.json"),
+    loadJSON("data/history.json"),
   ]);
 
   const scores = [];
@@ -892,6 +955,7 @@ function skeletonCard() {
 
   {
     const vix = fast?.vix?.close;
+    const vixPctile = fast?.vix?.percentile_1y;
     let status = "neutral", score = null;
     if (vix !== null && vix !== undefined) {
       if (vix < 14) status = "caution";
@@ -906,6 +970,9 @@ function skeletonCard() {
       valueHTML: `<div class="metric-row"><span class="metric-value ${status}">${fmtNum(vix, 2)}</span></div>`,
       meterScore: score,
       meterLabels: ["Calm (caution)", "Fearful (opportunity)"],
+      subMetrics: vixPctile !== null && vixPctile !== undefined
+        ? [{ k: "1-Year Percentile", v: `Higher than ${vixPctile}% of days` }]
+        : [],
       note: "High VIX = fear priced in, historically a better entry window. Low VIX = complacency, everyone's comfortable — worth being cautious.",
       asOf: fast?.generated_at ? timeAgo(fast.generated_at) : null,
     }));
@@ -941,6 +1008,8 @@ function skeletonCard() {
       score = clamp((45 - pct) * 3, -100, 100);
       scores.push(score);
     }
+    const breadthSeries = (history || []).map(h => h.breadth_pct).filter(v => v !== null && v !== undefined);
+    const breadthPctile = breadthSeries.length >= 15 ? percentileRank(breadthSeries, pct) : null;
     cards.push(card({
       title: "% of S&P 500 Above 50-day SMA",
       code: "S5FI-style breadth proxy",
@@ -948,7 +1017,11 @@ function skeletonCard() {
       valueHTML: `<div class="metric-row"><span class="metric-value ${status}">${pct !== null && pct !== undefined ? pct + "%" : "—"}</span></div>`,
       meterScore: score,
       meterLabels: ["Overextended (caution)", "Oversold (opportunity)"],
-      note: "Above ~70%: most stocks already extended — danger zone, be cautious. Below ~14–15%: severe, broad-based fear — historically a strong buying-opportunity zone.",
+      subMetrics: breadthPctile !== null
+        ? [{ k: `${breadthSeries.length}-Day Percentile`, v: `Higher than ${breadthPctile}% of days` }]
+        : [],
+      note: "Above ~70%: most stocks already extended — danger zone, be cautious. Below ~14–15%: severe, broad-based fear — historically a strong buying-opportunity zone."
+        + (breadthPctile === null ? " (Percentile context arrives once ~15 days of history have accumulated.)" : ""),
       asOf: breadth?.generated_at ? timeAgo(breadth.generated_at) + " · daily" : null,
     }));
   }
@@ -1014,6 +1087,8 @@ function skeletonCard() {
     $("#gauge-score").style.opacity = "0.4";
     $("#gauge-label").textContent = "Waiting for first data run";
   }
+
+  renderSparkline(history);
 })();
 
 document.addEventListener("touchstart", function () {}, { passive: true });
