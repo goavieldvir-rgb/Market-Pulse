@@ -1,10 +1,659 @@
 {
-  "generated_at": null,
-  "universe_size": null,
-  "near_sma20": [],
-  "near_sma150": [],
-  "volume_surge": [],
-  "near_52w_high": [],
-  "near_52w_low": [],
-  "_note": "Placeholder. Populated by .github/workflows/update-slow.yml (fetch_breadth.py) after first run."
+  "generated_at": "2026-09-02T09:15:29.254053+00:00",
+  "universe_size": 516,
+  "universe_sources": {
+    "sp500": 503,
+    "nasdaq100": 101
+  },
+  "near_sma20": [
+    {
+      "symbol": "CCEP",
+      "price": 107.6,
+      "dist_pct": -0.02
+    },
+    {
+      "symbol": "ETR",
+      "price": 107.02,
+      "dist_pct": 0.03
+    },
+    {
+      "symbol": "FOXA",
+      "price": 65.93,
+      "dist_pct": -0.03
+    },
+    {
+      "symbol": "LDOS",
+      "price": 139.18,
+      "dist_pct": 0.07
+    },
+    {
+      "symbol": "TECH",
+      "price": 72.18,
+      "dist_pct": -0.1
+    },
+    {
+      "symbol": "HCA",
+      "price": 413.58,
+      "dist_pct": -0.11
+    },
+    {
+      "symbol": "OMC",
+      "price": 86.09,
+      "dist_pct": -0.11
+    },
+    {
+      "symbol": "GWW",
+      "price": 1309.21,
+      "dist_pct": 0.15
+    },
+    {
+      "symbol": "ED",
+      "price": 107.7,
+      "dist_pct": -0.16
+    },
+    {
+      "symbol": "EW",
+      "price": 90.74,
+      "dist_pct": -0.16
+    },
+    {
+      "symbol": "GPC",
+      "price": 134.84,
+      "dist_pct": 0.16
+    },
+    {
+      "symbol": "A",
+      "price": 149.93,
+      "dist_pct": -0.18
+    },
+    {
+      "symbol": "INTU",
+      "price": 344.93,
+      "dist_pct": -0.18
+    },
+    {
+      "symbol": "BNY",
+      "price": 160.51,
+      "dist_pct": -0.2
+    },
+    {
+      "symbol": "MKC",
+      "price": 54.26,
+      "dist_pct": 0.2
+    },
+    {
+      "symbol": "TRMB",
+      "price": 58.94,
+      "dist_pct": 0.2
+    },
+    {
+      "symbol": "CNC",
+      "price": 65.23,
+      "dist_pct": -0.23
+    },
+    {
+      "symbol": "CRL",
+      "price": 282.34,
+      "dist_pct": 0.24
+    },
+    {
+      "symbol": "LIN",
+      "price": 486.76,
+      "dist_pct": 0.24
+    },
+    {
+      "symbol": "BALL",
+      "price": 62.77,
+      "dist_pct": -0.25
+    },
+    {
+      "symbol": "AES",
+      "price": 14.77,
+      "dist_pct": 0.26
+    },
+    {
+      "symbol": "ERIE",
+      "price": 256.09,
+      "dist_pct": -0.26
+    },
+    {
+      "symbol": "FICO",
+      "price": 1103.68,
+      "dist_pct": 0.28
+    },
+    {
+      "symbol": "SBUX",
+      "price": 106.15,
+      "dist_pct": -0.29
+    },
+    {
+      "symbol": "CHRW",
+      "price": 147.88,
+      "dist_pct": 0.3
+    },
+    {
+      "symbol": "IT",
+      "price": 189.93,
+      "dist_pct": 0.31
+    },
+    {
+      "symbol": "VTR",
+      "price": 92.07,
+      "dist_pct": 0.31
+    },
+    {
+      "symbol": "ACGL",
+      "price": 98.61,
+      "dist_pct": -0.33
+    },
+    {
+      "symbol": "WFC",
+      "price": 87.04,
+      "dist_pct": 0.35
+    },
+    {
+      "symbol": "J",
+      "price": 146.33,
+      "dist_pct": -0.36
+    }
+  ],
+  "near_sma150": [
+    {
+      "symbol": "AFL",
+      "price": 116.02,
+      "dist_pct": 0.05
+    },
+    {
+      "symbol": "AES",
+      "price": 14.77,
+      "dist_pct": 0.09
+    },
+    {
+      "symbol": "MKC",
+      "price": 54.26,
+      "dist_pct": -0.1
+    },
+    {
+      "symbol": "MGM",
+      "price": 40.77,
+      "dist_pct": -0.2
+    },
+    {
+      "symbol": "PH",
+      "price": 952.09,
+      "dist_pct": 0.24
+    },
+    {
+      "symbol": "PCAR",
+      "price": 122.45,
+      "dist_pct": 0.26
+    },
+    {
+      "symbol": "PLD",
+      "price": 139.68,
+      "dist_pct": -0.27
+    },
+    {
+      "symbol": "QCOM",
+      "price": 166.61,
+      "dist_pct": -0.27
+    },
+    {
+      "symbol": "AME",
+      "price": 231.32,
+      "dist_pct": -0.35
+    },
+    {
+      "symbol": "KMI",
+      "price": 32.1,
+      "dist_pct": -0.36
+    },
+    {
+      "symbol": "HIG",
+      "price": 137.13,
+      "dist_pct": 0.39
+    },
+    {
+      "symbol": "CEG",
+      "price": 280.31,
+      "dist_pct": -0.41
+    },
+    {
+      "symbol": "CL",
+      "price": 89.63,
+      "dist_pct": -0.41
+    },
+    {
+      "symbol": "DAL",
+      "price": 76.38,
+      "dist_pct": 0.5
+    },
+    {
+      "symbol": "LYB",
+      "price": 65.17,
+      "dist_pct": 0.51
+    },
+    {
+      "symbol": "ITW",
+      "price": 269.88,
+      "dist_pct": -0.54
+    },
+    {
+      "symbol": "ULTA",
+      "price": 545.66,
+      "dist_pct": 0.57
+    },
+    {
+      "symbol": "ES",
+      "price": 70.5,
+      "dist_pct": -0.58
+    },
+    {
+      "symbol": "PKG",
+      "price": 229.12,
+      "dist_pct": 0.58
+    },
+    {
+      "symbol": "HST",
+      "price": 21.64,
+      "dist_pct": -0.64
+    },
+    {
+      "symbol": "COIN",
+      "price": 176.82,
+      "dist_pct": 0.72
+    },
+    {
+      "symbol": "CI",
+      "price": 283.06,
+      "dist_pct": 0.73
+    },
+    {
+      "symbol": "GEHC",
+      "price": 70.42,
+      "dist_pct": 0.74
+    },
+    {
+      "symbol": "JCI",
+      "price": 139.25,
+      "dist_pct": -0.74
+    },
+    {
+      "symbol": "SNA",
+      "price": 381.2,
+      "dist_pct": -0.8
+    },
+    {
+      "symbol": "CASY",
+      "price": 766.91,
+      "dist_pct": -0.82
+    },
+    {
+      "symbol": "EQIX",
+      "price": 1027.59,
+      "dist_pct": 0.82
+    },
+    {
+      "symbol": "HAL",
+      "price": 36.8,
+      "dist_pct": 0.88
+    },
+    {
+      "symbol": "PSA",
+      "price": 302.86,
+      "dist_pct": -0.88
+    },
+    {
+      "symbol": "TFC",
+      "price": 49.44,
+      "dist_pct": -0.89
+    }
+  ],
+  "volume_surge": [
+    {
+      "symbol": "EIX",
+      "price": 58.8,
+      "ratio": 5.38
+    },
+    {
+      "symbol": "PCG",
+      "price": 14.06,
+      "ratio": 4.07
+    },
+    {
+      "symbol": "DELL",
+      "price": 425.0,
+      "ratio": 2.84
+    },
+    {
+      "symbol": "MDT",
+      "price": 92.04,
+      "ratio": 2.75
+    },
+    {
+      "symbol": "AON",
+      "price": 326.3,
+      "ratio": 2.69
+    },
+    {
+      "symbol": "HWM",
+      "price": 254.89,
+      "ratio": 2.21
+    },
+    {
+      "symbol": "ESS",
+      "price": 279.0,
+      "ratio": 2.05
+    },
+    {
+      "symbol": "BLDR",
+      "price": 62.79,
+      "ratio": 2.01
+    }
+  ],
+  "near_52w_high": [
+    {
+      "symbol": "COP",
+      "price": 136.19,
+      "dist_pct": 0.0
+    },
+    {
+      "symbol": "DE",
+      "price": 676.08,
+      "dist_pct": 0.0
+    },
+    {
+      "symbol": "HPQ",
+      "price": 31.32,
+      "dist_pct": 0.0
+    },
+    {
+      "symbol": "MPC",
+      "price": 383.0,
+      "dist_pct": 0.0
+    },
+    {
+      "symbol": "MSI",
+      "price": 491.24,
+      "dist_pct": 0.0
+    },
+    {
+      "symbol": "PSX",
+      "price": 252.02,
+      "dist_pct": 0.0
+    },
+    {
+      "symbol": "VLO",
+      "price": 361.99,
+      "dist_pct": 0.0
+    },
+    {
+      "symbol": "CVX",
+      "price": 211.05,
+      "dist_pct": 0.05
+    },
+    {
+      "symbol": "PFE",
+      "price": 28.55,
+      "dist_pct": 0.07
+    },
+    {
+      "symbol": "APA",
+      "price": 44.3,
+      "dist_pct": 0.2
+    },
+    {
+      "symbol": "SJM",
+      "price": 131.42,
+      "dist_pct": 0.32
+    },
+    {
+      "symbol": "CAH",
+      "price": 239.35,
+      "dist_pct": 0.38
+    },
+    {
+      "symbol": "TECH",
+      "price": 72.18,
+      "dist_pct": 0.41
+    },
+    {
+      "symbol": "SOLV",
+      "price": 90.95,
+      "dist_pct": 0.72
+    },
+    {
+      "symbol": "JNJ",
+      "price": 271.19,
+      "dist_pct": 0.81
+    },
+    {
+      "symbol": "VRTX",
+      "price": 547.65,
+      "dist_pct": 0.94
+    },
+    {
+      "symbol": "AMGN",
+      "price": 438.12,
+      "dist_pct": 1.29
+    },
+    {
+      "symbol": "OKE",
+      "price": 95.69,
+      "dist_pct": 1.42
+    },
+    {
+      "symbol": "CF",
+      "price": 135.6,
+      "dist_pct": 1.45
+    },
+    {
+      "symbol": "BMY",
+      "price": 66.92,
+      "dist_pct": 1.47
+    },
+    {
+      "symbol": "IQV",
+      "price": 258.35,
+      "dist_pct": 1.54
+    },
+    {
+      "symbol": "EXPD",
+      "price": 187.7,
+      "dist_pct": 1.58
+    },
+    {
+      "symbol": "NWSA",
+      "price": 30.63,
+      "dist_pct": 1.8
+    },
+    {
+      "symbol": "REGN",
+      "price": 823.82,
+      "dist_pct": 2.02
+    },
+    {
+      "symbol": "TRGP",
+      "price": 296.06,
+      "dist_pct": 2.05
+    },
+    {
+      "symbol": "VZ",
+      "price": 50.3,
+      "dist_pct": 2.1
+    },
+    {
+      "symbol": "SBUX",
+      "price": 106.15,
+      "dist_pct": 2.21
+    },
+    {
+      "symbol": "ABBV",
+      "price": 259.99,
+      "dist_pct": 2.25
+    },
+    {
+      "symbol": "BNY",
+      "price": 160.51,
+      "dist_pct": 2.29
+    },
+    {
+      "symbol": "DXCM",
+      "price": 90.14,
+      "dist_pct": 2.38
+    }
+  ],
+  "near_52w_low": [
+    {
+      "symbol": "BLDR",
+      "price": 62.79,
+      "dist_pct": 0.0
+    },
+    {
+      "symbol": "CCL",
+      "price": 23.23,
+      "dist_pct": 0.0
+    },
+    {
+      "symbol": "CMS",
+      "price": 67.96,
+      "dist_pct": 0.0
+    },
+    {
+      "symbol": "CRH",
+      "price": 91.2,
+      "dist_pct": 0.0
+    },
+    {
+      "symbol": "FDXF",
+      "price": 127.57,
+      "dist_pct": 0.0
+    },
+    {
+      "symbol": "HONA",
+      "price": 154.24,
+      "dist_pct": 0.0
+    },
+    {
+      "symbol": "LII",
+      "price": 377.25,
+      "dist_pct": 0.0
+    },
+    {
+      "symbol": "LOW",
+      "price": 200.05,
+      "dist_pct": 0.0
+    },
+    {
+      "symbol": "MLM",
+      "price": 504.92,
+      "dist_pct": 0.0
+    },
+    {
+      "symbol": "MNST",
+      "price": 44.99,
+      "dist_pct": 0.0
+    },
+    {
+      "symbol": "NKE",
+      "price": 38.12,
+      "dist_pct": 0.0
+    },
+    {
+      "symbol": "NRG",
+      "price": 109.51,
+      "dist_pct": 0.0
+    },
+    {
+      "symbol": "PNR",
+      "price": 60.45,
+      "dist_pct": 0.0
+    },
+    {
+      "symbol": "TJX",
+      "price": 133.27,
+      "dist_pct": 0.0
+    },
+    {
+      "symbol": "VICI",
+      "price": 25.54,
+      "dist_pct": 0.0
+    },
+    {
+      "symbol": "WYNN",
+      "price": 90.6,
+      "dist_pct": 0.0
+    },
+    {
+      "symbol": "LVS",
+      "price": 43.84,
+      "dist_pct": 0.07
+    },
+    {
+      "symbol": "APTV",
+      "price": 44.85,
+      "dist_pct": 0.2
+    },
+    {
+      "symbol": "TXT",
+      "price": 79.71,
+      "dist_pct": 0.37
+    },
+    {
+      "symbol": "MCD",
+      "price": 261.11,
+      "dist_pct": 0.4
+    },
+    {
+      "symbol": "XYL",
+      "price": 106.89,
+      "dist_pct": 0.52
+    },
+    {
+      "symbol": "LHX",
+      "price": 263.56,
+      "dist_pct": 0.6
+    },
+    {
+      "symbol": "ROL",
+      "price": 36.19,
+      "dist_pct": 0.7
+    },
+    {
+      "symbol": "VMC",
+      "price": 259.69,
+      "dist_pct": 1.04
+    },
+    {
+      "symbol": "LEN",
+      "price": 82.75,
+      "dist_pct": 1.11
+    },
+    {
+      "symbol": "PEG",
+      "price": 73.48,
+      "dist_pct": 1.2
+    },
+    {
+      "symbol": "AZO",
+      "price": 2965.83,
+      "dist_pct": 1.45
+    },
+    {
+      "symbol": "OTIS",
+      "price": 70.6,
+      "dist_pct": 1.82
+    },
+    {
+      "symbol": "TDG",
+      "price": 1155.76,
+      "dist_pct": 2.02
+    },
+    {
+      "symbol": "STZ",
+      "price": 130.63,
+      "dist_pct": 2.33
+    }
+  ],
+  "note": "Scanned from S&P 500 + Nasdaq 100 (deduplicated). Not stock advice - a starting point for your own research."
 }

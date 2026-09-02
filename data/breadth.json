@@ -1,5 +1,8 @@
 {
-  "generated_at": null,
-  "pct_above_sma50": null,
-  "_note": "Placeholder. Populated by .github/workflows/update-slow.yml after first run."
+  "generated_at": "2026-09-02T09:15:29.253301+00:00",
+  "universe_size_requested": 503,
+  "universe_size_matched": 503,
+  "pct_above_sma50": 46.5,
+  "count_above_sma50": 234,
+  "note": "Approximation of the 'S5FI'-style breadth reading (% of S&P 500 constituents above their 50-day moving average), computed from a community-maintained constituent list and Yahoo Finance chart data. Not an official index value."
 }
