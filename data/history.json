@@ -4,5 +4,11 @@
     "composite": -1.0,
     "breadth_pct": 47.9,
     "vix": 16.6
+  },
+  {
+    "date": "2026-09-03",
+    "composite": -2.5,
+    "breadth_pct": 50.9,
+    "vix": 16.6
   }
 ]
