@@ -1,8 +1,42 @@
 {
-  "generated_at": "2026-09-03T16:05:48.740553+00:00",
-  "checked_filings": 40,
+  "generated_at": "2026-09-03T19:22:58.175055+00:00",
+  "checked_filings": 29,
   "feed_size": 100,
   "buys": [],
-  "sells": [],
+  "sells": [
+    {
+      "symbol": "LRCX",
+      "insider": "Varadarajan Seshasayee",
+      "role": "Senior Vice President",
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 27480.0,
+      "price": 291.32,
+      "value": 8005474.0,
+      "date": "2026-09-02"
+    },
+    {
+      "symbol": "LRCX",
+      "insider": "Varadarajan Seshasayee",
+      "role": "Senior Vice President",
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 20000.0,
+      "price": 291.32,
+      "value": 5826400.0,
+      "date": "2026-09-02"
+    },
+    {
+      "symbol": "LRCX",
+      "insider": "Varadarajan Seshasayee",
+      "role": "Senior Vice President",
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 12270.0,
+      "price": 291.32,
+      "value": 3574496.0,
+      "date": "2026-09-02"
+    }
+  ],
   "note": "Official SEC Form 4 filings (Section 16 disclosures) for open-market buy/sell transactions by officers, directors, and 10%+ owners, filtered to S&P 500 + Nasdaq 100 companies. Grants, option exercises, gifts, and tax-withholding transactions are excluded. Not stock advice."
 }
