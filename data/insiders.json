@@ -1,8 +1,240 @@
 {
-  "generated_at": "2026-09-04T19:25:36.835485+00:00",
-  "checked_filings": 34,
+  "generated_at": "2026-09-04T21:42:20.813343+00:00",
+  "checked_filings": 10,
   "feed_size": 100,
   "buys": [],
-  "sells": [],
+  "sells": [
+    {
+      "symbol": "AJG",
+      "insider": "Hudson Scott R",
+      "role": "Vice President",
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 12000.0,
+      "price": 264.13,
+      "value": 3169596.0,
+      "date": "2026-09-02"
+    },
+    {
+      "symbol": "HOOD",
+      "insider": "Quirk Steven M.",
+      "role": "Chief Brokerage Officer",
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 13208.0,
+      "price": 119.93,
+      "value": 1584016.0,
+      "date": "2026-09-03"
+    },
+    {
+      "symbol": "KKR",
+      "insider": "HOLMES DANE E",
+      "role": "Insider",
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 10000.0,
+      "price": 108.58,
+      "value": 1085800.0,
+      "date": "2026-09-03"
+    },
+    {
+      "symbol": "HOOD",
+      "insider": "Gallagher Daniel Martin Jr",
+      "role": "Chief Legal Officer",
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 3800.0,
+      "price": 123.0,
+      "value": 467385.0,
+      "date": "2026-09-03"
+    },
+    {
+      "symbol": "HOOD",
+      "insider": "Quirk Steven M.",
+      "role": "Chief Brokerage Officer",
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 3599.0,
+      "price": 122.97,
+      "value": 442552.0,
+      "date": "2026-09-03"
+    },
+    {
+      "symbol": "HOOD",
+      "insider": "Gallagher Daniel Martin Jr",
+      "role": "Chief Legal Officer",
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 2700.0,
+      "price": 123.91,
+      "value": 334566.0,
+      "date": "2026-09-03"
+    },
+    {
+      "symbol": "HOOD",
+      "insider": "Quirk Steven M.",
+      "role": "Chief Brokerage Officer",
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 2700.0,
+      "price": 123.88,
+      "value": 334483.0,
+      "date": "2026-09-03"
+    },
+    {
+      "symbol": "HOOD",
+      "insider": "Quirk Steven M.",
+      "role": "Chief Brokerage Officer",
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 2397.0,
+      "price": 113.25,
+      "value": 271454.0,
+      "date": "2026-09-03"
+    },
+    {
+      "symbol": "HOOD",
+      "insider": "Gallagher Daniel Martin Jr",
+      "role": "Chief Legal Officer",
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 900.0,
+      "price": 119.6,
+      "value": 107642.0,
+      "date": "2026-09-03"
+    },
+    {
+      "symbol": "HOOD",
+      "insider": "Quirk Steven M.",
+      "role": "Chief Brokerage Officer",
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 812.0,
+      "price": 124.58,
+      "value": 101160.0,
+      "date": "2026-09-03"
+    },
+    {
+      "symbol": "HOOD",
+      "insider": "Quirk Steven M.",
+      "role": "Chief Brokerage Officer",
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 800.0,
+      "price": 121.7,
+      "value": 97358.0,
+      "date": "2026-09-03"
+    },
+    {
+      "symbol": "HOOD",
+      "insider": "Gallagher Daniel Martin Jr",
+      "role": "Chief Legal Officer",
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 800.0,
+      "price": 121.66,
+      "value": 97326.0,
+      "date": "2026-09-03"
+    },
+    {
+      "symbol": "HOOD",
+      "insider": "Gallagher Daniel Martin Jr",
+      "role": "Chief Legal Officer",
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 700.0,
+      "price": 124.62,
+      "value": 87233.0,
+      "date": "2026-09-03"
+    },
+    {
+      "symbol": "HOOD",
+      "insider": "Gallagher Daniel Martin Jr",
+      "role": "Chief Legal Officer",
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 400.0,
+      "price": 120.77,
+      "value": 48309.0,
+      "date": "2026-09-03"
+    },
+    {
+      "symbol": "HOOD",
+      "insider": "Quirk Steven M.",
+      "role": "Chief Brokerage Officer",
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 400.0,
+      "price": 120.63,
+      "value": 48253.0,
+      "date": "2026-09-03"
+    },
+    {
+      "symbol": "HOOD",
+      "insider": "Gallagher Daniel Martin Jr",
+      "role": "Chief Legal Officer",
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 300.0,
+      "price": 118.37,
+      "value": 35512.0,
+      "date": "2026-09-03"
+    },
+    {
+      "symbol": "HOOD",
+      "insider": "Quirk Steven M.",
+      "role": "Chief Brokerage Officer",
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 300.0,
+      "price": 117.86,
+      "value": 35358.0,
+      "date": "2026-09-03"
+    },
+    {
+      "symbol": "HOOD",
+      "insider": "Gallagher Daniel Martin Jr",
+      "role": "Chief Legal Officer",
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 200.0,
+      "price": 117.17,
+      "value": 23433.0,
+      "date": "2026-09-03"
+    },
+    {
+      "symbol": "HOOD",
+      "insider": "Quirk Steven M.",
+      "role": "Chief Brokerage Officer",
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 200.0,
+      "price": 116.28,
+      "value": 23256.0,
+      "date": "2026-09-03"
+    },
+    {
+      "symbol": "HOOD",
+      "insider": "Gallagher Daniel Martin Jr",
+      "role": "Chief Legal Officer",
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 100.0,
+      "price": 115.84,
+      "value": 11584.0,
+      "date": "2026-09-03"
+    },
+    {
+      "symbol": "HOOD",
+      "insider": "Gallagher Daniel Martin Jr",
+      "role": "Chief Legal Officer",
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 100.0,
+      "price": 113.45,
+      "value": 11345.0,
+      "date": "2026-09-03"
+    }
+  ],
   "note": "Official SEC Form 4 filings (Section 16 disclosures) for open-market buy/sell transactions by officers, directors, and 10%+ owners, filtered to S&P 500 + Nasdaq 100 companies. Grants, option exercises, gifts, and tax-withholding transactions are excluded. Not stock advice."
 }
