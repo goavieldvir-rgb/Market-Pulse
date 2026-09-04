@@ -1,53 +1,8 @@
 {
-  "generated_at": "2026-09-04T13:18:18.965030+00:00",
-  "checked_filings": 18,
+  "generated_at": "2026-09-04T16:58:47.888145+00:00",
+  "checked_filings": 15,
   "feed_size": 100,
   "buys": [],
-  "sells": [
-    {
-      "symbol": "JNJ",
-      "insider": "Schmid Timothy",
-      "role": "EVP, WW Chair, MedTech",
-      "transaction_code": "S",
-      "action": "Sell",
-      "shares": 22527.0,
-      "price": 274.74,
-      "value": 6189068.0,
-      "date": "2026-09-02"
-    },
-    {
-      "symbol": "JNJ",
-      "insider": "Schmid Timothy",
-      "role": "EVP, WW Chair, MedTech",
-      "transaction_code": "S",
-      "action": "Sell",
-      "shares": 11070.0,
-      "price": 274.74,
-      "value": 3041372.0,
-      "date": "2026-09-02"
-    },
-    {
-      "symbol": "AFL",
-      "insider": "Japan Post Holdings Co., Ltd.",
-      "role": "Insider",
-      "transaction_code": "S",
-      "action": "Sell",
-      "shares": 13500.0,
-      "price": 117.19,
-      "value": 1582065.0,
-      "date": "2026-09-02"
-    },
-    {
-      "symbol": "RMD",
-      "insider": "FARRELL PETER C",
-      "role": "Director",
-      "transaction_code": "S",
-      "action": "Sell",
-      "shares": 970.0,
-      "price": 234.73,
-      "value": 227688.0,
-      "date": "2026-09-02"
-    }
-  ],
+  "sells": [],
   "note": "Official SEC Form 4 filings (Section 16 disclosures) for open-market buy/sell transactions by officers, directors, and 10%+ owners, filtered to S&P 500 + Nasdaq 100 companies. Grants, option exercises, gifts, and tax-withholding transactions are excluded. Not stock advice."
 }
