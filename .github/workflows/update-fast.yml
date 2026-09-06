@@ -1,15 +1,15 @@
-name: Update slow market data
+name: Update fast market data
 
 on:
   schedule:
-    - cron: '30 21 * * 1-5'
+    - cron: '*/15 * * * 1-5'
   workflow_dispatch: {}
 
 permissions:
   contents: write
 
 concurrency:
-  group: update-slow
+  group: update-fast
   cancel-in-progress: true
 
 jobs:
@@ -22,24 +22,18 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Fetch breadth + opportunity scan (S&P 500 + Nasdaq 100)
-        run: python scripts/fetch_breadth.py
-
-      - name: Fetch AAII sentiment
-        run: python scripts/fetch_aaii.py
-
-      - name: Snapshot today's composite score & breadth for history
-        run: python scripts/fetch_history_snapshot.py
+      - name: Fetch fast indicators
+        run: python scripts/fetch_fast.py
 
       - name: Commit and push if changed
         run: |
           git config user.name "market-dashboard-bot"
           git config user.email "actions@users.noreply.github.com"
-          git add data/breadth.json data/opportunities.json data/aaii.json data/history.json
+          git add data/fast.json
           if git diff --cached --quiet; then
             echo "No changes to commit"
           else
-            git commit -m "chore: update breadth, opportunity scan, sentiment & history [skip ci]"
+            git commit -m "chore: update fast market data [skip ci]"
             for i in 1 2 3 4 5; do
               git pull --rebase origin main && git push && break
               echo "Push attempt $i failed (remote moved on) - retrying..."
