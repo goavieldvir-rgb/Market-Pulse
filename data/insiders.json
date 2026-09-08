@@ -1,20 +1,9 @@
 {
-  "generated_at": "2026-09-08T05:43:55.041264+00:00",
-  "checked_filings": 4,
+  "generated_at": "2026-09-08T10:54:51.305138+00:00",
+  "checked_filings": 5,
   "feed_size": 100,
   "buys": [],
   "sells": [
-    {
-      "symbol": "WBD",
-      "insider": "LOWE KENNETH W",
-      "role": "Director",
-      "transaction_code": "S",
-      "action": "Sell",
-      "shares": 200000.0,
-      "price": 28.35,
-      "value": 5670000.0,
-      "date": "2026-09-03"
-    },
     {
       "symbol": "CRWD",
       "insider": "Kurtz George",
