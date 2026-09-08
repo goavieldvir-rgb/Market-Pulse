@@ -1,19 +1,41 @@
 {
-  "generated_at": "2026-09-08T18:54:39.200607+00:00",
-  "checked_filings": 27,
+  "generated_at": "2026-09-08T21:42:00.802418+00:00",
+  "checked_filings": 15,
   "feed_size": 100,
   "buys": [],
   "sells": [
     {
-      "symbol": "WM",
-      "insider": "Carroll John A.",
-      "role": "VP & Chief Accounting Officer",
+      "symbol": "PYPL",
+      "insider": "Keller Frank",
+      "role": "Pres., Checkout Sol. & PayPal",
       "transaction_code": "S",
       "action": "Sell",
-      "shares": 1365.0,
-      "price": 219.9,
-      "value": 300164.0,
-      "date": "2026-09-04"
+      "shares": 2427.0,
+      "price": 54.68,
+      "value": 132716.0,
+      "date": "2026-09-03"
+    },
+    {
+      "symbol": "PYPL",
+      "insider": "Keller Frank",
+      "role": "Pres., Checkout Sol. & PayPal",
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 1185.0,
+      "price": 56.71,
+      "value": 67199.0,
+      "date": "2026-09-03"
+    },
+    {
+      "symbol": "PYPL",
+      "insider": "Keller Frank",
+      "role": "Pres., Checkout Sol. & PayPal",
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 1000.0,
+      "price": 55.74,
+      "value": 55741.0,
+      "date": "2026-09-03"
     }
   ],
   "note": "Official SEC Form 4 filings (Section 16 disclosures) for open-market buy/sell transactions by officers, directors, and 10%+ owners, filtered to S&P 500 + Nasdaq 100 companies. Grants, option exercises, gifts, and tax-withholding transactions are excluded. Not stock advice."
