@@ -1,30 +1,19 @@
 {
-  "generated_at": "2026-09-09T13:50:18.262358+00:00",
-  "checked_filings": 25,
+  "generated_at": "2026-09-09T17:42:01.773680+00:00",
+  "checked_filings": 40,
   "feed_size": 100,
   "buys": [],
   "sells": [
     {
-      "symbol": "AFL",
-      "insider": "Japan Post Holdings Co., Ltd.",
-      "role": "Insider",
+      "symbol": "VZ",
+      "insider": "Malady Kyle",
+      "role": "EVP and Group CEO-VZ Business",
       "transaction_code": "S",
       "action": "Sell",
-      "shares": 14850.0,
-      "price": 117.46,
-      "value": 1744281.0,
-      "date": "2026-09-04"
-    },
-    {
-      "symbol": "AFL",
-      "insider": "Japan Post Holdings Co., Ltd.",
-      "role": "Insider",
-      "transaction_code": "S",
-      "action": "Sell",
-      "shares": 150.0,
-      "price": 118.17,
-      "value": 17726.0,
-      "date": "2026-09-04"
+      "shares": 1100.0,
+      "price": 49.98,
+      "value": 54978.0,
+      "date": "2026-09-08"
     }
   ],
   "note": "Official SEC Form 4 filings (Section 16 disclosures) for open-market buy/sell transactions by officers, directors, and 10%+ owners, filtered to S&P 500 + Nasdaq 100 companies. Grants, option exercises, gifts, and tax-withholding transactions are excluded. Not stock advice."
