@@ -1,28 +1,28 @@
 {
-  "generated_at": "2026-09-10T00:36:16.328583+00:00",
+  "generated_at": "2026-09-10T05:18:21.139900+00:00",
   "spy": {
     "symbol": "SPY",
-    "date": "2026-09-08",
-    "close": 765.96,
-    "sma150": 722.07,
-    "distance_from_sma150_pct": 6.08,
+    "date": "2026-09-09",
+    "close": 762.4,
+    "sma150": 722.56,
+    "distance_from_sma150_pct": 5.51,
     "streak_direction": "red",
-    "streak_count": 2,
-    "return_5d_pct": -0.14,
-    "return_20d_pct": -0.91,
-    "percentile_1y": 92.8
+    "streak_count": 3,
+    "return_5d_pct": 0.08,
+    "return_20d_pct": -1.06,
+    "percentile_1y": 90.4
   },
   "qqq": {
     "symbol": "QQQ",
-    "date": "2026-09-08",
-    "close": 718.36,
-    "sma150": 671.62,
-    "distance_from_sma150_pct": 6.96,
+    "date": "2026-09-09",
+    "close": 716.31,
+    "sma150": 672.29,
+    "distance_from_sma150_pct": 6.55,
     "streak_direction": "red",
-    "streak_count": 1,
-    "return_5d_pct": 0.22,
-    "return_20d_pct": -0.35,
-    "percentile_1y": 87.2
+    "streak_count": 2,
+    "return_5d_pct": 1.23,
+    "return_20d_pct": -0.3,
+    "percentile_1y": 83.3
   },
   "vix": {
     "symbol": "^VIX",
@@ -39,165 +39,165 @@
   "sectors": {
     "XLP": {
       "symbol": "XLP",
-      "date": "2026-09-08",
-      "close": 84.02,
-      "sma150": 84.64,
-      "distance_from_sma150_pct": -0.73,
+      "date": "2026-09-09",
+      "close": 83.05,
+      "sma150": 84.62,
+      "distance_from_sma150_pct": -1.85,
       "streak_direction": "red",
-      "streak_count": 3,
-      "return_5d_pct": -1.13,
-      "return_20d_pct": -1.09,
-      "percentile_1y": 60.8
+      "streak_count": 4,
+      "return_5d_pct": -2.58,
+      "return_20d_pct": -1.94,
+      "percentile_1y": 51.8
     },
     "XLU": {
       "symbol": "XLU",
-      "date": "2026-09-08",
-      "close": 43.45,
-      "sma150": 45.15,
-      "distance_from_sma150_pct": -3.76,
-      "streak_direction": "green",
-      "streak_count": 5,
-      "return_5d_pct": 2.89,
-      "return_20d_pct": 0.74,
-      "percentile_1y": 27.6
+      "date": "2026-09-09",
+      "close": 42.94,
+      "sma150": 45.14,
+      "distance_from_sma150_pct": -4.88,
+      "streak_direction": "red",
+      "streak_count": 1,
+      "return_5d_pct": 0.89,
+      "return_20d_pct": -1.58,
+      "percentile_1y": 15.9
     },
     "XLY": {
       "symbol": "XLY",
-      "date": "2026-09-08",
-      "close": 113.99,
-      "sma150": 115.88,
-      "distance_from_sma150_pct": -1.63,
+      "date": "2026-09-09",
+      "close": 112.46,
+      "sma150": 115.83,
+      "distance_from_sma150_pct": -2.91,
       "streak_direction": "red",
-      "streak_count": 2,
-      "return_5d_pct": -2.23,
-      "return_20d_pct": -4.75,
-      "percentile_1y": 14.4
+      "streak_count": 3,
+      "return_5d_pct": -1.86,
+      "return_20d_pct": -5.69,
+      "percentile_1y": 10.8
     }
   },
   "participation": {
     "RSP": {
       "symbol": "RSP",
-      "date": "2026-09-08",
-      "close": 216.73,
-      "sma150": 207.07,
-      "distance_from_sma150_pct": 4.66,
+      "date": "2026-09-09",
+      "close": 214.64,
+      "sma150": 207.18,
+      "distance_from_sma150_pct": 3.6,
       "streak_direction": "red",
-      "streak_count": 2,
-      "return_5d_pct": -1.21,
-      "return_20d_pct": -1.58,
-      "percentile_1y": 89.6
+      "streak_count": 3,
+      "return_5d_pct": -1.36,
+      "return_20d_pct": -2.74,
+      "percentile_1y": 86.1
     },
     "SPY": {
       "symbol": "SPY",
-      "date": "2026-09-08",
-      "close": 765.96,
-      "sma150": 722.07,
-      "distance_from_sma150_pct": 6.08,
+      "date": "2026-09-09",
+      "close": 762.4,
+      "sma150": 722.56,
+      "distance_from_sma150_pct": 5.51,
       "streak_direction": "red",
-      "streak_count": 2,
-      "return_5d_pct": -0.14,
-      "return_20d_pct": -0.91,
-      "percentile_1y": 92.8
+      "streak_count": 3,
+      "return_5d_pct": 0.08,
+      "return_20d_pct": -1.06,
+      "percentile_1y": 90.4
     },
-    "rsp_minus_spy_20d_pct": -0.67
+    "rsp_minus_spy_20d_pct": -1.68
   },
   "fear_greed": {
-    "score": 39.0,
+    "score": 38.9,
     "rating": "fear"
   },
   "sector_breakout": [
     {
+      "symbol": "XLK",
+      "name": "Technology",
+      "close": 187.87,
+      "return_5d_pct": 2.3,
+      "return_20d_pct": 0.96,
+      "distance_from_sma150_pct": 12.99
+    },
+    {
       "symbol": "XLU",
       "name": "Utilities",
-      "close": 43.45,
-      "return_5d_pct": 2.89,
-      "return_20d_pct": 0.74,
-      "distance_from_sma150_pct": -3.76
+      "close": 42.94,
+      "return_5d_pct": 0.89,
+      "return_20d_pct": -1.58,
+      "distance_from_sma150_pct": -4.88
     },
     {
       "symbol": "XLE",
       "name": "Energy",
-      "close": 64.77,
-      "return_5d_pct": 1.27,
-      "return_20d_pct": 7.63,
-      "distance_from_sma150_pct": 12.02
-    },
-    {
-      "symbol": "XLK",
-      "name": "Technology",
-      "close": 187.87,
-      "return_5d_pct": 0.73,
-      "return_20d_pct": 0.83,
-      "distance_from_sma150_pct": 13.2
+      "close": 65.31,
+      "return_5d_pct": 0.83,
+      "return_20d_pct": 7.19,
+      "distance_from_sma150_pct": 12.77
     },
     {
       "symbol": "XLC",
       "name": "Communication Services",
-      "close": 111.52,
-      "return_5d_pct": 0.05,
-      "return_20d_pct": -0.28,
-      "distance_from_sma150_pct": -1.53
-    },
-    {
-      "symbol": "XLI",
-      "name": "Industrials",
-      "close": 174.42,
-      "return_5d_pct": -0.41,
-      "return_20d_pct": -5.51,
-      "distance_from_sma150_pct": -0.37
-    },
-    {
-      "symbol": "XLRE",
-      "name": "Real Estate",
-      "close": 43.9,
-      "return_5d_pct": -0.48,
-      "return_20d_pct": -1.13,
-      "distance_from_sma150_pct": 0.18
+      "close": 110.83,
+      "return_5d_pct": -0.05,
+      "return_20d_pct": -0.4,
+      "distance_from_sma150_pct": -2.1
     },
     {
       "symbol": "XLF",
       "name": "Financials",
-      "close": 57.3,
-      "return_5d_pct": -0.71,
-      "return_20d_pct": -0.88,
-      "distance_from_sma150_pct": 7.45
+      "close": 57.06,
+      "return_5d_pct": -0.24,
+      "return_20d_pct": -1.28,
+      "distance_from_sma150_pct": 6.95
     },
     {
-      "symbol": "XLP",
-      "name": "Consumer Staples",
-      "close": 84.02,
-      "return_5d_pct": -1.13,
-      "return_20d_pct": -1.09,
-      "distance_from_sma150_pct": -0.73
+      "symbol": "XLI",
+      "name": "Industrials",
+      "close": 171.79,
+      "return_5d_pct": -0.54,
+      "return_20d_pct": -7.49,
+      "distance_from_sma150_pct": -1.88
     },
     {
       "symbol": "XLB",
       "name": "Materials",
-      "close": 51.94,
-      "return_5d_pct": -1.42,
-      "return_20d_pct": -2.33,
-      "distance_from_sma150_pct": 1.08
+      "close": 51.39,
+      "return_5d_pct": -1.31,
+      "return_20d_pct": -3.47,
+      "distance_from_sma150_pct": 0.0
     },
     {
-      "symbol": "XLV",
-      "name": "Health Care",
-      "close": 167.13,
-      "return_5d_pct": -2.0,
-      "return_20d_pct": -0.78,
-      "distance_from_sma150_pct": 7.52
+      "symbol": "XLRE",
+      "name": "Real Estate",
+      "close": 43.41,
+      "return_5d_pct": -1.43,
+      "return_20d_pct": -1.52,
+      "distance_from_sma150_pct": -0.98
     },
     {
       "symbol": "XLY",
       "name": "Consumer Discretionary",
-      "close": 113.99,
-      "return_5d_pct": -2.23,
-      "return_20d_pct": -4.75,
-      "distance_from_sma150_pct": -1.63
+      "close": 112.46,
+      "return_5d_pct": -1.86,
+      "return_20d_pct": -5.69,
+      "distance_from_sma150_pct": -2.91
+    },
+    {
+      "symbol": "XLP",
+      "name": "Consumer Staples",
+      "close": 83.05,
+      "return_5d_pct": -2.58,
+      "return_20d_pct": -1.94,
+      "distance_from_sma150_pct": -1.85
+    },
+    {
+      "symbol": "XLV",
+      "name": "Health Care",
+      "close": 166.58,
+      "return_5d_pct": -2.96,
+      "return_20d_pct": -0.85,
+      "distance_from_sma150_pct": 7.11
     }
   ],
   "sector_rotation": {
-    "defensive_avg_return_5d_pct": 0.88,
-    "cyclical_return_5d_pct": -2.23,
-    "defensive_minus_cyclical_5d_pct": 3.11
+    "defensive_avg_return_5d_pct": -0.84,
+    "cyclical_return_5d_pct": -1.86,
+    "defensive_minus_cyclical_5d_pct": 1.02
   }
 }
