@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-09-10T06:28:35.834525+00:00",
-  "checked_filings": 5,
+  "generated_at": "2026-09-10T11:44:35.449372+00:00",
+  "checked_filings": 14,
   "feed_size": 100,
   "buys": [],
   "sells": [
@@ -390,6 +390,17 @@
       "date": "2026-09-04"
     },
     {
+      "symbol": "RMD",
+      "insider": "Farrell Michael J.",
+      "role": "Chairman and CEO",
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 4991.0,
+      "price": 222.44,
+      "value": 1110191.0,
+      "date": "2026-09-08"
+    },
+    {
       "symbol": "DELL",
       "insider": "Silver Lake Partners V DE (AIV), L.P.",
       "role": "Insider",
@@ -431,17 +442,6 @@
       "shares": 1948.0,
       "price": 523.52,
       "value": 1019817.0,
-      "date": "2026-09-04"
-    },
-    {
-      "symbol": "DELL",
-      "insider": "SL SPV-2, L.P.",
-      "role": "Insider",
-      "transaction_code": "S",
-      "action": "Sell",
-      "shares": 1910.0,
-      "price": 520.58,
-      "value": 994308.0,
       "date": "2026-09-04"
     }
   ],
