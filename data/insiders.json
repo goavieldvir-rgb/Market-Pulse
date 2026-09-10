@@ -1,20 +1,141 @@
 {
-  "generated_at": "2026-09-10T16:05:38.045803+00:00",
-  "checked_filings": 37,
+  "generated_at": "2026-09-10T21:46:42.177224+00:00",
+  "checked_filings": 26,
   "feed_size": 100,
-  "buys": [
+  "buys": [],
+  "sells": [
     {
-      "symbol": "TPL",
-      "insider": "HORIZON KINETICS ASSET MANAGEMENT LLC",
+      "symbol": "WST",
+      "insider": "Favorite Annette F",
+      "role": "Sr. VP & Chief HR Officer",
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 2818.0,
+      "price": 340.81,
+      "value": 960403.0,
+      "date": "2026-09-08"
+    },
+    {
+      "symbol": "WST",
+      "insider": "Favorite Annette F",
+      "role": "Sr. VP & Chief HR Officer",
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 2817.0,
+      "price": 340.81,
+      "value": 960062.0,
+      "date": "2026-09-08"
+    },
+    {
+      "symbol": "WST",
+      "insider": "Favorite Annette F",
+      "role": "Sr. VP & Chief HR Officer",
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 2500.0,
+      "price": 340.81,
+      "value": 852025.0,
+      "date": "2026-09-08"
+    },
+    {
+      "symbol": "LITE",
+      "insider": "Wupen Yuen",
       "role": "Insider",
-      "transaction_code": "P",
-      "action": "Buy",
-      "shares": 1.0,
-      "price": 378.57,
-      "value": 379.0,
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 500.0,
+      "price": 978.54,
+      "value": 489270.0,
+      "date": "2026-09-09"
+    },
+    {
+      "symbol": "LITE",
+      "insider": "Wupen Yuen",
+      "role": "Insider",
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 500.0,
+      "price": 961.44,
+      "value": 480720.0,
+      "date": "2026-09-10"
+    },
+    {
+      "symbol": "LITE",
+      "insider": "Wupen Yuen",
+      "role": "Insider",
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 500.0,
+      "price": 895.99,
+      "value": 447995.0,
+      "date": "2026-09-08"
+    },
+    {
+      "symbol": "TPR",
+      "insider": "Kulikowsky Denise",
+      "role": "Chief People Officer",
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 3619.0,
+      "price": 115.36,
+      "value": 417488.0,
+      "date": "2026-09-09"
+    },
+    {
+      "symbol": "TPR",
+      "insider": "Kulikowsky Denise",
+      "role": "Chief People Officer",
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 2191.0,
+      "price": 115.4,
+      "value": 252841.0,
+      "date": "2026-09-09"
+    },
+    {
+      "symbol": "O",
+      "insider": "McLaughlin Gregory",
+      "role": "Director",
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 3475.0,
+      "price": 60.15,
+      "value": 209022.0,
+      "date": "2026-09-10"
+    },
+    {
+      "symbol": "NKE",
+      "insider": "Alagirisamy Venkatesh",
+      "role": "EVP: CHIEF OPERATING OFFICER",
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 3671.0,
+      "price": 37.59,
+      "value": 137993.0,
+      "date": "2026-09-09"
+    },
+    {
+      "symbol": "NKE",
+      "insider": "Leinwand Robert",
+      "role": "EVP: Chief Legal Officer",
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 3646.0,
+      "price": 37.59,
+      "value": 137053.0,
+      "date": "2026-09-09"
+    },
+    {
+      "symbol": "NKE",
+      "insider": "McCartney Philip",
+      "role": "EVP: CHIEF INN,PROD&DSG OFCR",
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 2559.0,
+      "price": 37.59,
+      "value": 96193.0,
       "date": "2026-09-09"
     }
   ],
-  "sells": [],
   "note": "Official SEC Form 4 filings (Section 16 disclosures) for open-market buy/sell transactions by officers, directors, and 10%+ owners, filtered to S&P 500 + Nasdaq 100 companies. Grants, option exercises, gifts, and tax-withholding transactions are excluded. Not stock advice."
 }
