@@ -1,119 +1,9 @@
 {
-  "generated_at": "2026-09-11T22:27:18.320920+00:00",
-  "checked_filings": 16,
+  "generated_at": "2026-09-12T00:32:46.822711+00:00",
+  "checked_filings": 12,
   "feed_size": 100,
   "buys": [],
   "sells": [
-    {
-      "symbol": "META",
-      "insider": "Cox Christopher K",
-      "role": "Chief Product Officer",
-      "transaction_code": "S",
-      "action": "Sell",
-      "shares": 18578.0,
-      "price": 650.21,
-      "value": 12079640.0,
-      "date": "2026-09-09"
-    },
-    {
-      "symbol": "DELL",
-      "insider": "Silver Lake Partners IV, L.P.",
-      "role": "Insider",
-      "transaction_code": "S",
-      "action": "Sell",
-      "shares": 8484.0,
-      "price": 535.13,
-      "value": 4540043.0,
-      "date": "2026-09-09"
-    },
-    {
-      "symbol": "DELL",
-      "insider": "Silver Lake Partners IV, L.P.",
-      "role": "Insider",
-      "transaction_code": "S",
-      "action": "Sell",
-      "shares": 7630.0,
-      "price": 544.42,
-      "value": 4153925.0,
-      "date": "2026-09-09"
-    },
-    {
-      "symbol": "DELL",
-      "insider": "SL SPV-2, L.P.",
-      "role": "Insider",
-      "transaction_code": "S",
-      "action": "Sell",
-      "shares": 7742.0,
-      "price": 535.13,
-      "value": 4142976.0,
-      "date": "2026-09-09"
-    },
-    {
-      "symbol": "DELL",
-      "insider": "Silver Lake Partners IV, L.P.",
-      "role": "Insider",
-      "transaction_code": "S",
-      "action": "Sell",
-      "shares": 7301.0,
-      "price": 535.97,
-      "value": 3913117.0,
-      "date": "2026-09-09"
-    },
-    {
-      "symbol": "DELL",
-      "insider": "SL SPV-2, L.P.",
-      "role": "Insider",
-      "transaction_code": "S",
-      "action": "Sell",
-      "shares": 6962.0,
-      "price": 544.42,
-      "value": 3790252.0,
-      "date": "2026-09-09"
-    },
-    {
-      "symbol": "DELL",
-      "insider": "SL SPV-2, L.P.",
-      "role": "Insider",
-      "transaction_code": "S",
-      "action": "Sell",
-      "shares": 6662.0,
-      "price": 535.97,
-      "value": 3570632.0,
-      "date": "2026-09-09"
-    },
-    {
-      "symbol": "DELL",
-      "insider": "Silver Lake Partners IV, L.P.",
-      "role": "Insider",
-      "transaction_code": "S",
-      "action": "Sell",
-      "shares": 5402.0,
-      "price": 536.89,
-      "value": 2900280.0,
-      "date": "2026-09-09"
-    },
-    {
-      "symbol": "DELL",
-      "insider": "SL SPV-2, L.P.",
-      "role": "Insider",
-      "transaction_code": "S",
-      "action": "Sell",
-      "shares": 4929.0,
-      "price": 536.89,
-      "value": 2646331.0,
-      "date": "2026-09-09"
-    },
-    {
-      "symbol": "DELL",
-      "insider": "Silver Lake Partners IV, L.P.",
-      "role": "Insider",
-      "transaction_code": "S",
-      "action": "Sell",
-      "shares": 4733.0,
-      "price": 542.47,
-      "value": 2567511.0,
-      "date": "2026-09-09"
-    },
     {
       "symbol": "DELL",
       "insider": "Silver Lake Partners V DE (AIV), L.P.",
@@ -123,17 +13,6 @@
       "shares": 4447.0,
       "price": 535.13,
       "value": 2379723.0,
-      "date": "2026-09-09"
-    },
-    {
-      "symbol": "DELL",
-      "insider": "SL SPV-2, L.P.",
-      "role": "Insider",
-      "transaction_code": "S",
-      "action": "Sell",
-      "shares": 4319.0,
-      "price": 542.47,
-      "value": 2342928.0,
       "date": "2026-09-09"
     },
     {
@@ -160,50 +39,6 @@
     },
     {
       "symbol": "DELL",
-      "insider": "Silver Lake Partners IV, L.P.",
-      "role": "Insider",
-      "transaction_code": "S",
-      "action": "Sell",
-      "shares": 3683.0,
-      "price": 543.5,
-      "value": 2001710.0,
-      "date": "2026-09-09"
-    },
-    {
-      "symbol": "DELL",
-      "insider": "SL SPV-2, L.P.",
-      "role": "Insider",
-      "transaction_code": "S",
-      "action": "Sell",
-      "shares": 3360.0,
-      "price": 543.5,
-      "value": 1826160.0,
-      "date": "2026-09-09"
-    },
-    {
-      "symbol": "DELL",
-      "insider": "Silver Lake Partners IV, L.P.",
-      "role": "Insider",
-      "transaction_code": "S",
-      "action": "Sell",
-      "shares": 3283.0,
-      "price": 545.4,
-      "value": 1790548.0,
-      "date": "2026-09-09"
-    },
-    {
-      "symbol": "DELL",
-      "insider": "SL SPV-2, L.P.",
-      "role": "Insider",
-      "transaction_code": "S",
-      "action": "Sell",
-      "shares": 2996.0,
-      "price": 545.4,
-      "value": 1634018.0,
-      "date": "2026-09-09"
-    },
-    {
-      "symbol": "DELL",
       "insider": "Silver Lake Partners V DE (AIV), L.P.",
       "role": "Insider",
       "transaction_code": "S",
@@ -215,17 +50,6 @@
     },
     {
       "symbol": "DELL",
-      "insider": "Silver Lake Partners IV, L.P.",
-      "role": "Insider",
-      "transaction_code": "S",
-      "action": "Sell",
-      "shares": 2613.0,
-      "price": 540.56,
-      "value": 1412483.0,
-      "date": "2026-09-09"
-    },
-    {
-      "symbol": "DELL",
       "insider": "Silver Lake Partners V DE (AIV), L.P.",
       "role": "Insider",
       "transaction_code": "S",
@@ -233,61 +57,6 @@
       "shares": 2481.0,
       "price": 542.47,
       "value": 1345868.0,
-      "date": "2026-09-09"
-    },
-    {
-      "symbol": "DELL",
-      "insider": "Silver Lake Partners IV, L.P.",
-      "role": "Insider",
-      "transaction_code": "S",
-      "action": "Sell",
-      "shares": 2410.0,
-      "price": 546.53,
-      "value": 1317137.0,
-      "date": "2026-09-09"
-    },
-    {
-      "symbol": "DELL",
-      "insider": "SL SPV-2, L.P.",
-      "role": "Insider",
-      "transaction_code": "S",
-      "action": "Sell",
-      "shares": 2384.0,
-      "price": 540.56,
-      "value": 1288695.0,
-      "date": "2026-09-09"
-    },
-    {
-      "symbol": "DELL",
-      "insider": "Silver Lake Partners IV, L.P.",
-      "role": "Insider",
-      "transaction_code": "S",
-      "action": "Sell",
-      "shares": 2363.0,
-      "price": 538.03,
-      "value": 1271365.0,
-      "date": "2026-09-09"
-    },
-    {
-      "symbol": "DELL",
-      "insider": "SL SPV-2, L.P.",
-      "role": "Insider",
-      "transaction_code": "S",
-      "action": "Sell",
-      "shares": 2199.0,
-      "price": 546.53,
-      "value": 1201819.0,
-      "date": "2026-09-09"
-    },
-    {
-      "symbol": "DELL",
-      "insider": "SL SPV-2, L.P.",
-      "role": "Insider",
-      "transaction_code": "S",
-      "action": "Sell",
-      "shares": 2157.0,
-      "price": 538.03,
-      "value": 1160531.0,
       "date": "2026-09-09"
     },
     {
@@ -313,36 +82,14 @@
       "date": "2026-09-09"
     },
     {
-      "symbol": "META",
-      "insider": "Cox Christopher K",
-      "role": "Chief Product Officer",
-      "transaction_code": "S",
-      "action": "Sell",
-      "shares": 1422.0,
-      "price": 651.15,
-      "value": 925935.0,
-      "date": "2026-09-09"
-    },
-    {
-      "symbol": "DELL",
-      "insider": "Silver Lake Partners IV, L.P.",
+      "symbol": "CRWD",
+      "insider": "Kurtz George",
       "role": "Insider",
       "transaction_code": "S",
       "action": "Sell",
-      "shares": 1423.0,
-      "price": 547.31,
-      "value": 778822.0,
-      "date": "2026-09-09"
-    },
-    {
-      "symbol": "DELL",
-      "insider": "Silver Lake Partners IV, L.P.",
-      "role": "Insider",
-      "transaction_code": "S",
-      "action": "Sell",
-      "shares": 1382.0,
-      "price": 541.33,
-      "value": 748118.0,
+      "shares": 4400.0,
+      "price": 207.83,
+      "value": 914452.0,
       "date": "2026-09-09"
     },
     {
@@ -358,17 +105,6 @@
     },
     {
       "symbol": "DELL",
-      "insider": "SL SPV-2, L.P.",
-      "role": "Insider",
-      "transaction_code": "S",
-      "action": "Sell",
-      "shares": 1299.0,
-      "price": 547.31,
-      "value": 710956.0,
-      "date": "2026-09-09"
-    },
-    {
-      "symbol": "DELL",
       "insider": "Silver Lake Partners V DE (AIV), L.P.",
       "role": "Insider",
       "transaction_code": "S",
@@ -376,17 +112,6 @@
       "shares": 1263.0,
       "price": 546.53,
       "value": 690267.0,
-      "date": "2026-09-09"
-    },
-    {
-      "symbol": "DELL",
-      "insider": "SL SPV-2, L.P.",
-      "role": "Insider",
-      "transaction_code": "S",
-      "action": "Sell",
-      "shares": 1261.0,
-      "price": 541.33,
-      "value": 682617.0,
       "date": "2026-09-09"
     },
     {
@@ -401,14 +126,25 @@
       "date": "2026-09-09"
     },
     {
-      "symbol": "DELL",
-      "insider": "Silver Lake Partners IV, L.P.",
+      "symbol": "CRWD",
+      "insider": "Kurtz George",
       "role": "Insider",
       "transaction_code": "S",
       "action": "Sell",
-      "shares": 1057.0,
-      "price": 534.63,
-      "value": 565104.0,
+      "shares": 2800.0,
+      "price": 208.61,
+      "value": 584108.0,
+      "date": "2026-09-10"
+    },
+    {
+      "symbol": "CRWD",
+      "insider": "Kurtz George",
+      "role": "Insider",
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 2000.0,
+      "price": 208.86,
+      "value": 417720.0,
       "date": "2026-09-09"
     },
     {
@@ -423,14 +159,14 @@
       "date": "2026-09-09"
     },
     {
-      "symbol": "DELL",
-      "insider": "Silver Lake Partners IV, L.P.",
+      "symbol": "CRWD",
+      "insider": "Kurtz George",
       "role": "Insider",
       "transaction_code": "S",
       "action": "Sell",
-      "shares": 744.0,
-      "price": 538.63,
-      "value": 400741.0,
+      "shares": 1920.0,
+      "price": 209.71,
+      "value": 402643.0,
       "date": "2026-09-09"
     },
     {
@@ -443,6 +179,270 @@
       "price": 541.33,
       "value": 392464.0,
       "date": "2026-09-09"
+    },
+    {
+      "symbol": "CRWD",
+      "insider": "Kurtz George",
+      "role": "Insider",
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 1440.0,
+      "price": 210.59,
+      "value": 303250.0,
+      "date": "2026-09-10"
+    },
+    {
+      "symbol": "CRWD",
+      "insider": "Kurtz George",
+      "role": "Insider",
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 1431.0,
+      "price": 211.57,
+      "value": 302757.0,
+      "date": "2026-09-10"
+    },
+    {
+      "symbol": "CRWD",
+      "insider": "Kurtz George",
+      "role": "Insider",
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 1360.0,
+      "price": 209.4,
+      "value": 284784.0,
+      "date": "2026-09-10"
+    },
+    {
+      "symbol": "CRWD",
+      "insider": "Kurtz George",
+      "role": "Insider",
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 1169.0,
+      "price": 212.49,
+      "value": 248401.0,
+      "date": "2026-09-10"
+    },
+    {
+      "symbol": "CRWD",
+      "insider": "Kurtz George",
+      "role": "Insider",
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 1160.0,
+      "price": 210.68,
+      "value": 244389.0,
+      "date": "2026-09-09"
+    },
+    {
+      "symbol": "DELL",
+      "insider": "Silver Lake Partners V DE (AIV), L.P.",
+      "role": "Insider",
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 390.0,
+      "price": 538.63,
+      "value": 210066.0,
+      "date": "2026-09-09"
+    },
+    {
+      "symbol": "CRWD",
+      "insider": "Kurtz George",
+      "role": "Insider",
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 920.0,
+      "price": 213.43,
+      "value": 196356.0,
+      "date": "2026-09-10"
+    },
+    {
+      "symbol": "DELL",
+      "insider": "Silver Lake Partners V DE (AIV), L.P.",
+      "role": "Insider",
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 292.0,
+      "price": 548.78,
+      "value": 160244.0,
+      "date": "2026-09-09"
+    },
+    {
+      "symbol": "QCOM",
+      "insider": "Palkhiwala Akash J.",
+      "role": "EVP, CFO & COO",
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 739.0,
+      "price": 183.84,
+      "value": 135861.0,
+      "date": "2026-09-11"
+    },
+    {
+      "symbol": "QCOM",
+      "insider": "Palkhiwala Akash J.",
+      "role": "EVP, CFO & COO",
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 696.0,
+      "price": 181.89,
+      "value": 126596.0,
+      "date": "2026-09-11"
+    },
+    {
+      "symbol": "CRWD",
+      "insider": "Kurtz George",
+      "role": "Insider",
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 440.0,
+      "price": 211.67,
+      "value": 93135.0,
+      "date": "2026-09-09"
+    },
+    {
+      "symbol": "DELL",
+      "insider": "Silver Lake Technology Investors IV, L.P.",
+      "role": "Insider",
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 174.0,
+      "price": 535.13,
+      "value": 93113.0,
+      "date": "2026-09-09"
+    },
+    {
+      "symbol": "QCOM",
+      "insider": "Palkhiwala Akash J.",
+      "role": "EVP, CFO & COO",
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 508.0,
+      "price": 182.69,
+      "value": 92808.0,
+      "date": "2026-09-11"
+    },
+    {
+      "symbol": "DELL",
+      "insider": "Silver Lake Technology Investors IV, L.P.",
+      "role": "Insider",
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 156.0,
+      "price": 544.42,
+      "value": 84930.0,
+      "date": "2026-09-09"
+    },
+    {
+      "symbol": "DELL",
+      "insider": "Silver Lake Partners V DE (AIV), L.P.",
+      "role": "Insider",
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 149.0,
+      "price": 550.71,
+      "value": 82056.0,
+      "date": "2026-09-09"
+    },
+    {
+      "symbol": "DELL",
+      "insider": "Silver Lake Technology Investors IV, L.P.",
+      "role": "Insider",
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 149.0,
+      "price": 535.97,
+      "value": 79860.0,
+      "date": "2026-09-09"
+    },
+    {
+      "symbol": "CRWD",
+      "insider": "Kurtz George",
+      "role": "Insider",
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 360.0,
+      "price": 205.11,
+      "value": 73840.0,
+      "date": "2026-09-10"
+    },
+    {
+      "symbol": "DELL",
+      "insider": "Silver Lake Partners V DE (AIV), L.P.",
+      "role": "Insider",
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 130.0,
+      "price": 534.09,
+      "value": 69432.0,
+      "date": "2026-09-09"
+    },
+    {
+      "symbol": "QCOM",
+      "insider": "Palkhiwala Akash J.",
+      "role": "EVP, CFO & COO",
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 347.0,
+      "price": 184.63,
+      "value": 64066.0,
+      "date": "2026-09-11"
+    },
+    {
+      "symbol": "DELL",
+      "insider": "Silver Lake Technology Investors IV, L.P.",
+      "role": "Insider",
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 110.0,
+      "price": 536.89,
+      "value": 59058.0,
+      "date": "2026-09-09"
+    },
+    {
+      "symbol": "EW",
+      "insider": "Lippis Daniel J.",
+      "role": "CVP, TAVR",
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 619.0,
+      "price": 87.51,
+      "value": 54169.0,
+      "date": "2026-09-11"
+    },
+    {
+      "symbol": "DELL",
+      "insider": "Silver Lake Technology Investors IV, L.P.",
+      "role": "Insider",
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 97.0,
+      "price": 542.47,
+      "value": 52620.0,
+      "date": "2026-09-09"
+    },
+    {
+      "symbol": "DELL",
+      "insider": "Silver Lake Partners V DE (AIV), L.P.",
+      "role": "Insider",
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 88.0,
+      "price": 549.74,
+      "value": 48377.0,
+      "date": "2026-09-09"
+    },
+    {
+      "symbol": "CRWD",
+      "insider": "Kurtz George",
+      "role": "Insider",
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 200.0,
+      "price": 206.87,
+      "value": 41374.0,
+      "date": "2026-09-10"
     }
   ],
   "note": "Official SEC Form 4 filings (Section 16 disclosures) for open-market buy/sell transactions by officers, directors, and 10%+ owners, filtered to S&P 500 + Nasdaq 100 companies. Grants, option exercises, gifts, and tax-withholding transactions are excluded. Not stock advice."
