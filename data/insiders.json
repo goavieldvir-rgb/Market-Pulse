@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-09-14T04:09:05.432294+00:00",
-  "checked_filings": 4,
+  "generated_at": "2026-09-14T10:03:54.795786+00:00",
+  "checked_filings": 12,
   "feed_size": 100,
   "buys": [],
   "sells": [
@@ -146,17 +146,6 @@
       "price": 205.11,
       "value": 73840.0,
       "date": "2026-09-10"
-    },
-    {
-      "symbol": "EW",
-      "insider": "Lippis Daniel J.",
-      "role": "CVP, TAVR",
-      "transaction_code": "S",
-      "action": "Sell",
-      "shares": 619.0,
-      "price": 87.51,
-      "value": 54169.0,
-      "date": "2026-09-11"
     },
     {
       "symbol": "CRWD",
