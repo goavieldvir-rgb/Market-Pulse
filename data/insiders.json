@@ -1,86 +1,8 @@
 {
-  "generated_at": "2026-09-16T09:26:10.563906+00:00",
-  "checked_filings": 3,
+  "generated_at": "2026-09-16T14:18:23.688661+00:00",
+  "checked_filings": 14,
   "feed_size": 100,
   "buys": [],
-  "sells": [
-    {
-      "symbol": "MRVL",
-      "insider": "MURPHY MATTHEW J",
-      "role": "Chairman of the Board and CEO",
-      "transaction_code": "S",
-      "action": "Sell",
-      "shares": 7500.0,
-      "price": 223.39,
-      "value": 1675425.0,
-      "date": "2026-09-15"
-    },
-    {
-      "symbol": "TKO",
-      "insider": "Khan Nick",
-      "role": "Insider",
-      "transaction_code": "S",
-      "action": "Sell",
-      "shares": 4256.0,
-      "price": 194.12,
-      "value": 826175.0,
-      "date": "2026-09-14"
-    },
-    {
-      "symbol": "TKO",
-      "insider": "Khan Nick",
-      "role": "Insider",
-      "transaction_code": "S",
-      "action": "Sell",
-      "shares": 1421.0,
-      "price": 194.99,
-      "value": 277081.0,
-      "date": "2026-09-14"
-    },
-    {
-      "symbol": "TKO",
-      "insider": "Khan Nick",
-      "role": "Insider",
-      "transaction_code": "S",
-      "action": "Sell",
-      "shares": 1333.0,
-      "price": 193.13,
-      "value": 257442.0,
-      "date": "2026-09-14"
-    },
-    {
-      "symbol": "TKO",
-      "insider": "Khan Nick",
-      "role": "Insider",
-      "transaction_code": "S",
-      "action": "Sell",
-      "shares": 1279.0,
-      "price": 195.95,
-      "value": 250620.0,
-      "date": "2026-09-14"
-    },
-    {
-      "symbol": "TKO",
-      "insider": "Khan Nick",
-      "role": "Insider",
-      "transaction_code": "S",
-      "action": "Sell",
-      "shares": 1200.0,
-      "price": 197.12,
-      "value": 236544.0,
-      "date": "2026-09-14"
-    },
-    {
-      "symbol": "TKO",
-      "insider": "Khan Nick",
-      "role": "Insider",
-      "transaction_code": "S",
-      "action": "Sell",
-      "shares": 100.0,
-      "price": 197.64,
-      "value": 19764.0,
-      "date": "2026-09-14"
-    }
-  ],
+  "sells": [],
   "note": "Official SEC Form 4 filings (Section 16 disclosures) for open-market buy/sell transactions by officers, directors, and 10%+ owners, filtered to S&P 500 + Nasdaq 100 companies. Grants, option exercises, gifts, and tax-withholding transactions are excluded. Not stock advice."
 }
