@@ -1,8 +1,20 @@
 {
-  "generated_at": "2026-09-17T10:17:51.434328+00:00",
-  "checked_filings": 16,
+  "generated_at": "2026-09-17T15:12:30.322653+00:00",
+  "checked_filings": 29,
   "feed_size": 100,
-  "buys": [],
+  "buys": [
+    {
+      "symbol": "TPL",
+      "insider": "HORIZON KINETICS ASSET MANAGEMENT LLC",
+      "role": "Insider",
+      "transaction_code": "P",
+      "action": "Buy",
+      "shares": 1.0,
+      "price": 352.36,
+      "value": 352.0,
+      "date": "2026-09-16"
+    }
+  ],
   "sells": [],
   "note": "Official SEC Form 4 filings (Section 16 disclosures) for open-market buy/sell transactions by officers, directors, and 10%+ owners, filtered to S&P 500 + Nasdaq 100 companies. Grants, option exercises, gifts, and tax-withholding transactions are excluded. Not stock advice."
 }
