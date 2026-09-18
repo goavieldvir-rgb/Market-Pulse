@@ -1,31 +1,8 @@
 {
-  "generated_at": "2026-09-18T14:51:00.308440+00:00",
-  "checked_filings": 16,
+  "generated_at": "2026-09-18T18:10:23.053534+00:00",
+  "checked_filings": 20,
   "feed_size": 100,
   "buys": [],
-  "sells": [
-    {
-      "symbol": "AFL",
-      "insider": "Japan Post Holdings Co., Ltd.",
-      "role": "Insider",
-      "transaction_code": "S",
-      "action": "Sell",
-      "shares": 10814.0,
-      "price": 117.66,
-      "value": 1272375.0,
-      "date": "2026-09-16"
-    },
-    {
-      "symbol": "AFL",
-      "insider": "Japan Post Holdings Co., Ltd.",
-      "role": "Insider",
-      "transaction_code": "S",
-      "action": "Sell",
-      "shares": 2986.0,
-      "price": 116.89,
-      "value": 349034.0,
-      "date": "2026-09-16"
-    }
-  ],
+  "sells": [],
   "note": "Official SEC Form 4 filings (Section 16 disclosures) for open-market buy/sell transactions by officers, directors, and 10%+ owners, filtered to S&P 500 + Nasdaq 100 companies. Grants, option exercises, gifts, and tax-withholding transactions are excluded. Not stock advice."
 }
