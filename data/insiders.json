@@ -1,8 +1,174 @@
 {
-  "generated_at": "2026-09-21T20:53:15.798373+00:00",
-  "checked_filings": 15,
+  "generated_at": "2026-09-21T23:56:08.275752+00:00",
+  "checked_filings": 17,
   "feed_size": 100,
   "buys": [],
-  "sells": [],
+  "sells": [
+    {
+      "symbol": "ANET",
+      "insider": "BECHTOLSHEIM ANDREAS",
+      "role": "Insider",
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 58043.0,
+      "price": 200.38,
+      "value": 11630639.0,
+      "date": "2026-09-17"
+    },
+    {
+      "symbol": "WDAY",
+      "insider": "DUFFIELD DAVID A",
+      "role": "Insider",
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 47201.0,
+      "price": 194.91,
+      "value": 9199881.0,
+      "date": "2026-09-18"
+    },
+    {
+      "symbol": "ANET",
+      "insider": "BECHTOLSHEIM ANDREAS",
+      "role": "Insider",
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 38920.0,
+      "price": 199.58,
+      "value": 7767696.0,
+      "date": "2026-09-17"
+    },
+    {
+      "symbol": "WDAY",
+      "insider": "DUFFIELD DAVID A",
+      "role": "Insider",
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 34859.0,
+      "price": 194.04,
+      "value": 6763953.0,
+      "date": "2026-09-18"
+    },
+    {
+      "symbol": "ANET",
+      "insider": "BECHTOLSHEIM ANDREAS",
+      "role": "Insider",
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 32836.0,
+      "price": 195.47,
+      "value": 6418528.0,
+      "date": "2026-09-17"
+    },
+    {
+      "symbol": "ANET",
+      "insider": "BECHTOLSHEIM ANDREAS",
+      "role": "Insider",
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 29271.0,
+      "price": 194.52,
+      "value": 5693889.0,
+      "date": "2026-09-17"
+    },
+    {
+      "symbol": "ANET",
+      "insider": "BECHTOLSHEIM ANDREAS",
+      "role": "Insider",
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 26435.0,
+      "price": 198.33,
+      "value": 5242880.0,
+      "date": "2026-09-17"
+    },
+    {
+      "symbol": "ANET",
+      "insider": "BECHTOLSHEIM ANDREAS",
+      "role": "Insider",
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 25096.0,
+      "price": 203.56,
+      "value": 5108547.0,
+      "date": "2026-09-17"
+    },
+    {
+      "symbol": "ANET",
+      "insider": "BECHTOLSHEIM ANDREAS",
+      "role": "Insider",
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 20418.0,
+      "price": 196.29,
+      "value": 4007853.0,
+      "date": "2026-09-17"
+    },
+    {
+      "symbol": "ANET",
+      "insider": "BECHTOLSHEIM ANDREAS",
+      "role": "Insider",
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 17947.0,
+      "price": 197.51,
+      "value": 3544637.0,
+      "date": "2026-09-17"
+    },
+    {
+      "symbol": "ANET",
+      "insider": "BECHTOLSHEIM ANDREAS",
+      "role": "Insider",
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 16239.0,
+      "price": 201.34,
+      "value": 3269482.0,
+      "date": "2026-09-17"
+    },
+    {
+      "symbol": "ANET",
+      "insider": "BECHTOLSHEIM ANDREAS",
+      "role": "Insider",
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 15701.0,
+      "price": 202.4,
+      "value": 3177807.0,
+      "date": "2026-09-17"
+    },
+    {
+      "symbol": "ANET",
+      "insider": "BECHTOLSHEIM ANDREAS",
+      "role": "Insider",
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 11926.0,
+      "price": 204.31,
+      "value": 2436556.0,
+      "date": "2026-09-17"
+    },
+    {
+      "symbol": "WDAY",
+      "insider": "DUFFIELD DAVID A",
+      "role": "Insider",
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 12029.0,
+      "price": 195.73,
+      "value": 2354471.0,
+      "date": "2026-09-18"
+    },
+    {
+      "symbol": "ANET",
+      "insider": "BECHTOLSHEIM ANDREAS",
+      "role": "Insider",
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 7168.0,
+      "price": 193.61,
+      "value": 1387819.0,
+      "date": "2026-09-17"
+    }
+  ],
   "note": "Official SEC Form 4 filings (Section 16 disclosures) for open-market buy/sell transactions by officers, directors, and 10%+ owners, filtered to S&P 500 + Nasdaq 100 companies. Grants, option exercises, gifts, and tax-withholding transactions are excluded. Not stock advice."
 }
