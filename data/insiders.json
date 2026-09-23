@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-09-23T05:01:50.595990+00:00",
-  "checked_filings": 6,
+  "generated_at": "2026-09-23T10:13:26.771319+00:00",
+  "checked_filings": 7,
   "feed_size": 100,
   "buys": [],
   "sells": [
@@ -112,6 +112,17 @@
       "shares": 3014.0,
       "price": 249.86,
       "value": 753078.0,
+      "date": "2026-09-21"
+    },
+    {
+      "symbol": "KEYS",
+      "insider": "Dougherty Neil",
+      "role": "EVP and CFO",
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 2000.0,
+      "price": 340.79,
+      "value": 681570.0,
       "date": "2026-09-21"
     },
     {
@@ -431,17 +442,6 @@
       "shares": 40.0,
       "price": 240.45,
       "value": 9618.0,
-      "date": "2026-09-21"
-    },
-    {
-      "symbol": "CRWD",
-      "insider": "Podbere Burt W.",
-      "role": "Insider",
-      "transaction_code": "S",
-      "action": "Sell",
-      "shares": 4.0,
-      "price": 242.13,
-      "value": 969.0,
       "date": "2026-09-21"
     }
   ],
