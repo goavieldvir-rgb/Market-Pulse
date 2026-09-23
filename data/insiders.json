@@ -1,19 +1,118 @@
 {
-  "generated_at": "2026-09-23T19:09:57.640933+00:00",
-  "checked_filings": 23,
+  "generated_at": "2026-09-23T22:25:40.983653+00:00",
+  "checked_filings": 6,
   "feed_size": 100,
   "buys": [],
   "sells": [
     {
-      "symbol": "VZ",
-      "insider": "Malady Kyle",
-      "role": "EVP and Group CEO-VZ Business",
+      "symbol": "META",
+      "insider": "Cox Christopher K",
+      "role": "Chief Product Officer",
       "transaction_code": "S",
       "action": "Sell",
-      "shares": 1100.0,
-      "price": 47.65,
-      "value": 52415.0,
+      "shares": 20000.0,
+      "price": 725.02,
+      "value": 14500328.0,
+      "date": "2026-09-21"
+    },
+    {
+      "symbol": "META",
+      "insider": "Cox Christopher K",
+      "role": "Chief Product Officer",
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 20000.0,
+      "price": 700.5,
+      "value": 14009932.0,
+      "date": "2026-09-21"
+    },
+    {
+      "symbol": "META",
+      "insider": "Olivan Javier",
+      "role": "Chief Operating Officer",
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 946.0,
+      "price": 680.27,
+      "value": 643535.0,
+      "date": "2026-09-21"
+    },
+    {
+      "symbol": "XYZ",
+      "insider": "Eisen Anthony Mathew",
+      "role": "Director",
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 6000.0,
+      "price": 79.59,
+      "value": 477540.0,
       "date": "2026-09-22"
+    },
+    {
+      "symbol": "XYZ",
+      "insider": "Eisen Anthony Mathew",
+      "role": "Director",
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 6000.0,
+      "price": 77.54,
+      "value": 465240.0,
+      "date": "2026-09-21"
+    },
+    {
+      "symbol": "XYZ",
+      "insider": "Eisen Anthony Mathew",
+      "role": "Director",
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 6000.0,
+      "price": 76.67,
+      "value": 460020.0,
+      "date": "2026-09-23"
+    },
+    {
+      "symbol": "META",
+      "insider": "Olivan Javier",
+      "role": "Chief Operating Officer",
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 408.0,
+      "price": 680.27,
+      "value": 277550.0,
+      "date": "2026-09-21"
+    },
+    {
+      "symbol": "META",
+      "insider": "Olivan Javier",
+      "role": "Chief Operating Officer",
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 82.0,
+      "price": 680.27,
+      "value": 55782.0,
+      "date": "2026-09-21"
+    },
+    {
+      "symbol": "META",
+      "insider": "Olivan Javier",
+      "role": "Chief Operating Officer",
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 82.0,
+      "price": 680.27,
+      "value": 55782.0,
+      "date": "2026-09-21"
+    },
+    {
+      "symbol": "META",
+      "insider": "Olivan Javier",
+      "role": "Chief Operating Officer",
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 57.0,
+      "price": 680.27,
+      "value": 38775.0,
+      "date": "2026-09-21"
     }
   ],
   "note": "Official SEC Form 4 filings (Section 16 disclosures) for open-market buy/sell transactions by officers, directors, and 10%+ owners, filtered to S&P 500 + Nasdaq 100 companies. Grants, option exercises, gifts, and tax-withholding transactions are excluded. Not stock advice."
