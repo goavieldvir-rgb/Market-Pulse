@@ -1,31 +1,8 @@
 {
-  "generated_at": "2026-09-24T05:56:16.682498+00:00",
-  "checked_filings": 3,
+  "generated_at": "2026-09-24T11:32:07.987475+00:00",
+  "checked_filings": 5,
   "feed_size": 100,
   "buys": [],
-  "sells": [
-    {
-      "symbol": "ORCL",
-      "insider": "Sicilia Michael D.",
-      "role": "Chief Executive Officer",
-      "transaction_code": "S",
-      "action": "Sell",
-      "shares": 22562.0,
-      "price": 151.59,
-      "value": 3420174.0,
-      "date": "2026-09-22"
-    },
-    {
-      "symbol": "ORCL",
-      "insider": "Smith Maria",
-      "role": "EVP, Chief  Accounting Officer",
-      "transaction_code": "S",
-      "action": "Sell",
-      "shares": 2631.0,
-      "price": 151.7,
-      "value": 399123.0,
-      "date": "2026-09-22"
-    }
-  ],
+  "sells": [],
   "note": "Official SEC Form 4 filings (Section 16 disclosures) for open-market buy/sell transactions by officers, directors, and 10%+ owners, filtered to S&P 500 + Nasdaq 100 companies. Grants, option exercises, gifts, and tax-withholding transactions are excluded. Not stock advice."
 }
