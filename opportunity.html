@@ -299,7 +299,7 @@
 <div id="watchlist-card" class="card" style="display:none;"></div>
 
 <div class="section-title"><span class="em">🏛️</span> Insider Buying</div>
-<div class="section-sub">Open-market purchases by officers, directors &amp; 10%+ owners (official SEC Form 4 filings), last 30 days, largest first.</div>
+<div class="section-sub">Open-market purchases of $10K or more by officers, directors &amp; 10%+ owners (official SEC Form 4 filings), last 30 days, largest first.</div>
 <div class="section-asof" id="asof-insiders"></div>
 <div class="card" id="insider-buys-card"></div>
 
@@ -475,7 +475,7 @@ function insiderRow(t) {
       <div class="sym-role">
         ${starButton(t.symbol)}
         <span class="action-badge ${isBuy ? "buy" : "sell"}">${isBuy ? "Buy" : "Sell"}</span>
-        <span class="sym">${esc(t.symbol || "—")}</span>
+        <span class="sym" ${t.security ? `title="${esc(t.security)} shares of ${esc(t.symbol)}"` : ""}>${esc(t.security || t.symbol || "—")}</span>
         <span class="role">${esc(t.role || "")}</span>
         ${t.plan ? `<span class="plan-badge" title="Made under a pre-arranged Rule 10b5-1 trading plan">10b5-1 plan</span>` : ""}
       </div>

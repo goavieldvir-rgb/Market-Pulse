@@ -46,6 +46,8 @@ DOC_URL = "https://www.sec.gov/Archives/edgar/data/{cik}/{acc}.txt"
 WINDOW_DAYS = 30
 KEEP_SELLS = 100           # the largest sales in the window (smaller ones are mostly routine)
 KEEP_BUYS = 300            # purchases are rare - keep them all (safety cap only)
+MIN_VALUE = 10_000         # ignore token-sized trades (e.g. 1-share purchases)
+STATE_VERSION = 2          # bump to rebuild the window from scratch after a logic fix
 MAX_DOCS_PER_RUN = 2000    # the first run back-fills over a few runs
 FEED_MAX_PAGES = 15
 SEC_PAUSE = 0.12           # stays well under the SEC's 10 requests/second limit
@@ -85,11 +87,15 @@ ENTITY = re.compile(
     r"BERKSHIRE|HATHAWAY|ENDOWMENT|PENSION|RETIREMENT)\b\.?", re.I)
 
 
+INITIALISM = re.compile(r"^(?:[A-Za-z]\.){2,}[A-Za-z]?\.?,?$")
+
+
 def _smart_case(s):
     words = []
     for w in s.split():
         bare = w.strip(".,").upper()
-        if bare in {"II", "III", "IV", "LLC", "LP", "L.P", "LLP", "PLC", "AG", "SA", "NV", "USA", "US"} or len(bare) == 1:
+        if (bare in {"II", "III", "IV", "LLC", "LP", "L.P", "LLP", "PLC", "AG", "SA", "NV", "USA", "US"}
+                or len(bare) == 1 or INITIALISM.match(w)):
             words.append(w.upper())
         elif bare.startswith("MC") and len(bare) > 3:
             words.append("Mc" + w[2:].capitalize())
@@ -126,12 +132,32 @@ def display_name(raw):
 
 
 GENERIC_TITLES = {"see remarks", "see remarks below", "see remarks.", "officer", "see footnote", "see explanation"}
+TITLE_ACRONYMS = {"CEO", "CFO", "COO", "CTO", "CAO", "CIO", "CMO", "CRO", "CSO", "CPO", "CHRO", "CLO", "CCO",
+                  "CDO", "CISO", "EVP", "SVP", "SEVP", "VP", "GM", "GC", "PAO", "PFO", "US", "USA", "EMEA",
+                  "APAC", "AI", "IT", "HR", "R&D", "LLC", "II", "III", "IV"}
+TITLE_SMALL = {"and", "of", "the", "for", "to", "in", "on", "at", "&"}
+
+
+def tidy_title(title):
+    """'CHIEF FINANCIAL OFFICER' -> 'Chief Financial Officer', 'PRESIDENT AND CEO' -> 'President and CEO'."""
+    if not title or not title.isupper():
+        return title
+    out = []
+    for i, w in enumerate(title.split()):
+        core = w.strip(",.;:()")
+        if core in TITLE_ACRONYMS or (len(core) <= 3 and core.lower() not in TITLE_SMALL and core.isalpha()):
+            out.append(w)
+        elif core.lower() in TITLE_SMALL and i > 0:
+            out.append(w.lower())
+        else:
+            out.append(w.capitalize())
+    return " ".join(out)
 
 
 def owner_role(rel):
     is_officer, is_director = truthy(_text(rel, "isOfficer")), truthy(_text(rel, "isDirector"))
     is_ten, is_other = truthy(_text(rel, "isTenPercentOwner")), truthy(_text(rel, "isOther"))
-    title = " ".join((_text(rel, "officerTitle") or "").split())
+    title = tidy_title(" ".join((_text(rel, "officerTitle") or "").split()))
     other = " ".join((_text(rel, "otherText") or "").split())
     if is_officer:
         role = title if title and title.lower() not in GENERIC_TITLES else "Officer"
@@ -230,6 +256,7 @@ def parse_submission(txt):
 def filing_rows(doc, ticker):
     """One row per direction (buy/sell) for a parsed filing."""
     rows = []
+    security = doc["symbol"] if doc["symbol"] and doc["symbol"] != ticker else None
     for code, action in (("P", "Buy"), ("S", "Sell")):
         lines = [ln for ln in doc["lines"] if ln["code"] == code]
         if not lines:
@@ -240,6 +267,7 @@ def filing_rows(doc, ticker):
         primary, others = doc["owners"][0], doc["owners"][1:]
         rows.append({
             "symbol": ticker,
+            "security": security,
             "cik": doc["issuer_cik"],
             "insider": primary["name"],
             "role": primary["role"],
@@ -288,13 +316,16 @@ def merge_joint(rows):
 # ---------------------------------------------------------- collection ----
 
 def build_cik_map(universe):
+    """({issuer CIK: main ticker}, {issuer CIK: every ticker of ours for that CIK})."""
     data = json.loads(sec_get(TICKER_MAP_URL).decode("utf-8"))
-    out = {}
+    main, tickers = {}, {}
     for row in data.values():
         t = normalize_symbol(str(row.get("ticker", "")))
         if t in universe:
-            out.setdefault(int(row["cik_str"]), t)
-    return out
+            cik = int(row["cik_str"])
+            main.setdefault(cik, t)
+            tickers.setdefault(cik, set()).add(t)
+    return main, tickers
 
 
 def index_accessions(day, cik_map):
@@ -367,8 +398,15 @@ def main():
     window_start = today - timedelta(days=WINDOW_DAYS)
     previous = read_json(OUT_PATH, {}) or {}
     state = previous.get("state") or {}
-    stored = [r for r in (previous.get("buys") or []) + (previous.get("sells") or [])
-              if r.get("accession") and r.get("filed") and r["filed"] >= window_start.isoformat()]
+    if state.get("version") != STATE_VERSION:
+        # Data built by older logic: start the 30-day window over (it back-fills in a few runs).
+        log(f"Rebuilding the insider window (stored data version {state.get('version')} -> {STATE_VERSION})")
+        previous_rows, state = [], {"version": STATE_VERSION}
+    else:
+        previous_rows = (previous.get("buys") or []) + (previous.get("sells") or [])
+    stored = [r for r in previous_rows
+              if r.get("accession") and r.get("filed") and r["filed"] >= window_start.isoformat()
+              and (r.get("value") or 0) >= MIN_VALUE]
     known = {a for r in stored for a in (r.get("accessions") or [r["accession"]])}
     indexed = {d for d in state.get("indexed_days", []) if d >= window_start.isoformat()}
 
@@ -378,7 +416,7 @@ def main():
         warn(f"Insiders: universe lists incomplete ({len(universe)} tickers) - skipping this run")
         return
     try:
-        cik_map = build_cik_map(universe)
+        cik_map, cik_tickers = build_cik_map(universe)
     except Exception as e:
         warn(f"Insiders: could not load the SEC ticker map ({e}) - skipping this run")
         return
@@ -403,9 +441,13 @@ def main():
         doc = parse_submission(txt)
         if not doc or not doc["lines"]:
             return
-        ticker = doc["symbol"] if doc["symbol"] in universe else cik_map.get(cik)
-        if ticker:
-            new_rows.extend(filing_rows(doc, ticker))
+        # The CIK we found the filing under may be a reporting owner that is itself one of
+        # our companies (e.g. Uber selling Aurora shares) - only the ISSUER decides.
+        issuer = doc["issuer_cik"]
+        if issuer not in cik_map:
+            return
+        ticker = doc["symbol"] if doc["symbol"] in cik_tickers.get(issuer, ()) else cik_map[issuer]
+        new_rows.extend(filing_rows(doc, ticker))
         known.add(acc)
 
     # 1) Completeness: every business day in the window, from EDGAR's daily index.
@@ -446,7 +488,7 @@ def main():
         blocked = True
 
     rows = merge_joint(stored + new_rows)
-    rows = [r for r in rows if (r.get("filed") or "") >= window_start.isoformat()]
+    rows = [r for r in rows if (r.get("filed") or "") >= window_start.isoformat() and r["value"] >= MIN_VALUE]
     buys = sorted((r for r in rows if r["action"] == "Buy"),
                   key=lambda r: (r["filed"], r["value"]), reverse=True)[:KEEP_BUYS]
     sells = sorted((r for r in rows if r["action"] == "Sell"),
@@ -469,7 +511,8 @@ def main():
         "state": state,
         "note": ("Official SEC Form 4 filings: open-market purchases (P) and sales (S) by officers, "
                  "directors and 10%+ owners of S&P 500 + Nasdaq-100 companies. Grants, option "
-                 "exercises, gifts, tax withholding and amendments are excluded. Not stock advice."),
+                 "exercises, gifts, tax withholding, amendments and trades under $10,000 are excluded. "
+                 "Not stock advice."),
     }
     # Only commit when something a reader would see changed (or the feed bookmark is
     # a few hours stale), not on every run - keeps the repository history small.
