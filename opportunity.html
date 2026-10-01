@@ -197,6 +197,12 @@
   .metric.opportunity { color: var(--cool); }
   .metric.caution { color: var(--warm); }
   .metric.neutral { color: var(--text-dim); }
+  .metric.up, .num.up { color: var(--green); }
+  .metric.down, .num.down { color: var(--red); }
+  .metric .chg { font-weight: 500; font-size: 0.78rem; margin-left: 6px; }
+  .metric .chg.up { color: var(--green); }
+  .metric .chg.down { color: var(--red); }
+  .section-asof { font-size: 0.72rem; color: var(--text-faint); margin: -6px 0 12px; }
   .empty-note { color: var(--text-faint); font-size: 0.84rem; padding: 6px 0; }
 
   .sector-table { width: 100%; border-collapse: collapse; font-size: 0.86rem; }
@@ -211,6 +217,9 @@
   .sector-table .name { font-weight: 600; }
   .sector-table .sym { font-family: var(--font-mono); color: var(--text-faint); font-size: 0.78rem; }
   .sector-table .num { font-family: var(--font-mono); font-weight: 700; text-align: right; }
+  .sector-table tr.benchmark td { background: rgba(255,255,255,0.025); }
+  .sector-table tr.benchmark .name { font-weight: 500; color: var(--text-dim); font-style: italic; }
+  .sector-note { font-size: 0.76rem; color: var(--text-faint); margin-top: 10px; line-height: 1.5; }
 
   .insider-row {
     display: flex; align-items: flex-start; justify-content: space-between;
@@ -227,6 +236,13 @@
   .action-badge { font-size: 0.66rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; padding: 2px 8px; border-radius: 999px; }
   .action-badge.buy { color: var(--cool); background: var(--cool-dim); }
   .action-badge.sell { color: var(--warm); background: var(--warm-dim); }
+  .plan-badge {
+    font-size: 0.62rem; font-weight: 600; letter-spacing: 0.03em; color: var(--text-dim);
+    border: 1px solid var(--border); padding: 1px 7px; border-radius: 999px; white-space: nowrap;
+  }
+  .insider-right .detail a { color: var(--text-faint); text-decoration: none; border-bottom: 1px dotted rgba(166,175,198,0.4); }
+  .insider-right .detail a:hover { color: var(--text-dim); }
+  .insider-left .others { font-size: 0.74rem; color: var(--text-faint); margin-top: 2px; }
 
   footer {
     margin-top: 32px; padding-top: 20px; border-top: 1px solid var(--border);
@@ -235,10 +251,17 @@
   footer p { margin: 6px 0; }
   footer strong { color: var(--text-dim); }
 
+  .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
   @media (max-width: 480px) {
     body { padding: 18px 14px 44px; }
     .card { padding: 15px 16px; }
     .section-title { font-size: 1rem; }
+    .sector-table { font-size: 0.8rem; }
+    .sector-table th { padding-right: 6px; }
+    .sector-table td { padding: 9px 6px 9px 0; }
+    .sector-table .rank { width: 20px; }
+    .sector-table .num { font-size: 0.78rem; }
   }
 </style>
 </head>
@@ -276,19 +299,24 @@
 <div id="watchlist-card" class="card" style="display:none;"></div>
 
 <div class="section-title"><span class="em">🏛️</span> Insider Buying</div>
-<div class="section-sub">Open-market stock purchases by officers, directors &amp; 10%+ owners — from official SEC Form 4 filings, refreshed every ~30 min.</div>
+<div class="section-sub">Open-market purchases by officers, directors &amp; 10%+ owners (official SEC Form 4 filings), last 30 days, largest first.</div>
+<div class="section-asof" id="asof-insiders"></div>
 <div class="card" id="insider-buys-card"></div>
 
 <div class="section-title"><span class="em">📉</span> Insider Selling</div>
-<div class="section-sub">Noisier signal than buying (execs sell for many reasons — taxes, diversification, planned schedules) but included for context.</div>
+<div class="section-sub">Largest open-market sales over the last 30 days. A noisier signal than buying — insiders sell for many reasons. Sales marked <b>10b5-1 plan</b> were scheduled in advance and say even less.</div>
 <div class="card" id="insider-sells-card"></div>
 
 <div class="section-title"><span class="em">🔥</span> Sector Breakout Leaderboard</div>
-<div class="section-sub">All 11 SPDR sector ETFs, ranked by 5-day return.</div>
-<div class="card"><table class="sector-table" id="sector-table"></table></div>
+<div class="section-sub">All 11 SPDR sector ETFs, ranked by 5-day return, with the S&amp;P 500 (SPY) as the benchmark row.</div>
+<div class="section-asof" id="asof-sectors"></div>
+<div class="card"><div class="table-wrap"><table class="sector-table" id="sector-table"></table></div>
+  <div class="sector-note">Ranks are relative: in a down week the leaders can still be negative — what matters is whether a sector is beating SPY.</div>
+</div>
 
 <div class="section-title"><span class="em">📈</span> 52-Week Highs &amp; Lows</div>
-<div class="section-sub">Highs: momentum/breakout candidates. Lows: oversold/contrarian candidates.</div>
+<div class="section-sub">Closing price vs the highest high / lowest low of the past 52 weeks (intraday). Near highs: momentum and breakout candidates. Near lows: beaten-down names for contrarian research.</div>
+<div class="section-asof asof-scan"></div>
 <div class="controls-row">
   <label for="ctl-52w-pct">Within <span id="ctl-52w-pct-val">3.0</span>% of the 52-week extreme</label>
   <input type="range" id="ctl-52w-pct" min="0.5" max="10" step="0.5" value="3">
@@ -305,7 +333,8 @@
 </div>
 
 <div class="section-title"><span class="em">📊</span> Unusual Volume</div>
-<div class="section-sub">Today's volume vs. the trailing 20-day average.</div>
+<div class="section-sub">The last session's volume vs its 20-day average, with that day's price move — heavy volume on a big up day reads very differently from heavy volume on a big down day.</div>
+<div class="section-asof asof-scan"></div>
 <div class="controls-row">
   <label for="ctl-vol-ratio">At least <span id="ctl-vol-ratio-val">2.0</span>x average volume</label>
   <input type="range" id="ctl-vol-ratio" min="1.2" max="5" step="0.1" value="2">
@@ -313,7 +342,8 @@
 <div class="card"><div class="stock-list" id="volume-list"></div></div>
 
 <div class="section-title"><span class="em">🎯</span> Testing Key Averages</div>
-<div class="section-sub">Classic support/resistance test zones — pick which moving average and how close counts as "near."</div>
+<div class="section-sub">Stocks sitting close to a moving average — just above it can act as support, just below as resistance. Pick the average and how close counts as "near".</div>
+<div class="section-asof asof-scan"></div>
 <div class="controls-row">
   <label for="ctl-ma-pct">Within <span id="ctl-ma-pct-val">2.0</span>% of the average</label>
   <input type="range" id="ctl-ma-pct" min="0.5" max="8" step="0.5" value="2">
@@ -342,38 +372,53 @@
     SEC disclosures for informational purposes only. It is not a recommendation to buy or sell
     any security.</p>
   <p>Data: Yahoo Finance (price/volume/moving averages) for S&amp;P 500 + Nasdaq 100 constituents;
-    SEC EDGAR (official Form 4 insider-trading filings). Sector data refreshes ~every 15 min;
-    the technical scan and insider feed refresh on their own schedules — see each section's timestamp.</p>
+    SEC EDGAR (official Form 4 insider-trading filings). Sector data refreshes about every 10 minutes
+    while the market is open; the stock scan after each close; insider filings every few hours — see
+    each section's timestamp.</p>
 </footer>
 
 <script>
 const $ = (sel) => document.querySelector(sel);
+const $$ = (sel) => document.querySelectorAll(sel);
+const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const num = (v) => (typeof v === "number" && Number.isFinite(v) ? v : null);
 
 function fmtPct(v, digits = 2) {
-  if (v === null || v === undefined || Number.isNaN(v)) return "—";
-  const sign = v > 0 ? "+" : "";
-  return `${sign}${v.toFixed(digits)}%`;
+  v = num(v);
+  if (v === null) return "—";
+  return `${v > 0 ? "+" : ""}${v.toFixed(digits)}%`;
 }
+const upDown = (v) => (num(v) === null || v === 0 ? "" : v > 0 ? "up" : "down");
 function fmtMoney(v) {
-  if (v === null || v === undefined) return "—";
+  v = num(v);
+  if (v === null) return "—";
+  if (v >= 1e9) return "$" + (v / 1e9).toFixed(2) + "B";
   if (v >= 1e6) return "$" + (v / 1e6).toFixed(1) + "M";
   if (v >= 1e3) return "$" + (v / 1e3).toFixed(0) + "K";
   return "$" + v.toFixed(0);
 }
+function fmtPrice(v) {
+  v = num(v);
+  return v === null ? "—" : "$" + v.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}
 function timeAgo(iso) {
-  if (!iso) return "no data yet";
-  const then = new Date(iso).getTime();
-  const diffMin = Math.round((Date.now() - then) / 60000);
-  if (diffMin < 1) return "just now";
-  if (diffMin < 60) return `${diffMin}m ago`;
-  const h = Math.floor(diffMin / 60);
-  const m = diffMin % 60;
-  if (h < 24) return `${h}h ${m}m ago`;
+  const t = iso ? Date.parse(iso) : NaN;
+  if (!Number.isFinite(t)) return "no data yet";
+  const min = Math.round((Date.now() - t) / 60000);
+  if (min < 1) return "just now";
+  if (min < 60) return `${min}m ago`;
+  const h = Math.floor(min / 60);
+  if (h < 24) return `${h}h ${min % 60}m ago`;
   return `${Math.floor(h / 24)}d ago`;
+}
+function fmtDay(isoDate) {
+  if (!isoDate || !/^\d{4}-\d{2}-\d{2}/.test(isoDate)) return "—";
+  const [y, m, d] = isoDate.slice(0, 10).split("-").map(Number);
+  return new Date(Date.UTC(y, m - 1, d)).toLocaleDateString("en-US", { month: "short", day: "numeric", timeZone: "UTC" });
 }
 async function loadJSON(path) {
   try {
-    const res = await fetch(path + "?t=" + Date.now());
+    const res = await fetch(path + "?t=" + Date.now(), { cache: "no-store" });
     if (!res.ok) throw new Error(res.status);
     return await res.json();
   } catch (e) {
@@ -386,7 +431,8 @@ async function loadJSON(path) {
 const WATCHLIST_KEY = "opp-watchlist-v1";
 let watchlist = new Set();
 try {
-  watchlist = new Set(JSON.parse(localStorage.getItem(WATCHLIST_KEY) || "[]"));
+  const saved = JSON.parse(localStorage.getItem(WATCHLIST_KEY) || "[]");
+  if (Array.isArray(saved)) watchlist = new Set(saved.filter((x) => typeof x === "string" && /^[A-Z0-9.\-]{1,10}$/.test(x)));
 } catch (e) { /* corrupted or unavailable - start empty */ }
 
 function saveWatchlist() {
@@ -396,44 +442,66 @@ function saveWatchlist() {
 function starButton(sym) {
   if (!sym) return "";
   const active = watchlist.has(sym);
-  return `<button class="star-btn ${active ? 'active' : ''}" data-sym="${sym}" aria-label="Toggle watchlist for ${sym}">${active ? '★' : '☆'}</button>`;
+  return `<button class="star-btn ${active ? "active" : ""}" data-sym="${esc(sym)}" aria-label="Toggle watchlist for ${esc(sym)}">${active ? "★" : "☆"}</button>`;
 }
 
-function stockRow(sym, price, metricText, status = "neutral") {
+function stockRow(sym, price, metricHTML, cls = "neutral") {
   return `<div class="stock-row">
-    <div>${starButton(sym)}<span class="sym">${sym}</span><span class="price">$${price}</span></div>
-    <div class="metric ${status}">${metricText}</div>
+    <div>${starButton(sym)}<span class="sym">${esc(sym)}</span><span class="price">${fmtPrice(price)}</span></div>
+    <div class="metric ${cls}">${metricHTML}</div>
   </div>`;
 }
 
 function renderList(containerId, items, formatFn, emptyMsg) {
   const el = $("#" + containerId);
-  if (!items || !items.length) {
-    el.innerHTML = `<div class="empty-note">${emptyMsg}</div>`;
-    return;
-  }
-  el.innerHTML = items.map(formatFn).join("");
+  el.innerHTML = items && items.length ? items.map(formatFn).join("") : `<div class="empty-note">${esc(emptyMsg)}</div>`;
+}
+
+// ---------- Insider rows ----------
+function secLink(t) {
+  if (!t.cik || !t.accession) return "";
+  const acc = String(t.accession);
+  return `<a href="https://www.sec.gov/Archives/edgar/data/${encodeURIComponent(t.cik)}/${acc.replace(/-/g, "")}/${encodeURIComponent(acc)}-index.htm" target="_blank" rel="noopener">SEC filing ↗</a>`;
 }
 
 function insiderRow(t) {
   const isBuy = t.action === "Buy";
+  const others = Array.isArray(t.others) ? t.others : [];
+  const traded = t.date_first && t.date_first !== t.date ? `${fmtDay(t.date_first)}–${fmtDay(t.date)}` : fmtDay(t.date);
+  const when = t.filed ? `Traded ${traded} · filed ${fmtDay(t.filed)}` : (t.date ? `Traded ${fmtDay(t.date)}` : "");
   return `
   <div class="insider-row">
     <div class="insider-left">
       <div class="sym-role">
         ${starButton(t.symbol)}
-        <span class="action-badge ${isBuy ? 'buy' : 'sell'}">${t.action}</span>
-        <span class="sym">${t.symbol || "—"}</span>
-        <span class="role">${t.role || ""}</span>
+        <span class="action-badge ${isBuy ? "buy" : "sell"}">${isBuy ? "Buy" : "Sell"}</span>
+        <span class="sym">${esc(t.symbol || "—")}</span>
+        <span class="role">${esc(t.role || "")}</span>
+        ${t.plan ? `<span class="plan-badge" title="Made under a pre-arranged Rule 10b5-1 trading plan">10b5-1 plan</span>` : ""}
       </div>
-      <div class="name">${t.insider || "Unknown"}</div>
+      <div class="name">${esc(t.insider || "Unknown")}</div>
+      ${others.length ? `<div class="others">Also reported by ${esc(others.slice(0, 2).join(", "))}${others.length > 2 ? ` +${others.length - 2} more` : ""} (same trade)</div>` : ""}
     </div>
     <div class="insider-right">
       <div class="value">${fmtMoney(t.value)}</div>
-      <div class="detail">${t.shares ? Math.round(t.shares).toLocaleString() + " sh @ $" + t.price : ""}</div>
-      <div class="detail">${t.date || ""}</div>
+      <div class="detail">${num(t.shares) ? Math.round(t.shares).toLocaleString("en-US") + " sh @ " + fmtPrice(t.price) : ""}</div>
+      <div class="detail">${esc(when)}</div>
+      <div class="detail">${secLink(t)}</div>
     </div>
   </div>`;
+}
+
+// ---------- Scanner settings (remembered per browser, no accounts) ----------
+const SETTINGS_KEY = "opp-scanner-settings-v1";
+const defaultSettings = { maPct: 2.0, volRatio: 2.0, w52Pct: 3.0, maPeriodA: "20", maPeriodB: "150" };
+let settings = { ...defaultSettings };
+try {
+  const saved = JSON.parse(localStorage.getItem(SETTINGS_KEY) || "{}");
+  settings = { ...defaultSettings, ...saved };
+  ["maPct", "volRatio", "w52Pct"].forEach((k) => { if (!Number.isFinite(Number(settings[k]))) settings[k] = defaultSettings[k]; settings[k] = Number(settings[k]); });
+} catch (e) { /* corrupted or unavailable - just use defaults */ }
+function saveSettings() {
+  try { localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings)); } catch (e) { /* ignore */ }
 }
 
 (async function main() {
@@ -445,59 +513,70 @@ function insiderRow(t) {
     loadJSON("data/insiders.json"),
   ]);
 
-  const timestamps = [fast?.generated_at, opp?.generated_at, insiders?.generated_at].filter(Boolean);
-  const latest = timestamps.sort().reverse()[0];
-  $("#updated-text").textContent = latest ? `Updated ${timeAgo(latest)}` : "Waiting for first data run";
-  $("#updated-dot").classList.toggle("stale", !latest);
+  // Header badge: what the stock screens are based on.
+  const scanDay = opp?.as_of || null;
+  $("#updated-text").textContent = scanDay
+    ? `Stock scan as of ${fmtDay(scanDay)} close`
+    : (opp?.generated_at ? `Stock scan updated ${timeAgo(opp.generated_at)}` : "Waiting for first data run");
+  $("#updated-dot").classList.toggle("stale", !opp);
+  $$(".asof-scan").forEach((el) => {
+    el.textContent = scanDay ? `Based on the ${fmtDay(scanDay)} close · updated after each trading day` : "";
+  });
 
-  renderList("insider-buys-card", insiders?.buys, insiderRow,
-    "No open-market insider purchases in the S&P 500 / Nasdaq 100 in the most recent scan.");
-  renderList("insider-sells-card", insiders?.sells, insiderRow,
-    "No open-market insider sales in the S&P 500 / Nasdaq 100 in the most recent scan.");
+  // ---------- Insiders ----------
+  const buys = [...(insiders?.buys || [])].sort((a, b) => (b.value || 0) - (a.value || 0)).slice(0, 40);
+  const sells = [...(insiders?.sells || [])].sort((a, b) => (b.value || 0) - (a.value || 0)).slice(0, 25);
+  const windowDays = insiders?.window_days || 30;
+  if (insiders) {
+    const covered = insiders.covered_from ? ` · complete since ${fmtDay(insiders.covered_from)}` : "";
+    $("#asof-insiders").textContent = `Checked ${timeAgo(insiders.generated_at)}${covered}`;
+  }
+  renderList("insider-buys-card", buys, insiderRow,
+    `No open-market insider purchases at S&P 500 / Nasdaq-100 companies in the last ${windowDays} days.`);
+  renderList("insider-sells-card", sells, insiderRow,
+    `No open-market insider sales at S&P 500 / Nasdaq-100 companies in the last ${windowDays} days.`);
 
+  // ---------- Sector leaderboard (with SPY as the benchmark row) ----------
   {
-    const rows = fast?.sector_breakout || [];
-    const tbody = rows.map((r, i) => {
-      const status = (r.return_5d_pct ?? 0) > 0 ? "opportunity" : (r.return_5d_pct ?? 0) < 0 ? "caution" : "neutral";
-      return `<tr>
-        <td class="rank">${i + 1}</td>
-        <td class="name">${r.name}<br><span class="sym">${r.symbol}</span></td>
-        <td class="num ${status}">${fmtPct(r.return_5d_pct)}</td>
-        <td class="num">${fmtPct(r.return_20d_pct)}</td>
-        <td class="num">${fmtPct(r.distance_from_sma150_pct)}</td>
+    const rows = (fast?.sector_breakout || []).map((r) => ({ ...r }));
+    const spy = fast?.spy;
+    if (spy && rows.length) {
+      rows.push({ symbol: "SPY · benchmark", name: "S&P 500", benchmark: true, return_5d_pct: spy.return_5d_pct,
+        return_20d_pct: spy.return_20d_pct, distance_from_sma150_pct: spy.distance_from_sma150_pct });
+    }
+    rows.sort((a, b) => (num(b.return_5d_pct) ?? -999) - (num(a.return_5d_pct) ?? -999));
+    let rank = 0;
+    const tbody = rows.map((r) => {
+      if (!r.benchmark) rank++;
+      return `<tr class="${r.benchmark ? "benchmark" : ""}">
+        <td class="rank">${r.benchmark ? "" : rank}</td>
+        <td class="name">${esc(r.name)}<br><span class="sym">${esc(r.symbol)}</span></td>
+        <td class="num ${upDown(r.return_5d_pct)}">${fmtPct(r.return_5d_pct)}</td>
+        <td class="num ${upDown(r.return_20d_pct)}">${fmtPct(r.return_20d_pct)}</td>
+        <td class="num ${upDown(r.distance_from_sma150_pct)}">${fmtPct(r.distance_from_sma150_pct)}</td>
       </tr>`;
     }).join("");
     $("#sector-table").innerHTML = rows.length ? `
-      <thead><tr><th></th><th>Sector</th><th style="text-align:right">5D</th><th style="text-align:right">20D</th><th style="text-align:right">vs SMA150</th></tr></thead>
+      <thead><tr><th></th><th>Sector</th><th style="text-align:right">5D</th><th style="text-align:right">20D</th><th style="text-align:right">vs<br>SMA150</th></tr></thead>
       <tbody>${tbody}</tbody>` : `<tbody><tr><td class="empty-note">No data yet.</td></tr></tbody>`;
+    if (spy) {
+      $("#asof-sectors").textContent = spy.in_session
+        ? `Live · updated ${timeAgo(fast.generated_at)}`
+        : `As of ${fmtDay(spy.date)} close`;
+    }
   }
 
-  // ---------- Interactive screens (SMA proximity, volume surge, 52w proximity) ----------
-  // Settings are remembered per-browser via localStorage - no accounts, no server round-trip.
-  const SETTINGS_KEY = "opp-scanner-settings-v1";
-  const defaultSettings = { maPct: 2.0, volRatio: 2.0, w52Pct: 3.0, maPeriodA: "20", maPeriodB: "150" };
-  let settings = { ...defaultSettings };
-  try {
-    const saved = JSON.parse(localStorage.getItem(SETTINGS_KEY) || "{}");
-    settings = { ...defaultSettings, ...saved };
-  } catch (e) { /* corrupted or unavailable - just use defaults */ }
-
-  function saveSettings() {
-    try { localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings)); } catch (e) { /* storage unavailable, ignore */ }
-  }
-
+  // ---------- Interactive screens (SMA proximity, volume surge, 52-week proximity) ----------
   const stocks = opp?.stocks || [];
-  const periods = opp?.sma_periods || [10, 20, 50, 100, 150, 200];
+  const periods = (opp?.sma_periods || [10, 20, 50, 100, 150, 200]).map(String);
 
-  // Populate the two SMA-period dropdowns
   const selA = $("#ctl-ma-period-a"), selB = $("#ctl-ma-period-b");
-  [selA, selB].forEach((sel, idx) => {
-    sel.innerHTML = periods.map(p => `<option value="${p}">${p}-day</option>`).join("");
+  [selA, selB].forEach((sel) => {
+    sel.innerHTML = periods.map((p) => `<option value="${p}">${p}-day</option>`).join("");
   });
-  selA.value = settings.maPeriodA;
-  selB.value = settings.maPeriodB;
+  selA.value = periods.includes(String(settings.maPeriodA)) ? String(settings.maPeriodA) : "20";
+  selB.value = periods.includes(String(settings.maPeriodB)) ? String(settings.maPeriodB) : "150";
 
-  // Wire up sliders to their live value labels + settings object
   const ctl52w = $("#ctl-52w-pct"), ctl52wVal = $("#ctl-52w-pct-val");
   const ctlVol = $("#ctl-vol-ratio"), ctlVolVal = $("#ctl-vol-ratio-val");
   const ctlMa = $("#ctl-ma-pct"), ctlMaVal = $("#ctl-ma-pct-val");
@@ -505,147 +584,122 @@ function insiderRow(t) {
   ctlVol.value = settings.volRatio; ctlVolVal.textContent = settings.volRatio.toFixed(1);
   ctlMa.value = settings.maPct; ctlMaVal.textContent = settings.maPct.toFixed(1);
 
+  const chgHTML = (v) => (num(v) === null ? "" : `<span class="chg ${upDown(v)}">${fmtPct(v, 1)} day</span>`);
+
   function renderStockScreens() {
     const hi52 = stocks
-      .filter(s => s.dist_hi52_pct !== null && s.dist_hi52_pct !== undefined && s.dist_hi52_pct <= settings.w52Pct)
+      .filter((s) => num(s.dist_hi52_pct) !== null && s.dist_hi52_pct <= settings.w52Pct)
       .sort((a, b) => a.dist_hi52_pct - b.dist_hi52_pct)
       .slice(0, 30);
     renderList("hi52-list", hi52,
-      (r) => stockRow(r.symbol, r.price, `${r.dist_hi52_pct.toFixed(2)}% away`, "opportunity"),
+      (r) => stockRow(r.symbol, r.price, r.dist_hi52_pct === 0 ? "at the high" : `${r.dist_hi52_pct.toFixed(2)}% below high`, "up"),
       `No stocks currently within ${settings.w52Pct}% of their 52-week high.`);
 
     const lo52 = stocks
-      .filter(s => s.dist_lo52_pct !== null && s.dist_lo52_pct !== undefined && s.dist_lo52_pct <= settings.w52Pct)
+      .filter((s) => num(s.dist_lo52_pct) !== null && s.dist_lo52_pct <= settings.w52Pct)
       .sort((a, b) => a.dist_lo52_pct - b.dist_lo52_pct)
       .slice(0, 30);
     renderList("lo52-list", lo52,
-      (r) => stockRow(r.symbol, r.price, `${r.dist_lo52_pct.toFixed(2)}% away`, "caution"),
+      (r) => stockRow(r.symbol, r.price, r.dist_lo52_pct === 0 ? "at the low" : `${r.dist_lo52_pct.toFixed(2)}% above low`, "down"),
       `No stocks currently within ${settings.w52Pct}% of their 52-week low.`);
 
     const volSurge = stocks
-      .filter(s => s.volume_ratio !== null && s.volume_ratio !== undefined && s.volume_ratio >= settings.volRatio)
+      .filter((s) => num(s.volume_ratio) !== null && s.volume_ratio >= settings.volRatio)
       .sort((a, b) => b.volume_ratio - a.volume_ratio)
       .slice(0, 30);
     renderList("volume-list", volSurge,
-      (r) => stockRow(r.symbol, r.price, `${r.volume_ratio.toFixed(2)}x avg`, "opportunity"),
-      `No stocks currently at ${settings.volRatio}x+ average volume.`);
+      (r) => stockRow(r.symbol, r.price, `${r.volume_ratio.toFixed(1)}× avg${chgHTML(r.chg_1d_pct)}`, "neutral"),
+      `No stocks traded at ${settings.volRatio}× their average volume or more in the last session.`);
 
-    [["A", selA.value, "sma-list-a"], ["B", selB.value, "sma-list-b"]].forEach(([_, period, listId]) => {
+    [[selA.value, "sma-list-a"], [selB.value, "sma-list-b"]].forEach(([period, listId]) => {
       const near = stocks
-        .filter(s => {
-          const sma = s.sma?.[period];
-          if (!sma) return false;
-          const distPct = (s.price - sma) / sma * 100;
-          return Math.abs(distPct) <= settings.maPct;
+        .map((s) => {
+          const sma = num(s.sma?.[period]);
+          return sma ? { ...s, distPct: ((s.price - sma) / sma) * 100 } : null;
         })
-        .map(s => {
-          const sma = s.sma[period];
-          const distPct = (s.price - sma) / sma * 100;
-          return { ...s, distPct };
-        })
+        .filter((s) => s && Math.abs(s.distPct) <= settings.maPct)
         .sort((a, b) => Math.abs(a.distPct) - Math.abs(b.distPct))
         .slice(0, 30);
       renderList(listId, near,
-        (r) => stockRow(r.symbol, r.price, fmtPct(r.distPct), r.distPct >= 0 ? "caution" : "opportunity"),
+        (r) => stockRow(r.symbol, r.price,
+          r.distPct >= 0 ? `${r.distPct.toFixed(2)}% above` : `${Math.abs(r.distPct).toFixed(2)}% below`,
+          r.distPct >= 0 ? "up" : "down"),
         `No stocks currently within ${settings.maPct}% of their ${period}-day SMA.`);
     });
   }
 
   ctl52w.addEventListener("input", () => {
-    settings.w52Pct = parseFloat(ctl52w.value);
-    ctl52wVal.textContent = settings.w52Pct.toFixed(1);
+    settings.w52Pct = parseFloat(ctl52w.value); ctl52wVal.textContent = settings.w52Pct.toFixed(1);
     renderStockScreens(); saveSettings();
   });
   ctlVol.addEventListener("input", () => {
-    settings.volRatio = parseFloat(ctlVol.value);
-    ctlVolVal.textContent = settings.volRatio.toFixed(1);
+    settings.volRatio = parseFloat(ctlVol.value); ctlVolVal.textContent = settings.volRatio.toFixed(1);
     renderStockScreens(); saveSettings();
   });
   ctlMa.addEventListener("input", () => {
-    settings.maPct = parseFloat(ctlMa.value);
-    ctlMaVal.textContent = settings.maPct.toFixed(1);
+    settings.maPct = parseFloat(ctlMa.value); ctlMaVal.textContent = settings.maPct.toFixed(1);
     renderStockScreens(); saveSettings();
   });
   selA.addEventListener("change", () => { settings.maPeriodA = selA.value; renderStockScreens(); saveSettings(); });
   selB.addEventListener("change", () => { settings.maPeriodB = selB.value; renderStockScreens(); saveSettings(); });
 
   if (!stocks.length) {
-    // No data yet (placeholder state) - show honest empty messages instead of nothing.
-    ["hi52-list", "lo52-list", "volume-list", "sma-list-a", "sma-list-b"].forEach(id => {
+    ["hi52-list", "lo52-list", "volume-list", "sma-list-a", "sma-list-b"].forEach((id) => {
       $("#" + id).innerHTML = `<div class="empty-note">No data yet.</div>`;
     });
   } else {
     renderStockScreens();
   }
 
-  // ---------- Watchlist section ----------
+  // ---------- Watchlist ----------
+  const allInsider = [...(insiders?.buys || []), ...(insiders?.sells || [])];
   function renderWatchlistSection() {
-    const titleEl = $("#watchlist-title"), subEl = $("#watchlist-sub"), cardEl = $("#watchlist-card");
-    if (watchlist.size === 0) {
-      titleEl.style.display = "none";
-      subEl.style.display = "none";
-      cardEl.style.display = "none";
-      return;
-    }
-    titleEl.style.display = "";
-    subEl.style.display = "";
-    cardEl.style.display = "";
+    const show = watchlist.size > 0;
+    ["#watchlist-title", "#watchlist-sub", "#watchlist-card"].forEach((id) => { $(id).style.display = show ? "" : "none"; });
+    if (!show) return;
 
-    const buys = insiders?.buys || [];
-    const sells = insiders?.sells || [];
-
-    const rows = [...watchlist].sort().map(sym => {
-      const stock = stocks.find(s => s.symbol === sym);
-      const hadBuy = buys.some(b => b.symbol === sym);
-      const hadSell = sells.some(s => s.symbol === sym);
-      const insiderBadge = hadBuy
-        ? `<span class="action-badge buy" style="margin-left:6px;">Insider Buy</span>`
-        : hadSell
-          ? `<span class="action-badge sell" style="margin-left:6px;">Insider Sell</span>`
-          : "";
-
+    $("#watchlist-card").innerHTML = [...watchlist].sort().map((sym) => {
+      const stock = stocks.find((s) => s.symbol === sym);
+      const hadBuy = allInsider.some((t) => t.symbol === sym && t.action === "Buy");
+      const hadSell = allInsider.some((t) => t.symbol === sym && t.action === "Sell");
+      const badge = hadBuy
+        ? `<span class="action-badge buy" style="margin-left:6px;">Insider buy</span>`
+        : hadSell ? `<span class="action-badge sell" style="margin-left:6px;">Insider sell</span>` : "";
       if (!stock) {
         return `
         <div class="insider-row">
           <div class="insider-left">
-            <div class="sym-role">${starButton(sym)}<span class="sym">${sym}</span>${insiderBadge}</div>
-            <div class="name">Not in this scan's S&amp;P 500 / Nasdaq 100 universe</div>
+            <div class="sym-role">${starButton(sym)}<span class="sym">${esc(sym)}</span>${badge}</div>
+            <div class="name">Not in this scan's S&amp;P 500 / Nasdaq-100 universe</div>
           </div>
         </div>`;
       }
-
-      const sma50 = stock.sma?.["50"];
-      const distSma50 = sma50 ? ((stock.price - sma50) / sma50 * 100).toFixed(2) : null;
-      const hiTxt = stock.dist_hi52_pct !== null && stock.dist_hi52_pct !== undefined ? `${stock.dist_hi52_pct}% from 52w high` : "";
-      const volTxt = stock.volume_ratio !== null && stock.volume_ratio !== undefined ? `${stock.volume_ratio}x avg volume` : "";
-
+      const sma50 = num(stock.sma?.["50"]);
+      const dist50 = sma50 ? ((stock.price - sma50) / sma50) * 100 : null;
       return `
       <div class="insider-row">
         <div class="insider-left">
-          <div class="sym-role">${starButton(sym)}<span class="sym">${sym}</span>${insiderBadge}</div>
-          <div class="name">$${stock.price}${distSma50 !== null ? ` · ${distSma50 >= 0 ? "+" : ""}${distSma50}% vs SMA50` : ""}</div>
+          <div class="sym-role">${starButton(sym)}<span class="sym">${esc(sym)}</span>${badge}</div>
+          <div class="name">${fmtPrice(stock.price)}${num(stock.chg_1d_pct) !== null ? ` (${fmtPct(stock.chg_1d_pct, 1)})` : ""}${dist50 !== null ? ` · ${fmtPct(dist50)} vs SMA50` : ""}</div>
         </div>
         <div class="insider-right">
-          <div class="detail">${hiTxt}</div>
-          <div class="detail">${volTxt}</div>
+          <div class="detail">${num(stock.dist_hi52_pct) !== null ? `${stock.dist_hi52_pct.toFixed(1)}% below 52w high` : ""}</div>
+          <div class="detail">${num(stock.volume_ratio) !== null ? `${stock.volume_ratio.toFixed(1)}× avg volume` : ""}</div>
         </div>
       </div>`;
     }).join("");
-
-    cardEl.innerHTML = rows;
   }
 
-  // Single delegated listener handles star clicks anywhere on the page -
-  // simpler and more reliable than re-attaching listeners every re-render.
+  // One delegated listener handles every star on the page and keeps all copies in sync.
   document.addEventListener("click", (e) => {
     const btn = e.target.closest(".star-btn");
-    if (!btn) return;
+    if (!btn || !btn.dataset.sym) return;
     const sym = btn.dataset.sym;
-    if (!sym) return;
     if (watchlist.has(sym)) watchlist.delete(sym); else watchlist.add(sym);
     saveWatchlist();
     const active = watchlist.has(sym);
-    document.querySelectorAll(`.star-btn[data-sym="${sym}"]`).forEach((b) => {
+    $$(".star-btn").forEach((b) => {
+      if (b.dataset.sym !== sym) return;
       b.classList.toggle("active", active);
       b.textContent = active ? "★" : "☆";
     });
@@ -654,6 +708,14 @@ function insiderRow(t) {
 
   renderWatchlistSection();
 })();
+
+document.addEventListener("touchstart", function () {}, { passive: true });
+
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("sw.js").catch(() => {});
+  });
+}
 </script>
 </body>
 </html>

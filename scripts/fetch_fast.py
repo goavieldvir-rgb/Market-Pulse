@@ -1,232 +1,220 @@
 #!/usr/bin/env python3
 """
-Fetches the "fast" indicators that can meaningfully change intraday:
-  - SPY / QQQ price, distance from SMA150, win/loss streak
-  - VIX level
-  - Sector rotation ratios (XLU/XLP vs XLY) - defensive vs cyclical
-  - All 11 SPDR sector ETFs, ranked by momentum (breakout leaderboard)
-  - Market participation proxy (RSP equal-weight vs SPY cap-weight)
-  - CNN Fear & Greed Index (unofficial public endpoint)
+The "fast" indicators - everything that moves intraday:
+  - SPY / QQQ price, distance from the 150-day SMA, up/down-day streak
+  - VIX level and where it sits in its 1-year range
+  - Participation: equal-weight RSP vs cap-weight SPY over 20 sessions
+  - Defensive rotation: Utilities + Staples vs Discretionary over 20 sessions
+  - All 11 SPDR sector ETFs for the Opportunity Scanner leaderboard
+  - CNN Fear & Greed
 
-Writes data/fast.json. Designed to run every ~15 minutes via GitHub Actions.
-No API key required - uses Yahoo Finance's public chart endpoint and CNN's
-public (unofficial) Fear & Greed data endpoint.
+Writes data/fast.json. Run once with `python3 scripts/fetch_fast.py`, or let
+scripts/fast_session.py call build() every few minutes through the session.
+
+Accuracy notes:
+  - Dates are exchange-local (New York), not UTC.
+  - Streaks count completed sessions only; while the market is open, today's
+    move is reported separately (change_pct / in_session).
+  - Prices, SMA distance and 5/20-day returns use the live price mid-session.
 """
-import json
 import os
-import sys
-import urllib.request
-from datetime import datetime, timezone
+import time
+from datetime import datetime, timedelta, timezone
 
-HEADERS = {
-    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
-                  "(KHTML, like Gecko) Chrome/124.0 Safari/537.36"
+from common import (DATA_DIR, http_json, iso_from_ts, last_bar_is_final, log,
+                    market_state, pct_change, read_json, rnd, utc_now_iso,
+                    warn, write_json, yahoo_daily)
+
+OUT_PATH = os.path.join(DATA_DIR, "fast.json")
+
+SECTOR_NAMES = {
+    "XLK": "Technology", "XLF": "Financials", "XLV": "Health Care",
+    "XLY": "Consumer Discretionary", "XLP": "Consumer Staples", "XLE": "Energy",
+    "XLI": "Industrials", "XLB": "Materials", "XLRE": "Real Estate",
+    "XLC": "Communication Services", "XLU": "Utilities",
 }
+SECTORS = list(SECTOR_NAMES)
+SYMBOLS = ["SPY", "QQQ", "^VIX", "RSP"] + SECTORS
+REQUIRED = ("SPY", "^VIX")  # without these the file would be misleading - keep the old one
 
-OUT_PATH = os.path.join(os.path.dirname(__file__), "..", "data", "fast.json")
-
-
-def get_json(url, timeout=15):
-    req = urllib.request.Request(url, headers=HEADERS)
-    with urllib.request.urlopen(req, timeout=timeout) as r:
-        return json.loads(r.read().decode("utf-8"))
-
-
-def fetch_history(symbol, range_="1y", interval="1d"):
-    url = (f"https://query1.finance.yahoo.com/v8/finance/chart/{symbol}"
-           f"?range={range_}&interval={interval}")
-    try:
-        data = get_json(url)
-    except Exception as e:
-        print(f"WARN: failed to fetch {symbol}: {e}", file=sys.stderr)
-        return []
-    try:
-        result = data["chart"]["result"][0]
-        timestamps = result["timestamp"]
-        closes = result["indicators"]["quote"][0]["close"]
-    except (KeyError, TypeError, IndexError):
-        print(f"WARN: unexpected shape for {symbol}", file=sys.stderr)
-        return []
-    out = []
-    for ts, c in zip(timestamps, closes):
-        if c is None:
-            continue
-        d = datetime.fromtimestamp(ts, tz=timezone.utc).strftime("%Y-%m-%d")
-        out.append((d, c))
-    return out
-
-
-def sma(values, window):
-    if len(values) < window:
-        return None
-    return sum(values[-window:]) / window
+CNN_URL = "https://production.dataviz.cnn.io/index/fearandgreed/graphdata/{start}"
+CNN_HEADERS = {"Referer": "https://www.cnn.com/markets/fear-and-greed", "Accept": "application/json"}
 
 
 def streak(closes):
+    """(direction, count) of consecutive up or down closes at the end of the series."""
     if len(closes) < 2:
         return None, 0
-    diffs = []
-    for i in range(1, len(closes)):
-        diffs.append(1 if closes[i] > closes[i - 1] else (-1 if closes[i] < closes[i - 1] else 0))
+    diffs = [1 if b > a else (-1 if b < a else 0) for a, b in zip(closes, closes[1:])]
     direction = diffs[-1]
     if direction == 0:
         return "flat", 0
     count = 0
     for d in reversed(diffs):
-        if d == direction:
-            count += 1
-        else:
+        if d != direction:
             break
+        count += 1
     return ("green" if direction == 1 else "red"), count
 
 
-def pct_change(a, b):
-    if a in (0, None) or b is None:
-        return None
-    return (b - a) / a * 100.0
-
-
 def percentile_rank(values, current):
-    """What % of the trailing values are <= current. Used for 'VIX is higher
-    than X% of the past year' style context - cheap since we already have
-    the 1y history fetched for other purposes."""
+    """% of values that are <= current (current included)."""
     if not values or current is None:
         return None
-    below_or_equal = sum(1 for v in values if v <= current)
-    return round(below_or_equal / len(values) * 100, 1)
+    return round(sum(1 for v in values if v <= current) / len(values) * 100, 1)
 
 
-def build_symbol_block(symbol):
-    hist = fetch_history(symbol)
-    if not hist:
+def symbol_block(symbol, chart, now):
+    bars = chart["bars"]
+    if len(bars) < 22:
         return None
-    closes = [c for _, c in hist]
-    last_date, last_close = hist[-1]
-    sma150 = sma(closes, 150)
-    dist_pct = pct_change(sma150, last_close) if sma150 else None
-    dirn, cnt = streak(closes)
-    ret_5d = pct_change(closes[-6], last_close) if len(closes) >= 6 else None
-    ret_20d = pct_change(closes[-21], last_close) if len(closes) >= 21 else None
+    meta = chart["meta"]
+    final = last_bar_is_final(chart, now)
+    closes = [b["c"] for b in bars]
+    live = meta.get("regularMarketPrice")
+    if not final and isinstance(live, (int, float)) and live > 0:
+        closes[-1] = float(live)
+    completed = closes if final else closes[:-1]
+    price, prev_close = closes[-1], closes[-2]
+    sma150 = sum(closes[-150:]) / 150 if len(closes) >= 150 else None
+    direction, count = streak(completed)
+    as_of = meta.get("regularMarketTime")
     return {
         "symbol": symbol,
-        "date": last_date,
-        "close": round(last_close, 2),
-        "sma150": round(sma150, 2) if sma150 else None,
-        "distance_from_sma150_pct": round(dist_pct, 2) if dist_pct is not None else None,
-        "streak_direction": dirn,
-        "streak_count": cnt,
-        "return_5d_pct": round(ret_5d, 2) if ret_5d is not None else None,
-        "return_20d_pct": round(ret_20d, 2) if ret_20d is not None else None,
-        "percentile_1y": percentile_rank(closes, last_close),
+        "date": bars[-1]["date"],
+        "close": round(price, 2),              # live price while the session is open
+        "prev_close": round(prev_close, 2),
+        "change_pct": rnd(pct_change(prev_close, price)),
+        "in_session": not final,
+        "as_of": iso_from_ts(as_of) if isinstance(as_of, (int, float)) else None,
+        "sma150": rnd(sma150),
+        "distance_from_sma150_pct": rnd(pct_change(sma150, price)),
+        "streak_direction": direction,
+        "streak_count": count,
+        "streak_through": bars[-1]["date"] if final else bars[-2]["date"],
+        "return_5d_pct": rnd(pct_change(closes[-6], price)),
+        "return_20d_pct": rnd(pct_change(closes[-21], price)),
+        "percentile_1y": percentile_rank(closes[-252:], price),
     }
 
 
 def fetch_fear_greed():
-    from datetime import timedelta
-    start_date = (datetime.now(timezone.utc) - timedelta(days=10)).strftime("%Y-%m-%d")
-    url = f"https://production.dataviz.cnn.io/index/fearandgreed/graphdata/{start_date}"
-    cnn_headers = dict(HEADERS)
-    cnn_headers["Referer"] = "https://www.cnn.com/markets/fear-and-greed"
-    cnn_headers["Accept"] = "application/json"
+    start = (datetime.now(timezone.utc) - timedelta(days=10)).strftime("%Y-%m-%d")
     try:
-        req = urllib.request.Request(url, headers=cnn_headers)
-        with urllib.request.urlopen(req, timeout=15) as r:
-            data = json.loads(r.read().decode("utf-8"))
-
-        fg = data.get("fear_and_greed")
-        if fg and fg.get("score") is not None:
-            return {"score": round(float(fg["score"]), 1), "rating": fg.get("rating")}
-
-        hist = data.get("fear_and_greed_historical", {}).get("data", [])
-        if hist:
-            latest = hist[-1]
-            return {"score": round(float(latest["y"]), 1), "rating": latest.get("rating")}
-
-        print("WARN: fear & greed response had neither current nor historical data", file=sys.stderr)
-        return None
+        data = http_json(CNN_URL.format(start=start), headers=CNN_HEADERS, timeout=15)
     except Exception as e:
-        print(f"WARN: fear & greed fetch failed: {e}", file=sys.stderr)
+        log(f"WARN: Fear & Greed fetch failed: {e}")
+        return None
+    fg = data.get("fear_and_greed") or {}
+    score, rating, ts = fg.get("score"), fg.get("rating"), fg.get("timestamp")
+    if score is None:
+        hist = ((data.get("fear_and_greed_historical") or {}).get("data")) or []
+        if not hist:
+            return None
+        score, rating, ts = hist[-1].get("y"), hist[-1].get("rating"), hist[-1].get("x")
+    if isinstance(ts, (int, float)):  # epoch milliseconds
+        ts = iso_from_ts(ts / 1000)
+    try:
+        score = round(float(score), 1)
+    except (TypeError, ValueError):
+        return None
+    if not 0 <= score <= 100:
+        return None
+    return {"score": score, "rating": rating, "as_of": ts,
+            "previous_close": rnd(fg.get("previous_close"), 1),
+            "previous_1_week": rnd(fg.get("previous_1_week"), 1)}
+
+
+def _avg(vals):
+    vals = [v for v in vals if v is not None]
+    return sum(vals) / len(vals) if vals else None
+
+
+def build(previous=None, now=None):
+    """Returns the fast.json payload, or None if the core symbols failed."""
+    now = time.time() if now is None else now
+    previous = previous or {}
+    charts, blocks = {}, {}
+    for sym in SYMBOLS:
+        chart = yahoo_daily(sym, "1y")
+        if chart:
+            charts[sym] = chart
+            block = symbol_block(sym, chart, now)
+            if block:
+                blocks[sym] = block
+    missing = [s for s in REQUIRED if s not in blocks]
+    if missing:
+        warn(f"Yahoo returned no usable data for {', '.join(missing)} - keeping the previous fast.json")
         return None
 
+    state, start, end = market_state(charts["SPY"], now)
 
-def main():
-    all_sectors = ["XLK", "XLF", "XLV", "XLY", "XLP", "XLE", "XLI", "XLB", "XLRE", "XLC", "XLU"]
-    symbols = ["SPY", "QQQ", "^VIX", "RSP"] + all_sectors
-    blocks = {}
-    for s in symbols:
-        b = build_symbol_block(s)
-        if b:
-            blocks[s] = b
-
-    sector_names = {
-        "XLK": "Technology", "XLF": "Financials", "XLV": "Health Care",
-        "XLY": "Consumer Discretionary", "XLP": "Consumer Staples", "XLE": "Energy",
-        "XLI": "Industrials", "XLB": "Materials", "XLRE": "Real Estate",
-        "XLC": "Communication Services", "XLU": "Utilities",
-    }
+    fear_greed = fetch_fear_greed()
+    if fear_greed is None and previous.get("fear_greed"):
+        fear_greed = dict(previous["fear_greed"], carried_forward=True)
+        log("Fear & Greed unavailable this run - carrying the previous reading forward")
 
     out = {
-        "generated_at": datetime.now(timezone.utc).isoformat(),
+        "generated_at": utc_now_iso(),
+        "market": {
+            "state": state,
+            "session_open": iso_from_ts(start),
+            "session_close": iso_from_ts(end),
+            "as_of": blocks["SPY"]["as_of"],
+            "session_date": blocks["SPY"]["date"],
+        },
         "spy": blocks.get("SPY"),
         "qqq": blocks.get("QQQ"),
         "vix": blocks.get("^VIX"),
-        "sectors": {
-            "XLP": blocks.get("XLP"),
-            "XLU": blocks.get("XLU"),
-            "XLY": blocks.get("XLY"),
-        },
-        "participation": {
-            "RSP": blocks.get("RSP"),
-            "SPY": blocks.get("SPY"),
-        },
-        "fear_greed": fetch_fear_greed(),
+        "sectors": {s: blocks.get(s) for s in ("XLP", "XLU", "XLY")},
+        "participation": {"RSP": blocks.get("RSP"), "SPY": blocks.get("SPY")},
+        "fear_greed": fear_greed,
     }
 
-    sector_rows = []
-    for sym in all_sectors:
+    rows = []
+    for sym in SECTORS:
         b = blocks.get(sym)
-        if not b:
-            continue
-        sector_rows.append({
-            "symbol": sym,
-            "name": sector_names.get(sym, sym),
-            "close": b.get("close"),
-            "return_5d_pct": b.get("return_5d_pct"),
-            "return_20d_pct": b.get("return_20d_pct"),
-            "distance_from_sma150_pct": b.get("distance_from_sma150_pct"),
-        })
-    sector_rows.sort(key=lambda r: (r["return_5d_pct"] if r["return_5d_pct"] is not None else -999), reverse=True)
-    out["sector_breakout"] = sector_rows
+        if b:
+            rows.append({
+                "symbol": sym, "name": SECTOR_NAMES[sym], "close": b["close"],
+                "change_pct": b["change_pct"],
+                "return_5d_pct": b["return_5d_pct"], "return_20d_pct": b["return_20d_pct"],
+                "distance_from_sma150_pct": b["distance_from_sma150_pct"],
+            })
+    rows.sort(key=lambda r: r["return_5d_pct"] if r["return_5d_pct"] is not None else -999, reverse=True)
+    out["sector_breakout"] = rows
 
-    xlu = blocks.get("XLU")
-    xlp = blocks.get("XLP")
-    xly = blocks.get("XLY")
-    if xlu and xlp and xly:
-        defensive_avg_5d = None
-        vals = [v["return_5d_pct"] for v in (xlu, xlp) if v.get("return_5d_pct") is not None]
-        if vals:
-            defensive_avg_5d = sum(vals) / len(vals)
-        cyclical_5d = xly.get("return_5d_pct")
-        spread = None
-        if defensive_avg_5d is not None and cyclical_5d is not None:
-            spread = round(defensive_avg_5d - cyclical_5d, 2)
-        out["sector_rotation"] = {
-            "defensive_avg_return_5d_pct": round(defensive_avg_5d, 2) if defensive_avg_5d is not None else None,
-            "cyclical_return_5d_pct": cyclical_5d,
-            "defensive_minus_cyclical_5d_pct": spread,
-        }
+    rot = {}
+    for days in (5, 20):
+        key = f"return_{days}d_pct"
+        defensive = _avg([(blocks.get(s) or {}).get(key) for s in ("XLU", "XLP")])
+        cyclical = (blocks.get("XLY") or {}).get(key)
+        rot[f"defensive_avg_return_{days}d_pct"] = rnd(defensive)
+        rot[f"cyclical_return_{days}d_pct"] = rnd(cyclical)
+        rot[f"defensive_minus_cyclical_{days}d_pct"] = (
+            rnd(defensive - cyclical) if defensive is not None and cyclical is not None else None)
+    out["sector_rotation"] = rot
 
-    rsp = blocks.get("RSP")
-    spy = blocks.get("SPY")
-    if rsp and spy and rsp.get("return_20d_pct") is not None and spy.get("return_20d_pct") is not None:
-        out["participation"]["rsp_minus_spy_20d_pct"] = round(
-            rsp["return_20d_pct"] - spy["return_20d_pct"], 2
-        )
+    rsp, spy = blocks.get("RSP"), blocks.get("SPY")
+    if rsp and spy and rsp["return_20d_pct"] is not None and spy["return_20d_pct"] is not None:
+        out["participation"]["rsp_minus_spy_20d_pct"] = rnd(rsp["return_20d_pct"] - spy["return_20d_pct"])
 
-    os.makedirs(os.path.dirname(OUT_PATH), exist_ok=True)
-    with open(OUT_PATH, "w") as f:
-        json.dump(out, f, indent=2)
-    print(f"Wrote {OUT_PATH}")
+    failed = [s for s in SYMBOLS if s not in blocks]
+    if failed:
+        out["missing_symbols"] = failed
+        log(f"WARN: no data this run for {', '.join(failed)}")
+    return out
+
+
+def main():
+    previous = read_json(OUT_PATH, {}) or {}
+    out = build(previous)
+    if out is None:
+        return
+    write_json(OUT_PATH, out)
+    spy = out["spy"]
+    log(f"Wrote {OUT_PATH}: market {out['market']['state']}, SPY {spy['close']} "
+        f"({spy['distance_from_sma150_pct']}% vs SMA150), VIX {out['vix']['close']}")
 
 
 if __name__ == "__main__":

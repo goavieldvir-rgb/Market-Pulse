@@ -8,14 +8,14 @@
 
 <meta property="og:type" content="website" />
 <meta property="og:title" content="Market Pulse — SPY / QQQ Health Dashboard" />
-<meta property="og:description" content="Trend, sentiment, breadth, volatility & sector rotation for SPY/QQQ — one glance, real data, refreshed every 15 min." />
+<meta property="og:description" content="Trend, sentiment, breadth, volatility & sector rotation for SPY/QQQ — one glance, real data, refreshed every 10 min while the US market is open." />
 <meta property="og:image" content="https://goavieldvir-rgb.github.io/Market-Pulse/og-image.png" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
 <meta property="og:url" content="https://goavieldvir-rgb.github.io/Market-Pulse/" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="Market Pulse — SPY / QQQ Health Dashboard" />
-<meta name="twitter:description" content="Trend, sentiment, breadth, volatility & sector rotation for SPY/QQQ — one glance, real data, refreshed every 15 min." />
+<meta name="twitter:description" content="Trend, sentiment, breadth, volatility & sector rotation for SPY/QQQ — one glance, real data, refreshed every 10 min while the US market is open." />
 <meta name="twitter:image" content="https://goavieldvir-rgb.github.io/Market-Pulse/og-image.png" />
 
 <link rel="manifest" href="manifest.json" />
@@ -151,6 +151,14 @@
   }
   .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); flex: none; box-shadow: 0 0 0 3px rgba(52,211,153,0.15); }
   .dot.stale { background: var(--text-faint); box-shadow: none; }
+  .dot.warn { background: var(--warm); box-shadow: 0 0 0 3px rgba(255,171,60,0.15); }
+  .dot.live { animation: livePulse 2.4s ease-out infinite; }
+  @keyframes livePulse {
+    0% { box-shadow: 0 0 0 0 rgba(52,211,153,0.45); }
+    70% { box-shadow: 0 0 0 7px rgba(52,211,153,0); }
+    100% { box-shadow: 0 0 0 0 rgba(52,211,153,0); }
+  }
+  @media (prefers-reduced-motion: reduce) { .dot.live { animation: none; } }
 
   .hero {
     background: linear-gradient(175deg, var(--surface) 0%, var(--surface-2) 100%);
@@ -294,6 +302,12 @@
     color: var(--text-faint);
     margin-top: 2px;
   }
+  .gauge-basis {
+    font-size: 0.72rem;
+    color: var(--text-faint);
+    margin-top: 6px;
+    min-height: 1em;
+  }
 
   .grid {
     display: grid;
@@ -385,6 +399,15 @@
   .status-tag.caution .sdot { background: var(--warm); }
   .status-tag.neutral { color: var(--text-faint); }
   .status-tag.neutral .sdot { background: var(--text-faint); }
+  .status-tag .tag-stack { display: inline-flex; flex-direction: column; align-items: flex-end; line-height: 1.2; }
+  .status-tag .tag-lean { font-size: 0.56rem; letter-spacing: 0.1em; opacity: 0.75; }
+  .status-tag .tag-main { display: inline-flex; align-items: center; gap: 5px; }
+  .status-tag.lean-opportunity { color: #8FBBFF; }
+  .status-tag.lean-opportunity .sdot { background: transparent; box-shadow: inset 0 0 0 1.5px var(--cool); }
+  .status-tag.lean-caution { color: #FFC47A; }
+  .status-tag.lean-caution .sdot { background: transparent; box-shadow: inset 0 0 0 1.5px var(--warm); }
+  .status-tag.context { color: var(--text-faint); }
+  .status-tag.context .sdot { background: transparent; box-shadow: inset 0 0 0 1.5px var(--text-faint); }
 
   .metric-row {
     display: flex;
@@ -452,6 +475,17 @@
     background: linear-gradient(90deg, var(--warm) 0%, #4B5470 50%, var(--cool) 100%);
     opacity: 0.9;
   }
+  /* Faint ticks at the -50 / 0 / +50 marks: past a side tick the card reads Caution/Opportunity. */
+  .mini-meter-track::before {
+    content: "";
+    position: absolute;
+    inset: -3px 0;
+    background:
+      linear-gradient(90deg, transparent calc(25% - 0.5px), rgba(8,11,19,0.85) calc(25% - 0.5px), rgba(8,11,19,0.85) calc(25% + 0.5px), transparent calc(25% + 0.5px)),
+      linear-gradient(90deg, transparent calc(50% - 0.5px), rgba(8,11,19,0.6) calc(50% - 0.5px), rgba(8,11,19,0.6) calc(50% + 0.5px), transparent calc(50% + 0.5px)),
+      linear-gradient(90deg, transparent calc(75% - 0.5px), rgba(8,11,19,0.85) calc(75% - 0.5px), rgba(8,11,19,0.85) calc(75% + 0.5px), transparent calc(75% + 0.5px));
+    pointer-events: none;
+  }
   .mini-meter-marker {
     position: absolute;
     top: 50%;
@@ -462,6 +496,8 @@
     border: 2px solid var(--bg);
     transform: translate(-50%, -50%);
     box-shadow: 0 0 0 1px rgba(255,255,255,0.25), 0 2px 6px rgba(0,0,0,0.5);
+    transition: left 0.6s cubic-bezier(0.16, 0.8, 0.3, 1);
+    z-index: 1;
   }
   .mini-meter-labels {
     display: flex;
@@ -572,12 +608,13 @@
     <div class="gauge-score" id="gauge-score"><span class="skel-line" style="width:76px;height:34px;display:inline-block;border-radius:8px;"></span></div>
     <div class="gauge-scale-hint">on a −100 (caution) to +100 (opportunity) scale</div>
     <div class="gauge-label" id="gauge-label">Loading data…</div>
+    <div class="gauge-basis" id="gauge-basis"></div>
   </div>
   <div id="sparkline-slot"></div>
   <div class="gauge-explainer">
-    <p class="gauge-sub">A simple, contrarian-leaning blend of the signals below — not a forecast.
-      Skewed toward "Opportunity" when fear, pessimism, or oversold conditions dominate, and toward
-      "Caution" when comfort, greed, or crowding dominate.</p>
+    <p class="gauge-sub">The average of the seven scored signals below — a contrarian-leaning read, not a forecast.
+      It leans toward "Opportunity" when fear, pessimism or oversold conditions dominate, and toward
+      "Caution" when comfort, greed or crowding dominate.</p>
   </div>
 </section>
 
@@ -596,39 +633,57 @@
     AAII.com (weekly sentiment survey), a community-maintained S&amp;P 500 constituent list for breadth.
     Some figures are best-effort approximations of proprietary index tickers (e.g. the S5FI-style
     breadth reading) — see each card's note.</p>
-  <p>Refreshed automatically roughly every 15 minutes on trading days via GitHub Actions.</p>
+  <p>Prices refresh about every 10 minutes while the US market is open; breadth updates after each
+    close and AAII weekly. Every card shows how current its data is.</p>
 </footer>
 
 <script>
 const $ = (sel) => document.querySelector(sel);
+const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const num = (v) => (typeof v === "number" && Number.isFinite(v) ? v : null);
 
 function fmtPct(v, digits = 2) {
-  if (v === null || v === undefined || Number.isNaN(v)) return "—";
-  const sign = v > 0 ? "+" : "";
-  return `${sign}${v.toFixed(digits)}%`;
+  v = num(v);
+  if (v === null) return "—";
+  return `${v > 0 ? "+" : ""}${v.toFixed(digits)}%`;
 }
 function fmtNum(v, digits = 2) {
-  if (v === null || v === undefined || Number.isNaN(v)) return "—";
-  return v.toFixed(digits);
+  v = num(v);
+  return v === null ? "—" : v.toFixed(digits);
 }
 function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
 
+// ---------- Time helpers ----------
+const HOUR = 3600000, DAY = 24 * HOUR;
+function ageMs(iso) {
+  const t = iso ? Date.parse(iso) : NaN;
+  return Number.isFinite(t) ? Date.now() - t : Infinity;
+}
 function timeAgo(iso) {
-  if (!iso) return "no data yet";
-  const then = new Date(iso).getTime();
-  const diffMin = Math.round((Date.now() - then) / 60000);
-  if (diffMin < 1) return "just now";
-  if (diffMin < 60) return `${diffMin}m ago`;
-  const h = Math.floor(diffMin / 60);
-  const m = diffMin % 60;
-  if (h < 24) return `${h}h ${m}m ago`;
-  const d = Math.floor(h / 24);
-  return `${d}d ago`;
+  const ms = ageMs(iso);
+  if (!Number.isFinite(ms)) return "no data yet";
+  const min = Math.round(ms / 60000);
+  if (min < 1) return "just now";
+  if (min < 60) return `${min}m ago`;
+  const h = Math.floor(min / 60);
+  if (h < 24) return `${h}h ${min % 60}m ago`;
+  return `${Math.floor(h / 24)}d ago`;
+}
+// "2026-09-29" -> "Sep 29" (a calendar date, so no time-zone shifting)
+function fmtDay(isoDate) {
+  if (!isoDate || !/^\d{4}-\d{2}-\d{2}/.test(isoDate)) return "—";
+  const [y, m, d] = isoDate.slice(0, 10).split("-").map(Number);
+  return new Date(Date.UTC(y, m - 1, d)).toLocaleDateString("en-US", { month: "short", day: "numeric", timeZone: "UTC" });
+}
+function daysSince(isoDate) {
+  if (!isoDate) return Infinity;
+  const [y, m, d] = isoDate.slice(0, 10).split("-").map(Number);
+  return (Date.now() - Date.UTC(y, m - 1, d)) / DAY;
 }
 
 async function loadJSON(path) {
   try {
-    const res = await fetch(path + "?t=" + Date.now());
+    const res = await fetch(path + "?t=" + Date.now(), { cache: "no-store" });
     if (!res.ok) throw new Error(res.status);
     return await res.json();
   } catch (e) {
@@ -637,6 +692,49 @@ async function loadJSON(path) {
   }
 }
 
+// ---------- Scoring: ONE table drives the card tags, the mini-meters, the gauge and the trend line ----------
+// Each signal maps its reading onto a shared scale: -100 = strong caution … +100 = strong opportunity,
+// by straight lines between anchor points [reading, score]. The ±50 anchors are the thresholds quoted
+// on each card, so "Caution"/"Opportunity" on a card always means the same thing as on the gauge.
+const SIGNALS = {
+  trend:         [[-10, 100], [-3, 50], [3, 0], [8, -50], [12, -100]],     // SPY % vs its 150-day SMA
+  aaii:          [[-29, 100], [-11, 50], [6.5, 0], [24, -50], [42, -100]],  // bull−bear spread (long-run avg +6.5)
+  vix:           [[11, -100], [14, -50], [18, 0], [25, 50], [35, 100]],     // VIX level (long-run median ≈ 18)
+  participation: [[-4, -100], [-2, -50], [0, 0], [2, 50], [4, 100]],        // RSP − SPY, 20 sessions
+  breadth:       [[5, 100], [15, 50], [50, 0], [70, -50], [85, -100]],      // % of S&P 500 above 50-day SMA
+  rotation:      [[-6, 100], [-3, 50], [0, 0], [3, -50], [6, -100]],        // (XLU+XLP)/2 − XLY, 20 sessions
+  feargreed:     [[0, 100], [25, 50], [50, 0], [75, -50], [100, -100]],     // CNN's own bands
+};
+const SIGNAL_COUNT = Object.keys(SIGNALS).length;
+
+function scoreFrom(key, x) {
+  x = num(x);
+  if (x === null) return null;
+  const pts = SIGNALS[key];
+  if (x <= pts[0][0]) return pts[0][1];
+  for (let i = 1; i < pts.length; i++) {
+    const [x0, y0] = pts[i - 1], [x1, y1] = pts[i];
+    if (x <= x1) return y0 + ((y1 - y0) * (x - x0)) / (x1 - x0);
+  }
+  return pts[pts.length - 1][1];
+}
+
+// Five zones, shared by cards and gauge.
+function zoneOf(score) {
+  if (score === null || score === undefined) return { status: "neutral", tag: "No data", label: "Not enough data" };
+  if (score >= 50) return { status: "opportunity", tag: "Opportunity", label: "Opportunity Zone" };
+  if (score >= 20) return { status: "lean-opportunity", tag: "Leaning Opportunity", label: "Leaning Opportunity" };
+  if (score > -20) return { status: "neutral", tag: "Neutral", label: "Neutral / Mixed Signals" };
+  if (score > -50) return { status: "lean-caution", tag: "Leaning Caution", label: "Leaning Caution" };
+  return { status: "caution", tag: "Caution", label: "Caution Zone" };
+}
+
+function aaiiPlausible(a) {
+  const b = num(a?.bullish_pct), n = num(a?.neutral_pct), r = num(a?.bearish_pct);
+  return b !== null && n !== null && r !== null && Math.abs(b + n + r - 100) <= 1.5;
+}
+
+// ---------- Gauge ----------
 const GAUGE = { w: 340, h: 190, cx: 170, cy: 172, r: 130 };
 const gaugeScoreToAngle = (s) => -90 + ((s + 100) / 200) * 180;
 const gaugePt = (deg, radius) => {
@@ -656,22 +754,18 @@ function needlePolygonPoints(score) {
 
 function renderGauge() {
   const { w, h, cx, cy, r } = GAUGE;
-  const wrap = $("#gauge-wrap");
-
   const ticks = [];
   const majorScores = [-100, -50, 0, 50, 100];
-  for (let s = -100; s <= 100; s += 20) {
+  for (let s = -100; s <= 100; s += 10) {
     const isMajor = majorScores.includes(s);
     const deg = gaugeScoreToAngle(s);
     const [ix, iy] = gaugePt(deg, r + 16);
     const [ox, oy] = gaugePt(deg, r + (isMajor ? 26 : 21));
     ticks.push(`<line x1="${ix}" y1="${iy}" x2="${ox}" y2="${oy}" stroke="${isMajor ? 'rgba(231,236,251,0.5)' : 'rgba(231,236,251,0.2)'}" stroke-width="${isMajor ? 2 : 1.3}" stroke-linecap="round"/>`);
   }
-
   const arcPath = `M ${cx - r} ${cy} A ${r} ${r} 0 0 1 ${cx + r} ${cy}`;
-
-  const svg = `
-  <svg viewBox="0 0 ${w} ${h}" xmlns="http://www.w3.org/2000/svg">
+  $("#gauge-wrap").innerHTML = `
+  <svg viewBox="0 0 ${w} ${h}" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Composite gauge">
     <defs>
       <linearGradient id="arcGrad" x1="0%" y1="0%" x2="100%" y2="0%">
         <stop offset="0%" stop-color="#FFAB3C"/>
@@ -696,91 +790,82 @@ function renderGauge() {
         <feColorMatrix in="inset" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.45 0"/>
       </filter>
     </defs>
-
     <path d="${arcPath}" stroke="#1B2340" stroke-width="24" fill="none" stroke-linecap="round"/>
     <path d="${arcPath}" stroke="#0A0E1A" stroke-width="24" fill="none" stroke-linecap="round" filter="url(#grooveInset)" opacity="0.6"/>
-
     <path d="${arcPath}" stroke="url(#arcGrad)" stroke-width="16" fill="none" stroke-linecap="round"/>
     <path d="${arcPath}" stroke="rgba(255,255,255,0.14)" stroke-width="1.5" fill="none" stroke-linecap="round" transform="translate(0,-6)"/>
-
     ${ticks.join("")}
-
     <polygon id="gauge-needle" points="${needlePolygonPoints(0)}" fill="url(#needleGrad)" filter="url(#needleShadow)"/>
-
     <circle cx="${cx}" cy="${cy}" r="11" fill="#0A0E1A"/>
     <circle cx="${cx}" cy="${cy}" r="9" fill="url(#hubGrad)"/>
     <circle cx="${cx}" cy="${cy}" r="3.4" fill="#1B2340"/>
   </svg>`;
-  wrap.innerHTML = svg;
 }
 
+let gaugeValue = 0;
 function animateGaugeTo(targetScore) {
   const needle = document.getElementById("gauge-needle");
   const scoreEl = $("#gauge-score");
   if (!needle || !scoreEl) return;
-  const duration = 1000;
+  const from = gaugeValue;
+  const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const duration = reduce ? 0 : 1000;
   const start = performance.now();
   const easeOutCubic = (t) => 1 - Math.pow(1 - t, 3);
-
-  function frame(now) {
-    const t = Math.min((now - start) / duration, 1);
-    const eased = easeOutCubic(t);
-    const current = targetScore * eased;
-    needle.setAttribute("points", needlePolygonPoints(current));
-    const rounded = Math.round(current);
+  const show = (v) => {
+    needle.setAttribute("points", needlePolygonPoints(v));
+    const rounded = Math.round(v);
     scoreEl.textContent = (rounded > 0 ? "+" : "") + rounded;
+  };
+  function frame(now) {
+    const t = duration ? Math.min((now - start) / duration, 1) : 1;
+    show(from + (targetScore - from) * easeOutCubic(t));
     if (t < 1) requestAnimationFrame(frame);
-    else {
-      const finalRounded = Math.round(targetScore);
-      scoreEl.textContent = (finalRounded > 0 ? "+" : "") + finalRounded;
-    }
+    else { show(targetScore); gaugeValue = targetScore; }
   }
   requestAnimationFrame(frame);
 }
 
-function gaugeLabel(score) {
-  if (score === null) return { label: "Not enough data" };
-  if (score >= 55) return { label: "Extreme Fear — Opportunity Zone" };
-  if (score >= 20) return { label: "Leaning Opportunity" };
-  if (score > -20) return { label: "Neutral / Mixed Signals" };
-  if (score > -55) return { label: "Leaning Caution" };
-  return { label: "Extreme Comfort — Caution Zone" };
+// ---------- Cards ----------
+function statusTag(status, text) {
+  // "Leaning …" states stack the qualifier above the word so the tag stays as narrow as the strong ones.
+  const m = /^Leaning (.+)$/i.exec(text);
+  if (m) {
+    return `<span class="status-tag ${status}" aria-label="${esc(text)}"><span class="tag-stack"><span class="tag-lean">Leaning</span><span class="tag-main"><span class="sdot"></span>${esc(m[1])}</span></span></span>`;
+  }
+  return `<span class="status-tag ${status}"><span class="sdot"></span>${esc(text)}</span>`;
 }
 
-function statusTag(status) {
-  const map = { opportunity: "Opportunity", caution: "Caution", neutral: "Neutral" };
-  return `<span class="status-tag ${status}"><span class="sdot"></span>${map[status] || "Neutral"}</span>`;
-}
-
-function miniMeter(score, leftLabel = "Caution", rightLabel = "Opportunity") {
-  if (score === null || score === undefined || Number.isNaN(score)) return "";
+function miniMeter(score, leftLabel, rightLabel) {
+  if (num(score) === null) return "";
   const pct = clamp(((score + 100) / 200) * 100, 2, 98);
   return `
-  <div class="mini-meter">
-    <div class="mini-meter-track"><div class="mini-meter-marker" style="left:${pct}%"></div></div>
-    <div class="mini-meter-labels"><span>${leftLabel}</span><span>${rightLabel}</span></div>
+  <div class="mini-meter" title="Score ${Math.round(score) > 0 ? "+" : ""}${Math.round(score)} of ±100">
+    <div class="mini-meter-track"><div class="mini-meter-marker" style="left:${pct.toFixed(1)}%"></div></div>
+    <div class="mini-meter-labels"><span>${esc(leftLabel)}</span><span>${esc(rightLabel)}</span></div>
   </div>`;
 }
 
-let _cardIndex = 0;
-function card({ title, code, status, valueHTML, note, subMetrics = [], asOf, meterScore = null, meterLabels = ["Caution", "Opportunity"] }) {
-  const sub = subMetrics.length
-    ? `<div class="sub-metrics">${subMetrics.map(s => `<div class="sub-metric"><div class="k">${s.k}</div><div class="v">${s.v}</div></div>`).join("")}</div>`
+let cardIndex = 0, animateCards = true;
+function card({ title, code, score = null, context = false, value, valueStyle = "", unit = "", note, sub = [], asOf, meterLabels = ["Caution", "Opportunity"] }) {
+  const zone = context ? { status: "context", tag: "Context only" } : zoneOf(score);
+  const strong = zone.status === "opportunity" || zone.status === "caution";
+  const subHTML = sub.length
+    ? `<div class="sub-metrics">${sub.map(([k, v]) => `<div class="sub-metric"><div class="k">${esc(k)}</div><div class="v">${esc(v)}</div></div>`).join("")}</div>`
     : "";
-  const meter = meterScore !== null ? miniMeter(meterScore, meterLabels[0], meterLabels[1]) : "";
-  const delayMs = Math.min(_cardIndex * 55, 400);
-  _cardIndex++;
+  const delay = animateCards ? `animation-delay:${Math.min(cardIndex * 55, 400)}ms` : "animation:none";
+  cardIndex++;
   return `
-  <div class="card" style="animation-delay:${delayMs}ms">
+  <div class="card" style="${delay}">
     <div class="card-head">
-      <div><div class="card-title">${title}</div>${code ? `<span class="card-code">${code}</span>` : ""}</div>
-      ${statusTag(status)}
+      <div><div class="card-title">${esc(title)}</div>${code ? `<span class="card-code">${esc(code)}</span>` : ""}</div>
+      ${statusTag(zone.status, zone.tag)}
     </div>
-    ${valueHTML}
-    ${meter}
-    ${sub}
-    <p class="card-note">${note}</p>
-    ${asOf ? `<div class="as-of">as of ${asOf}</div>` : ""}
+    <div class="metric-row"><span class="metric-value ${strong ? zone.status : ""}" style="${valueStyle}">${esc(value)}</span>${unit ? `<span class="metric-unit">${esc(unit)}</span>` : ""}</div>
+    ${context ? "" : miniMeter(score, meterLabels[0], meterLabels[1])}
+    ${subHTML}
+    <p class="card-note">${esc(note)}</p>
+    ${asOf ? `<div class="as-of">${esc(asOf)}</div>` : ""}
   </div>`;
 }
 
@@ -796,299 +881,330 @@ function skeletonCard() {
   </div>`;
 }
 
-// ---------- Composite score sparkline ----------
-function renderSparkline(history) {
+// "live · 4m ago" mid-session, otherwise "Sep 29 close"
+function priceAsOf(fast, block) {
+  if (!block) return null;
+  if (block.in_session) return `Live · updated ${timeAgo(fast?.generated_at)}`;
+  return `As of ${fmtDay(block.date)} close`;
+}
+
+// ---------- Data quality ----------
+const LIMITS = { fastDays: 4, breadthDays: 4, aaiiDays: 12, fgDays: 4 };
+
+function assess(fast, breadth, aaii) {
+  const fastAge = ageMs(fast?.generated_at) / DAY;
+  const fg = fast?.fear_greed;
+  const fgAge = ageMs(fg?.as_of || fast?.generated_at) / DAY;
+  const breadthAge = ageMs(breadth?.generated_at) / DAY;
+  const aaiiValid = aaiiPlausible(aaii);
+  const aaiiAge = aaii?.survey_date ? daysSince(aaii.survey_date) : ageMs(aaii?.generated_at) / DAY;
+  return {
+    fastOk: fastAge <= LIMITS.fastDays,
+    fgOk: num(fg?.score) !== null && fgAge <= LIMITS.fgDays,
+    breadthOk: num(breadth?.pct_above_sma50) !== null && breadthAge <= LIMITS.breadthDays,
+    aaiiValid,
+    aaiiOk: aaiiValid && aaiiAge <= LIMITS.aaiiDays + 2,
+    problems: [
+      fast && fastAge > LIMITS.fastDays ? `<b>Price/VIX/sector data</b> hasn't updated since ${timeAgo(fast.generated_at)}` : null,
+      breadth && breadthAge > LIMITS.breadthDays ? `<b>S&amp;P 500 breadth</b> hasn't updated since ${timeAgo(breadth.generated_at)}` : null,
+      aaii && !aaiiValid ? `<b>AAII sentiment</b>: the latest survey couldn't be read reliably` : null,
+      aaii && aaiiValid && aaiiAge > LIMITS.aaiiDays ? `<b>AAII sentiment</b>: the latest survey is from ${fmtDay(aaii.survey_date)}` : null,
+      fg && fgAge > LIMITS.fgDays ? `<b>CNN Fear &amp; Greed</b> hasn't updated since ${timeAgo(fg.as_of)}` : null,
+    ].filter(Boolean),
+  };
+}
+
+// ---------- History: the trend line is scored with the same SIGNALS table ----------
+function compositeFromReadings(r, minSignals = 5) {
+  const scores = Object.keys(SIGNALS).map((k) => scoreFrom(k, r[k])).filter((s) => s !== null);
+  return scores.length >= minSignals ? scores.reduce((a, b) => a + b, 0) / scores.length : null;
+}
+
+function renderSparkline(daily, live) {
   const slot = $("#sparkline-slot");
-  const points = (history || []).filter(h => h.composite !== null && h.composite !== undefined);
-  if (points.length < 3) {
-    slot.innerHTML = ""; // not enough history yet - stay silent, no half-empty chart
-    return;
-  }
-  const w = 280, h = 36, pad = 3;
-  const values = points.map(p => p.composite);
-  const minV = Math.min(...values, -20), maxV = Math.max(...values, 20); // keep some visual range even if flat
+  const rows = (daily?.days || []).slice(-63);
+  const points = rows.map((r) => ({ d: r.d, v: compositeFromReadings(r) })).filter((p) => p.v !== null);
+  if (live && num(live.v) !== null && (!points.length || live.d > points[points.length - 1].d)) points.push(live);
+  if (points.length < 10) { slot.innerHTML = ""; return; }
+
+  const w = 280, h = 40, pad = 3;
+  const values = points.map((p) => p.v);
+  const minV = Math.min(...values, -25), maxV = Math.max(...values, 25);
   const range = maxV - minV || 1;
   const stepX = (w - pad * 2) / (points.length - 1);
-  const toXY = (i, v) => {
-    const x = pad + i * stepX;
-    const y = pad + (1 - (v - minV) / range) * (h - pad * 2);
-    return [x, y];
-  };
-  const pathD = points.map((p, i) => {
-    const [x, y] = toXY(i, p.composite);
-    return `${i === 0 ? "M" : "L"} ${x.toFixed(1)} ${y.toFixed(1)}`;
-  }).join(" ");
-  const [lastX, lastY] = toXY(points.length - 1, points[points.length - 1].composite);
-  const lastScore = points[points.length - 1].composite;
-  const dotColor = lastScore >= 0 ? "#5B9CFF" : "#FFAB3C";
-
+  const y = (v) => pad + (1 - (v - minV) / range) * (h - pad * 2);
+  const pathD = points.map((p, i) => `${i ? "L" : "M"} ${(pad + i * stepX).toFixed(1)} ${y(p.v).toFixed(1)}`).join(" ");
+  const last = points[points.length - 1];
+  const dotColor = last.v >= 0 ? "#5B9CFF" : "#FFAB3C";
   slot.innerHTML = `
     <div class="sparkline-wrap">
-      <div class="sparkline-label">Composite score — last ${points.length} days</div>
-      <svg viewBox="0 0 ${w} ${h}" xmlns="http://www.w3.org/2000/svg">
-        <line x1="${pad}" y1="${(pad + (1 - (0 - minV) / range) * (h - pad * 2)).toFixed(1)}"
-              x2="${w - pad}" y2="${(pad + (1 - (0 - minV) / range) * (h - pad * 2)).toFixed(1)}"
-              stroke="rgba(255,255,255,0.12)" stroke-width="1" stroke-dasharray="2,3"/>
+      <div class="sparkline-label">Composite since ${fmtDay(points[0].d)}</div>
+      <svg viewBox="0 0 ${w} ${h}" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Composite score trend">
+        <line x1="${pad}" y1="${y(0).toFixed(1)}" x2="${w - pad}" y2="${y(0).toFixed(1)}" stroke="rgba(255,255,255,0.12)" stroke-width="1" stroke-dasharray="2,3"/>
         <path d="${pathD}" fill="none" stroke="rgba(91,156,255,0.7)" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
-        <circle cx="${lastX.toFixed(1)}" cy="${lastY.toFixed(1)}" r="2.6" fill="${dotColor}"/>
+        <circle cx="${(pad + (points.length - 1) * stepX).toFixed(1)}" cy="${y(last.v).toFixed(1)}" r="2.6" fill="${dotColor}"/>
       </svg>
     </div>`;
 }
 
-// Percentile of `current` within a series of past values (what % of days were <= current)
 function percentileRank(series, current) {
-  if (!series.length || current === null || current === undefined) return null;
-  const below = series.filter(v => v <= current).length;
-  return Math.round((below / series.length) * 100);
+  if (!series.length || num(current) === null) return null;
+  return Math.round((series.filter((v) => v <= current).length / series.length) * 100);
 }
 
-(async function main() {
-  $("#card-grid").innerHTML = Array.from({ length: 8 }, skeletonCard).join("");
-  $("#updated-text").textContent = "Loading…";
-  $("#gauge-label").textContent = "Loading data…";
-  renderGauge();
-
-  const [fast, breadth, aaii, history] = await Promise.all([
-    loadJSON("data/fast.json"),
-    loadJSON("data/breadth.json"),
-    loadJSON("data/aaii.json"),
-    loadJSON("data/history.json"),
-  ]);
-
-  const scores = [];
-  const cards = [];
-  _cardIndex = 0;
-
-  const timestamps = [fast?.generated_at, breadth?.generated_at, aaii?.generated_at].filter(Boolean);
-  const latest = timestamps.sort().reverse()[0];
-  $("#updated-text").textContent = latest ? `Updated ${timeAgo(latest)}` : "Waiting for first data run";
-  $("#updated-dot").classList.toggle("stale", !latest);
-
-  const STALE_HOURS = 96;
-  const hoursSince = (iso) => iso ? (Date.now() - new Date(iso).getTime()) / 3600000 : Infinity;
-  const staleSources = [
-    { label: "Price/VIX/sector data", iso: fast?.generated_at },
-    { label: "S&P 500 breadth", iso: breadth?.generated_at },
-    { label: "AAII sentiment", iso: aaii?.generated_at },
-  ].filter(s => hoursSince(s.iso) > STALE_HOURS);
-
-  if (staleSources.length) {
-    const names = staleSources.map(s => `<b>${s.label}</b> (${timeAgo(s.iso)})`).join(", ");
-    $("#health-banner-slot").innerHTML = `
-      <div class="health-banner">
-        <span class="hb-icon">⚠️</span>
-        <span>Heads up: ${names} hasn't refreshed in over ${STALE_HOURS / 24} days — likely a broken data source upstream, not just a quiet weekend. The numbers below may be outdated until it's fixed.</span>
-      </div>`;
+// ---------- Header badge ----------
+let latestFast = null;
+function renderBadge() {
+  const fast = latestFast;
+  const dot = $("#updated-dot"), text = $("#updated-text");
+  dot.className = "dot";
+  if (!fast) { dot.classList.add("stale"); text.textContent = "Waiting for first data run"; return; }
+  const m = fast.market || {};
+  const age = ageMs(fast.generated_at);
+  if (m.state === "open") {
+    const fresh = age < 30 * 60000;
+    dot.classList.add(fresh ? "live" : "warn");
+    text.textContent = `Market open · updated ${timeAgo(fast.generated_at)}`;
+  } else {
+    dot.classList.add("stale");
+    const when = fast.spy?.date ? `${fmtDay(fast.spy.date)} close` : timeAgo(fast.generated_at);
+    text.textContent = `${m.state === "pre" ? "Pre-market" : "Market closed"} · prices as of ${when}`;
   }
+}
 
+// ---------- Main render ----------
+let lastSignature = "";
+function render({ fast, breadth, aaii, daily }) {
+  const q = assess(fast, breadth, aaii);
+  const scores = {};
+  const cards = [];
+  cardIndex = 0;
+
+  $("#health-banner-slot").innerHTML = q.problems.length ? `
+    <div class="health-banner">
+      <span class="hb-icon">⚠️</span>
+      <span>Heads up — ${q.problems.join("; ")}. ${q.problems.length > 1 ? "These readings are" : "That reading is"} left out of the composite until ${q.problems.length > 1 ? "they refresh" : "it refreshes"}.</span>
+    </div>` : "";
+
+  const spy = fast?.spy, qqq = fast?.qqq;
+
+  // 1. Trend
   {
-    const spy = fast?.spy, qqq = fast?.qqq;
-    const d = spy?.distance_from_sma150_pct;
-    let status = "neutral", score = null;
-    if (d !== null && d !== undefined) {
-      if (d > 8) status = "caution";
-      else if (d < -3) status = "opportunity";
-      score = clamp(-d * 6, -100, 100);
-      scores.push(score);
-    }
+    const d = num(spy?.distance_from_sma150_pct);
+    const score = q.fastOk ? scoreFrom("trend", d) : null;
+    scores.trend = score;
     cards.push(card({
       title: "Trend: Distance from SMA150",
-      code: "SPY / QQQ vs 150-day average",
-      status,
-      valueHTML: `<div class="metric-row"><span class="metric-value ${status}">${fmtPct(d)}</span><span class="metric-unit">SPY vs SMA150</span></div>`,
-      meterScore: score,
+      code: "SPY / QQQ vs their 150-day average",
+      score, value: fmtPct(d), unit: "SPY vs SMA150",
       meterLabels: ["Extended (caution)", "Below trend (opportunity)"],
-      subMetrics: [
-        { k: "SPY close", v: spy?.close ?? "—" },
-        { k: "SPY SMA150", v: spy?.sma150 ?? "—" },
-        { k: "QQQ vs SMA150", v: fmtPct(qqq?.distance_from_sma150_pct) },
-      ],
-      note: "Price well above its 150-day average often means the trend is extended and due a pause; well below can flag long-term trend damage, but far-below-average dips are also where mean-reversion buyers tend to step in.",
-      asOf: fast?.generated_at ? timeAgo(fast.generated_at) : null,
+      sub: [["SPY", fmtNum(spy?.close)], ["SPY SMA150", fmtNum(spy?.sma150)], ["QQQ vs SMA150", fmtPct(qqq?.distance_from_sma150_pct)]],
+      note: "Scored on SPY. More than 8% above its 150-day average = stretched (caution). More than 3% below = a pullback where buyers have historically stepped in (opportunity) — though a deep break can also mean trend damage.",
+      asOf: priceAsOf(fast, spy),
     }));
   }
 
+  // 2. Momentum streak (context only)
   {
-    const spy = fast?.spy, qqq = fast?.qqq;
     const dir = spy?.streak_direction;
-    const cnt = spy?.streak_count ?? 0;
-    const dirLabel = dir === "green" ? "green days in a row" : dir === "red" ? "red days in a row" : "flat";
+    const cnt = num(spy?.streak_count) ?? 0;
+    const label = dir === "green" ? `green day${cnt === 1 ? "" : "s"} in a row` : dir === "red" ? `red day${cnt === 1 ? "" : "s"} in a row` : "flat close";
+    const qDir = qqq?.streak_direction;
+    const sub = [
+      ["QQQ streak", qqq ? `${qqq.streak_count} ${qDir === "green" ? "up" : qDir === "red" ? "down" : "flat"}` : "—"],
+      ["SPY 5-day", fmtPct(spy?.return_5d_pct)],
+    ];
+    if (spy?.in_session) sub.push(["SPY today (so far)", fmtPct(spy?.change_pct)]);
     cards.push(card({
       title: "Momentum Streak",
       code: "Consecutive up/down closes",
-      status: "neutral",
-      valueHTML: `<div class="metric-row"><span class="metric-value" style="color:${dir === 'green' ? 'var(--green)' : dir === 'red' ? 'var(--red)' : 'var(--text)'}">${cnt}</span><span class="metric-unit">${dirLabel} (SPY)</span></div>`,
-      subMetrics: [
-        { k: "QQQ streak", v: qqq ? `${qqq.streak_count} ${qqq.streak_direction === 'green' ? '🟢' : qqq.streak_direction === 'red' ? '🔴' : ''}` : "—" },
-        { k: "SPY 5d return", v: fmtPct(spy?.return_5d_pct) },
-      ],
-      note: "Long streaks in either direction tend to mean-revert — useful context, not a signal on its own.",
-      asOf: fast?.generated_at ? timeAgo(fast.generated_at) : null,
+      context: true,
+      value: String(cnt),
+      valueStyle: `color:${dir === "green" ? "var(--green)" : dir === "red" ? "var(--red)" : "var(--text)"}`,
+      unit: `${label} (SPY)`,
+      sub,
+      note: "Counts completed sessions only — today's move is shown separately until the close. Long streaks tend to mean-revert. Context only: not part of the composite.",
+      asOf: spy ? `Through ${fmtDay(spy.streak_through || spy.date)} close` : null,
     }));
   }
 
+  // 3. AAII
   {
-    const spread = aaii?.bull_bear_spread;
-    let status = "neutral", score = null;
-    if (spread !== null && spread !== undefined) {
-      if (spread > 10) status = "caution";
-      else if (spread < -10) status = "opportunity";
-      score = clamp(-spread * 3, -100, 100);
-      scores.push(score);
-    }
+    const valid = q.aaiiValid;
+    const spread = valid ? Math.round((aaii.bullish_pct - aaii.bearish_pct) * 10) / 10 : null;
+    const score = q.aaiiOk ? scoreFrom("aaii", spread) : null;
+    scores.aaii = score;
+    const avg = aaii?.historical_avg || { bullish: 37.5, neutral: 31.5, bearish: 31.0 };
     cards.push(card({
       title: "AAII Investor Sentiment",
-      code: "Bull − Bear spread",
-      status,
-      valueHTML: `<div class="metric-row"><span class="metric-value ${status}">${spread !== null && spread !== undefined ? fmtPct(spread, 1) : "—"}</span><span class="metric-unit">spread</span></div>`,
-      meterScore: score,
+      code: "Bull − Bear spread, weekly survey",
+      score, value: spread === null ? "—" : `${spread > 0 ? "+" : ""}${spread.toFixed(1)}`, unit: "pts",
       meterLabels: ["More bulls (caution)", "More bears (opportunity)"],
-      subMetrics: [
-        { k: "Bullish", v: aaii?.bullish_pct !== undefined ? `${aaii.bullish_pct}%` : "—" },
-        { k: "Neutral", v: aaii?.neutral_pct !== undefined && aaii?.neutral_pct !== null ? `${aaii.neutral_pct}%` : "—" },
-        { k: "Bearish", v: aaii?.bearish_pct !== undefined ? `${aaii.bearish_pct}%` : "—" },
-      ],
-      note: "More bulls than bears means the public is getting comfortable — a classic contrarian caution flag. More bears than bulls has historically preceded strength.",
-      asOf: aaii?.generated_at ? timeAgo(aaii.generated_at) + " · weekly (Thu)" : null,
+      sub: valid ? [
+        ["Bullish", `${aaii.bullish_pct}% (avg ${avg.bullish})`],
+        ["Neutral", `${aaii.neutral_pct}%`],
+        ["Bearish", `${aaii.bearish_pct}% (avg ${avg.bearish})`],
+      ] : [],
+      note: valid
+        ? "Contrarian: a crowd of bulls is a warning, a crowd of bears has historically come before gains. Scored against the long-run average spread of +6.5: above +24 = caution, below −11 = opportunity."
+        : "This week's survey couldn't be read reliably, so it's left out of the composite until the next update.",
+      asOf: valid && aaii.survey_date ? `Week ending ${fmtDay(aaii.survey_date)} · weekly (Thu)` : null,
     }));
   }
 
+  // 4. VIX
   {
-    const vix = fast?.vix?.close;
-    const vixPctile = fast?.vix?.percentile_1y;
-    let status = "neutral", score = null;
-    if (vix !== null && vix !== undefined) {
-      if (vix < 14) status = "caution";
-      else if (vix > 25) status = "opportunity";
-      score = clamp((vix - 18) * 5, -100, 100);
-      scores.push(score);
-    }
+    const v = num(fast?.vix?.close);
+    const score = q.fastOk ? scoreFrom("vix", v) : null;
+    scores.vix = score;
+    const pctile = num(fast?.vix?.percentile_1y);
     cards.push(card({
       title: "VIX — Volatility Index",
-      code: "CBOE",
-      status,
-      valueHTML: `<div class="metric-row"><span class="metric-value ${status}">${fmtNum(vix, 2)}</span></div>`,
-      meterScore: score,
+      code: "Cboe S&P 500 volatility",
+      score, value: fmtNum(v),
       meterLabels: ["Calm (caution)", "Fearful (opportunity)"],
-      subMetrics: vixPctile !== null && vixPctile !== undefined
-        ? [{ k: "1-Year Percentile", v: `Higher than ${vixPctile}% of days` }]
-        : [],
-      note: "High VIX = fear priced in, historically a better entry window. Low VIX = complacency, everyone's comfortable — worth being cautious.",
-      asOf: fast?.generated_at ? timeAgo(fast.generated_at) : null,
+      sub: [
+        ...(pctile !== null ? [["Past year", `Higher than ${Math.round(pctile)}% of days`]] : []),
+        ...(fast?.vix?.change_pct !== undefined ? [[fast.vix.in_session ? "Today" : "Last session", fmtPct(fast.vix.change_pct)]] : []),
+      ],
+      note: "Below 14 = complacency (caution). Above 25 = fear is priced in, historically a better entry window (opportunity). The long-run median is about 18.",
+      asOf: priceAsOf(fast, fast?.vix),
     }));
   }
 
+  // 5. Participation
   {
-    const rel = fast?.participation?.rsp_minus_spy_20d_pct;
-    let status = "neutral", score = null;
-    if (rel !== null && rel !== undefined) {
-      if (rel < -2) status = "caution";
-      else if (rel > 1) status = "opportunity";
-      score = clamp(rel * 12, -100, 100);
-      scores.push(score);
-    }
+    const rel = num(fast?.participation?.rsp_minus_spy_20d_pct);
+    const score = q.fastOk ? scoreFrom("participation", rel) : null;
+    scores.participation = score;
+    const rsp = fast?.participation?.RSP;
     cards.push(card({
       title: "Market Participation",
-      code: "Equal-weight (RSP) vs cap-weight (SPY), 20d",
-      status,
-      valueHTML: `<div class="metric-row"><span class="metric-value ${status}">${fmtPct(rel, 2)}</span><span class="metric-unit">RSP − SPY</span></div>`,
-      meterScore: score,
+      code: "Equal-weight RSP vs cap-weight SPY, 20 sessions",
+      score, value: fmtPct(rel), unit: "RSP − SPY",
       meterLabels: ["Narrow (caution)", "Broad (healthy)"],
-      note: "A proxy for how broad the rally is. When equal-weight badly lags cap-weight, gains are concentrated in a handful of mega-caps rather than the average stock — a narrower, more fragile advance.",
-      asOf: fast?.generated_at ? timeAgo(fast.generated_at) : null,
+      sub: [["RSP 20-day", fmtPct(rsp?.return_20d_pct)], ["SPY 20-day", fmtPct(spy?.return_20d_pct)]],
+      note: "How the average stock is doing next to the giants. Lagging by more than 2 points = gains concentrated in a few mega-caps, a narrower, more fragile market (caution). Leading by 2+ = broad participation.",
+      asOf: priceAsOf(fast, rsp),
     }));
   }
 
+  // 6. Breadth
   {
-    const pct = breadth?.pct_above_sma50;
-    let status = "neutral", score = null;
-    if (pct !== null && pct !== undefined) {
-      if (pct >= 70) status = "caution";
-      else if (pct <= 15) status = "opportunity";
-      score = clamp((45 - pct) * 3, -100, 100);
-      scores.push(score);
-    }
-    const breadthSeries = (history || []).map(h => h.breadth_pct).filter(v => v !== null && v !== undefined);
-    const breadthPctile = breadthSeries.length >= 15 ? percentileRank(breadthSeries, pct) : null;
+    const pct = num(breadth?.pct_above_sma50);
+    const score = q.breadthOk ? scoreFrom("breadth", pct) : null;
+    scores.breadth = score;
+    const series = (breadth?.series || []).map((p) => p.v).filter((v) => num(v) !== null);
+    const pctile = series.length >= 120 ? percentileRank(series, pct) : null;
+    const sub = [];
+    if (num(breadth?.count_above_sma50) !== null) sub.push(["Stocks above", `${breadth.count_above_sma50} of ${breadth.universe_size_matched}`]);
+    if (pctile !== null) sub.push(["Past year", `Higher than ${pctile}% of days`]);
     cards.push(card({
       title: "% of S&P 500 Above 50-day SMA",
-      code: "S5FI-style breadth proxy",
-      status,
-      valueHTML: `<div class="metric-row"><span class="metric-value ${status}">${pct !== null && pct !== undefined ? pct + "%" : "—"}</span></div>`,
-      meterScore: score,
+      code: "S5FI-style breadth",
+      score, value: pct === null ? "—" : `${pct}%`,
       meterLabels: ["Overextended (caution)", "Oversold (opportunity)"],
-      subMetrics: breadthPctile !== null
-        ? [{ k: `${breadthSeries.length}-Day Percentile`, v: `Higher than ${breadthPctile}% of days` }]
-        : [],
-      note: "Above ~70%: most stocks already extended — danger zone, be cautious. Below ~14–15%: severe, broad-based fear — historically a strong buying-opportunity zone."
-        + (breadthPctile === null ? " (Percentile context arrives once ~15 days of history have accumulated.)" : ""),
-      asOf: breadth?.generated_at ? timeAgo(breadth.generated_at) + " · daily" : null,
+      sub,
+      note: "Above 70% = most stocks already extended, the danger zone (caution). Below 15% = broad, severe fear — historically a strong buying zone (opportunity).",
+      asOf: breadth?.as_of ? `As of ${fmtDay(breadth.as_of)} close · daily` : (breadth?.generated_at ? `Updated ${timeAgo(breadth.generated_at)} · daily` : null),
     }));
   }
 
+  // 7. Defensive rotation (20 sessions; computed from the sector blocks so older data files work too)
   {
-    const rot = fast?.sector_rotation;
-    const spread = rot?.defensive_minus_cyclical_5d_pct;
-    let status = "neutral", score = null;
-    if (spread !== null && spread !== undefined) {
-      if (spread > 2) status = "caution";
-      else if (spread < -2) status = "opportunity";
-      score = clamp(-spread * 15, -100, 100);
-    }
+    const s = fast?.sectors || {};
+    const r20 = (sym) => num(s[sym]?.return_20d_pct);
+    const def = r20("XLU") !== null && r20("XLP") !== null ? (r20("XLU") + r20("XLP")) / 2 : null;
+    const spread = num(fast?.sector_rotation?.defensive_minus_cyclical_20d_pct) ??
+      (def !== null && r20("XLY") !== null ? Math.round((def - r20("XLY")) * 100) / 100 : null);
+    const score = q.fastOk ? scoreFrom("rotation", spread) : null;
+    scores.rotation = score;
     cards.push(card({
       title: "Defensive Sector Rotation",
-      code: "XLU/XLP vs XLY, 5-day",
-      status,
-      valueHTML: `<div class="metric-row"><span class="metric-value ${status}">${fmtPct(spread, 2)}</span><span class="metric-unit">defensive − cyclical</span></div>`,
-      meterScore: score,
+      code: "Utilities + Staples vs Discretionary, 20 sessions",
+      score, value: fmtPct(spread), unit: "defensive − cyclical",
       meterLabels: ["Rotating defensive (caution)", "Risk-on (opportunity)"],
-      subMetrics: [
-        { k: "XLU 5d", v: fmtPct(fast?.sectors?.XLU?.return_5d_pct) },
-        { k: "XLP 5d", v: fmtPct(fast?.sectors?.XLP?.return_5d_pct) },
-        { k: "XLY 5d", v: fmtPct(fast?.sectors?.XLY?.return_5d_pct) },
-      ],
-      note: "When Utilities/Staples (defensive) are quietly outrunning Discretionary (cyclical), money is rotating toward safety — often an early warning sign under the surface of a still-calm index.",
-      asOf: fast?.generated_at ? timeAgo(fast.generated_at) : null,
+      sub: [["XLU 20-day", fmtPct(r20("XLU"))], ["XLP 20-day", fmtPct(r20("XLP"))], ["XLY 20-day", fmtPct(r20("XLY"))]],
+      note: "When Utilities and Staples outrun Discretionary by 3+ points, money is hiding in safety — often an early warning under a calm index (caution). Discretionary leading by 3+ = healthy risk appetite.",
+      asOf: priceAsOf(fast, s.XLY),
     }));
   }
 
+  // 8. Fear & Greed
   {
     const fg = fast?.fear_greed;
-    let status = "neutral", score = null;
-    if (fg?.score !== null && fg?.score !== undefined) {
-      if (fg.score >= 70) status = "caution";
-      else if (fg.score <= 25) status = "opportunity";
-      score = clamp((50 - fg.score) * 2.2, -100, 100);
-      scores.push(score);
-    }
+    const v = num(fg?.score);
+    const score = q.fgOk && q.fastOk ? scoreFrom("feargreed", v) : null;
+    scores.feargreed = score;
+    const sub = [];
+    if (num(fg?.previous_close) !== null) sub.push(["Previous close", String(fg.previous_close)]);
+    if (num(fg?.previous_1_week) !== null) sub.push(["1 week ago", String(fg.previous_1_week)]);
     cards.push(card({
       title: "CNN Fear & Greed Index",
       code: "Composite sentiment, 0–100",
-      status,
-      valueHTML: `<div class="metric-row"><span class="metric-value ${status}">${fg?.score ?? "—"}</span><span class="metric-unit">${fg?.rating ?? ""}</span></div>`,
-      meterScore: score,
+      score, value: v === null ? "—" : v.toFixed(0), unit: fg?.rating || "",
       meterLabels: ["Extreme greed (caution)", "Extreme fear (opportunity)"],
-      note: "CNN's blend of momentum, breadth, options, volatility, junk-bond demand and safe-haven flows into one read. Extreme Fear has historically marked better entry windows; Extreme Greed has often preceded pullbacks.",
-      asOf: fast?.generated_at ? timeAgo(fast.generated_at) : null,
+      sub,
+      note: "CNN's blend of seven market gauges. Using CNN's own bands: 25 or below = Extreme Fear (opportunity), 75 or above = Extreme Greed (caution).",
+      asOf: fg?.as_of ? `CNN · updated ${timeAgo(fg.as_of)}` : null,
     }));
   }
 
   $("#card-grid").innerHTML = cards.join("");
-  document.querySelectorAll("#card-grid .card").forEach((el) => {
-    el.addEventListener("animationend", () => { el.style.animation = "none"; }, { once: true });
-  });
+  if (animateCards) {
+    document.querySelectorAll("#card-grid .card").forEach((el) => {
+      el.addEventListener("animationend", () => { el.style.animation = "none"; }, { once: true });
+    });
+  }
 
-  if (scores.length) {
-    const composite = scores.reduce((a, b) => a + b, 0) / scores.length;
+  // Composite
+  const used = Object.values(scores).filter((s) => s !== null);
+  if (used.length >= 4) {
+    const composite = used.reduce((a, b) => a + b, 0) / used.length;
+    $("#gauge-score").style.opacity = "";
     animateGaugeTo(composite);
-    $("#gauge-label").textContent = gaugeLabel(composite).label;
+    $("#gauge-label").textContent = zoneOf(composite).label;
+    $("#gauge-basis").textContent = used.length === SIGNAL_COUNT
+      ? `Average of all ${SIGNAL_COUNT} signals`
+      : `Average of ${used.length} of ${SIGNAL_COUNT} signals (the rest are missing or out of date)`;
+    renderSparkline(daily, { d: fast?.spy?.date || "9999-12-31", v: composite });
   } else {
     $("#gauge-score").textContent = "N/A";
     $("#gauge-score").style.opacity = "0.4";
-    $("#gauge-label").textContent = "Waiting for first data run";
+    $("#gauge-label").textContent = fast ? "Not enough fresh data" : "Waiting for first data run";
+    $("#gauge-basis").textContent = "";
+    renderSparkline(daily, null);
   }
+}
 
-  renderSparkline(history);
+async function refresh() {
+  const [fast, breadth, aaii, daily] = await Promise.all([
+    loadJSON("data/fast.json"),
+    loadJSON("data/breadth.json"),
+    loadJSON("data/aaii.json"),
+    loadJSON("data/daily_history.json"),
+  ]);
+  lastLoad = Date.now();
+  latestFast = fast;
+  renderBadge();
+  const signature = [fast, breadth, aaii, daily].map((d) => d?.generated_at || "").join("|");
+  if (signature === lastSignature) return;   // nothing new - leave the page alone
+  lastSignature = signature;
+  render({ fast, breadth, aaii, daily });
+  animateCards = false;                      // later refreshes update in place, no entrance animation
+}
+
+let lastLoad = 0;
+(function start() {
+  $("#card-grid").innerHTML = Array.from({ length: 8 }, skeletonCard).join("");
+  renderGauge();
+  refresh();
+  // Data lands about every 10 minutes during the session: check every 5 while the page is visible.
+  setInterval(() => { if (document.visibilityState === "visible") refresh(); }, 5 * 60000);
+  setInterval(renderBadge, 60000);
+  document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === "visible" && Date.now() - lastLoad > 2 * 60000) refresh();
+  });
 })();
 
 document.addEventListener("touchstart", function () {}, { passive: true });

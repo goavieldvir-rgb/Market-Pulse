@@ -1,218 +1,150 @@
 #!/usr/bin/env python3
 """
-One scan, two outputs:
-1. data/breadth.json - % of S&P 500 above 50-day SMA (S5FI-style approximation).
-2. data/opportunities.json - scans S&P 500 + Nasdaq 100 (deduplicated) for:
-   near_sma20 / near_sma150, volume_surge, near_52w_high / near_52w_low.
-Both come from the SAME pass of Yahoo Finance chart data per ticker.
+Daily scan of the S&P 500 + Nasdaq-100 (deduplicated), one Yahoo request per
+ticker, producing two files:
+
+1. data/breadth.json - % of S&P 500 members above their 50-day SMA (an
+   S5FI-style reading), plus the same reading for each of the past ~260
+   sessions so the dashboard can show where today sits in the past year.
+2. data/opportunities.json - per-ticker stats for the Opportunity Scanner:
+   SMAs, 52-week high/low (intraday), last session's volume vs its 20-day
+   average and last session's % change. Thresholds are applied in the browser.
+
+Only completed sessions are used, so a manual run during market hours does
+not mix a half-finished day into the stats.
 """
-import json
 import os
 import sys
 import time
-import urllib.request
-import urllib.error
-import csv
-import io
-from datetime import datetime, timezone
 
-HEADERS = {
-    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
-                  "(KHTML, like Gecko) Chrome/124.0 Safari/537.36"
-}
+from common import (DATA_DIR, completed_bars, fetch_universe, log, pct_change,
+                    rnd, utc_now_iso, warn, write_json, yahoo_daily)
 
-BREADTH_OUT = os.path.join(os.path.dirname(__file__), "..", "data", "breadth.json")
-OPP_OUT = os.path.join(os.path.dirname(__file__), "..", "data", "opportunities.json")
-
-SP500_URL = "https://raw.githubusercontent.com/datasets/s-and-p-500-companies/main/data/constituents.csv"
-NASDAQ100_URL = "https://yfiua.github.io/index-constituents/constituents-nasdaq100.csv"
-
-# Note: thresholds for "near" are no longer applied server-side - the full
-# per-ticker stats are shipped and the Opportunity Scanner page lets the
-# viewer adjust these live in the browser. See SMA_PERIODS below for which
-# moving averages get precomputed.
-
-
-def normalize_symbol(sym):
-    return sym.strip().upper().replace(".", "-")
-
-
-def fetch_sp500():
-    req = urllib.request.Request(SP500_URL, headers=HEADERS)
-    with urllib.request.urlopen(req, timeout=20) as r:
-        text = r.read().decode("utf-8")
-    reader = csv.DictReader(io.StringIO(text))
-    out = []
-    for row in reader:
-        sym = row.get("Symbol") or row.get("symbol")
-        if sym:
-            out.append(normalize_symbol(sym))
-    return out
-
-
-def fetch_nasdaq100():
-    req = urllib.request.Request(NASDAQ100_URL, headers=HEADERS)
-    with urllib.request.urlopen(req, timeout=20) as r:
-        text = r.read().decode("utf-8")
-    reader = csv.DictReader(io.StringIO(text))
-    out = []
-    for row in reader:
-        sym = (row.get("Symbol") or row.get("symbol") or row.get("Ticker")
-               or row.get("ticker") or row.get("code") or row.get("Code"))
-        if sym:
-            out.append(normalize_symbol(sym))
-    return out
-
-
-def fetch_history(symbol, retries=2):
-    url = f"https://query1.finance.yahoo.com/v8/finance/chart/{symbol}?range=1y&interval=1d"
-    for attempt in range(retries + 1):
-        try:
-            req = urllib.request.Request(url, headers=HEADERS)
-            with urllib.request.urlopen(req, timeout=10) as r:
-                data = json.loads(r.read().decode("utf-8"))
-            result = data["chart"]["result"][0]
-            quote = result["indicators"]["quote"][0]
-            closes_raw = quote["close"]
-            volumes_raw = quote.get("volume", [])
-            closes, volumes = [], []
-            for c, v in zip(closes_raw, volumes_raw):
-                if c is None:
-                    continue
-                closes.append(c)
-                volumes.append(v or 0)
-            if len(closes) < 20:
-                return None
-            return closes, volumes
-        except urllib.error.HTTPError as e:
-            if e.code == 429 and attempt < retries:
-                time.sleep(2 * (attempt + 1))
-                continue
-            return None
-        except Exception:
-            return None
-    return None
-
+BREADTH_OUT = os.path.join(DATA_DIR, "breadth.json")
+OPP_OUT = os.path.join(DATA_DIR, "opportunities.json")
 
 SMA_PERIODS = [10, 20, 50, 100, 150, 200]
+SERIES_SESSIONS = 260          # ~1 year of daily breadth readings
+REQUEST_PAUSE = 0.15           # be polite to Yahoo
 
 
-def analyze(symbol, closes, volumes):
+def analyze(symbol, bars):
+    """Scanner stats from completed daily bars (oldest first)."""
+    if len(bars) < 60:
+        return None
+    closes = [b["c"] for b in bars]
+    vols = [b["v"] for b in bars]
     price = closes[-1]
     out = {"symbol": symbol, "price": round(price, 2), "sma": {}}
-
-    for period in SMA_PERIODS:
-        if len(closes) >= period:
-            sma = sum(closes[-period:]) / period
-            out["sma"][str(period)] = round(sma, 2)
-
-    hist_window = closes[-252:] if len(closes) >= 252 else closes
-    hi52, lo52 = max(hist_window), min(hist_window)
+    for p in SMA_PERIODS:
+        if len(closes) >= p:
+            out["sma"][str(p)] = round(sum(closes[-p:]) / p, 2)
+    window = bars[-252:]
+    hi52 = max(b["h"] for b in window)
+    lo52 = min(b["l"] for b in window)
     out["hi52"] = round(hi52, 2)
     out["lo52"] = round(lo52, 2)
-    out["dist_hi52_pct"] = round((hi52 - price) / hi52 * 100, 2) if hi52 else None
-    out["dist_lo52_pct"] = round((price - lo52) / lo52 * 100, 2) if lo52 else None
+    out["dist_hi52_pct"] = rnd((hi52 - price) / hi52 * 100) if hi52 else None
+    out["dist_lo52_pct"] = rnd((price - lo52) / lo52 * 100) if lo52 else None
+    out["chg_1d_pct"] = rnd(pct_change(closes[-2], closes[-1]))
+    base = vols[-21:-1]
+    avg_vol = sum(base) / len(base) if len(base) == 20 else 0
+    out["volume_ratio"] = rnd(vols[-1] / avg_vol) if avg_vol > 0 and vols[-1] > 0 else None
+    out["as_of"] = bars[-1]["date"]
+    return out
 
-    if len(volumes) >= 21:
-        vol_today = volumes[-1]
-        avg_vol20 = sum(volumes[-21:-1]) / 20
-        out["volume_ratio"] = round(vol_today / avg_vol20, 2) if avg_vol20 > 0 else None
 
+def above_sma50_by_date(bars):
+    """{date: bool} - was the close above its own 50-day SMA on that date?"""
+    closes = [b["c"] for b in bars]
+    out, running = {}, 0.0
+    for i, c in enumerate(closes):
+        running += c
+        if i >= 50:
+            running -= closes[i - 50]
+        if i >= 49:
+            out[bars[i]["date"]] = c > running / 50
     return out
 
 
 def main():
-    try:
-        sp500 = fetch_sp500()
-    except Exception as e:
-        print(f"ERROR: could not fetch S&P 500 list: {e}", file=sys.stderr)
-        sp500 = []
-    try:
-        nasdaq100 = fetch_nasdaq100()
-    except Exception as e:
-        print(f"WARN: could not fetch Nasdaq 100 list, continuing with S&P 500 only: {e}", file=sys.stderr)
-        nasdaq100 = []
-
+    sp500, ndx = fetch_universe()
     sp500_set = set(sp500)
-    universe = sorted(sp500_set | set(nasdaq100))
-
+    universe = sorted(sp500_set | set(ndx))
     if not universe:
-        print("ERROR: empty universe, nothing to scan", file=sys.stderr)
-        sys.exit(0)
+        warn("Empty universe (both constituent lists failed) - nothing scanned")
+        return
 
-    results = {}
-    failed = 0
+    results, flags_by_symbol, failed = {}, {}, 0
     for i, sym in enumerate(universe):
-        hist = fetch_history(sym)
-        if hist is None:
+        chart = yahoo_daily(sym, "2y")
+        time.sleep(REQUEST_PAUSE)
+        if not chart:
             failed += 1
             continue
-        closes, volumes = hist
-        results[sym] = analyze(sym, closes, volumes)
-        time.sleep(0.15)
+        bars = completed_bars(chart)
+        stats = analyze(sym, bars)
+        if not stats:
+            failed += 1
+            continue
+        results[sym] = stats
+        if sym in sp500_set:
+            flags_by_symbol[sym] = above_sma50_by_date(bars)
         if (i + 1) % 100 == 0:
-            print(f"...{i + 1}/{len(universe)} processed", file=sys.stderr)
+            log(f"...{i + 1}/{len(universe)} scanned")
 
     matched = len(results)
-    print(f"Scanned {matched}/{len(universe)} tickers ({failed} failed)", file=sys.stderr)
-
+    log(f"Scanned {matched}/{len(universe)} tickers ({failed} failed)")
     if matched < len(universe) * 0.5:
-        print("ERROR: too many failures this run - skipping writes to avoid clobbering good data", file=sys.stderr)
-        sys.exit(0)
+        warn(f"Only {matched}/{len(universe)} tickers returned data - keeping the previous scan")
+        return
 
-    sp500_results = [r for sym, r in results.items() if sym in sp500_set and "50" in r.get("sma", {})]
-    above = sum(1 for r in sp500_results if r["price"] > r["sma"]["50"])
-    total_sp = len(sp500_results)
-    pct_above = round((above / total_sp) * 100, 1) if total_sp else None
+    # The session the scan describes = the most common latest date.
+    dates = [r["as_of"] for r in results.values()]
+    as_of = max(set(dates), key=dates.count)
 
-    breadth_out = {
-        "generated_at": datetime.now(timezone.utc).isoformat(),
-        "universe_size_requested": len(sp500),
-        "universe_size_matched": total_sp,
-        "pct_above_sma50": pct_above,
-        "count_above_sma50": above,
-        "note": (
-            "Approximation of the 'S5FI'-style breadth reading (% of S&P 500 "
-            "constituents above their 50-day moving average), computed from a "
-            "community-maintained constituent list and Yahoo Finance chart data. "
-            "Not an official index value."
-        ),
-    }
-    os.makedirs(os.path.dirname(BREADTH_OUT), exist_ok=True)
-    with open(BREADTH_OUT, "w") as f:
-        json.dump(breadth_out, f, indent=2)
-    print(f"Wrote {BREADTH_OUT}: {pct_above}% above 50DMA ({above}/{total_sp})")
-
-    # Ship full per-ticker stats (not pre-filtered lists) so the Opportunity
-    # Scanner page can let the viewer adjust SMA period / closeness / volume
-    # thresholds client-side, with no server round-trip needed.
-    stocks = []
-    for r in results.values():
-        if not r.get("sma"):
-            continue
-        stocks.append({
-            "symbol": r["symbol"],
-            "price": r["price"],
-            "sma": r["sma"],
-            "hi52": r.get("hi52"),
-            "lo52": r.get("lo52"),
-            "dist_hi52_pct": r.get("dist_hi52_pct"),
-            "dist_lo52_pct": r.get("dist_lo52_pct"),
-            "volume_ratio": r.get("volume_ratio"),
+    # ---- breadth.json
+    sp_ok = [s for s in sp500 if s in results and "50" in results[s]["sma"]]
+    if sp500 and len(sp_ok) >= 0.8 * len(sp500):
+        above = sum(1 for s in sp_ok if results[s]["price"] > results[s]["sma"]["50"])
+        per_date_total, per_date_above = {}, {}
+        for flags in flags_by_symbol.values():
+            for d, is_above in flags.items():
+                per_date_total[d] = per_date_total.get(d, 0) + 1
+                per_date_above[d] = per_date_above.get(d, 0) + (1 if is_above else 0)
+        full = max(per_date_total.values()) if per_date_total else 0
+        series = [{"d": d, "v": round(per_date_above[d] / per_date_total[d] * 100, 1)}
+                  for d in sorted(per_date_total)
+                  if per_date_total[d] >= 0.9 * full and d <= as_of][-SERIES_SESSIONS:]
+        write_json(BREADTH_OUT, {
+            "generated_at": utc_now_iso(),
+            "as_of": as_of,
+            "universe_size_requested": len(sp500),
+            "universe_size_matched": len(sp_ok),
+            "pct_above_sma50": round(above / len(sp_ok) * 100, 1),
+            "count_above_sma50": above,
+            "series": series,
+            "note": ("Approximation of the S5FI reading (% of S&P 500 members above their "
+                     "50-day moving average) from a community-maintained constituent list and "
+                     "Yahoo Finance daily closes. Not an official index value."),
         })
+        log(f"Wrote {BREADTH_OUT}: {above}/{len(sp_ok)} above 50DMA as of {as_of}; {len(series)} days of history")
+    else:
+        warn(f"Only {len(sp_ok)}/{len(sp500)} S&P 500 members scanned - breadth not updated")
 
-    opp_out = {
-        "generated_at": datetime.now(timezone.utc).isoformat(),
+    # ---- opportunities.json
+    stocks = [results[s] for s in sorted(results)]
+    write_json(OPP_OUT, {
+        "generated_at": utc_now_iso(),
+        "as_of": as_of,
         "universe_size": matched,
-        "universe_sources": {"sp500": len(sp500), "nasdaq100": len(nasdaq100)},
+        "universe_sources": {"sp500": len(sp500), "nasdaq100": len(ndx)},
         "sma_periods": SMA_PERIODS,
         "stocks": stocks,
-        "note": "Scanned from S&P 500 + Nasdaq 100 (deduplicated). Not stock advice - a starting point for your own research.",
-    }
-    with open(OPP_OUT, "w") as f:
-        json.dump(opp_out, f, indent=2)
-    print(f"Wrote {OPP_OUT}: {len(stocks)} stocks with full stats")
+        "note": "S&P 500 + Nasdaq-100 (deduplicated), completed sessions only. Not stock advice.",
+    }, compact=True)
+    log(f"Wrote {OPP_OUT}: {len(stocks)} stocks as of {as_of}")
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())
