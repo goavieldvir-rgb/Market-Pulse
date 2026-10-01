@@ -1,9 +1,149 @@
 {
-  "generated_at": "2026-10-01T00:43:55.248513+00:00",
-  "bullish_pct": 75.0,
-  "neutral_pct": 19.2,
-  "bearish_pct": 70.3,
-  "bull_bear_spread": 4.7,
+  "generated_at": "2026-10-01T05:24:38+00:00",
+  "survey_date": "2026-09-30",
+  "bullish_pct": 34.6,
+  "neutral_pct": 18.9,
+  "bearish_pct": 46.5,
+  "bull_bear_spread": -11.9,
+  "historical_avg": {
+    "bullish": 37.5,
+    "neutral": 31.5,
+    "bearish": 31.0
+  },
+  "history": [
+    {
+      "date": "2026-05-06",
+      "bullish": 38.3,
+      "neutral": 28.7,
+      "bearish": 33.0
+    },
+    {
+      "date": "2026-05-13",
+      "bullish": 39.3,
+      "neutral": 24.1,
+      "bearish": 36.6
+    },
+    {
+      "date": "2026-05-20",
+      "bullish": 31.7,
+      "neutral": 24.7,
+      "bearish": 43.6
+    },
+    {
+      "date": "2026-05-27",
+      "bullish": 35.6,
+      "neutral": 22.6,
+      "bearish": 41.9
+    },
+    {
+      "date": "2026-06-03",
+      "bullish": 36.3,
+      "neutral": 26.7,
+      "bearish": 37.0
+    },
+    {
+      "date": "2026-06-10",
+      "bullish": 30.4,
+      "neutral": 22.0,
+      "bearish": 47.7
+    },
+    {
+      "date": "2026-06-17",
+      "bullish": 36.6,
+      "neutral": 24.1,
+      "bearish": 39.4
+    },
+    {
+      "date": "2026-06-24",
+      "bullish": 44.9,
+      "neutral": 18.9,
+      "bearish": 36.1
+    },
+    {
+      "date": "2026-07-01",
+      "bullish": 31.4,
+      "neutral": 26.4,
+      "bearish": 42.3
+    },
+    {
+      "date": "2026-07-08",
+      "bullish": 36.3,
+      "neutral": 26.5,
+      "bearish": 37.2
+    },
+    {
+      "date": "2026-07-15",
+      "bullish": 44.9,
+      "neutral": 22.2,
+      "bearish": 32.9
+    },
+    {
+      "date": "2026-07-22",
+      "bullish": 29.6,
+      "neutral": 28.1,
+      "bearish": 42.3
+    },
+    {
+      "date": "2026-07-29",
+      "bullish": 31.0,
+      "neutral": 26.9,
+      "bearish": 42.1
+    },
+    {
+      "date": "2026-08-05",
+      "bullish": 37.0,
+      "neutral": 25.0,
+      "bearish": 38.0
+    },
+    {
+      "date": "2026-08-12",
+      "bullish": 34.7,
+      "neutral": 27.4,
+      "bearish": 37.9
+    },
+    {
+      "date": "2026-08-19",
+      "bullish": 35.5,
+      "neutral": 24.6,
+      "bearish": 39.9
+    },
+    {
+      "date": "2026-08-26",
+      "bullish": 32.9,
+      "neutral": 22.6,
+      "bearish": 44.4
+    },
+    {
+      "date": "2026-09-02",
+      "bullish": 39.7,
+      "neutral": 22.7,
+      "bearish": 37.6
+    },
+    {
+      "date": "2026-09-09",
+      "bullish": 38.0,
+      "neutral": 22.7,
+      "bearish": 39.3
+    },
+    {
+      "date": "2026-09-16",
+      "bullish": 28.8,
+      "neutral": 17.9,
+      "bearish": 53.3
+    },
+    {
+      "date": "2026-09-23",
+      "bullish": 32.7,
+      "neutral": 19.2,
+      "bearish": 48.1
+    },
+    {
+      "date": "2026-09-30",
+      "bullish": 34.6,
+      "neutral": 18.9,
+      "bearish": 46.5
+    }
+  ],
   "source": "https://www.aaii.com/sentimentsurvey",
-  "note": "AAII updates this survey weekly (Thursdays). Scraped best-effort from AAII's public page."
+  "note": "AAII Investor Sentiment Survey, published weekly (Thursdays). Rows are checked to add up to 100%."
 }
