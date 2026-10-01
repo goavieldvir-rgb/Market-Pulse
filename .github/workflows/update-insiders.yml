@@ -1,8 +1,10 @@
 name: Update insider trading data
 
+# Every ~2 hours (UTC). GitHub may run these late or skip some; the script
+# back-fills anything it missed from EDGAR's daily index, so nothing is lost.
 on:
   schedule:
-    - cron: '*/30 * * * 1-5'
+    - cron: '41 */2 * * *'
   workflow_dispatch: {}
 
 permissions:
@@ -10,33 +12,19 @@ permissions:
 
 concurrency:
   group: update-insiders
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   update:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
+      - name: Fetch SEC Form 4 insider trades
+        run: python3 scripts/fetch_insiders.py
 
-      - name: Fetch insider trading data
-        run: python scripts/fetch_insiders.py
-
-      - name: Commit and push if changed
-        run: |
-          git config user.name "market-dashboard-bot"
-          git config user.email "actions@users.noreply.github.com"
-          git add data/insiders.json
-          if git diff --cached --quiet; then
-            echo "No changes to commit"
-          else
-            git commit -m "chore: update insider trading data [skip ci]"
-            for i in 1 2 3 4 5; do
-              git pull --rebase origin main && git push && break
-              echo "Push attempt $i failed (remote moved on) - retrying..."
-              sleep 5
-            done
-          fi
+      - name: Publish
+        if: always()
+        run: >-
+          python3 scripts/publish.py "chore: update insider trading data [skip ci]" data/insiders.json

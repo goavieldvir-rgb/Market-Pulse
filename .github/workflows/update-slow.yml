@@ -1,8 +1,11 @@
 name: Update slow market data
 
+# Once per trading day after the US close (UTC times; the second entry is a
+# back-up because GitHub's scheduler sometimes skips runs - running twice is harmless).
 on:
   schedule:
-    - cron: '30 21 * * 1-5'
+    - cron: '47 21 * * 1-5'
+    - cron: '17 1 * * 2-6'
   workflow_dispatch: {}
 
 permissions:
@@ -10,36 +13,26 @@ permissions:
 
 concurrency:
   group: update-slow
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   update:
     runs-on: ubuntu-latest
+    timeout-minutes: 45
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
+      - name: Scan S&P 500 + Nasdaq-100 (breadth + Opportunity Scanner data)
+        run: python3 scripts/fetch_breadth.py
 
-      - name: Fetch breadth + opportunity scan (S&P 500 + Nasdaq 100)
-        run: python scripts/fetch_breadth.py
+      - name: AAII sentiment survey
+        run: python3 scripts/fetch_aaii.py
 
-      - name: Fetch AAII sentiment
-        run: python scripts/fetch_aaii.py
+      - name: Daily history for the trend line and percentiles
+        run: python3 scripts/build_history.py
 
-      - name: Commit and push if changed
-        run: |
-          git config user.name "market-dashboard-bot"
-          git config user.email "actions@users.noreply.github.com"
-          git add data/breadth.json data/opportunities.json data/aaii.json
-          if git diff --cached --quiet; then
-            echo "No changes to commit"
-          else
-            git commit -m "chore: update breadth, opportunity scan & sentiment data [skip ci]"
-            for i in 1 2 3 4 5; do
-              git pull --rebase origin main && git push && break
-              echo "Push attempt $i failed (remote moved on) - retrying..."
-              sleep 5
-            done
-          fi
+      - name: Publish
+        if: always()
+        run: >-
+          python3 scripts/publish.py "chore: update daily scan, sentiment & history [skip ci]"
+          data/breadth.json data/opportunities.json data/aaii.json data/daily_history.json

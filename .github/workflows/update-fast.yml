@@ -1,42 +1,40 @@
 name: Update fast market data
 
+# GitHub runs scheduled workflows on a best-effort basis (often hours late, or
+# skipped), so these times are only wake-up calls. The first one that fires on
+# a trading day starts scripts/fast_session.py, which refreshes the data every
+# 10 minutes until the close and hands off to a fresh run before GitHub's
+# 6-hour job limit. Wake-ups that arrive while a session loop is already
+# running exit within seconds. All times are UTC (US open = 13:30 UTC in
+# summer / 14:30 UTC in winter).
 on:
   schedule:
-    - cron: '*/15 * * * 1-5'
-  workflow_dispatch: {}
+    - cron: '53 12 * * 1-5'
+    - cron: '53 13 * * 1-5'
+    - cron: '23 15 * * 1-5'
+    - cron: '23 17 * * 1-5'
+    - cron: '23 19 * * 1-5'
+    - cron: '23 21 * * 1-5'
+  workflow_dispatch:
+    inputs:
+      parent:
+        description: "Leave empty (used internally when a session run hands over to the next one)"
+        required: false
+        default: ""
 
 permissions:
-  contents: write
-
-concurrency:
-  group: update-fast
-  cancel-in-progress: true
+  contents: write   # commit data/fast.json
+  actions: write    # see whether a session loop is already running / start the hand-off run
 
 jobs:
   update:
     runs-on: ubuntu-latest
+    timeout-minutes: 340
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
-
-      - name: Fetch fast indicators
-        run: python scripts/fetch_fast.py
-
-      - name: Commit and push if changed
-        run: |
-          git config user.name "market-dashboard-bot"
-          git config user.email "actions@users.noreply.github.com"
-          git add data/fast.json
-          if git diff --cached --quiet; then
-            echo "No changes to commit"
-          else
-            git commit -m "chore: update fast market data [skip ci]"
-            for i in 1 2 3 4 5; do
-              git pull --rebase origin main && git push && break
-              echo "Push attempt $i failed (remote moved on) - retrying..."
-              sleep 5
-            done
-          fi
+      - name: Keep fast market data fresh through the session
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PARENT_RUN_ID: ${{ inputs.parent }}
+        run: python3 scripts/fast_session.py
