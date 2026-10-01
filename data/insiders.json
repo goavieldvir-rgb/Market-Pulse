@@ -1,29 +1,140 @@
 {
-  "generated_at": "2026-09-30T22:30:05.276791+00:00",
-  "checked_filings": 5,
+  "generated_at": "2026-10-01T01:30:13.524677+00:00",
+  "checked_filings": 7,
   "feed_size": 100,
-  "buys": [],
-  "sells": [
+  "buys": [
     {
-      "symbol": "COST",
-      "insider": "Adamo Claudine",
-      "role": "Executive Vice President",
-      "transaction_code": "S",
-      "action": "Sell",
-      "shares": 2200.0,
-      "price": 915.93,
-      "value": 2015046.0,
+      "symbol": "LEN",
+      "insider": "BERKSHIRE HATHAWAY INC",
+      "role": "Insider",
+      "transaction_code": "P",
+      "action": "Buy",
+      "shares": 638813.0,
+      "price": 81.59,
+      "value": 52120753.0,
+      "date": "2026-09-30"
+    },
+    {
+      "symbol": "LEN",
+      "insider": "BERKSHIRE HATHAWAY INC",
+      "role": "Insider",
+      "transaction_code": "P",
+      "action": "Buy",
+      "shares": 638813.0,
+      "price": 81.59,
+      "value": 52120753.0,
+      "date": "2026-09-30"
+    },
+    {
+      "symbol": "LEN",
+      "insider": "BERKSHIRE HATHAWAY INC",
+      "role": "Insider",
+      "transaction_code": "P",
+      "action": "Buy",
+      "shares": 12289.0,
+      "price": 81.95,
+      "value": 1007084.0,
       "date": "2026-09-29"
     },
     {
-      "symbol": "COST",
-      "insider": "Frates Caton",
-      "role": "Sr. Executive Vice President",
+      "symbol": "LEN",
+      "insider": "BERKSHIRE HATHAWAY INC",
+      "role": "Insider",
+      "transaction_code": "P",
+      "action": "Buy",
+      "shares": 12289.0,
+      "price": 81.95,
+      "value": 1007084.0,
+      "date": "2026-09-29"
+    },
+    {
+      "symbol": "LEN",
+      "insider": "BERKSHIRE HATHAWAY INC",
+      "role": "Insider",
+      "transaction_code": "P",
+      "action": "Buy",
+      "shares": 5200.0,
+      "price": 81.96,
+      "value": 426192.0,
+      "date": "2026-09-28"
+    },
+    {
+      "symbol": "LEN",
+      "insider": "BERKSHIRE HATHAWAY INC",
+      "role": "Insider",
+      "transaction_code": "P",
+      "action": "Buy",
+      "shares": 5200.0,
+      "price": 81.96,
+      "value": 426192.0,
+      "date": "2026-09-28"
+    },
+    {
+      "symbol": "LEN",
+      "insider": "BERKSHIRE HATHAWAY INC",
+      "role": "Insider",
+      "transaction_code": "P",
+      "action": "Buy",
+      "shares": 4008.0,
+      "price": 79.98,
+      "value": 320560.0,
+      "date": "2026-09-30"
+    },
+    {
+      "symbol": "LEN",
+      "insider": "BERKSHIRE HATHAWAY INC",
+      "role": "Insider",
+      "transaction_code": "P",
+      "action": "Buy",
+      "shares": 4008.0,
+      "price": 79.98,
+      "value": 320560.0,
+      "date": "2026-09-30"
+    },
+    {
+      "symbol": "LEN",
+      "insider": "BERKSHIRE HATHAWAY INC",
+      "role": "Insider",
+      "transaction_code": "P",
+      "action": "Buy",
+      "shares": 100.0,
+      "price": 80.0,
+      "value": 8000.0,
+      "date": "2026-09-29"
+    },
+    {
+      "symbol": "LEN",
+      "insider": "BERKSHIRE HATHAWAY INC",
+      "role": "Insider",
+      "transaction_code": "P",
+      "action": "Buy",
+      "shares": 100.0,
+      "price": 80.0,
+      "value": 8000.0,
+      "date": "2026-09-29"
+    }
+  ],
+  "sells": [
+    {
+      "symbol": "CRWD",
+      "insider": "Kurtz George",
+      "role": "Insider",
       "transaction_code": "S",
       "action": "Sell",
-      "shares": 800.638,
-      "price": 915.93,
-      "value": 733328.0,
+      "shares": 3530.0,
+      "price": 259.26,
+      "value": 915188.0,
+      "date": "2026-09-28"
+    },
+    {
+      "symbol": "CRWD",
+      "insider": "Kurtz George",
+      "role": "Insider",
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 3355.0,
+      "price": 259.5,
+      "value": 870622.0,
       "date": "2026-09-29"
     },
     {
@@ -38,6 +149,72 @@
       "date": "2026-09-28"
     },
     {
+      "symbol": "CRWD",
+      "insider": "Kurtz George",
+      "role": "Insider",
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 2163.0,
+      "price": 260.41,
+      "value": 563267.0,
+      "date": "2026-09-29"
+    },
+    {
+      "symbol": "LITE",
+      "insider": "Wupen Yuen",
+      "role": "Insider",
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 500.0,
+      "price": 948.5,
+      "value": 474250.0,
+      "date": "2026-09-28"
+    },
+    {
+      "symbol": "CRWD",
+      "insider": "Kurtz George",
+      "role": "Insider",
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 1471.0,
+      "price": 259.88,
+      "value": 382283.0,
+      "date": "2026-09-28"
+    },
+    {
+      "symbol": "CRWD",
+      "insider": "Kurtz George",
+      "role": "Insider",
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 1440.0,
+      "price": 258.63,
+      "value": 372427.0,
+      "date": "2026-09-29"
+    },
+    {
+      "symbol": "CRWD",
+      "insider": "Kurtz George",
+      "role": "Insider",
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 1240.0,
+      "price": 262.42,
+      "value": 325401.0,
+      "date": "2026-09-29"
+    },
+    {
+      "symbol": "CRWD",
+      "insider": "Kurtz George",
+      "role": "Insider",
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 1234.0,
+      "price": 253.71,
+      "value": 313078.0,
+      "date": "2026-09-28"
+    },
+    {
       "symbol": "META",
       "insider": "Olivan Javier",
       "role": "Chief Operating Officer",
@@ -49,6 +226,127 @@
       "date": "2026-09-28"
     },
     {
+      "symbol": "LITE",
+      "insider": "Wupen Yuen",
+      "role": "Insider",
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 307.0,
+      "price": 945.0,
+      "value": 290115.0,
+      "date": "2026-09-29"
+    },
+    {
+      "symbol": "CRWD",
+      "insider": "Kurtz George",
+      "role": "Insider",
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 1146.0,
+      "price": 252.56,
+      "value": 289434.0,
+      "date": "2026-09-28"
+    },
+    {
+      "symbol": "CRWD",
+      "insider": "Kurtz George",
+      "role": "Insider",
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 842.0,
+      "price": 261.49,
+      "value": 220175.0,
+      "date": "2026-09-29"
+    },
+    {
+      "symbol": "CRWD",
+      "insider": "Kurtz George",
+      "role": "Insider",
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 645.0,
+      "price": 257.35,
+      "value": 165991.0,
+      "date": "2026-09-29"
+    },
+    {
+      "symbol": "CRWD",
+      "insider": "Kurtz George",
+      "role": "Insider",
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 565.0,
+      "price": 258.01,
+      "value": 145776.0,
+      "date": "2026-09-28"
+    },
+    {
+      "symbol": "CRWD",
+      "insider": "Kurtz George",
+      "role": "Insider",
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 459.0,
+      "price": 254.79,
+      "value": 116949.0,
+      "date": "2026-09-28"
+    },
+    {
+      "symbol": "CRWD",
+      "insider": "Kurtz George",
+      "role": "Insider",
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 460.0,
+      "price": 251.76,
+      "value": 115810.0,
+      "date": "2026-09-28"
+    },
+    {
+      "symbol": "CRWD",
+      "insider": "Kurtz George",
+      "role": "Insider",
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 382.0,
+      "price": 249.81,
+      "value": 95427.0,
+      "date": "2026-09-28"
+    },
+    {
+      "symbol": "CRWD",
+      "insider": "Kurtz George",
+      "role": "Insider",
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 315.0,
+      "price": 256.42,
+      "value": 80772.0,
+      "date": "2026-09-29"
+    },
+    {
+      "symbol": "CRWD",
+      "insider": "Kurtz George",
+      "role": "Insider",
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 293.0,
+      "price": 255.99,
+      "value": 75005.0,
+      "date": "2026-09-28"
+    },
+    {
+      "symbol": "CRWD",
+      "insider": "Kurtz George",
+      "role": "Insider",
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 256.0,
+      "price": 256.99,
+      "value": 65789.0,
+      "date": "2026-09-28"
+    },
+    {
       "symbol": "META",
       "insider": "Olivan Javier",
       "role": "Chief Operating Officer",
@@ -68,6 +366,17 @@
       "shares": 82.0,
       "price": 748.91,
       "value": 61411.0,
+      "date": "2026-09-28"
+    },
+    {
+      "symbol": "CRWD",
+      "insider": "Kurtz George",
+      "role": "Insider",
+      "transaction_code": "S",
+      "action": "Sell",
+      "shares": 204.0,
+      "price": 248.24,
+      "value": 50641.0,
       "date": "2026-09-28"
     },
     {
