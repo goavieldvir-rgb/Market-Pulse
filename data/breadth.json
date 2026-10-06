@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-06T01:57:28+00:00",
+  "generated_at": "2026-10-06T07:38:42+00:00",
   "as_of": "2026-10-05",
   "universe_size_requested": 503,
   "universe_size_matched": 503,
@@ -1044,7 +1044,7 @@
     },
     {
       "d": "2026-10-05",
-      "v": 26.7
+      "v": 26.8
     }
   ],
   "note": "Approximation of the S5FI reading (% of S&P 500 members above their 50-day moving average) from a community-maintained constituent list and Yahoo Finance daily closes. Not an official index value."
