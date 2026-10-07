@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-06T23:05:58+00:00",
+  "generated_at": "2026-10-07T00:50:22+00:00",
   "market": {
     "state": "closed",
     "session_open": "2026-10-06T13:30:00+00:00",
@@ -149,9 +149,9 @@
     "rsp_minus_spy_20d_pct": -3.74
   },
   "fear_greed": {
-    "score": 47.3,
+    "score": 47.4,
     "rating": "neutral",
-    "as_of": "2026-10-06T21:11:13+00:00",
+    "as_of": "2026-10-06T23:59:49+00:00",
     "previous_close": 43.0,
     "previous_1_week": 28.9
   },
@@ -213,11 +213,11 @@
     {
       "symbol": "XLC",
       "name": "Communication Services",
-      "close": 111.65,
-      "change_pct": 0.04,
-      "return_5d_pct": 0.16,
-      "return_20d_pct": 0.12,
-      "distance_from_sma150_pct": -0.94
+      "close": 111.61,
+      "change_pct": 1.17,
+      "return_5d_pct": 0.39,
+      "return_20d_pct": -0.37,
+      "distance_from_sma150_pct": -1.01
     },
     {
       "symbol": "XLF",
@@ -240,11 +240,11 @@
     {
       "symbol": "XLRE",
       "name": "Real Estate",
-      "close": 41.1,
-      "change_pct": 1.06,
-      "return_5d_pct": -0.58,
-      "return_20d_pct": -6.38,
-      "distance_from_sma150_pct": -5.95
+      "close": 40.67,
+      "change_pct": -0.34,
+      "return_5d_pct": -1.64,
+      "return_20d_pct": -7.42,
+      "distance_from_sma150_pct": -6.97
     },
     {
       "symbol": "XLV",
