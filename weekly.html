@@ -17,9 +17,7 @@
 <meta name="theme-color" content="#F5E4D3" media="(prefers-color-scheme: light)" />
 <meta name="theme-color" content="#17130F" media="(prefers-color-scheme: dark)" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400..800&family=Barlow:wght@400;500;600&family=Barlow+Semi+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/fonts.css">
 <link rel="stylesheet" href="assets/mp.css?v=1" />
 <script src="assets/mp.js?v=1"></script>
 <style>
@@ -224,7 +222,9 @@
   <p><strong>Not financial advice.</strong> The weekly recap summarizes public market data, news and official
     trade disclosures for informational purposes only. Nothing here is a recommendation to buy or sell any security.</p>
   <p>Prices, sector moves, yields, commodities, bitcoin and the week's insider filings are computed from Yahoo Finance and SEC EDGAR data;
-    the written sections are researched each Sunday from the sources listed in each edition. Politicians' trades are reported with delays of up to six weeks.</p>
+    the written sections are drafted each Sunday with AI assistance from the sources listed in each edition and reviewed by the editor before publication. Politicians' trades are reported with delays of up to six weeks.</p>
+  <p><strong>Privacy.</strong> No accounts, cookies, ads or analytics. Your watchlist, scanner settings and day/night choice are saved only in your own browser. Fonts are served from this site. The site is hosted on GitHub Pages, which may log visits as described in <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" rel="noopener noreferrer">GitHub’s privacy statement</a>.</p>
+  <p>Independent project, not affiliated with or endorsed by S&amp;P Dow Jones Indices, Nasdaq, CNN, AAII, Yahoo or the SEC. Index and product names belong to their owners.</p>
 </footer>
 </div>
 
@@ -267,7 +267,7 @@ function priceLine({ min, max, now, nowLabel, band, zone, marks }) {
   // Keep labels inside the line: near an edge they anchor to that edge instead of centring.
   const anchor = (p) => (p < 9 ? "transform:translateX(0);text-align:left" : p > 91 ? "transform:translateX(-100%);text-align:right" : "");
   const fmt = (v) => v.toLocaleString("en-US");
-  const line = `<div class="pline-scroll"><div class="pline" role="img" aria-label="${esc(nowLabel)}; ${marks.map((m) => `${m.label} ${fmt(m.value)}`).join(", ")}">
+  const line = `<div class="pline-scroll"><div class="pline" role="img" aria-label="${esc(nowLabel)}; ${esc(marks.map((m) => `${m.label} ${fmt(m.value)}`).join(", "))}">
     <div class="base"></div>
     ${band ? `<div class="band" style="left:${pos(band[0]).toFixed(2)}%;width:${(pos(band[1]) - pos(band[0])).toFixed(2)}%"></div>` : ""}
     ${zone ? `<div class="zone" style="left:${pos(zone.from).toFixed(2)}%;width:${Math.max(0.8, pos(zone.to) - pos(zone.from)).toFixed(2)}%"></div>
@@ -435,11 +435,11 @@ function renderEdition(ed, editions) {
   <section class="section" id="week-ahead" aria-labelledby="week-h">
     <div class="section-head"><h2 class="h-section" id="week-h">The week ahead</h2><span class="asof">Dots show how much each day matters</span></div>
     <div class="week-layout">
-      <div>${ed.calendar.map((c) => `
+      <div>${ed.calendar.map((c) => { const imp = [1, 2, 3].includes(c.importance) ? c.importance : 1; return `
         <div class="day ${c.key ? "key" : ""}">
-          <div><div class="dn">${esc(c.day)}</div><div class="pips" role="img" aria-label="Importance ${c.importance} of 3">${[1, 2, 3].map((i) => `<i class="${i <= c.importance ? "on" : ""}"></i>`).join("")}</div></div>
+          <div><div class="dn">${esc(c.day)}</div><div class="pips" role="img" aria-label="Importance ${imp} of 3">${[1, 2, 3].map((i) => `<i class="${i <= imp ? "on" : ""}"></i>`).join("")}</div></div>
           <div><div class="dt">${esc(c.title)}</div>${c.body ? `<p>${esc(c.body)}</p>` : ""}</div>
-        </div>`).join("")}</div>
+        </div>`; }).join("")}</div>
       <div>
         ${(ed.consensus || []).length ? `<div class="side-box"><h3>The numbers to beat</h3>
           <table class="ctable"><thead><tr><th scope="col">Report</th><th scope="col" class="r">Expected</th><th scope="col" class="r">Prior</th></tr></thead>
@@ -472,7 +472,7 @@ function renderEdition(ed, editions) {
 
   <section class="section" aria-labelledby="src-h">
     <div class="section-head"><h2 class="h-sub" id="src-h">Sources</h2></div>
-    <ul class="sources">${ed.sources.map((s) => `<li><a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.title)}</a></li>`).join("")}</ul>
+    <ul class="sources">${ed.sources.map((s) => /^https?:\/\//i.test(String(s.url || "")) ? `<li><a href="${esc(s.url)}" target="_blank" rel="noopener noreferrer">${esc(s.title)}</a></li>` : `<li>${esc(s.title)}</li>`).join("")}</ul>
   </section>`;
 
   $("#edition").classList.remove("loading");
