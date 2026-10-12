@@ -18,8 +18,8 @@
 <meta name="theme-color" content="#17130F" media="(prefers-color-scheme: dark)" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <link rel="stylesheet" href="assets/fonts.css">
-<link rel="stylesheet" href="assets/mp.css?v=1" />
-<script src="assets/mp.js?v=1"></script>
+<link rel="stylesheet" href="assets/mp.css?v=2" />
+<script src="assets/mp.js?v=2"></script>
 <style>
   /* Heat steps: caution 3..1, neutral, opportunity 1..3 */
   :root { --h-c3: #8E3410; --h-c2: #B9582F; --h-c1: #E5BCA3; --h-n: #DCC6B2; --h-o1: #BCC9DB; --h-o2: #4E76AB; --h-o3: #1B4C8C; --h-light: #FFFFFF; --h-dark: #1E1A16; }
@@ -27,7 +27,7 @@
   @media (prefers-color-scheme: dark) { :root:not([data-theme="day"]) { --h-c3: #B04B1C; --h-c2: #7A3A1C; --h-c1: #4B3022; --h-n: #2D251E; --h-o1: #23324A; --h-o2: #2B4F82; --h-o3: #3C6FB6; --h-light: #F7ECE1; --h-dark: #F7ECE1; } }
 
   .edition-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-2) var(--space-4); margin-bottom: var(--space-4); }
-  .edition-bar .meta { font-family: var(--cond); font-weight: 500; color: var(--ink-2); }
+  .edition-bar .meta { font-family: var(--cond); font-weight: 500; color: var(--ink-2); text-wrap: pretty; }
   .edition-bar .meta b { color: var(--ink); font-weight: 600; }
   .edition-bar .actions { display: flex; flex-wrap: wrap; gap: var(--space-2); align-items: center; }
   .edition-bar label { font-family: var(--cond); font-weight: 600; font-size: var(--step--1); color: var(--ink-2); }
@@ -35,10 +35,7 @@
   .headline { font-weight: 800; font-size: clamp(2.75rem, 1.6rem + 5.4vw, 5.5rem); line-height: 0.96; letter-spacing: -0.03em; max-width: 16ch; }
   .deck { font-family: var(--serif); font-weight: 400; font-size: clamp(1.125rem, 1rem + 0.5vw, 1.375rem); line-height: 1.45; color: var(--ink-2); max-width: 62ch; margin: var(--space-4) 0 0; }
 
-  .jump { display: flex; gap: var(--space-2); flex-wrap: wrap; margin: var(--space-5) 0 0; }
-  .jump a { display: inline-flex; align-items: center; min-height: 36px; padding: 0 12px; border: 1px solid var(--rule); border-radius: var(--radius); font-family: var(--cond); font-weight: 600; font-size: 0.9375rem; color: var(--ink-2); text-decoration: none; }
-  .jump a:hover { border-color: var(--ink); color: var(--ink); }
-  .section { scroll-margin-top: var(--space-4); }
+  .jump { margin-top: var(--space-5); }
 
   /* Price line (levels, crypto) */
   .pline-box { margin-top: var(--space-5); border: 1px solid var(--ink); background: var(--paper-2); border-radius: var(--radius); padding: var(--space-4); }
@@ -71,6 +68,16 @@
   .tk .n { font-weight: 500; font-size: var(--step--1); color: var(--ink-2); }
   .tk .v { font-family: var(--serif); font-weight: 700; font-size: var(--step-1); }
   .tk .c { font-weight: 600; font-size: 0.875rem; color: var(--ink-2); }
+  /* Phones: every reading visible at once in a two-column grid instead of a sideways scroll. */
+  @media (max-width: 639px) {
+    .strip { overflow: visible; }
+    .strip-in { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); min-width: 0; }
+    .tk, .tk:first-child { padding: var(--space-2) 0; border-right: none; border-bottom: 1px solid var(--rule); }
+    .tk:nth-child(odd) { padding-right: var(--space-3); border-right: 1px solid var(--rule); }
+    .tk:nth-child(even) { padding-left: var(--space-3); }
+    .tk:last-child:nth-child(odd) { grid-column: 1 / -1; border-right: none; }
+    .tk:last-child, .tk:nth-last-child(2):nth-child(odd) { border-bottom: none; }
+  }
   .strip-note { font-family: var(--cond); font-weight: 500; font-size: var(--step--1); color: var(--ink-3); margin-top: 6px; }
 
   /* TL;DR */
@@ -102,6 +109,23 @@
   .h-c3 { background: var(--h-c3); } .h-c2 { background: var(--h-c2); } .h-o2 { background: var(--h-o2); } .h-o3 { background: var(--h-o3); }
   .h-c1 { background: var(--h-c1); color: var(--h-dark); } .h-n { background: var(--h-n); color: var(--h-dark); } .h-o1 { background: var(--h-o1); color: var(--h-dark); }
   .sub-tile { border-radius: var(--radius); padding: 10px; display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+  /* Phones: the board becomes a ranked list with bars from a centre line, same heat colours. */
+  .heat-list { display: none; list-style: none; margin: 0; padding: 0; border-top: 2px solid var(--ink); }
+  .hl-row { display: grid; grid-template-columns: minmax(0, 7.75rem) minmax(0, 1fr) 4.75rem; align-items: center; gap: var(--space-3); min-height: 42px; border-bottom: 1px solid var(--rule); font-family: var(--cond); font-size: 0.9375rem; }
+  .hl-name { font-weight: 600; line-height: 1.15; padding: 4px 0; }
+  .hl-name small { display: block; font-weight: 500; font-size: 0.75rem; color: var(--ink-3); }
+  .hl-row.hl-sub .hl-name { padding-left: var(--space-3); font-weight: 500; color: var(--ink-2); }
+  .hl-track { position: relative; height: 14px; }
+  .hl-track::before { content: ""; position: absolute; left: 50%; top: -5px; bottom: -5px; width: 1px; background: var(--ink-3); }
+  .hl-bar { position: absolute; top: 0; bottom: 0; border-radius: 1px; }
+  .hl-val { text-align: right; font-weight: 700; white-space: nowrap; }
+  .only-narrow { display: none; }
+  @media (max-width: 639px) {
+    .heat-scroll { display: none; }
+    .heat-list { display: block; }
+    .only-wide { display: none; }
+    .only-narrow { display: inline; }
+  }
   .legend { display: flex; flex-wrap: wrap; align-items: center; gap: 6px var(--space-4); font-family: var(--cond); font-weight: 500; font-size: var(--step--1); color: var(--ink-2); margin-top: var(--space-2); }
   .legend .sw { display: inline-flex; gap: 3px; vertical-align: middle; }
   .legend .sw i { width: 20px; height: 12px; border-radius: 1px; display: block; }
@@ -109,9 +133,9 @@
   .flows { border-top: 2px solid var(--ink); display: grid; grid-template-columns: minmax(0, 1fr); column-gap: var(--space-5); }
   @media (min-width: 640px) { .flows { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
   .flow { padding: var(--space-3) 0; border-bottom: 1px solid var(--rule); }
-  .flow .fh { display: flex; justify-content: space-between; align-items: baseline; gap: var(--space-3); font-family: var(--cond); }
+  .flow .fh { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 2px var(--space-3); font-family: var(--cond); }
   .flow .fl { font-weight: 500; color: var(--ink-2); }
-  .flow .fv { font-family: var(--serif); font-weight: 700; font-size: var(--step-1); }
+  .flow .fv { font-family: var(--serif); font-weight: 700; font-size: var(--step-1); white-space: nowrap; }
   .flow p { margin: 4px 0 0; font-size: 0.9375rem; }
   .takeaway { font-family: var(--serif); font-size: var(--step-1); line-height: 1.4; margin: var(--space-3) 0 0; }
 
@@ -190,6 +214,7 @@
 
   .sources { columns: 2 280px; column-gap: var(--space-6); margin: var(--space-3) 0 0; padding-left: 1.1em; font-size: 0.9375rem; color: var(--ink-2); }
   .sources li { margin-bottom: 6px; break-inside: avoid; }
+  @media (pointer: coarse) { .sources li { margin-bottom: var(--space-3); } }
 
   .loading .skel { margin-top: 12px; }
 </style>
@@ -318,8 +343,16 @@ function heatmap(numbers) {
       <div><div class="tn">${esc(short)}</div><div class="tv">${fmtPct(v)}</div></div>${inner}</div>`;
   }).join("");
   const desc = sectors.map((s) => `${s.name} ${fmtPct(s.week_pct)}`).join(", ") + (semis ? `, semiconductors ${fmtPct(semis.week_pct)}` : "");
-  return `<div class="heat-scroll"><div class="heat" role="img" aria-label="Sector heatmap for the week: ${esc(desc)}">${tiles}</div></div>
-    <div class="legend"><span>Weekly change. Tile size roughly follows each sector's weight in the S&amp;P 500.</span>
+  // Ranked list for phones: same colours, bars drawn from a centre line, semiconductors under Technology.
+  const ranked = sectors.filter((s) => HEAT_LAYOUT[s.symbol] && num(s.week_pct) !== null).sort((a, b) => b.week_pct - a.week_pct);
+  const semiV = semis ? num(semis.week_pct) : null;
+  const maxAbs = Math.max(0.5, ...ranked.map((s) => Math.abs(s.week_pct)), semiV !== null ? Math.abs(semiV) : 0);
+  const bar = (v) => { const w = (Math.abs(v) / maxAbs) * 50; return `<span class="hl-track" aria-hidden="true"><i class="hl-bar ${heatClass(v)}" style="left:${(v < 0 ? 50 - w : 50).toFixed(2)}%;width:${Math.max(0.6, w).toFixed(2)}%"></i></span>`; };
+  const list = `<ol class="heat-list" aria-label="Sectors ranked by weekly change">${ranked.map((s) => `
+    <li class="hl-row"><span class="hl-name">${esc(HEAT_LAYOUT[s.symbol][3])}<small>${esc(s.symbol)}</small></span>${bar(s.week_pct)}<span class="hl-val">${move(s.week_pct)}</span></li>${s.symbol === "XLK" && semiV !== null ? `
+    <li class="hl-row hl-sub"><span class="hl-name">Semiconductors<small>SOXX · in Tech</small></span>${bar(semiV)}<span class="hl-val">${move(semiV, 1)}</span></li>` : ""}`).join("")}</ol>`;
+  return `<div class="heat-scroll"><div class="heat" role="img" aria-label="Sector heatmap for the week: ${esc(desc)}">${tiles}</div></div>${list}
+    <div class="legend"><span class="only-wide">Weekly change. Tile size roughly follows each sector's weight in the S&amp;P 500.</span><span class="only-narrow">Weekly change, best to worst. Bars start at zero.</span>
       <span><span class="sw" aria-hidden="true"><i class="h-c3"></i><i class="h-c2"></i><i class="h-c1"></i><i class="h-n"></i><i class="h-o1"></i><i class="h-o2"></i><i class="h-o3"></i></span> −3% or worse to +2.5% or better</span></div>`;
 }
 
@@ -509,7 +542,7 @@ function renderError(msg) {
   const pick = editions.find((e) => e.week_of === want) || editions[0];
   const ed = await loadJSON(`data/weekly/${pick.week_of}.json`);
   if (!ed || ed.schema !== 1) { renderError(`The recap for ${pick.label || pick.week_of} couldn't be loaded. Try refreshing.`); return; }
-  try { renderEdition(ed, editions); }
+  try { renderEdition(ed, editions); window.MP_JUMP($(".jump")); }
   catch (e) { console.error(e); renderError(`The recap for ${pick.label || pick.week_of} has a formatting problem and couldn't be shown.`); }
 })();
 
