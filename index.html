@@ -36,8 +36,9 @@
   .lead { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-6); }
   @media (min-width: 900px) { .lead { grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); align-items: start; } }
 
-  .glance .figure-row { display: flex; align-items: flex-end; gap: var(--space-4); margin: var(--space-2) 0 var(--space-3); }
-  .figure-xl { font-family: var(--serif); font-weight: 700; font-size: clamp(5rem, 3.6rem + 7vw, 6rem); line-height: 0.86; letter-spacing: -0.04em; font-optical-sizing: auto; min-width: 2ch; }
+  .glance .figure-row { display: flex; flex-wrap: wrap; align-items: flex-end; gap: var(--space-2) var(--space-4); margin: var(--space-2) 0 var(--space-3); }
+  .glance .figure-row > div { flex: 1 1 150px; min-width: 0; }
+  .figure-xl { font-family: var(--serif); font-weight: 700; font-size: clamp(5rem, 3.6rem + 7vw, 6rem); line-height: 0.86; letter-spacing: -0.04em; font-optical-sizing: auto; min-width: 2ch; flex: none; }
   .figure-xl.opportunity { color: var(--opp); }
   .figure-xl.caution { color: var(--cau); }
   .zone-word { font-family: var(--serif); font-weight: 700; font-size: var(--step-2); line-height: 1.1; }
@@ -65,17 +66,21 @@
 
   /* Seven signals on one scale */
   .dotplot { border-top: 2px solid var(--ink); margin-top: var(--space-3); }
-  .drow { display: grid; grid-template-columns: minmax(104px, 132px) minmax(0, 1fr) 44px; gap: var(--space-3); align-items: center; min-height: 44px; border-bottom: 1px solid var(--rule); font-family: var(--cond); font-weight: 600; font-size: 0.9375rem; }
+  .drow { display: grid; grid-template-columns: minmax(112px, 150px) minmax(0, 1fr) 92px; gap: var(--space-3); align-items: center; min-height: 44px; border-bottom: 1px solid var(--rule); font-family: var(--cond); font-weight: 600; font-size: 0.9375rem; }
   .drow .track { position: relative; height: 16px; }
   .drow .track::before { content: ""; position: absolute; left: 0; right: 0; top: 7px; height: 2px; background: var(--rule); }
   .drow .track::after { content: ""; position: absolute; left: 50%; top: 0; width: 1px; height: 16px; background: var(--ink-3); }
   .drow .dot { position: absolute; top: 1px; width: 14px; height: 14px; margin-left: -7px; border-radius: 7px; background: var(--ink-2); border: 2px solid var(--paper); z-index: 1; transition: left 0.9s cubic-bezier(0.16, 1, 0.3, 1); }
   .drow .dot.opp { background: var(--opp); }
   .drow .dot.cau { background: var(--cau); }
-  .drow .score { text-align: right; font-weight: 700; }
-  .drow .score.opp { color: var(--opp); }
-  .drow .score.cau { color: var(--cau); }
-  .scale-axis { display: grid; grid-template-columns: minmax(104px, 132px) minmax(0, 1fr) 44px; gap: var(--space-3); font-family: var(--cond); font-weight: 600; font-size: 0.75rem; color: var(--ink-2); padding-top: 6px; }
+  .drow .name { display: flex; flex-direction: column; line-height: 1.2; padding: 6px 0; }
+  .drow .name small { font-weight: 500; font-size: 0.75rem; color: var(--ink-3); }
+  .drow .reading { display: flex; flex-direction: column; align-items: flex-end; line-height: 1.2; padding: 6px 0; text-align: right; }
+  .drow .reading b { font-weight: 700; color: var(--ink); white-space: nowrap; }
+  .drow .reading small { font-weight: 600; font-size: 0.75rem; color: var(--ink-3); white-space: nowrap; }
+  .drow .reading small.opp { color: var(--opp); }
+  .drow .reading small.cau { color: var(--cau); }
+  .scale-axis { display: grid; grid-template-columns: minmax(112px, 150px) minmax(0, 1fr) 92px; gap: var(--space-3); font-family: var(--cond); font-weight: 600; font-size: 0.75rem; color: var(--ink-2); padding-top: 6px; }
   .scale-axis .ends { display: flex; justify-content: space-between; }
 
   /* ---------- The evidence: one entry per signal ---------- */
@@ -136,16 +141,16 @@
       </div>
     </div>
     <div id="gauge-wrap"></div>
-    <p class="explain">The average of the seven scored signals, from −100 (caution) to +100 (opportunity). A contrarian read, not a forecast: it leans toward opportunity when fear, pessimism or oversold conditions dominate, and toward caution when comfort, greed or crowding dominate.</p>
+    <p class="explain">A score, not an index level: the average of the seven signals’ scores, from −100 (caution) to +100 (opportunity). A contrarian read, not a forecast: it leans toward opportunity when fear, pessimism or oversold conditions dominate, and toward caution when comfort, greed or crowding dominate.</p>
     <div id="sparkline-slot"></div>
     <div id="weekly-slot"></div>
   </section>
 
   <section aria-labelledby="scale-title">
     <h2 class="h-section" id="scale-title">Seven signals, one scale</h2>
-    <p class="lede">Every signal is scored on the same −100…+100 axis. Left of centre leans caution, right leans opportunity.</p>
+    <p class="lede">On the right is each signal’s actual reading. The dot is the score that reading gets on one shared −100…+100 scale: left of centre leans caution, right leans opportunity.</p>
     <div class="dotplot" id="signal-scale"></div>
-    <div class="scale-axis" aria-hidden="true"><span></span><span class="ends"><span>−100</span><span>0</span><span>+100</span></span><span></span></div>
+    <div class="scale-axis" aria-hidden="true"><span>Score</span><span class="ends"><span>−100</span><span>0</span><span>+100</span></span><span style="text-align:right">Reading</span></div>
   </section>
 </div>
 
@@ -178,7 +183,7 @@ const MARK = window.MP_MARK;
 function fmtPct(v, digits = 2) {
   v = num(v);
   if (v === null) return "—";
-  return `${v > 0 ? "+" : ""}${v.toFixed(digits)}%`;
+  return `${v > 0 ? "+" : v < 0 ? "−" : ""}${Math.abs(v).toFixed(digits)}%`;
 }
 function fmtNum(v, digits = 2) {
   v = num(v);
@@ -246,6 +251,12 @@ const SIGNAL_COUNT = Object.keys(SIGNALS).length;
 const SIGNAL_NAMES = {
   trend: "Trend vs 150-day", aaii: "AAII sentiment", vix: "VIX", participation: "Participation",
   breadth: "Breadth", rotation: "Sector rotation", feargreed: "Fear & Greed",
+};
+// What each reading measures, shown under the name in the scale rows.
+const SIGNAL_UNITS = {
+  trend: "SPY vs its 150-day average", aaii: "bulls minus bears", vix: "volatility index level",
+  participation: "equal-weight minus S&P, 20 days", breadth: "S&P stocks above 50-day",
+  rotation: "defensives minus discretionary, 20 days", feargreed: "CNN index, 0 to 100",
 };
 
 function scoreFrom(key, x) {
@@ -317,14 +328,15 @@ function animateGaugeTo(targetScore) {
 function renderScale(rows) {
   const sorted = [...rows].sort((a, b) => (a.score ?? 999) - (b.score ?? 999));
   $("#signal-scale").innerHTML = sorted.map((r) => {
+    const name = `<span class="name">${esc(r.name)}<small>${esc(SIGNAL_UNITS[r.key] || "")}</small></span>`;
     if (r.score === null) {
-      return `<div class="drow"><span>${esc(r.name)}</span><span><span class="stamp">${esc(r.reason || "No data")}</span></span><span class="score">—</span></div>`;
+      return `<div class="drow">${name}<span><span class="stamp">${esc(r.reason || "No data")}</span></span><span class="reading"><b>${esc(r.reading || "—")}</b><small>not scored</small></span></div>`;
     }
     const tone = toneOf(r.score);
-    return `<div class="drow" title="${esc(r.name)}: ${fmtScore(r.score)}">
-      <span>${esc(r.name)}</span>
+    return `<div class="drow" title="${esc(r.name)}: reading ${esc(r.reading || "—")}, score ${fmtScore(r.score)} of ±100">
+      ${name}
       <span class="track"><span class="dot ${tone}" style="left:${posOf(r.score).toFixed(1)}%"></span></span>
-      <span class="score ${tone}">${fmtScore(r.score)}</span>
+      <span class="reading"><b>${esc(r.reading || "—")}</b><small class="${tone}">score ${fmtScore(r.score)}</small></span>
     </div>`;
   }).join("");
 }
@@ -354,7 +366,7 @@ function card({ title, code, score = null, context = false, value, valueStyle = 
     : "";
   return `
   <article class="entry">
-    <div class="entry-head"><h3>${esc(title)}</h3>${stale ? `<span class="stamp">Stale</span>` : statusTag(zone.status, zone.tag)}</div>
+    <div class="entry-head"><h3>${esc(title)}</h3>${stale ? `<span class="stamp">Stale</span>` : statusTag(zone.status, context || num(score) === null ? zone.tag : `${zone.tag} · score ${fmtScore(score)}`)}</div>
     ${code ? `<div class="entry-code">${esc(code)}</div>` : ""}
     <div class="entry-figure"><span class="val ${strong ? zone.status : ""}" style="${valueStyle}">${esc(value)}</span>${unit ? `<span class="unit">${esc(unit)}</span>` : ""}</div>
     ${context ? "" : miniMeter(score, meterLabels[0], meterLabels[1])}
@@ -385,21 +397,33 @@ function priceAsOf(fast, block) {
 // ---------- Data quality ----------
 const LIMITS = { fastDays: 4, breadthDays: 4, aaiiDays: 12, fgDays: 4 };
 
+// The US session date (America/New_York) an ISO timestamp falls on.
+const etDate = (iso) => (iso ? new Date(iso).toLocaleDateString("en-CA", { timeZone: "America/New_York" }) : null);
+
 function assess(fast, breadth, aaii) {
   const fastAge = ageMs(fast?.generated_at) / DAY;
+  // Yahoo can report a later last trade than its newest daily bar (the close hasn't been posted yet).
+  // Then the prices belong to an older session than the rest of the page, so they don't count as fresh.
+  const lagOf = (b) => !!(b && !b.in_session && b.as_of && b.date && etDate(b.as_of) > b.date);
+  const fastFresh = fastAge <= LIMITS.fastDays;
+  // True when every given price block is on its latest session (and the file itself is recent).
+  const pricesOk = (...blocks) => fastFresh && blocks.every((b) => b && !lagOf(b));
+  const lagged = ["spy", "vix"].map((k) => fast?.[k]).concat(["XLU", "XLP", "XLY"].map((k) => fast?.sectors?.[k]), [fast?.participation?.RSP]).find(lagOf);
   const fg = fast?.fear_greed;
   const fgAge = ageMs(fg?.as_of || fast?.generated_at) / DAY;
   const breadthAge = ageMs(breadth?.generated_at) / DAY;
   const aaiiValid = aaiiPlausible(aaii);
   const aaiiAge = aaii?.survey_date ? daysSince(aaii.survey_date) : ageMs(aaii?.generated_at) / DAY;
   return {
-    fastOk: fastAge <= LIMITS.fastDays,
+    fastOk: fastFresh,
+    pricesOk,
     fgOk: num(fg?.score) !== null && fgAge <= LIMITS.fgDays,
     breadthOk: num(breadth?.pct_above_sma50) !== null && breadthAge <= LIMITS.breadthDays,
     aaiiValid,
     aaiiOk: aaiiValid && aaiiAge <= LIMITS.aaiiDays + 2,
     problems: [
       fast && fastAge > LIMITS.fastDays ? `<b>Price, VIX and sector data</b> hasn't updated since ${timeAgo(fast.generated_at)}` : null,
+      fast && fastFresh && lagged ? `<b>Some price data</b> is still on the ${fmtDay(lagged.date)} close because Yahoo hasn't posted the ${fmtDay(etDate(lagged.as_of))} close yet` : null,
       breadth && breadthAge > LIMITS.breadthDays ? `<b>S&amp;P 500 breadth</b> hasn't updated since ${timeAgo(breadth.generated_at)}` : null,
       aaii && !aaiiValid ? `<b>AAII sentiment</b>: the latest survey couldn't be read reliably` : null,
       aaii && aaiiValid && aaiiAge > LIMITS.aaiiDays ? `<b>AAII sentiment</b>: the latest survey is from ${fmtDay(aaii.survey_date)}` : null,
@@ -484,6 +508,7 @@ function render({ fast, breadth, aaii, daily }) {
   const scores = {};
   const cards = [];
   const reasons = {};
+  const readings = {};
 
   $("#health-banner-slot").innerHTML = q.problems.length ? `
     <div class="notice" role="status">
@@ -496,13 +521,14 @@ function render({ fast, breadth, aaii, daily }) {
   // 1. Trend
   {
     const d = num(spy?.distance_from_sma150_pct);
-    const score = q.fastOk ? scoreFrom("trend", d) : null;
+    const score = q.pricesOk(spy) ? scoreFrom("trend", d) : null;
     scores.trend = score;
+    readings.trend = fmtPct(d);
     if (score === null && fast) reasons.trend = "Stale";
     cards.push(card({
       title: "Trend: distance from the 150-day average",
       code: "SPY and QQQ vs their 150-day average",
-      score, value: fmtPct(d), unit: "SPY vs SMA150", stale: !!fast && !q.fastOk,
+      score, value: fmtPct(d), unit: "SPY vs SMA150", stale: !!fast && !q.pricesOk(spy),
       meterLabels: ["Extended (caution)", "Below trend (opportunity)"],
       sub: [["SPY", fmtNum(spy?.close)], ["SPY SMA150", fmtNum(spy?.sma150)], ["QQQ vs SMA150", fmtPct(qqq?.distance_from_sma150_pct)]],
       note: "Scored on SPY. More than 8% above its 150-day average = stretched (caution). More than 3% below = a pullback where buyers have historically stepped in (opportunity), though a deep break can also mean trend damage.",
@@ -540,6 +566,7 @@ function render({ fast, breadth, aaii, daily }) {
     const spread = valid ? Math.round((aaii.bullish_pct - aaii.bearish_pct) * 10) / 10 : null;
     const score = q.aaiiOk ? scoreFrom("aaii", spread) : null;
     scores.aaii = score;
+    readings.aaii = spread === null ? "—" : `${spread > 0 ? "+" : ""}${spread.toFixed(1)} pts`;
     if (score === null && aaii) reasons.aaii = valid ? "Stale" : "Unreadable";
     const avg = aaii?.historical_avg || { bullish: 37.5, neutral: 31.5, bearish: 31.0 };
     cards.push(card({
@@ -562,14 +589,15 @@ function render({ fast, breadth, aaii, daily }) {
   // 4. VIX
   {
     const v = num(fast?.vix?.close);
-    const score = q.fastOk ? scoreFrom("vix", v) : null;
+    const score = q.pricesOk(fast?.vix) ? scoreFrom("vix", v) : null;
     scores.vix = score;
+    readings.vix = fmtNum(v);
     if (score === null && fast) reasons.vix = "Stale";
     const pctile = num(fast?.vix?.percentile_1y);
     cards.push(card({
       title: "VIX volatility index",
       code: "Cboe S&P 500 volatility",
-      score, value: fmtNum(v), stale: !!fast && !q.fastOk,
+      score, value: fmtNum(v), stale: !!fast && !q.pricesOk(fast?.vix),
       meterLabels: ["Calm (caution)", "Fearful (opportunity)"],
       sub: [
         ...(pctile !== null ? [["Past year", `Higher than ${Math.round(pctile)}% of days`]] : []),
@@ -583,14 +611,15 @@ function render({ fast, breadth, aaii, daily }) {
   // 5. Participation
   {
     const rel = num(fast?.participation?.rsp_minus_spy_20d_pct);
-    const score = q.fastOk ? scoreFrom("participation", rel) : null;
+    const score = q.pricesOk(fast?.participation?.RSP, spy) ? scoreFrom("participation", rel) : null;
     scores.participation = score;
+    readings.participation = fmtPct(rel);
     if (score === null && fast) reasons.participation = "Stale";
     const rsp = fast?.participation?.RSP;
     cards.push(card({
       title: "Market participation",
       code: "Equal-weight RSP vs cap-weight SPY, 20 sessions",
-      score, value: fmtPct(rel), unit: "RSP − SPY", stale: !!fast && !q.fastOk,
+      score, value: fmtPct(rel), unit: "RSP − SPY", stale: !!fast && !q.pricesOk(fast?.participation?.RSP, spy),
       meterLabels: ["Narrow (caution)", "Broad (healthy)"],
       sub: [["RSP 20-day", fmtPct(rsp?.return_20d_pct)], ["SPY 20-day", fmtPct(spy?.return_20d_pct)]],
       note: "How the average stock is doing next to the giants. Lagging by more than 2 points = gains concentrated in a few mega-caps, a narrower, more fragile market (caution). Leading by 2+ = broad participation.",
@@ -603,6 +632,7 @@ function render({ fast, breadth, aaii, daily }) {
     const pct = num(breadth?.pct_above_sma50);
     const score = q.breadthOk ? scoreFrom("breadth", pct) : null;
     scores.breadth = score;
+    readings.breadth = pct === null ? "—" : `${pct}%`;
     if (score === null && breadth) reasons.breadth = "Stale";
     const series = (breadth?.series || []).map((p) => p.v).filter((v) => num(v) !== null);
     const pctile = series.length >= 120 ? percentileRank(series, pct) : null;
@@ -627,13 +657,14 @@ function render({ fast, breadth, aaii, daily }) {
     const def = r20("XLU") !== null && r20("XLP") !== null ? (r20("XLU") + r20("XLP")) / 2 : null;
     const spread = num(fast?.sector_rotation?.defensive_minus_cyclical_20d_pct) ??
       (def !== null && r20("XLY") !== null ? Math.round((def - r20("XLY")) * 100) / 100 : null);
-    const score = q.fastOk ? scoreFrom("rotation", spread) : null;
+    const score = q.pricesOk(s.XLU, s.XLP, s.XLY) ? scoreFrom("rotation", spread) : null;
     scores.rotation = score;
+    readings.rotation = fmtPct(spread);
     if (score === null && fast) reasons.rotation = "Stale";
     cards.push(card({
       title: "Defensive sector rotation",
       code: "Utilities + Staples vs Discretionary, 20 sessions",
-      score, value: fmtPct(spread), unit: "defensive − cyclical", stale: !!fast && !q.fastOk,
+      score, value: fmtPct(spread), unit: "defensive − cyclical", stale: !!fast && !q.pricesOk(s.XLU, s.XLP, s.XLY),
       meterLabels: ["Rotating defensive (caution)", "Risk-on (opportunity)"],
       sub: [["XLU 20-day", fmtPct(r20("XLU"))], ["XLP 20-day", fmtPct(r20("XLP"))], ["XLY 20-day", fmtPct(r20("XLY"))]],
       note: "When Utilities and Staples outrun Discretionary by 3+ points, money is hiding in safety, often an early warning under a calm index (caution). Discretionary leading by 3+ = healthy risk appetite.",
@@ -645,8 +676,9 @@ function render({ fast, breadth, aaii, daily }) {
   {
     const fg = fast?.fear_greed;
     const v = num(fg?.score);
-    const score = q.fgOk && q.fastOk ? scoreFrom("feargreed", v) : null;
+    const score = q.fgOk ? scoreFrom("feargreed", v) : null;
     scores.feargreed = score;
+    readings.feargreed = v === null ? "—" : `${v.toFixed(0)}${fg?.rating ? " " + fg.rating.replace(/^./, (c) => c.toUpperCase()) : ""}`;
     if (score === null && fg) reasons.feargreed = "Stale";
     const sub = [];
     if (num(fg?.previous_close) !== null) sub.push(["Previous close", String(fg.previous_close)]);
@@ -663,7 +695,7 @@ function render({ fast, breadth, aaii, daily }) {
   }
 
   $("#card-grid").innerHTML = cards.join("");
-  renderScale(Object.keys(SIGNALS).map((k) => ({ key: k, name: SIGNAL_NAMES[k], score: scores[k], reason: reasons[k] })));
+  renderScale(Object.keys(SIGNALS).map((k) => ({ key: k, name: SIGNAL_NAMES[k], score: scores[k], reason: reasons[k], reading: readings[k] })));
 
   // Composite
   const used = Object.values(scores).filter((s) => s !== null);

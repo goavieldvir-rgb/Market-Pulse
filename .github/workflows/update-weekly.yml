@@ -28,7 +28,10 @@ jobs:
       - name: Weekly moves for indices, sectors, yields, commodities and bitcoin
         run: python3 scripts/fetch_weekly.py
 
+      - name: Refresh the dashboard's prices to Friday's close
+        run: python3 scripts/fetch_fast.py
+
       - name: Publish
         if: always()
         run: >-
-          python3 scripts/publish.py "chore: update weekly recap numbers [skip ci]" data/weekly_numbers.json
+          python3 scripts/publish.py "chore: update weekly recap numbers [skip ci]" data/weekly_numbers.json data/fast.json
