@@ -48,7 +48,7 @@ including chips on `--paper-2`.
 
 ## Signature moment
 
-The seven signals are plotted as dots on one shared −100…+100 scale under the composite figure,
+The five scored signals are plotted as dots on one shared −100…+100 scale under the composite figure,
 so every signal is compared on the same axis.
 
 ## Weekly recap

@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <title>Market Pulse — SPY / QQQ market health, at a glance</title>
-<meta name="description" content="One contrarian read of the US market: seven scored signals for SPY/QQQ on one scale, with every reading's freshness shown." />
+<meta name="description" content="One contrarian read of the US market: five sentiment and positioning signals for SPY/QQQ on one scale, with every reading's freshness shown." />
 
 <meta property="og:type" content="website" />
 <meta property="og:title" content="Market Pulse — SPY / QQQ market health, at a glance" />
@@ -64,7 +64,7 @@
   .weekly-link .wl-t { font-family: var(--serif); font-weight: 700; font-size: var(--step-1); line-height: 1.2; text-decoration: underline; text-decoration-color: var(--rule); text-underline-offset: 4px; }
   .weekly-link:hover .wl-t { text-decoration-color: var(--ink); }
 
-  /* Seven signals on one scale */
+  /* Five signals on one scale */
   .dotplot { border-top: 2px solid var(--ink); margin-top: var(--space-3); }
   .drow { display: grid; grid-template-columns: minmax(112px, 150px) minmax(0, 1fr) 92px; gap: var(--space-3); align-items: center; min-height: 44px; border-bottom: 1px solid var(--rule); font-family: var(--cond); font-weight: 600; font-size: 0.9375rem; }
   .drow .track { position: relative; height: 16px; }
@@ -87,6 +87,7 @@
   .entries { display: grid; grid-template-columns: minmax(0, 1fr); column-gap: var(--space-6); }
   @media (min-width: 760px) { .entries { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
   .entry { border-bottom: 1px solid var(--rule); padding: var(--space-4) 0 var(--space-4); }
+  .entries-divider { grid-column: 1 / -1; margin-top: var(--space-6); padding-top: var(--space-2); border-top: 2px solid var(--ink); font-weight: 700; font-size: var(--step-1); }
   .entry-head { display: flex; justify-content: space-between; align-items: baseline; gap: var(--space-3); }
   .entry-head h3 { font-weight: 700; font-size: var(--step-1); line-height: 1.2; }
   .entry-code { font-family: var(--cond); font-weight: 500; font-size: var(--step--1); color: var(--ink-3); margin-top: 2px; }
@@ -141,13 +142,13 @@
       </div>
     </div>
     <div id="gauge-wrap"></div>
-    <p class="explain">A score, not an index level: the average of the seven signals’ scores, from −100 (caution) to +100 (opportunity). A contrarian read, not a forecast: it leans toward opportunity when fear, pessimism or oversold conditions dominate, and toward caution when comfort, greed or crowding dominate.</p>
+    <p class="explain">A score, not an index level: the average of the five contrarian signals’ scores, from −100 (caution) to +100 (opportunity). A contrarian read, not a forecast: it leans toward opportunity when fear, pessimism or oversold conditions dominate, and toward caution when comfort, greed or crowding dominate.</p>
     <div id="sparkline-slot"></div>
     <div id="weekly-slot"></div>
   </section>
 
   <section aria-labelledby="scale-title">
-    <h2 class="h-section" id="scale-title">Seven signals, one scale</h2>
+    <h2 class="h-section" id="scale-title">Five signals, one scale</h2>
     <p class="lede">On the right is each signal’s actual reading. The dot is the score that reading gets on one shared −100…+100 scale: left of centre leans caution, right leans opportunity.</p>
     <div class="dotplot" id="signal-scale"></div>
     <div class="scale-axis" aria-hidden="true"><span>Score</span><span class="ends"><span>−100</span><span>0</span><span>+100</span></span><span style="text-align:right">Reading</span></div>
@@ -238,25 +239,27 @@ async function loadJSON(path) {
 // Each signal maps its reading onto a shared scale: -100 = strong caution … +100 = strong opportunity,
 // by straight lines between anchor points [reading, score]. The ±50 anchors are the thresholds quoted
 // on each entry, so "Caution"/"Opportunity" on an entry always means the same thing as in the composite.
+// Only contrarian signals are scored: each one reads fear, pessimism or an oversold market as
+// opportunity, and comfort, greed or a stretched market as caution, so they all pull the same way.
+// Participation (RSP vs SPY) and defensive rotation are trend-health measures that read the other
+// way round, so they are shown as context entries and kept out of the composite.
 const SIGNALS = {
   trend:         [[-10, 100], [-3, 50], [3, 0], [8, -50], [12, -100]],     // SPY % vs its 150-day SMA
   aaii:          [[-29, 100], [-11, 50], [6.5, 0], [24, -50], [42, -100]],  // bull−bear spread (long-run avg +6.5)
   vix:           [[11, -100], [14, -50], [18, 0], [25, 50], [35, 100]],     // VIX level (long-run median ≈ 18)
-  participation: [[-4, -100], [-2, -50], [0, 0], [2, 50], [4, 100]],        // RSP − SPY, 20 sessions
   breadth:       [[5, 100], [15, 50], [50, 0], [70, -50], [85, -100]],      // % of S&P 500 above 50-day SMA
-  rotation:      [[-6, 100], [-3, 50], [0, 0], [3, -50], [6, -100]],        // (XLU+XLP)/2 − XLY, 20 sessions
   feargreed:     [[0, 100], [25, 50], [50, 0], [75, -50], [100, -100]],     // CNN's own bands
 };
+const MIN_SIGNALS = 3; // the composite needs at least this many fresh signals
 const SIGNAL_COUNT = Object.keys(SIGNALS).length;
 const SIGNAL_NAMES = {
-  trend: "Trend vs 150-day", aaii: "AAII sentiment", vix: "VIX", participation: "Participation",
-  breadth: "Breadth", rotation: "Sector rotation", feargreed: "Fear & Greed",
+  trend: "Trend vs 150-day", aaii: "AAII sentiment", vix: "VIX",
+  breadth: "Breadth", feargreed: "Fear & Greed",
 };
 // What each reading measures, shown under the name in the scale rows.
 const SIGNAL_UNITS = {
   trend: "SPY vs its 150-day average", aaii: "bulls minus bears", vix: "volatility index level",
-  participation: "equal-weight minus S&P, 20 days", breadth: "S&P stocks above 50-day",
-  rotation: "defensives minus discretionary, 20 days", feargreed: "CNN index, 0 to 100",
+  breadth: "S&P stocks above 50-day", feargreed: "CNN index, 0 to 100",
 };
 
 function scoreFrom(key, x) {
@@ -324,7 +327,7 @@ function animateGaugeTo(targetScore) {
   requestAnimationFrame(frame);
 }
 
-// ---------- Seven signals on one scale ----------
+// ---------- Five signals on one scale ----------
 function renderScale(rows) {
   const sorted = [...rows].sort((a, b) => (a.score ?? 999) - (b.score ?? 999));
   $("#signal-scale").innerHTML = sorted.map((r) => {
@@ -365,7 +368,7 @@ function card({ title, code, score = null, context = false, value, valueStyle = 
     ? `<dl class="kv">${sub.map(([k, v]) => `<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join("")}</dl>`
     : "";
   return `
-  <article class="entry">
+  <article class="entry" data-kind="${context ? "context" : "scored"}">
     <div class="entry-head"><h3>${esc(title)}</h3>${stale ? `<span class="stamp">Stale</span>` : statusTag(zone.status, context || num(score) === null ? zone.tag : `${zone.tag} · score ${fmtScore(score)}`)}</div>
     ${code ? `<div class="entry-code">${esc(code)}</div>` : ""}
     <div class="entry-figure"><span class="val ${strong ? zone.status : ""}" style="${valueStyle}">${esc(value)}</span>${unit ? `<span class="unit">${esc(unit)}</span>` : ""}</div>
@@ -433,7 +436,7 @@ function assess(fast, breadth, aaii) {
 }
 
 // ---------- History: the line is scored with the same SIGNALS table ----------
-function compositeFromReadings(r, minSignals = 5) {
+function compositeFromReadings(r, minSignals = 4) {
   const scores = Object.keys(SIGNALS).map((k) => scoreFrom(k, r[k])).filter((s) => s !== null);
   return scores.length >= minSignals ? scores.reduce((a, b) => a + b, 0) / scores.length : null;
 }
@@ -611,18 +614,13 @@ function render({ fast, breadth, aaii, daily }) {
   // 5. Participation
   {
     const rel = num(fast?.participation?.rsp_minus_spy_20d_pct);
-    const score = q.pricesOk(fast?.participation?.RSP, spy) ? scoreFrom("participation", rel) : null;
-    scores.participation = score;
-    readings.participation = fmtPct(rel);
-    if (score === null && fast) reasons.participation = "Stale";
     const rsp = fast?.participation?.RSP;
     cards.push(card({
       title: "Market participation",
       code: "Equal-weight RSP vs cap-weight SPY, 20 sessions",
-      score, value: fmtPct(rel), unit: "RSP − SPY", stale: !!fast && !q.pricesOk(fast?.participation?.RSP, spy),
-      meterLabels: ["Narrow (caution)", "Broad (healthy)"],
+      context: true, value: fmtPct(rel), unit: "RSP − SPY", stale: !!fast && !q.pricesOk(rsp, spy),
       sub: [["RSP 20-day", fmtPct(rsp?.return_20d_pct)], ["SPY 20-day", fmtPct(spy?.return_20d_pct)]],
-      note: "How the average stock is doing next to the giants. Lagging by more than 2 points = gains concentrated in a few mega-caps, a narrower, more fragile market (caution). Leading by 2+ = broad participation.",
+      note: "How the average stock is doing next to the giants. Lagging by more than 2 points means gains are concentrated in a few mega-caps; leading by 2+ means broad participation. Context only: a market-health measure, not part of the contrarian composite.",
       asOf: priceAsOf(fast, rsp),
     }));
   }
@@ -657,17 +655,12 @@ function render({ fast, breadth, aaii, daily }) {
     const def = r20("XLU") !== null && r20("XLP") !== null ? (r20("XLU") + r20("XLP")) / 2 : null;
     const spread = num(fast?.sector_rotation?.defensive_minus_cyclical_20d_pct) ??
       (def !== null && r20("XLY") !== null ? Math.round((def - r20("XLY")) * 100) / 100 : null);
-    const score = q.pricesOk(s.XLU, s.XLP, s.XLY) ? scoreFrom("rotation", spread) : null;
-    scores.rotation = score;
-    readings.rotation = fmtPct(spread);
-    if (score === null && fast) reasons.rotation = "Stale";
     cards.push(card({
       title: "Defensive sector rotation",
       code: "Utilities + Staples vs Discretionary, 20 sessions",
-      score, value: fmtPct(spread), unit: "defensive − cyclical", stale: !!fast && !q.pricesOk(s.XLU, s.XLP, s.XLY),
-      meterLabels: ["Rotating defensive (caution)", "Risk-on (opportunity)"],
+      context: true, value: fmtPct(spread), unit: "defensive − cyclical", stale: !!fast && !q.pricesOk(s.XLU, s.XLP, s.XLY),
       sub: [["XLU 20-day", fmtPct(r20("XLU"))], ["XLP 20-day", fmtPct(r20("XLP"))], ["XLY 20-day", fmtPct(r20("XLY"))]],
-      note: "When Utilities and Staples outrun Discretionary by 3+ points, money is hiding in safety, often an early warning under a calm index (caution). Discretionary leading by 3+ = healthy risk appetite.",
+      note: "When Utilities and Staples outrun Discretionary by 3+ points, money is hiding in safety; Discretionary leading by 3+ shows healthy risk appetite. Context only: a market-health measure, not part of the contrarian composite.",
       asOf: priceAsOf(fast, s.XLY),
     }));
   }
@@ -694,12 +687,16 @@ function render({ fast, breadth, aaii, daily }) {
     }));
   }
 
-  $("#card-grid").innerHTML = cards.join("");
+  // Scored signals first, then the context entries under their own heading.
+  const scored = cards.filter((c) => c.includes('data-kind="scored"'));
+  const contextCards = cards.filter((c) => c.includes('data-kind="context"'));
+  $("#card-grid").innerHTML = scored.join("") +
+    (contextCards.length ? `<h3 class="entries-divider">Context: shown for reference, not part of the composite</h3>${contextCards.join("")}` : "");
   renderScale(Object.keys(SIGNALS).map((k) => ({ key: k, name: SIGNAL_NAMES[k], score: scores[k], reason: reasons[k], reading: readings[k] })));
 
   // Composite
   const used = Object.values(scores).filter((s) => s !== null);
-  if (used.length >= 4) {
+  if (used.length >= MIN_SIGNALS) {
     const composite = used.reduce((a, b) => a + b, 0) / used.length;
     $("#gauge-score").style.opacity = "";
     animateGaugeTo(composite);
