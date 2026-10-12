@@ -31,8 +31,13 @@ jobs:
       - name: Daily history for the trend line and percentiles
         run: python3 scripts/build_history.py
 
+      # Re-read prices after the close: Yahoo sometimes posts the day's bar late, and the
+      # in-session loop has stopped by now, so this keeps fast.json on the latest close.
+      - name: Refresh prices to the latest close
+        run: python3 scripts/fetch_fast.py
+
       - name: Publish
         if: always()
         run: >-
           python3 scripts/publish.py "chore: update daily scan, sentiment & history [skip ci]"
-          data/breadth.json data/opportunities.json data/aaii.json data/daily_history.json
+          data/breadth.json data/opportunities.json data/aaii.json data/daily_history.json data/fast.json

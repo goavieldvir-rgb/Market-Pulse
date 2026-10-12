@@ -21,7 +21,7 @@ import os
 import time
 from datetime import datetime, timedelta, timezone
 
-from common import (DATA_DIR, http_json, iso_from_ts, last_bar_is_final, log,
+from common import (DATA_DIR, fill_missing_close, http_json, iso_from_ts, last_bar_is_final, log,
                     market_state, pct_change, read_json, rnd, utc_now_iso,
                     warn, write_json, yahoo_daily)
 
@@ -86,6 +86,7 @@ def symbol_block(symbol, chart, now):
         "prev_close": round(prev_close, 2),
         "change_pct": rnd(pct_change(prev_close, price)),
         "in_session": not final,
+        "close_from_quote": bool(bars[-1].get("from_quote")),
         "as_of": iso_from_ts(as_of) if isinstance(as_of, (int, float)) else None,
         "sma150": rnd(sma150),
         "distance_from_sma150_pct": rnd(pct_change(sma150, price)),
@@ -138,6 +139,8 @@ def build(previous=None, now=None):
     for sym in SYMBOLS:
         chart = yahoo_daily(sym, "1y")
         if chart:
+            if fill_missing_close(chart, now):
+                warn(f"{sym}: Yahoo hasn't posted the {chart['bars'][-1]['date']} daily bar yet - using its quoted close")
             charts[sym] = chart
             block = symbol_block(sym, chart, now)
             if block:

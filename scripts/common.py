@@ -216,6 +216,28 @@ def last_bar_is_final(chart, now=None):
     return now >= close_ts + FINAL_BUFFER_SECONDS
 
 
+def fill_missing_close(chart, now=None):
+    """Yahoo sometimes posts a session's daily bar hours after the close, while its
+    quote (regularMarketPrice / regularMarketTime) already shows that session's
+    official close. When the quote belongs to a later, already-closed session than
+    the newest bar, append that close as the session's bar (marked from_quote) so
+    every symbol on the page is on the same session. Returns True if a bar was added."""
+    now = time.time() if now is None else now
+    bars = chart.get("bars") or []
+    meta, tz = chart.get("meta") or {}, chart.get("tz") or ET
+    price, rmt = meta.get("regularMarketPrice"), meta.get("regularMarketTime")
+    if not bars or not isinstance(price, (int, float)) or price <= 0 or not isinstance(rmt, (int, float)):
+        return False
+    quote_day = datetime.fromtimestamp(rmt, tz).date().isoformat()
+    if quote_day <= bars[-1]["date"]:
+        return False
+    if now < _default_close_ts(quote_day, tz, meta.get("symbol")) + FINAL_BUFFER_SECONDS:
+        return False  # that session is still open (or just closed): the live path handles it
+    bars.append({"t": int(rmt), "date": quote_day, "o": None, "h": float(price), "l": float(price),
+                 "c": float(price), "v": 0, "from_quote": True})
+    return True
+
+
 def completed_bars(chart, now=None):
     bars = chart.get("bars") or []
     return bars if last_bar_is_final(chart, now) else bars[:-1]
