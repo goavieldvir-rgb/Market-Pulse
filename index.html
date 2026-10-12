@@ -27,8 +27,8 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="MktPulse" />
 <link rel="stylesheet" href="assets/fonts.css">
-<link rel="stylesheet" href="assets/mp.css?v=1" />
-<script src="assets/mp.js?v=1"></script>
+<link rel="stylesheet" href="assets/mp.css?v=2" />
+<script src="assets/mp.js?v=2"></script>
 <style>
   /* ---------- Lead: the glance box and the shared signal scale ---------- */
   .lead { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-6); }
@@ -80,14 +80,24 @@
   .drow .reading small.cau { color: var(--cau); }
   .scale-axis { display: grid; grid-template-columns: minmax(112px, 150px) minmax(0, 1fr) 92px; gap: var(--space-3); font-family: var(--cond); font-weight: 600; font-size: 0.75rem; color: var(--ink-2); padding-top: 6px; }
   .scale-axis .ends { display: flex; justify-content: space-between; }
+  /* Phones: the track gets the full width under each signal's name and reading,
+     so the dots spread across the scale instead of crowding a 90px strip. */
+  @media (max-width: 559px) {
+    .drow { grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "name reading" "track track"; gap: 0 var(--space-3); padding-bottom: var(--space-3); }
+    .drow > :nth-child(1) { grid-area: name; }
+    .drow > :nth-child(2) { grid-area: track; }
+    .drow > :nth-child(3) { grid-area: reading; }
+    .scale-axis { grid-template-columns: minmax(0, 1fr); }
+    .scale-axis > span:not(.ends) { display: none; }
+  }
 
   /* ---------- The evidence: one entry per signal ---------- */
   .entries { display: grid; grid-template-columns: minmax(0, 1fr); column-gap: var(--space-6); }
   @media (min-width: 760px) { .entries { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
   .entry { border-bottom: 1px solid var(--rule); padding: var(--space-4) 0 var(--space-4); }
   .entries-divider { grid-column: 1 / -1; margin-top: var(--space-6); padding-top: var(--space-2); border-top: 2px solid var(--ink); font-weight: 700; font-size: var(--step-1); }
-  .entry-head { display: flex; justify-content: space-between; align-items: baseline; gap: var(--space-3); }
-  .entry-head h3 { font-weight: 700; font-size: var(--step-1); line-height: 1.2; }
+  .entry-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 2px var(--space-3); }
+  .entry-head h3 { flex: 1 1 15rem; font-weight: 700; font-size: var(--step-1); line-height: 1.2; }
   .entry-code { font-family: var(--cond); font-weight: 500; font-size: var(--step--1); color: var(--ink-3); margin-top: 2px; }
   .entry-figure { display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px 10px; margin: var(--space-2) 0 var(--space-1); }
   .entry-figure .val { font-family: var(--serif); font-weight: 700; font-size: var(--step-3); line-height: 1; letter-spacing: -0.02em; }

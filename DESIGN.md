@@ -46,6 +46,18 @@ including chips on `--paper-2`.
   it is never silently hidden.
 - "Not financial advice" sits in every footer.
 
+## Phones
+
+Phone first: the evening check before the open is the main moment.
+
+- **Section bar:** on the Scanner and Weekly recap, the jump chips become a sticky, swipeable
+  bar under 760px. The chip for the section in view is inked (`MP_JUMP` in `mp.js`).
+- **Signal scale:** under 560px each signal's track spans the full width, under its name and reading.
+- **Weekly recap:** the market strip becomes a two-column grid instead of a sideways scroll, and the
+  sector heatmap becomes a ranked bar list from a centre line, both under 640px.
+- **Touch:** every control is at least 44px. Hover styles apply only where a pointer can hover, so
+  a tapped button never stays inked. Padding respects the notch and the home indicator.
+
 ## Signature moment
 
 The five scored signals are plotted as dots on one shared −100…+100 scale under the composite figure,

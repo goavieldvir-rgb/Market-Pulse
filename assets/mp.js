@@ -42,6 +42,38 @@
   });
 })();
 
+// Section jump bar: ink the chip for the section in view and keep it visible in the
+// swipeable bar on phones. Pages call MP_JUMP(nav) once the sections exist.
+window.MP_JUMP = function (nav) {
+  if (!nav || nav.dataset.tracked) return;
+  nav.dataset.tracked = "1";
+  var links = Array.prototype.slice.call(nav.querySelectorAll('a[href^="#"]'));
+  var current = null, queued = false;
+  function update() {
+    queued = false;
+    var line = nav.getBoundingClientRect().bottom + 24;
+    var active = null;
+    for (var i = 0; i < links.length; i++) {
+      var sec = document.getElementById(links[i].getAttribute("href").slice(1));
+      if (!sec || sec.offsetParent === null || links[i].hidden) continue;
+      if (sec.getBoundingClientRect().top <= line) active = links[i];
+    }
+    if (active === current) return;
+    if (current) current.removeAttribute("aria-current");
+    current = active;
+    if (!active) return;
+    active.setAttribute("aria-current", "true");
+    if (nav.scrollWidth > nav.clientWidth) {
+      var l = active.offsetLeft - nav.offsetLeft, r = l + active.offsetWidth;
+      if (l < nav.scrollLeft + 16 || r > nav.scrollLeft + nav.clientWidth - 16) nav.scrollLeft = Math.max(0, l - 16);
+    }
+  }
+  function queue() { if (!queued) { queued = true; requestAnimationFrame(update); } }
+  window.addEventListener("scroll", queue, { passive: true });
+  window.addEventListener("resize", queue);
+  update();
+};
+
 // Direction marks drawn as SVG (never colour alone): up = filled triangle, down = inverted, flat = dot.
 window.MP_MARK = {
   up: '<svg class="mark" viewBox="0 0 10 10" aria-hidden="true"><path d="M5 1.2 9.2 8.6H.8z" fill="currentColor"/></svg>',
