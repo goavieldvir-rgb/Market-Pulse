@@ -1,0 +1,521 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Weekly recap — Market Pulse</title>
+<meta name="description" content="The Sunday pre-open brief: the week's moves, sector rotation, notable trades by politicians, famous investors and insiders, the news, and the week ahead." />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Weekly recap — Market Pulse" />
+<meta property="og:description" content="The Sunday pre-open brief: moves, rotation, big-money trades, news and the week ahead." />
+<meta property="og:image" content="https://goavieldvir-rgb.github.io/Market-Pulse/og-image.png" />
+<meta property="og:url" content="https://goavieldvir-rgb.github.io/Market-Pulse/weekly.html" />
+<meta name="twitter:card" content="summary_large_image" />
+<link rel="manifest" href="manifest.json" />
+<link rel="icon" href="icons/icon-192.png" />
+<link rel="apple-touch-icon" href="icons/icon-192.png" />
+<meta name="theme-color" content="#F5E4D3" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#17130F" media="(prefers-color-scheme: dark)" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400..800&family=Barlow:wght@400;500;600&family=Barlow+Semi+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/mp.css?v=1" />
+<script src="assets/mp.js?v=1"></script>
+<style>
+  /* Heat steps: caution 3..1, neutral, opportunity 1..3 */
+  :root { --h-c3: #8E3410; --h-c2: #B9582F; --h-c1: #E5BCA3; --h-n: #DCC6B2; --h-o1: #BCC9DB; --h-o2: #4E76AB; --h-o3: #1B4C8C; --h-light: #FFFFFF; --h-dark: #1E1A16; }
+  :root[data-theme="night"] { --h-c3: #B04B1C; --h-c2: #7A3A1C; --h-c1: #4B3022; --h-n: #2D251E; --h-o1: #23324A; --h-o2: #2B4F82; --h-o3: #3C6FB6; --h-light: #F7ECE1; --h-dark: #F7ECE1; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="day"]) { --h-c3: #B04B1C; --h-c2: #7A3A1C; --h-c1: #4B3022; --h-n: #2D251E; --h-o1: #23324A; --h-o2: #2B4F82; --h-o3: #3C6FB6; --h-light: #F7ECE1; --h-dark: #F7ECE1; } }
+
+  .edition-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-2) var(--space-4); margin-bottom: var(--space-4); }
+  .edition-bar .meta { font-family: var(--cond); font-weight: 500; color: var(--ink-2); }
+  .edition-bar .meta b { color: var(--ink); font-weight: 600; }
+  .edition-bar .actions { display: flex; flex-wrap: wrap; gap: var(--space-2); align-items: center; }
+  .edition-bar label { font-family: var(--cond); font-weight: 600; font-size: var(--step--1); color: var(--ink-2); }
+
+  .headline { font-weight: 800; font-size: clamp(2.75rem, 1.6rem + 5.4vw, 5.5rem); line-height: 0.96; letter-spacing: -0.03em; max-width: 16ch; }
+  .deck { font-family: var(--serif); font-weight: 400; font-size: clamp(1.125rem, 1rem + 0.5vw, 1.375rem); line-height: 1.45; color: var(--ink-2); max-width: 62ch; margin: var(--space-4) 0 0; }
+
+  .jump { display: flex; gap: var(--space-2); flex-wrap: wrap; margin: var(--space-5) 0 0; }
+  .jump a { display: inline-flex; align-items: center; min-height: 36px; padding: 0 12px; border: 1px solid var(--rule); border-radius: var(--radius); font-family: var(--cond); font-weight: 600; font-size: 0.9375rem; color: var(--ink-2); text-decoration: none; }
+  .jump a:hover { border-color: var(--ink); color: var(--ink); }
+  .section { scroll-margin-top: var(--space-4); }
+
+  /* Price line (levels, crypto) */
+  .pline-box { margin-top: var(--space-5); border: 1px solid var(--ink); background: var(--paper-2); border-radius: var(--radius); padding: var(--space-4); }
+  .pline-head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px var(--space-4); align-items: baseline; }
+  .pline-scroll { overflow-x: auto; }
+  .pline { position: relative; height: 118px; min-width: 620px; margin-top: var(--space-2); }
+  .pline .base { position: absolute; left: 0; right: 0; top: 52px; height: 3px; background: var(--rule); }
+  .pline .band { position: absolute; top: 44px; height: 19px; border: 1px solid var(--ink-3); background: var(--paper-3); }
+  .pline .zone { position: absolute; top: 47px; height: 13px; background: var(--opp-tint); border: 1px solid var(--opp); }
+  .pline .tick { position: absolute; top: 44px; width: 2px; height: 19px; margin-left: -1px; background: var(--ink-2); }
+  .pline .tick.up { background: var(--opp); } .pline .tick.down { background: var(--cau); }
+  .pline .now { position: absolute; top: 22px; width: 4px; height: 42px; margin-left: -2px; background: var(--ink); }
+  .pline .nowlab { position: absolute; top: 0; transform: translateX(-50%); font-family: var(--cond); font-weight: 700; font-size: 0.9375rem; white-space: nowrap; }
+  .pline .lab { position: absolute; top: 70px; transform: translateX(-50%); width: 112px; text-align: center; font-family: var(--cond); font-weight: 500; font-size: var(--step--1); line-height: 1.3; color: var(--ink-2); }
+  .pline .lab b { display: block; font-weight: 700; color: var(--ink); font-size: 0.9375rem; }
+  .pline .lab.up b { color: var(--opp); } .pline .lab.down b { color: var(--cau); }
+  .ladder { display: none; margin-top: var(--space-2); border-top: 2px solid var(--ink); }
+  .ladder div { display: flex; justify-content: space-between; gap: var(--space-3); padding: 8px 0; border-bottom: 1px solid var(--rule); font-family: var(--cond); font-size: 0.9375rem; }
+  .ladder b { font-weight: 700; }
+  .ladder .is-now { font-weight: 700; background: var(--paper-3); padding-left: 6px; padding-right: 6px; }
+  .ladder .up b { color: var(--opp); } .ladder .down b { color: var(--cau); }
+  @media (max-width: 640px) { .pline-scroll { display: none; } .ladder { display: block; } }
+  .pline-note { font-size: 0.875rem; color: var(--ink-2); margin: var(--space-2) 0 0; max-width: var(--measure); }
+
+  /* Ticker strip */
+  .strip { overflow-x: auto; border-top: 2px solid var(--ink); border-bottom: 1px solid var(--ink); margin-top: var(--space-5); }
+  .strip-in { display: flex; min-width: max-content; }
+  .tk { display: flex; flex-direction: column; gap: 1px; padding: var(--space-2) var(--space-4); border-right: 1px solid var(--rule); font-family: var(--cond); }
+  .tk:first-child { padding-left: 0; } .tk:last-child { border-right: none; }
+  .tk .n { font-weight: 500; font-size: var(--step--1); color: var(--ink-2); }
+  .tk .v { font-family: var(--serif); font-weight: 700; font-size: var(--step-1); }
+  .tk .c { font-weight: 600; font-size: 0.875rem; color: var(--ink-2); }
+  .strip-note { font-family: var(--cond); font-weight: 500; font-size: var(--step--1); color: var(--ink-3); margin-top: 6px; }
+
+  /* TL;DR */
+  .tldr { display: grid; grid-template-columns: minmax(0, 1fr); gap: 0; border: 1px solid var(--ink); border-radius: var(--radius); margin-top: var(--space-5); background: var(--paper-2); }
+  @media (min-width: 760px) { .tldr { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  .tldr div { padding: var(--space-4); border-bottom: 1px solid var(--rule); }
+  @media (min-width: 760px) { .tldr div { border-bottom: none; border-right: 1px solid var(--rule); } .tldr div:last-child { border-right: none; } }
+  .tldr div:last-child { border-bottom: none; }
+  .tldr h3 { font-weight: 700; font-size: var(--step-1); margin-bottom: 4px; }
+  .tldr p { margin: 0; font-size: var(--step-0); }
+
+  /* Scorecard */
+  .score-row { display: grid; grid-template-columns: minmax(0, 1fr); gap: 4px var(--space-5); padding: var(--space-3) 0; border-bottom: 1px solid var(--rule); }
+  @media (min-width: 760px) { .score-row { grid-template-columns: 200px minmax(0, 1fr) auto; align-items: baseline; } }
+  .score-row .call { font-weight: 600; font-family: var(--cond); font-size: var(--step-1); }
+  .score-row p { margin: 0; color: var(--ink-2); max-width: var(--measure); }
+
+  /* Heatmap */
+  .sector-layout { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-5); margin-top: var(--space-3); }
+  .flows-wrap { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-2) var(--space-6); align-items: start; }
+  @media (min-width: 900px) { .flows-wrap { grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); } }
+  .heat-scroll { overflow-x: auto; }
+  .heat { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); grid-template-rows: repeat(4, 76px); gap: 3px; min-width: 700px; }
+  .tile { border-radius: var(--radius); padding: 10px; display: flex; flex-direction: column; justify-content: space-between; overflow: hidden; font-family: var(--cond); color: var(--h-light); }
+  .tile .tn { font-weight: 600; font-size: 0.9375rem; line-height: 1.15; }
+  .tile .tv { font-family: var(--serif); font-weight: 700; font-size: 1.375rem; line-height: 1; }
+  .tile.sm { padding: 7px 6px; } .tile.sm .tn { font-size: 0.75rem; } .tile.sm .tv { font-size: 0.9375rem; }
+  .tile.big .tn { font-family: var(--serif); font-weight: 700; font-size: 1.375rem; } .tile.big .tv { font-size: 2rem; }
+  .h-c3 { background: var(--h-c3); } .h-c2 { background: var(--h-c2); } .h-o2 { background: var(--h-o2); } .h-o3 { background: var(--h-o3); }
+  .h-c1 { background: var(--h-c1); color: var(--h-dark); } .h-n { background: var(--h-n); color: var(--h-dark); } .h-o1 { background: var(--h-o1); color: var(--h-dark); }
+  .sub-tile { border-radius: var(--radius); padding: 10px; display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+  .legend { display: flex; flex-wrap: wrap; align-items: center; gap: 6px var(--space-4); font-family: var(--cond); font-weight: 500; font-size: var(--step--1); color: var(--ink-2); margin-top: var(--space-2); }
+  .legend .sw { display: inline-flex; gap: 3px; vertical-align: middle; }
+  .legend .sw i { width: 20px; height: 12px; border-radius: 1px; display: block; }
+
+  .flows { border-top: 2px solid var(--ink); display: grid; grid-template-columns: minmax(0, 1fr); column-gap: var(--space-5); }
+  @media (min-width: 640px) { .flows { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  .flow { padding: var(--space-3) 0; border-bottom: 1px solid var(--rule); }
+  .flow .fh { display: flex; justify-content: space-between; align-items: baseline; gap: var(--space-3); font-family: var(--cond); }
+  .flow .fl { font-weight: 500; color: var(--ink-2); }
+  .flow .fv { font-family: var(--serif); font-weight: 700; font-size: var(--step-1); }
+  .flow p { margin: 4px 0 0; font-size: 0.9375rem; }
+  .takeaway { font-family: var(--serif); font-size: var(--step-1); line-height: 1.4; margin: var(--space-3) 0 0; }
+
+  /* Big money ledger */
+  .lag { border: 1px solid var(--rule); background: var(--paper-2); border-radius: var(--radius); padding: var(--space-3) var(--space-4); font-size: 0.9375rem; max-width: var(--measure); margin: var(--space-3) 0 0; }
+  .lag b { color: var(--ink); }
+  .group-title { font-family: var(--cond); font-weight: 600; font-size: var(--step-1); color: var(--ink-2); margin: var(--space-5) 0 0; padding-bottom: 6px; border-bottom: 2px solid var(--ink); }
+  .ledger-row { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-2) var(--space-5); padding: var(--space-4) 0; border-bottom: 1px solid var(--rule); }
+  @media (min-width: 900px) { .ledger-row { grid-template-columns: 250px minmax(0, 1.2fr) minmax(0, 1fr); } }
+  .who { display: flex; gap: var(--space-3); align-items: flex-start; }
+  .mono { flex: none; width: 44px; height: 44px; border-radius: 22px; border: 1.5px solid var(--ink); display: flex; align-items: center; justify-content: center; font-family: var(--serif); font-weight: 700; font-size: 1rem; }
+  .mono.tick-box { width: auto; min-width: 44px; padding: 0 6px; border-radius: var(--radius); font-family: var(--cond); font-size: 0.875rem; }
+  .who .nm { font-family: var(--serif); font-weight: 700; font-size: var(--step-1); line-height: 1.2; }
+  .who .rl { font-family: var(--cond); font-weight: 500; color: var(--ink-2); font-size: 0.9375rem; }
+  .who .wh { font-family: var(--cond); font-weight: 500; color: var(--ink-3); font-size: var(--step--1); }
+  .moves { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: var(--space-2); }
+  .ledger-row p { margin: 0; font-size: 0.9375rem; }
+  .ledger-row .read { color: var(--ink-2); }
+  .overlaps { margin-top: var(--space-4); border: 1px solid var(--ink); border-radius: var(--radius); padding: var(--space-3) var(--space-4); background: var(--paper-2); }
+  .overlaps h3 { font-weight: 700; font-size: var(--step-1); margin-bottom: 4px; }
+  .overlaps ul { margin: 0; padding-left: 1.1em; }
+
+  /* News */
+  .news { display: grid; grid-template-columns: minmax(0, 1fr); column-gap: var(--space-6); }
+  @media (min-width: 760px) { .news { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  .story { padding: var(--space-4) 0; border-bottom: 1px solid var(--rule); }
+  .story h3 { font-weight: 700; font-size: var(--step-1); line-height: 1.25; display: flex; gap: 8px; align-items: baseline; }
+  .story h3 .mark { flex: none; }
+  .story p { margin: 6px 0 0; color: var(--ink-2); max-width: var(--measure); }
+
+  /* Week ahead */
+  .week-layout { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-6); margin-top: var(--space-3); }
+  @media (min-width: 960px) { .week-layout { grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); } }
+  .day { display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: var(--space-3); padding: var(--space-3) 0; border-bottom: 1px solid var(--rule); }
+  .day:first-child { border-top: 2px solid var(--ink); }
+  .day.key { background: var(--paper-2); padding-left: var(--space-2); padding-right: var(--space-2); }
+  .day .dn { font-family: var(--serif); font-weight: 700; font-size: var(--step-1); }
+  .pips { display: flex; gap: 4px; margin-top: 6px; }
+  .pips i { width: 8px; height: 8px; border-radius: 4px; border: 1.5px solid var(--ink); }
+  .pips i.on { background: var(--ink); }
+  .day .dt { font-family: var(--cond); font-weight: 700; font-size: var(--step-1); }
+  .day p { margin: 2px 0 0; color: var(--ink-2); }
+  .side-box { border: 1px solid var(--ink); border-radius: var(--radius); padding: var(--space-4); background: var(--paper-2); }
+  .side-box + .side-box { margin-top: var(--space-4); }
+  .side-box h3 { font-weight: 700; font-size: var(--step-1); margin-bottom: var(--space-2); }
+  .ctable { width: 100%; border-collapse: collapse; font-family: var(--cond); font-size: 0.9375rem; }
+  .ctable th { text-align: left; font-weight: 500; color: var(--ink-2); padding: 0 0 6px; border-bottom: 2px solid var(--ink); }
+  .ctable td, .ctable tbody th { padding: 8px 0; border-bottom: 1px solid var(--rule); }
+  .ctable tbody th { font-weight: 600; text-align: left; }
+  .ctable .r { text-align: right; }
+  .ctable td.exp { font-weight: 700; }
+  .odds { margin-top: var(--space-3); }
+  .odds .oh { display: flex; justify-content: space-between; font-family: var(--cond); font-weight: 600; }
+  .odds .bar { height: 8px; background: var(--paper-3); margin-top: 4px; border-radius: 1px; }
+  .odds .bar span { display: block; height: 100%; background: var(--ink); }
+  .small { font-size: 0.875rem; color: var(--ink-2); margin: var(--space-3) 0 0; }
+
+  /* Crypto */
+  .crypto-top { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: var(--space-2) var(--space-5); }
+  .crypto-price { font-family: var(--serif); font-weight: 800; font-size: clamp(2.5rem, 2rem + 2.5vw, 3.5rem); line-height: 1; letter-spacing: -0.02em; }
+  .stats { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-4); margin-top: var(--space-4); }
+  @media (min-width: 760px) { .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  .stat { border-top: 2px solid var(--ink); padding-top: var(--space-2); }
+  .stat .sl { font-family: var(--cond); font-weight: 500; color: var(--ink-2); }
+  .stat .sv { font-family: var(--serif); font-weight: 700; font-size: var(--step-3); line-height: 1.1; }
+  .stat p { margin: 4px 0 0; }
+
+  /* Bottom line */
+  .bottom { border-top: 3px solid var(--ink); margin-top: var(--space-7); padding-top: var(--space-3); }
+  .bottom ol { list-style: none; margin: var(--space-3) 0 0; padding: 0; display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-4) var(--space-6); counter-reset: b; }
+  @media (min-width: 760px) { .bottom ol { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  .bottom li { counter-increment: b; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: var(--space-3); }
+  .bottom li::before { content: counter(b); font-family: var(--serif); font-weight: 800; font-size: var(--step-3); line-height: 1; }
+  .bottom h3 { font-weight: 700; font-size: var(--step-1); }
+  .bottom p { margin: 4px 0 0; color: var(--ink-2); }
+
+  .sources { columns: 2 280px; column-gap: var(--space-6); margin: var(--space-3) 0 0; padding-left: 1.1em; font-size: 0.9375rem; color: var(--ink-2); }
+  .sources li { margin-bottom: 6px; break-inside: avoid; }
+
+  .loading .skel { margin-top: 12px; }
+</style>
+</head>
+<body>
+<div class="page">
+
+<header class="mast">
+  <a class="brand" href="index.html">Market Pulse</a>
+  <div class="mast-side"><span>Weekly recap</span><button class="theme-btn" id="theme-btn" type="button">Edition</button></div>
+</header>
+<div class="dateline">
+  <span id="today-date"></span>
+  <span>Published every Sunday before the US open</span>
+</div>
+<nav class="tabs" aria-label="Sections">
+  <a href="index.html">Today</a>
+  <a href="opportunity.html">Scanner</a>
+  <a href="weekly.html" aria-current="page">Weekly recap</a>
+</nav>
+
+<main id="edition" class="loading" aria-busy="true">
+  <span class="skel" style="width:60%;height:64px"></span>
+  <span class="skel" style="width:85%;height:20px"></span>
+  <span class="skel" style="width:70%;height:20px"></span>
+  <span class="skel" style="width:100%;height:120px"></span>
+</main>
+
+<footer class="footer">
+  <p><strong>Not financial advice.</strong> The weekly recap summarizes public market data, news and official
+    trade disclosures for informational purposes only. Nothing here is a recommendation to buy or sell any security.</p>
+  <p>Prices, sector moves, yields, commodities, bitcoin and the week's insider filings are computed from Yahoo Finance and SEC EDGAR data;
+    the written sections are researched each Sunday from the sources listed in each edition. Politicians' trades are reported with delays of up to six weeks.</p>
+</footer>
+</div>
+
+<script>
+const $ = (sel) => document.querySelector(sel);
+const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const num = (v) => (typeof v === "number" && Number.isFinite(v) ? v : null);
+const MARK = window.MP_MARK;
+const toneMark = (t) => (t === "up" ? MARK.up : t === "down" ? MARK.down : MARK.flat);
+const toneClass = (t) => (t === "up" ? "up" : t === "down" ? "down" : "");
+
+function fmtPct(v, d = 2) { v = num(v); return v === null ? "—" : `${v > 0 ? "+" : v < 0 ? "−" : ""}${Math.abs(v).toFixed(d)}%`; }
+function fmtNum(v, d = 2) { v = num(v); return v === null ? "—" : v.toLocaleString("en-US", { minimumFractionDigits: d, maximumFractionDigits: d }); }
+function fmtMoney(v) {
+  v = num(v); if (v === null) return "—";
+  if (v >= 1e9) return "$" + (v / 1e9).toFixed(2) + "B";
+  if (v >= 1e6) return "$" + (v / 1e6).toFixed(1) + "M";
+  if (v >= 1e3) return "$" + (v / 1e3).toFixed(0) + "K";
+  return "$" + v.toFixed(0);
+}
+function fmtDay(iso, opts = { month: "short", day: "numeric" }) {
+  if (!iso || !/^\d{4}-\d{2}-\d{2}/.test(iso)) return "—";
+  const [y, m, d] = iso.slice(0, 10).split("-").map(Number);
+  return new Date(Date.UTC(y, m - 1, d)).toLocaleDateString("en-US", { ...opts, timeZone: "UTC" });
+}
+const signed = (v, d = 1) => `${v > 0 ? "+" : v < 0 ? "−" : ""}${Math.abs(v).toFixed(d)}`;
+const move = (v, d = 2) => { v = num(v); return v === null ? "—" : `<span class="${v > 0 ? "up" : v < 0 ? "down" : ""}">${v > 0 ? MARK.up : v < 0 ? MARK.down : ""} ${fmtPct(v, d)}</span>`; };
+
+async function loadJSON(path) {
+  try {
+    const res = await fetch(path + (path.includes("?") ? "&" : "?") + "t=" + Date.now(), { cache: "no-store" });
+    if (!res.ok) throw new Error(res.status);
+    return await res.json();
+  } catch (e) { console.warn("Failed to load", path, e); return null; }
+}
+
+// ---------- Pieces ----------
+function priceLine({ min, max, now, nowLabel, band, zone, marks }) {
+  const pos = (v) => Math.max(0, Math.min(100, ((v - min) / (max - min)) * 100));
+  // Keep labels inside the line: near an edge they anchor to that edge instead of centring.
+  const anchor = (p) => (p < 9 ? "transform:translateX(0);text-align:left" : p > 91 ? "transform:translateX(-100%);text-align:right" : "");
+  const fmt = (v) => v.toLocaleString("en-US");
+  const line = `<div class="pline-scroll"><div class="pline" role="img" aria-label="${esc(nowLabel)}; ${marks.map((m) => `${m.label} ${fmt(m.value)}`).join(", ")}">
+    <div class="base"></div>
+    ${band ? `<div class="band" style="left:${pos(band[0]).toFixed(2)}%;width:${(pos(band[1]) - pos(band[0])).toFixed(2)}%"></div>` : ""}
+    ${zone ? `<div class="zone" style="left:${pos(zone.from).toFixed(2)}%;width:${Math.max(0.8, pos(zone.to) - pos(zone.from)).toFixed(2)}%"></div>
+      <div class="lab up" style="left:${((pos(zone.from) + pos(zone.to)) / 2).toFixed(2)}%;${anchor((pos(zone.from) + pos(zone.to)) / 2)}"><b>${esc(fmt(zone.from))}–${esc(fmt(zone.to))}</b>${esc(zone.label)}</div>` : ""}
+    ${marks.map((m) => `<div class="tick ${toneClass(m.tone)}" style="left:${pos(m.value).toFixed(2)}%"></div>
+      <div class="lab ${toneClass(m.tone)}" style="left:${pos(m.value).toFixed(2)}%;${anchor(pos(m.value))}"><b>${esc(fmt(m.value))}</b>${esc(m.label)}</div>`).join("")}
+    ${now !== null ? `<div class="now" style="left:${pos(now).toFixed(2)}%"></div><div class="nowlab" style="left:${pos(now).toFixed(2)}%;${anchor(pos(now))}">${esc(nowLabel)}</div>` : ""}
+  </div></div>`;
+  // Phones get the same levels as a top-to-bottom ladder, highest first.
+  const rows = marks.map((m) => ({ v: m.value, label: m.label, tone: m.tone, txt: fmt(m.value) }));
+  if (zone) rows.push({ v: zone.to, label: zone.label, tone: "up", txt: `${fmt(zone.from)}–${fmt(zone.to)}` });
+  if (now !== null) rows.push({ v: now, label: nowLabel, now: true });
+  rows.sort((a, b) => b.v - a.v);
+  const ladder = `<div class="ladder">${rows.map((r) => r.now
+    ? `<div class="is-now"><span>${esc(r.label)}</span><span>${MARK.flat}</span></div>`
+    : `<div class="${toneClass(r.tone)}"><span>${esc(r.label)}</span><b>${esc(r.txt)}</b></div>`).join("")}</div>`;
+  return line + ladder;
+}
+
+function heatClass(v) {
+  if (v === null) return "h-n";
+  if (v <= -3) return "h-c3"; if (v <= -1) return "h-c2"; if (v < -0.25) return "h-c1";
+  if (v <= 0.25) return "h-n"; if (v < 1) return "h-o1"; if (v < 2.5) return "h-o2"; return "h-o3";
+}
+// Grid placement on a 12 × 4 board, sized roughly by S&P 500 weight.
+const HEAT_LAYOUT = {
+  XLK: ["1 / span 5", "1 / span 4", "big", "Technology"],
+  XLF: ["6 / span 3", "1 / span 2", "", "Financials"],
+  XLY: ["9 / span 2", "1 / span 2", "", "Discretionary"],
+  XLC: ["11 / span 2", "1 / span 2", "", "Comm. services"],
+  XLV: ["6 / span 2", "3 / span 2", "", "Health care"],
+  XLI: ["8 / span 2", "3 / span 2", "", "Industrials"],
+  XLP: ["10 / span 1", "3 / span 2", "sm", "Staples"],
+  XLE: ["11 / span 1", "3 / span 1", "sm", "Energy"],
+  XLU: ["12 / span 1", "3 / span 1", "sm", "Utilities"],
+  XLRE: ["11 / span 1", "4 / span 1", "sm", "Real estate"],
+  XLB: ["12 / span 1", "4 / span 1", "sm", "Materials"],
+};
+function heatmap(numbers) {
+  const sectors = numbers?.sectors || [];
+  const semis = numbers?.semis;
+  const tiles = sectors.filter((s) => HEAT_LAYOUT[s.symbol]).map((s) => {
+    const [col, row, size, short] = HEAT_LAYOUT[s.symbol];
+    const v = num(s.week_pct);
+    const inner = s.symbol === "XLK" && semis && num(semis.week_pct) !== null
+      ? `<div class="sub-tile ${heatClass(semis.week_pct)}"><span class="tn">Semiconductors (SOXX)</span><span class="tv">${fmtPct(semis.week_pct, 1)}</span></div>` : "";
+    return `<div class="tile ${size} ${heatClass(v)}" style="grid-column:${col};grid-row:${row}" title="${esc(s.name)} ${fmtPct(v)}">
+      <div><div class="tn">${esc(short)}</div><div class="tv">${fmtPct(v)}</div></div>${inner}</div>`;
+  }).join("");
+  const desc = sectors.map((s) => `${s.name} ${fmtPct(s.week_pct)}`).join(", ") + (semis ? `, semiconductors ${fmtPct(semis.week_pct)}` : "");
+  return `<div class="heat-scroll"><div class="heat" role="img" aria-label="Sector heatmap for the week: ${esc(desc)}">${tiles}</div></div>
+    <div class="legend"><span>Weekly change. Tile size roughly follows each sector's weight in the S&amp;P 500.</span>
+      <span><span class="sw" aria-hidden="true"><i class="h-c3"></i><i class="h-c2"></i><i class="h-c1"></i><i class="h-n"></i><i class="h-o1"></i><i class="h-o2"></i><i class="h-o3"></i></span> −3% or worse to +2.5% or better</span></div>`;
+}
+
+function strip(numbers) {
+  if (!numbers) return "";
+  const items = [];
+  for (const i of numbers.indices || []) items.push({ n: i.name, v: fmtNum(i.close, i.close > 10000 ? 0 : 2), c: move(i.week_pct) + " wk" });
+  const ten = numbers.rates?.us10y;
+  if (ten) items.push({ n: "10-year yield", v: `${fmtNum(ten.close, 2)}%`, c: `${signed(ten.week_change_bp, 0)} bp wk${num(ten.week_high) !== null ? ` · high ${fmtNum(ten.week_high, 2)}%` : ""}` });
+  if (numbers.vix) items.push({ n: "VIX", v: fmtNum(numbers.vix.close), c: move(numbers.vix.week_pct, 1) + " wk" });
+  for (const c of numbers.commodities || []) items.push({ n: c.name, v: "$" + fmtNum(c.close, c.close > 1000 ? 0 : 2), c: move(c.week_pct, 1) + " wk" });
+  if (numbers.crypto) items.push({ n: "Bitcoin", v: "$" + fmtNum(numbers.crypto.close, 0), c: move(numbers.crypto.week_pct, 1) + " wk" });
+  return `<div class="strip"><div class="strip-in">${items.map((t) => `<div class="tk"><span class="n">${esc(t.n)}</span><span class="v">${esc(t.v)}</span><span class="c">${t.c}</span></div>`).join("")}</div></div>
+    <div class="strip-note">Closing values for the week ending ${fmtDay(numbers.week_ending, { weekday: "short", month: "short", day: "numeric" })}. Blue ${MARK.up} is up, vermilion ${MARK.down} is down.</div>`;
+}
+
+function chip(side, text) {
+  const cls = side === "buy" ? "buy" : side === "sell" || side === "short" ? "sell" : "quiet";
+  const mk = side === "buy" ? MARK.up : side === "sell" || side === "short" ? MARK.down : "";
+  const word = side === "buy" ? "Buy " : side === "sell" ? "Sell " : side === "short" ? "Bet against " : "";
+  return `<span class="chip ${cls}">${mk}${esc(word)}${esc(text)}</span>`;
+}
+
+function insiderGroup(ins) {
+  const rows = [...(ins?.top_buys || []).slice(0, 4), ...(ins?.top_sells || []).slice(0, 3)];
+  if (!rows.length) return "";
+  return `<h3 class="group-title">Company insiders, filed this week (SEC Form 4)</h3>` + rows.map((t) => `
+    <article class="ledger-row">
+      <div class="who"><span class="mono tick-box" aria-hidden="true">${esc((t.symbol || "?").slice(0, 5))}</span>
+        <div><div class="nm">${esc(t.insider || "Unknown")}</div><div class="rl">${esc(t.role || "")} · ${esc(t.symbol || "")}</div><div class="wh">Traded ${esc(fmtDay(t.date))}${t.filed ? ` · filed ${esc(fmtDay(t.filed))}` : ""}</div></div></div>
+      <div><div class="moves">${chip(t.action === "Buy" ? "buy" : "sell", `${t.symbol} ${fmtMoney(t.value)}`)}${t.plan ? `<span class="chip quiet">10b5-1 plan</span>` : ""}</div>
+        <p>${num(t.shares) ? `${Math.round(t.shares).toLocaleString("en-US")} shares at $${fmtNum(t.price)}` : ""}</p></div>
+      <p class="read">${t.action === "Buy" ? "An open-market purchase with the insider's own money." : t.plan ? "Scheduled in advance, so it says little." : "Insiders sell for many reasons; a weaker signal than buying."}</p>
+    </article>`).join("") + `<p class="small">From the Scanner's live SEC feed. <a href="opportunity.html#insider-buying">See all insider filings</a>.</p>`;
+}
+
+// ---------- Edition ----------
+function renderEdition(ed, editions) {
+  const nb = ed.numbers || {};
+  const crypto = ed.crypto || {};
+  const btcNow = num(nb.crypto?.close);
+  const lv = ed.levels;
+
+  document.title = `${ed.title} — Weekly recap — Market Pulse`;
+  const options = editions.map((e) => `<option value="${esc(e.week_of)}" ${e.week_of === ed.week_of ? "selected" : ""}>${esc(e.label)}</option>`).join("");
+
+  $("#edition").innerHTML = `
+  <div class="edition-bar">
+    <span class="meta"><b>Week of ${esc(ed.label)}</b> · published ${esc(fmtDay(ed.published, { weekday: "long", month: "long", day: "numeric" }))}</span>
+    <span class="actions">
+      ${editions.length > 1 ? `<label for="archive">Past editions</label><select class="select" id="archive">${options}</select>` : ""}
+      <button class="btn" type="button" id="share-btn">Share this recap</button>
+    </span>
+  </div>
+  <h1 class="headline">${esc(ed.title)}</h1>
+  <p class="deck">${esc(ed.deck)}</p>
+
+  <div class="pline-box">
+    <div class="pline-head"><h2 class="h-sub">Where the ${esc(lv.name)} sits</h2><span class="asof">Shaded: the trading range ${esc(lv.range[0].toLocaleString("en-US"))}–${esc(lv.range[1].toLocaleString("en-US"))}</span></div>
+    ${priceLine({ min: lv.min, max: lv.max, now: lv.now, nowLabel: `Now ${Math.round(lv.now).toLocaleString("en-US")}${num(lv.record) !== null ? ` · record ${Math.round(lv.record).toLocaleString("en-US")}` : ""}`, band: lv.range, marks: lv.marks })}
+    ${lv.note ? `<p class="pline-note">${esc(lv.note)}</p>` : ""}
+  </div>
+
+  ${strip(nb)}
+
+  <nav class="jump" aria-label="Jump to a section">
+    <a href="#sectors">Sectors</a><a href="#big-money">Big money</a><a href="#news">News</a><a href="#week-ahead">Week ahead</a><a href="#bitcoin">Bitcoin</a>
+  </nav>
+
+  <div class="tldr">${ed.tldr.map((t) => `<div><h3>${esc(t.label)}</h3><p>${esc(t.text)}</p></div>`).join("")}</div>
+
+  <section class="section" aria-labelledby="calls-h">
+    <div class="section-head"><h2 class="h-section" id="calls-h">Last week's calls, checked</h2></div>
+    ${ed.scorecard.map((s) => `<div class="score-row"><span class="call">${esc(s.call)}</span><p>${esc(s.outcome)}</p><span class="chip ${s.tone === "up" ? "buy" : s.tone === "down" ? "sell" : "quiet"}">${toneMark(s.tone)}${esc(s.verdict)}</span></div>`).join("")}
+  </section>
+
+  <section class="section" id="sectors" aria-labelledby="sectors-h">
+    <div class="section-head"><h2 class="h-section" id="sectors-h">${esc(ed.sectors.title)}</h2></div>
+    <p class="lede">${esc(ed.sectors.deck)}</p>
+    <div class="sector-layout">
+      <div>${heatmap(nb)}</div>
+      <div class="flows-wrap">
+        <div class="flows">
+          ${num(nb.equal_weight?.rsp_week_pct) !== null ? `<div class="flow"><div class="fh"><span class="fl">Equal-weight S&amp;P vs S&amp;P 500</span><span class="fv">${fmtPct(nb.equal_weight.rsp_week_pct)} vs ${fmtPct(nb.equal_weight.spy_week_pct)}</span></div><p>${nb.equal_weight.rsp_week_pct > nb.equal_weight.spy_week_pct ? "The average stock beat the giants this week." : "The giants beat the average stock this week: leadership stayed narrow."}</p></div>` : ""}
+          ${ed.sectors.flows.map((f) => `<div class="flow"><div class="fh"><span class="fl">${esc(f.label)}</span><span class="fv ${toneClass(f.tone)}">${esc(f.value)}</span></div><p>${esc(f.note)}</p></div>`).join("")}
+        </div>
+        ${ed.sectors.takeaway ? `<p class="takeaway">${esc(ed.sectors.takeaway)}</p>` : ""}
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="big-money" aria-labelledby="money-h">
+    <div class="section-head"><h2 class="h-section" id="money-h">Big money moves</h2></div>
+    <p class="lede">What the people traders follow have bought and sold: politicians' disclosures, famous investors, and company insiders.</p>
+    <p class="lag"><b>Mind the lag.</b> ${esc(ed.big_money.lag_note)}</p>
+    ${ed.big_money.groups.map((g) => `
+      <h3 class="group-title">${esc(g.title)}</h3>
+      ${g.entries.map((e) => `
+      <article class="ledger-row">
+        <div class="who"><span class="mono" aria-hidden="true">${esc(e.initials)}</span><div><div class="nm">${esc(e.who)}</div><div class="rl">${esc(e.role)}</div><div class="wh">${esc(e.when)}</div></div></div>
+        <div><div class="moves">${e.moves.map((m) => chip(m.side, m.text)).join("")}</div><p>${esc(e.detail)}</p></div>
+        <p class="read">${esc(e.read)}</p>
+      </article>`).join("")}`).join("")}
+    ${insiderGroup(nb.insiders)}
+    ${(ed.big_money.overlaps || []).length ? `<div class="overlaps"><h3>Names showing up twice</h3><ul>${ed.big_money.overlaps.map((o) => `<li><b>${esc(o.name)}</b>: ${esc(o.text)}</li>`).join("")}</ul></div>` : ""}
+  </section>
+
+  <section class="section" id="news" aria-labelledby="news-h">
+    <div class="section-head"><h2 class="h-section" id="news-h">What moved markets</h2></div>
+    <div class="news">${ed.news.map((n) => `<article class="story"><h3><span class="${toneClass(n.tone)}">${toneMark(n.tone)}</span>${esc(n.headline)}</h3><p>${esc(n.body)}</p></article>`).join("")}</div>
+  </section>
+
+  <section class="section" id="week-ahead" aria-labelledby="week-h">
+    <div class="section-head"><h2 class="h-section" id="week-h">The week ahead</h2><span class="asof">Dots show how much each day matters</span></div>
+    <div class="week-layout">
+      <div>${ed.calendar.map((c) => `
+        <div class="day ${c.key ? "key" : ""}">
+          <div><div class="dn">${esc(c.day)}</div><div class="pips" role="img" aria-label="Importance ${c.importance} of 3">${[1, 2, 3].map((i) => `<i class="${i <= c.importance ? "on" : ""}"></i>`).join("")}</div></div>
+          <div><div class="dt">${esc(c.title)}</div>${c.body ? `<p>${esc(c.body)}</p>` : ""}</div>
+        </div>`).join("")}</div>
+      <div>
+        ${(ed.consensus || []).length ? `<div class="side-box"><h3>The numbers to beat</h3>
+          <table class="ctable"><thead><tr><th scope="col">Report</th><th scope="col" class="r">Expected</th><th scope="col" class="r">Prior</th></tr></thead>
+          <tbody>${ed.consensus.map((c) => `<tr><th scope="row">${esc(c.report)}</th><td class="r exp ${toneClass(c.tone)}">${esc(c.expected)}</td><td class="r">${esc(c.prior)}</td></tr>`).join("")}</tbody></table>
+          ${ed.consensus_note ? `<p class="small">${esc(ed.consensus_note)}</p>` : ""}</div>` : ""}
+        ${(ed.fed_odds || []).length ? `<div class="side-box"><h3>Odds of another Fed hike</h3>
+          ${ed.fed_odds.map((f) => `<div class="odds"><div class="oh"><span>${esc(f.label)}</span><span>~${esc(f.pct)}%</span></div><div class="bar"><span style="width:${Math.max(0, Math.min(100, f.pct))}%"></span></div></div>`).join("")}
+          ${ed.further ? `<p class="small">${esc(ed.further)}</p>` : ""}</div>` : ""}
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="bitcoin" aria-labelledby="btc-h">
+    <div class="section-head"><h2 class="h-section" id="btc-h">${esc(crypto.headline)}</h2></div>
+    <div class="crypto-top">
+      <p class="lede" style="margin:4px 0 0">${esc(crypto.deck)}</p>
+      ${btcNow !== null ? `<div><span class="crypto-price">$${fmtNum(btcNow / 1000, 1)}K</span> <span class="c">${move(nb.crypto?.week_pct, 1)} wk</span></div>` : ""}
+    </div>
+    <div class="pline-box">
+      ${priceLine({ min: crypto.map.min, max: crypto.map.max, now: btcNow, nowLabel: btcNow !== null ? `Now ~${fmtNum(btcNow / 1000, 1)}K` : "", zone: crypto.map.zone, marks: crypto.map.marks })}
+      <p class="pline-note">${esc(crypto.signal)}</p>
+    </div>
+    <div class="stats">${crypto.stats.map((s) => `<div class="stat"><div class="sl">${esc(s.label)}</div>${s.value ? `<div class="sv ${toneClass(s.tone)}">${esc(s.value)}</div>` : ""}<p>${esc(s.note)}</p></div>`).join("")}</div>
+  </section>
+
+  <section class="bottom" aria-labelledby="bottom-h">
+    <h2 class="h-section" id="bottom-h">Three things that decide the week</h2>
+    <ol>${ed.bottom_line.map((b) => `<li><div><h3>${esc(b.title)}</h3><p>${esc(b.body)}</p></div></li>`).join("")}</ol>
+  </section>
+
+  <section class="section" aria-labelledby="src-h">
+    <div class="section-head"><h2 class="h-sub" id="src-h">Sources</h2></div>
+    <ul class="sources">${ed.sources.map((s) => `<li><a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.title)}</a></li>`).join("")}</ul>
+  </section>`;
+
+  $("#edition").classList.remove("loading");
+  $("#edition").removeAttribute("aria-busy");
+
+  const sel = $("#archive");
+  if (sel) sel.addEventListener("change", () => { location.search = "?week=" + encodeURIComponent(sel.value); });
+  $("#share-btn").addEventListener("click", async () => {
+    const url = location.origin + location.pathname + "?week=" + encodeURIComponent(ed.week_of);
+    const btn = $("#share-btn");
+    try {
+      if (navigator.share) { await navigator.share({ title: ed.title, text: `Market Pulse weekly recap: ${ed.title}`, url }); return; }
+      await navigator.clipboard.writeText(url);
+      btn.textContent = "Link copied";
+    } catch (e) {
+      if (e && e.name === "AbortError") return;
+      btn.textContent = "Copy failed: use the address bar";
+    }
+    setTimeout(() => { btn.textContent = "Share this recap"; }, 2500);
+  });
+}
+
+function renderError(msg) {
+  $("#edition").classList.remove("loading");
+  $("#edition").removeAttribute("aria-busy");
+  $("#edition").innerHTML = `<div class="notice" role="alert"><span class="stamp">Missing</span><span>${esc(msg)} <a href="index.html">Go to today's market read</a>.</span></div>`;
+}
+
+(async function main() {
+  const idx = await loadJSON("data/weekly/index.json");
+  const editions = (idx?.editions || []).filter((e) => /^\d{4}-\d{2}-\d{2}$/.test(e.week_of || ""));
+  if (!editions.length) { renderError("No weekly recap has been published yet. The first one arrives on a Sunday before the US open."); return; }
+  const want = new URLSearchParams(location.search).get("week");
+  const pick = editions.find((e) => e.week_of === want) || editions[0];
+  const ed = await loadJSON(`data/weekly/${pick.week_of}.json`);
+  if (!ed || ed.schema !== 1) { renderError(`The recap for ${pick.label || pick.week_of} couldn't be loaded. Try refreshing.`); return; }
+  try { renderEdition(ed, editions); }
+  catch (e) { console.error(e); renderError(`The recap for ${pick.label || pick.week_of} has a formatting problem and couldn't be shown.`); }
+})();
+
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => { navigator.serviceWorker.register("sw.js").catch(() => {}); });
+}
+</script>
+</body>
+</html>

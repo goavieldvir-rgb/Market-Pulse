@@ -1,6 +1,6 @@
 // Bump the version whenever the page shell changes so old caches are cleared.
-const CACHE = "market-pulse-shell-v3";
-const STATIC_SHELL = ["./manifest.json", "./icons/icon-192.png", "./icons/icon-512.png"];
+const CACHE = "market-pulse-shell-v4";
+const STATIC_SHELL = ["./manifest.json", "./icons/icon-192.png", "./icons/icon-512.png", "./assets/mp.css?v=1", "./assets/mp.js?v=1"];
 
 self.addEventListener("install", (e) => {
   e.waitUntil(caches.open(CACHE).then((c) => c.addAll(STATIC_SHELL)));
