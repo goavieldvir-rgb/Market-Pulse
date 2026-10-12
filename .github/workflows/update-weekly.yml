@@ -1,0 +1,34 @@
+name: Update weekly recap numbers
+
+# Computes the hard numbers for the Sunday Weekly Recap (data/weekly_numbers.json):
+# weekly index/sector/yield/commodity/bitcoin moves and the week's largest insider trades.
+# Runs Saturday after Friday's close is final, with a Sunday-morning back-up (UTC; GitHub's
+# scheduler is best-effort, and running twice is harmless). The written part of each edition
+# is added on Sunday through a pull request; see docs/weekly-recap.md.
+on:
+  schedule:
+    - cron: '17 6 * * 6'
+    - cron: '47 4 * * 0'
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-weekly
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Weekly moves for indices, sectors, yields, commodities and bitcoin
+        run: python3 scripts/fetch_weekly.py
+
+      - name: Publish
+        if: always()
+        run: >-
+          python3 scripts/publish.py "chore: update weekly recap numbers [skip ci]" data/weekly_numbers.json

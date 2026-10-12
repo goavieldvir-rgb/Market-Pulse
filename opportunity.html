@@ -3,385 +3,199 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<title>Opportunity Scanner — Market Pulse</title>
-<meta name="description" content="Insider buying, 52-week highs/lows, volume surges, support/resistance tests, and sector breakouts across the S&P 500 + Nasdaq 100." />
+<title>Scanner — Market Pulse</title>
+<meta name="description" content="Insider buying and selling, sector leaders, 52-week highs and lows, volume surges and moving-average tests across the S&P 500 + Nasdaq 100." />
 <link rel="manifest" href="manifest.json" />
 <link rel="icon" href="icons/icon-192.png" />
 <link rel="apple-touch-icon" href="icons/icon-192.png" />
-<meta name="theme-color" content="#080B13" />
+<meta name="theme-color" content="#F5E4D3" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#17130F" media="(prefers-color-scheme: dark)" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400..800&family=Barlow:wght@400;500;600&family=Barlow+Semi+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/mp.css?v=1" />
+<script src="assets/mp.js?v=1"></script>
 <style>
-  :root {
-    --bg: #080B13;
-    --surface: #12172A;
-    --surface-2: #171E35;
-    --border: rgba(255,255,255,0.07);
-    --border-soft: rgba(255,255,255,0.045);
-    --text: #F3F5FB;
-    --text-dim: #A6AFC6;
-    --text-faint: #626C85;
-    --cool: #5B9CFF;
-    --cool-dim: #2C4B85;
-    --warm: #FFAB3C;
-    --warm-dim: #7A5220;
-    --green: #34D399;
-    --red: #FB7185;
-    --font-display: 'Space Grotesk', system-ui, sans-serif;
-    --font-body: 'Inter', system-ui, sans-serif;
-    --font-mono: 'JetBrains Mono', ui-monospace, monospace;
-    --shadow: 0 1px 0 rgba(255,255,255,0.03) inset, 0 16px 32px -20px rgba(0,0,0,0.65);
-  }
-  * { box-sizing: border-box; }
-  html { background: var(--bg); }
-  body {
-    margin: 0;
-    padding: 28px 20px 56px;
-    max-width: 1080px;
-    margin-left: auto;
-    margin-right: auto;
-    color: var(--text);
-    font-family: var(--font-body);
-    -webkit-font-smoothing: antialiased;
-    position: relative;
-    isolation: isolate;
-  }
-  body::before { content: ""; position: fixed; inset: 0; z-index: -2; background: var(--bg); }
-  body::after {
-    content: "";
-    position: fixed; inset: 0; z-index: -1; pointer-events: none;
-    background:
-      radial-gradient(900px 520px at 12% -6%, rgba(91,156,255,0.14), transparent 60%),
-      radial-gradient(760px 480px at 100% 8%, rgba(255,171,60,0.08), transparent 55%),
-      repeating-linear-gradient(0deg, rgba(255,255,255,0.025) 0px, rgba(255,255,255,0.025) 1px, transparent 1px, transparent 64px),
-      repeating-linear-gradient(90deg, rgba(255,255,255,0.025) 0px, rgba(255,255,255,0.025) 1px, transparent 1px, transparent 64px);
-    -webkit-mask-image: radial-gradient(1200px 900px at 50% 0%, black 40%, transparent 92%);
-    mask-image: radial-gradient(1200px 900px at 50% 0%, black 40%, transparent 92%);
-  }
-  a { color: var(--cool); }
+  .intro { font-size: var(--step-0); color: var(--ink-2); max-width: var(--measure); margin: 0 0 var(--space-4); }
+  .intro strong { color: var(--ink); }
 
-  header.top {
-    display: flex; align-items: center; justify-content: space-between;
-    gap: 12px; margin-bottom: 20px; flex-wrap: wrap;
-  }
-  .brand { display: flex; align-items: center; gap: 12px; }
-  .brand .mark {
-    width: 38px; height: 38px; border-radius: 11px;
-    background: linear-gradient(150deg, var(--warm), #C77A1F);
-    display: flex; align-items: center; justify-content: center; flex: none;
-    box-shadow: 0 6px 16px -6px rgba(255,171,60,0.5);
-  }
-  .brand .mark svg { width: 20px; height: 20px; }
-  .brand h1 { font-family: var(--font-display); font-size: 1.3rem; font-weight: 700; margin: 0; letter-spacing: -0.015em; }
-  .brand p { margin: 2px 0 0; font-size: 0.82rem; color: var(--text-faint); }
+  .jump { display: flex; flex-wrap: wrap; gap: var(--space-2); margin: 0 0 var(--space-2); }
+  .jump a { display: inline-flex; align-items: center; min-height: 36px; padding: 0 12px; border: 1px solid var(--rule); border-radius: var(--radius); font-family: var(--cond); font-weight: 600; font-size: 0.9375rem; color: var(--ink-2); text-decoration: none; }
+  .jump a:hover { border-color: var(--ink); color: var(--ink); }
 
-  .back-link {
-    font-size: 0.82rem; color: var(--text-dim); text-decoration: none;
-    display: inline-flex; align-items: center; gap: 5px;
-    border: 1px solid var(--border); padding: 7px 13px; border-radius: 999px;
-    transition: border-color 0.15s ease, color 0.15s ease;
-  }
-  .back-link:hover { border-color: rgba(91,156,255,0.4); color: var(--text); }
+  .section { scroll-margin-top: var(--space-4); }
+  .grid-2 { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-2) var(--space-6); }
+  @media (min-width: 760px) { .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  .col-title { font-family: var(--serif); font-weight: 700; font-size: var(--step-1); margin: var(--space-3) 0 var(--space-1); display: flex; align-items: center; gap: var(--space-2); flex-wrap: wrap; }
 
-  .updated-badge {
-    font-size: 0.78rem; color: var(--text-faint);
-    display: flex; align-items: center; gap: 7px; white-space: nowrap;
-  }
-  .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 3px rgba(52,211,153,0.15); }
-  .dot.stale { background: var(--text-faint); box-shadow: none; }
+  .controls { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2) var(--space-4); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); padding: var(--space-2) 0; margin: var(--space-2) 0 var(--space-2); }
+  .controls label { font-family: var(--cond); font-weight: 500; font-size: 0.9375rem; color: var(--ink-2); white-space: nowrap; }
+  .controls label b { color: var(--ink); font-weight: 700; }
+  .controls input[type="range"] { flex: 1; min-width: 140px; }
 
-  .intro {
-    background: linear-gradient(175deg, var(--surface) 0%, var(--surface-2) 100%);
-    border: 1px solid var(--border); border-radius: 20px;
-    padding: 20px 22px; margin-bottom: 22px;
-    font-size: 0.86rem; color: var(--text-dim); line-height: 1.6;
-  }
-  .intro strong { color: var(--text); }
+  /* Ticker rows */
+  .list { border-top: 2px solid var(--ink); }
+  .row { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); min-height: 48px; border-bottom: 1px solid var(--rule); font-family: var(--cond); font-size: 0.9375rem; }
+  .row .left { display: flex; align-items: center; gap: 6px; min-width: 0; }
+  .row .sym { font-weight: 700; font-size: 1rem; letter-spacing: 0.01em; }
+  .row .price { color: var(--ink-3); font-weight: 500; margin-left: 4px; }
+  .row .metric { font-weight: 700; text-align: right; }
+  .metric.up { color: var(--opp); }
+  .metric.down { color: var(--cau); }
+  .metric.neutral { color: var(--ink); }
+  .metric .chg { font-weight: 500; font-size: 0.875rem; margin-left: 6px; }
+  .metric .chg.up { color: var(--opp); }
+  .metric .chg.down { color: var(--cau); }
+  .empty-note { font-family: var(--cond); font-weight: 500; color: var(--ink-2); padding: var(--space-3) 0; border-bottom: 1px solid var(--rule); }
 
-  .section-title {
-    font-family: var(--font-display); font-weight: 700; font-size: 1.1rem;
-    margin: 30px 0 12px; display: flex; align-items: center; gap: 9px;
-  }
-  .section-title .em { font-size: 1.2em; }
-  .section-sub { font-size: 0.8rem; color: var(--text-faint); margin: -8px 0 14px; }
+  .star-btn { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; margin-left: -8px; background: none; border: none; border-radius: var(--radius); color: var(--ink-3); cursor: pointer; flex: none; }
+  .star-btn svg { width: 18px; height: 18px; }
+  .star-btn:hover { color: var(--ink); }
+  .star-btn.active { color: var(--ink); }
 
-  .controls-row {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 10px 16px;
-    margin-bottom: 14px;
-    flex-wrap: wrap;
+  /* Insider filings */
+  .filing { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--space-1) var(--space-4); padding: var(--space-3) 0; border-bottom: 1px solid var(--rule); }
+  .filing .top { display: flex; align-items: center; flex-wrap: wrap; gap: 6px 8px; }
+  .filing .sym { font-family: var(--cond); font-weight: 700; font-size: 1.0625rem; }
+  .filing .role { font-family: var(--cond); font-weight: 500; font-size: var(--step--1); color: var(--ink-2); }
+  .filing .who { font-size: 0.9375rem; margin-top: 2px; }
+  .filing .others { font-size: var(--step--1); color: var(--ink-2); margin-top: 2px; }
+  .filing .right { text-align: right; font-family: var(--cond); }
+  .filing .value { font-family: var(--serif); font-weight: 700; font-size: var(--step-1); line-height: 1.2; }
+  .filing .detail { font-weight: 500; font-size: var(--step--1); color: var(--ink-2); }
+  .filing .detail a { color: var(--ink-2); }
+  @media (max-width: 560px) {
+    .filing { grid-template-columns: minmax(0, 1fr); }
+    .filing .right { text-align: left; display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 10px; }
   }
-  .controls-row label {
-    font-size: 0.82rem;
-    color: var(--text-dim);
-    white-space: nowrap;
-  }
-  .controls-row label span { font-family: var(--font-mono); font-weight: 700; color: var(--text); }
-  .controls-row input[type="range"] {
-    flex: 1;
-    min-width: 120px;
-    accent-color: var(--cool);
-    height: 4px;
-    cursor: pointer;
-  }
-  .ma-card-head {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 10px;
-    font-size: 0.95rem;
-  }
-  .ma-select {
-    background: var(--bg);
-    color: var(--text);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 4px 10px;
-    font-family: var(--font-mono);
-    font-weight: 700;
-    font-size: 0.85rem;
-    cursor: pointer;
-  }
-  .ma-select:hover { border-color: rgba(91,156,255,0.4); }
+  .plan { font-family: var(--cond); font-weight: 600; font-size: 0.75rem; color: var(--ink-2); border: 1px solid var(--rule); border-radius: var(--radius); padding: 1px 6px; white-space: nowrap; }
+  .more { margin-top: var(--space-3); }
 
-  @keyframes cardIn {
-    from { opacity: 0; transform: translateY(14px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  .card {
-    background: linear-gradient(165deg, #141B32 0%, var(--surface) 45%);
-    border: 1px solid var(--border); border-radius: 18px;
-    padding: 18px 20px; box-shadow: var(--shadow);
-    transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
-    animation: cardIn 0.5s cubic-bezier(0.16, 0.8, 0.3, 1) both;
-    will-change: transform;
-  }
-  @media (hover: hover) and (pointer: fine) {
-    .card:hover { border-color: rgba(91,156,255,0.3); transform: translateY(-3px); box-shadow: var(--shadow), 0 16px 30px -18px rgba(91,156,255,0.3); }
-  }
-  .card:active { transform: scale(0.99); transition: transform 0.08s ease; }
-
-  .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 14px; }
-
-  .stock-list { display: flex; flex-direction: column; }
-  .stock-row {
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 9px 0; border-bottom: 1px solid var(--border-soft);
-    font-size: 0.86rem;
-  }
-  .stock-row:last-child { border-bottom: none; }
-  .stock-row .sym { font-family: var(--font-mono); font-weight: 700; font-size: 0.9rem; }
-  .star-btn {
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 1.05rem;
-    line-height: 1;
-    padding: 0 6px 0 0;
-    color: var(--text-faint);
-    vertical-align: middle;
-    transition: color 0.15s ease, transform 0.1s ease;
-  }
-  .star-btn:hover { color: #FFD24D; }
-  .star-btn.active { color: #FFD24D; }
-  .star-btn:active { transform: scale(0.85); }
-  .stock-row .price { color: var(--text-faint); font-family: var(--font-mono); font-size: 0.78rem; margin-left: 8px; }
-  .stock-row .metric { font-family: var(--font-mono); font-weight: 700; }
-  .metric.opportunity { color: var(--cool); }
-  .metric.caution { color: var(--warm); }
-  .metric.neutral { color: var(--text-dim); }
-  .metric.up, .num.up { color: var(--green); }
-  .metric.down, .num.down { color: var(--red); }
-  .metric .chg { font-weight: 500; font-size: 0.78rem; margin-left: 6px; }
-  .metric .chg.up { color: var(--green); }
-  .metric .chg.down { color: var(--red); }
-  .section-asof { font-size: 0.72rem; color: var(--text-faint); margin: -6px 0 12px; }
-  .empty-note { color: var(--text-faint); font-size: 0.84rem; padding: 6px 0; }
-
-  .sector-table { width: 100%; border-collapse: collapse; font-size: 0.86rem; }
-  .sector-table th {
-    text-align: left; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.05em;
-    color: var(--text-faint); font-weight: 600; padding: 0 10px 10px 0;
-    border-bottom: 1px solid var(--border);
-  }
-  .sector-table td { padding: 10px 10px 10px 0; border-bottom: 1px solid var(--border-soft); }
-  .sector-table tr:last-child td { border-bottom: none; }
-  .sector-table .rank { color: var(--text-faint); font-family: var(--font-mono); width: 28px; }
-  .sector-table .name { font-weight: 600; }
-  .sector-table .sym { font-family: var(--font-mono); color: var(--text-faint); font-size: 0.78rem; }
-  .sector-table .num { font-family: var(--font-mono); font-weight: 700; text-align: right; }
-  .sector-table tr.benchmark td { background: rgba(255,255,255,0.025); }
-  .sector-table tr.benchmark .name { font-weight: 500; color: var(--text-dim); font-style: italic; }
-  .sector-note { font-size: 0.76rem; color: var(--text-faint); margin-top: 10px; line-height: 1.5; }
-
-  .insider-row {
-    display: flex; align-items: flex-start; justify-content: space-between;
-    gap: 10px; padding: 12px 0; border-bottom: 1px solid var(--border-soft);
-  }
-  .insider-row:last-child { border-bottom: none; }
-  .insider-left .sym-role { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
-  .insider-left .sym { font-family: var(--font-mono); font-weight: 700; font-size: 0.95rem; }
-  .insider-left .role { font-size: 0.76rem; color: var(--text-faint); }
-  .insider-left .name { font-size: 0.84rem; color: var(--text-dim); margin-top: 2px; }
-  .insider-right { text-align: right; flex: none; }
-  .insider-right .value { font-family: var(--font-mono); font-weight: 700; font-size: 0.9rem; }
-  .insider-right .detail { font-size: 0.72rem; color: var(--text-faint); margin-top: 2px; }
-  .action-badge { font-size: 0.66rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; padding: 2px 8px; border-radius: 999px; }
-  .action-badge.buy { color: var(--cool); background: var(--cool-dim); }
-  .action-badge.sell { color: var(--warm); background: var(--warm-dim); }
-  .plan-badge {
-    font-size: 0.62rem; font-weight: 600; letter-spacing: 0.03em; color: var(--text-dim);
-    border: 1px solid var(--border); padding: 1px 7px; border-radius: 999px; white-space: nowrap;
-  }
-  .insider-right .detail a { color: var(--text-faint); text-decoration: none; border-bottom: 1px dotted rgba(166,175,198,0.4); }
-  .insider-right .detail a:hover { color: var(--text-dim); }
-  .insider-left .others { font-size: 0.74rem; color: var(--text-faint); margin-top: 2px; }
-
-  footer {
-    margin-top: 32px; padding-top: 20px; border-top: 1px solid var(--border);
-    font-size: 0.8rem; color: var(--text-faint); line-height: 1.7;
-  }
-  footer p { margin: 6px 0; }
-  footer strong { color: var(--text-dim); }
-
+  /* Sector leaderboard */
   .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-
-  @media (max-width: 480px) {
-    body { padding: 18px 14px 44px; }
-    .card { padding: 15px 16px; }
-    .section-title { font-size: 1rem; }
-    .sector-table { font-size: 0.8rem; }
-    .sector-table th { padding-right: 6px; }
-    .sector-table td { padding: 9px 6px 9px 0; }
-    .sector-table .rank { width: 20px; }
-    .sector-table .num { font-size: 0.78rem; }
-  }
+  .sector-table { width: 100%; border-collapse: collapse; font-family: var(--cond); font-size: 0.9375rem; }
+  .sector-table th { text-align: left; font-weight: 600; font-size: var(--step--1); color: var(--ink-2); padding: var(--space-2) var(--space-2) var(--space-2) 0; border-bottom: 2px solid var(--ink); white-space: nowrap; }
+  .sector-table td { padding: 10px var(--space-2) 10px 0; border-bottom: 1px solid var(--rule); }
+  .sector-table .rank { color: var(--ink-3); width: 28px; font-weight: 600; }
+  .sector-table .name { font-weight: 600; }
+  .sector-table .sym { color: var(--ink-3); font-weight: 500; font-size: var(--step--1); }
+  .sector-table .num { font-weight: 700; text-align: right; white-space: nowrap; }
+  .num.up { color: var(--opp); }
+  .num.down { color: var(--cau); }
+  .sector-table tr.benchmark td { background: var(--paper-2); }
+  .sector-table tr.benchmark .name { font-weight: 500; color: var(--ink-2); }
+  .sector-note { font-size: 0.875rem; color: var(--ink-2); margin-top: var(--space-2); max-width: var(--measure); }
 </style>
 </head>
 <body>
+<div class="page">
 
-<header class="top">
-  <div class="brand">
-    <div class="mark">
-      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M4 16l4-5 4 3 4-7 4 4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        <circle cx="20" cy="11" r="1.6" fill="white"/>
-      </svg>
-    </div>
-    <div>
-      <h1>Opportunity Scanner</h1>
-      <p>Insider buying, breakouts &amp; screens</p>
-    </div>
-  </div>
-  <a class="back-link" href="index.html">← Market Pulse</a>
+<header class="mast">
+  <a class="brand" href="index.html">Market Pulse</a>
+  <div class="mast-side"><span>S&amp;P 500 · Nasdaq 100</span><button class="theme-btn" id="theme-btn" type="button">Edition</button></div>
 </header>
-
-<div class="updated-badge" id="updated-badge" style="margin-bottom:18px;">
-  <span class="dot" id="updated-dot"></span>
-  <span id="updated-text">Loading…</span>
+<div class="dateline">
+  <span id="today-date"></span>
+  <span id="updated-badge"><span class="live-dot" id="updated-dot"></span><span id="updated-text">Loading…</span></span>
 </div>
+<nav class="tabs" aria-label="Sections">
+  <a href="index.html">Today</a>
+  <a href="opportunity.html" aria-current="page">Scanner</a>
+  <a href="weekly.html">Weekly recap</a>
+</nav>
 
-<div class="intro">
-  <strong>What this page is:</strong> a daily scan of the S&amp;P 500 + Nasdaq 100 for technical
-  setups worth a second look, plus official SEC insider-trading disclosures. None of this is a
-  recommendation — it's a starting point for your own research, not a signal to buy or sell.
-</div>
+<h1 class="visually-hidden">Scanner</h1>
+<p class="intro"><strong>A daily scan of the S&amp;P 500 and Nasdaq 100</strong> for setups worth a second look, plus official SEC insider-trading filings. A starting point for your own research, not a recommendation to buy or sell.</p>
 
-<div id="watchlist-title" class="section-title" style="display:none;"><span class="em">⭐</span> My Watchlist</div>
-<div id="watchlist-sub" class="section-sub" style="display:none;">Tap the star next to any ticker on this page to add or remove it here. Saved on this device only — no account needed.</div>
-<div id="watchlist-card" class="card" style="display:none;"></div>
+<nav class="jump" aria-label="Jump to a screen">
+  <a href="#watchlist" id="jump-watchlist" hidden>My watchlist</a>
+  <a href="#insider-buying">Insider buying</a>
+  <a href="#insider-selling">Insider selling</a>
+  <a href="#sectors">Sector leaders</a>
+  <a href="#highs-lows">52-week highs &amp; lows</a>
+  <a href="#volume">Unusual volume</a>
+  <a href="#averages">Key averages</a>
+</nav>
 
-<div class="section-title"><span class="em">🏛️</span> Insider Buying</div>
-<div class="section-sub">Open-market purchases of $10K or more by officers, directors &amp; 10%+ owners (official SEC Form 4 filings), last 30 days, largest first.</div>
-<div class="section-asof" id="asof-insiders"></div>
-<div class="card" id="insider-buys-card"></div>
+<section class="section" id="watchlist" hidden>
+  <div class="section-head"><h2 class="h-section">My watchlist</h2><span class="asof">Saved on this device only, no account needed</span></div>
+  <p class="lede">Tap the star next to any ticker on this page to add or remove it here.</p>
+  <div class="list" id="watchlist-card"></div>
+</section>
 
-<div class="section-title"><span class="em">📉</span> Insider Selling</div>
-<div class="section-sub">Largest open-market sales over the last 30 days. A noisier signal than buying — insiders sell for many reasons. Sales marked <b>10b5-1 plan</b> were scheduled in advance and say even less.</div>
-<div class="card" id="insider-sells-card"></div>
+<section class="section" id="insider-buying">
+  <div class="section-head"><h2 class="h-section">Insider buying</h2><span class="asof" id="asof-insiders"></span></div>
+  <p class="lede">Open-market purchases of $10K or more by officers, directors and 10%+ owners (official SEC Form 4 filings), last 30 days, largest first.</p>
+  <div class="list" id="insider-buys-card"></div>
+</section>
 
-<div class="section-title"><span class="em">🔥</span> Sector Breakout Leaderboard</div>
-<div class="section-sub">All 11 SPDR sector ETFs, ranked by 5-day return, with the S&amp;P 500 (SPY) as the benchmark row.</div>
-<div class="section-asof" id="asof-sectors"></div>
-<div class="card"><div class="table-wrap"><table class="sector-table" id="sector-table"></table></div>
-  <div class="sector-note">Ranks are relative: in a down week the leaders can still be negative — what matters is whether a sector is beating SPY.</div>
-</div>
+<section class="section" id="insider-selling">
+  <div class="section-head"><h2 class="h-section">Insider selling</h2></div>
+  <p class="lede">Largest open-market sales over the last 30 days. A noisier signal than buying: insiders sell for many reasons. Sales marked <b>10b5-1 plan</b> were scheduled in advance and say even less.</p>
+  <div class="list" id="insider-sells-card"></div>
+</section>
 
-<div class="section-title"><span class="em">📈</span> 52-Week Highs &amp; Lows</div>
-<div class="section-sub">Closing price vs the highest high / lowest low of the past 52 weeks (intraday). Near highs: momentum and breakout candidates. Near lows: beaten-down names for contrarian research.</div>
-<div class="section-asof asof-scan"></div>
-<div class="controls-row">
-  <label for="ctl-52w-pct">Within <span id="ctl-52w-pct-val">3.0</span>% of the 52-week extreme</label>
-  <input type="range" id="ctl-52w-pct" min="0.5" max="10" step="0.5" value="3">
-</div>
-<div class="grid-2">
-  <div class="card">
-    <div style="font-weight:600;margin-bottom:8px;">Near 52-Week High</div>
-    <div class="stock-list" id="hi52-list"></div>
+<section class="section" id="sectors">
+  <div class="section-head"><h2 class="h-section">Sector leaderboard</h2><span class="asof" id="asof-sectors"></span></div>
+  <p class="lede">All 11 SPDR sector ETFs ranked by 5-day return, with the S&amp;P 500 (SPY) as the benchmark row.</p>
+  <div class="table-wrap"><table class="sector-table" id="sector-table"></table></div>
+  <p class="sector-note">Ranks are relative: in a down week the leaders can still be negative. What matters is whether a sector is beating SPY.</p>
+</section>
+
+<section class="section" id="highs-lows">
+  <div class="section-head"><h2 class="h-section">52-week highs and lows</h2><span class="asof asof-scan"></span></div>
+  <p class="lede">Closing price vs the highest high and lowest low of the past 52 weeks. Near highs: momentum and breakout candidates. Near lows: beaten-down names for contrarian research.</p>
+  <div class="controls">
+    <label for="ctl-52w-pct">Within <b id="ctl-52w-pct-val">3.0</b>% of the 52-week extreme</label>
+    <input type="range" id="ctl-52w-pct" min="0.5" max="10" step="0.5" value="3">
   </div>
-  <div class="card">
-    <div style="font-weight:600;margin-bottom:8px;">Near 52-Week Low</div>
-    <div class="stock-list" id="lo52-list"></div>
+  <div class="grid-2">
+    <div><h3 class="col-title">Near a 52-week high</h3><div class="list" id="hi52-list"></div></div>
+    <div><h3 class="col-title">Near a 52-week low</h3><div class="list" id="lo52-list"></div></div>
   </div>
-</div>
+</section>
 
-<div class="section-title"><span class="em">📊</span> Unusual Volume</div>
-<div class="section-sub">The last session's volume vs its 20-day average, with that day's price move — heavy volume on a big up day reads very differently from heavy volume on a big down day.</div>
-<div class="section-asof asof-scan"></div>
-<div class="controls-row">
-  <label for="ctl-vol-ratio">At least <span id="ctl-vol-ratio-val">2.0</span>x average volume</label>
-  <input type="range" id="ctl-vol-ratio" min="1.2" max="5" step="0.1" value="2">
-</div>
-<div class="card"><div class="stock-list" id="volume-list"></div></div>
-
-<div class="section-title"><span class="em">🎯</span> Testing Key Averages</div>
-<div class="section-sub">Stocks sitting close to a moving average — just above it can act as support, just below as resistance. Pick the average and how close counts as "near".</div>
-<div class="section-asof asof-scan"></div>
-<div class="controls-row">
-  <label for="ctl-ma-pct">Within <span id="ctl-ma-pct-val">2.0</span>% of the average</label>
-  <input type="range" id="ctl-ma-pct" min="0.5" max="8" step="0.5" value="2">
-</div>
-<div class="grid-2">
-  <div class="card">
-    <div class="ma-card-head">
-      <span style="font-weight:600;">Near</span>
-      <select id="ctl-ma-period-a" class="ma-select"></select>
-      <span style="font-weight:600;">SMA</span>
-    </div>
-    <div class="stock-list" id="sma-list-a"></div>
+<section class="section" id="volume">
+  <div class="section-head"><h2 class="h-section">Unusual volume</h2><span class="asof asof-scan"></span></div>
+  <p class="lede">The last session's volume vs its 20-day average, with that day's price move. Heavy volume on a big up day reads very differently from heavy volume on a big down day.</p>
+  <div class="controls">
+    <label for="ctl-vol-ratio">At least <b id="ctl-vol-ratio-val">2.0</b>× average volume</label>
+    <input type="range" id="ctl-vol-ratio" min="1.2" max="5" step="0.1" value="2">
   </div>
-  <div class="card">
-    <div class="ma-card-head">
-      <span style="font-weight:600;">Near</span>
-      <select id="ctl-ma-period-b" class="ma-select"></select>
-      <span style="font-weight:600;">SMA</span>
-    </div>
-    <div class="stock-list" id="sma-list-b"></div>
-  </div>
-</div>
+  <div class="list" id="volume-list"></div>
+</section>
 
-<footer>
+<section class="section" id="averages">
+  <div class="section-head"><h2 class="h-section">Testing key averages</h2><span class="asof asof-scan"></span></div>
+  <p class="lede">Stocks sitting close to a moving average: just above it can act as support, just below as resistance. Pick the average and how close counts as near.</p>
+  <div class="controls">
+    <label for="ctl-ma-pct">Within <b id="ctl-ma-pct-val">2.0</b>% of the average</label>
+    <input type="range" id="ctl-ma-pct" min="0.5" max="8" step="0.5" value="2">
+  </div>
+  <div class="grid-2">
+    <div><h3 class="col-title"><label for="ctl-ma-period-a">Near the</label> <select id="ctl-ma-period-a" class="select"></select> average</h3><div class="list" id="sma-list-a"></div></div>
+    <div><h3 class="col-title"><label for="ctl-ma-period-b">Near the</label> <select id="ctl-ma-period-b" class="select"></select> average</h3><div class="list" id="sma-list-b"></div></div>
+  </div>
+</section>
+
+<footer class="footer">
   <p><strong>Not financial advice.</strong> This page summarizes public technical data and official
     SEC disclosures for informational purposes only. It is not a recommendation to buy or sell
     any security.</p>
-  <p>Data: Yahoo Finance (price/volume/moving averages) for S&amp;P 500 + Nasdaq 100 constituents;
+  <p>Data: Yahoo Finance (price, volume, moving averages) for S&amp;P 500 + Nasdaq 100 constituents;
     SEC EDGAR (official Form 4 insider-trading filings). Sector data refreshes about every 10 minutes
-    while the market is open; the stock scan after each close; insider filings every few hours — see
+    while the market is open; the stock scan after each close; insider filings every few hours. See
     each section's timestamp.</p>
 </footer>
+</div>
 
 <script>
 const $ = (sel) => document.querySelector(sel);
 const $$ = (sel) => document.querySelectorAll(sel);
 const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 const num = (v) => (typeof v === "number" && Number.isFinite(v) ? v : null);
+const MARK = window.MP_MARK;
 
 function fmtPct(v, digits = 2) {
   v = num(v);
@@ -389,6 +203,7 @@ function fmtPct(v, digits = 2) {
   return `${v > 0 ? "+" : ""}${v.toFixed(digits)}%`;
 }
 const upDown = (v) => (num(v) === null || v === 0 ? "" : v > 0 ? "up" : "down");
+const markFor = (v) => (num(v) === null || v === 0 ? "" : v > 0 ? MARK.up : MARK.down);
 function fmtMoney(v) {
   v = num(v);
   if (v === null) return "—";
@@ -439,29 +254,37 @@ function saveWatchlist() {
   try { localStorage.setItem(WATCHLIST_KEY, JSON.stringify([...watchlist])); } catch (e) { /* ignore */ }
 }
 
+const STAR = (on) => `<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2.2l2.4 5 5.4.6-4 3.7 1.1 5.4L10 14.2 5.1 16.9l1.1-5.4-4-3.7 5.4-.6z" fill="${on ? "currentColor" : "none"}" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>`;
 function starButton(sym) {
   if (!sym) return "";
   const active = watchlist.has(sym);
-  return `<button class="star-btn ${active ? "active" : ""}" data-sym="${esc(sym)}" aria-label="Toggle watchlist for ${esc(sym)}">${active ? "★" : "☆"}</button>`;
+  return `<button class="star-btn ${active ? "active" : ""}" type="button" data-sym="${esc(sym)}" aria-pressed="${active}" aria-label="Watch ${esc(sym)}">${STAR(active)}</button>`;
 }
 
 function stockRow(sym, price, metricHTML, cls = "neutral") {
-  return `<div class="stock-row">
-    <div>${starButton(sym)}<span class="sym">${esc(sym)}</span><span class="price">${fmtPrice(price)}</span></div>
+  return `<div class="row">
+    <div class="left">${starButton(sym)}<span class="sym">${esc(sym)}</span><span class="price">${fmtPrice(price)}</span></div>
     <div class="metric ${cls}">${metricHTML}</div>
   </div>`;
 }
 
-function renderList(containerId, items, formatFn, emptyMsg) {
+// Render a list; long lists show the first `limit` rows with a button for the rest.
+function renderList(containerId, items, formatFn, emptyMsg, limit = 0) {
   const el = $("#" + containerId);
-  el.innerHTML = items && items.length ? items.map(formatFn).join("") : `<div class="empty-note">${esc(emptyMsg)}</div>`;
+  if (!items || !items.length) { el.innerHTML = `<div class="empty-note">${esc(emptyMsg)}</div>`; return; }
+  const shown = limit && items.length > limit ? items.slice(0, limit) : items;
+  el.innerHTML = shown.map(formatFn).join("") + (shown.length < items.length
+    ? `<div class="more"><button class="btn" type="button" data-more="${esc(containerId)}">Show all ${items.length}</button></div>` : "");
+  if (shown.length < items.length) {
+    el.querySelector("[data-more]").addEventListener("click", () => renderList(containerId, items, formatFn, emptyMsg, 0));
+  }
 }
 
 // ---------- Insider rows ----------
 function secLink(t) {
   if (!t.cik || !t.accession) return "";
   const acc = String(t.accession);
-  return `<a href="https://www.sec.gov/Archives/edgar/data/${encodeURIComponent(t.cik)}/${acc.replace(/-/g, "")}/${encodeURIComponent(acc)}-index.htm" target="_blank" rel="noopener">SEC filing ↗</a>`;
+  return `<a href="https://www.sec.gov/Archives/edgar/data/${encodeURIComponent(t.cik)}/${acc.replace(/-/g, "")}/${encodeURIComponent(acc)}-index.htm" target="_blank" rel="noopener">SEC filing</a>`;
 }
 
 function insiderRow(t) {
@@ -470,19 +293,19 @@ function insiderRow(t) {
   const traded = t.date_first && t.date_first !== t.date ? `${fmtDay(t.date_first)}–${fmtDay(t.date)}` : fmtDay(t.date);
   const when = t.filed ? `Traded ${traded} · filed ${fmtDay(t.filed)}` : (t.date ? `Traded ${fmtDay(t.date)}` : "");
   return `
-  <div class="insider-row">
-    <div class="insider-left">
-      <div class="sym-role">
+  <div class="filing">
+    <div>
+      <div class="top">
         ${starButton(t.symbol)}
-        <span class="action-badge ${isBuy ? "buy" : "sell"}">${isBuy ? "Buy" : "Sell"}</span>
+        <span class="chip ${isBuy ? "buy" : "sell"}">${isBuy ? MARK.up + "Buy" : MARK.down + "Sell"}</span>
         <span class="sym" ${t.security ? `title="${esc(t.security)} shares of ${esc(t.symbol)}"` : ""}>${esc(t.security || t.symbol || "—")}</span>
         <span class="role">${esc(t.role || "")}</span>
-        ${t.plan ? `<span class="plan-badge" title="Made under a pre-arranged Rule 10b5-1 trading plan">10b5-1 plan</span>` : ""}
+        ${t.plan ? `<span class="plan" title="Made under a pre-arranged Rule 10b5-1 trading plan">10b5-1 plan</span>` : ""}
       </div>
-      <div class="name">${esc(t.insider || "Unknown")}</div>
+      <div class="who">${esc(t.insider || "Unknown")}</div>
       ${others.length ? `<div class="others">Also reported by ${esc(others.slice(0, 2).join(", "))}${others.length > 2 ? ` +${others.length - 2} more` : ""} (same trade)</div>` : ""}
     </div>
-    <div class="insider-right">
+    <div class="right">
       <div class="value">${fmtMoney(t.value)}</div>
       <div class="detail">${num(t.shares) ? Math.round(t.shares).toLocaleString("en-US") + " sh @ " + fmtPrice(t.price) : ""}</div>
       <div class="detail">${esc(when)}</div>
@@ -513,12 +336,12 @@ function saveSettings() {
     loadJSON("data/insiders.json"),
   ]);
 
-  // Header badge: what the stock screens are based on.
+  // Dateline badge: what the stock screens are based on.
   const scanDay = opp?.as_of || null;
-  $("#updated-text").textContent = scanDay
-    ? `Stock scan as of ${fmtDay(scanDay)} close`
-    : (opp?.generated_at ? `Stock scan updated ${timeAgo(opp.generated_at)}` : "Waiting for first data run");
-  $("#updated-dot").classList.toggle("stale", !opp);
+  $("#updated-text").innerHTML = scanDay
+    ? `<b>Stock scan</b> as of ${esc(fmtDay(scanDay))} close`
+    : (opp?.generated_at ? `Stock scan updated ${esc(timeAgo(opp.generated_at))}` : "Waiting for the first data run");
+  if (opp) $("#updated-dot").classList.add("live");
   $$(".asof-scan").forEach((el) => {
     el.textContent = scanDay ? `Based on the ${fmtDay(scanDay)} close · updated after each trading day` : "";
   });
@@ -532,9 +355,9 @@ function saveSettings() {
     $("#asof-insiders").textContent = `Checked ${timeAgo(insiders.generated_at)}${covered}`;
   }
   renderList("insider-buys-card", buys, insiderRow,
-    `No open-market insider purchases at S&P 500 / Nasdaq-100 companies in the last ${windowDays} days.`);
+    `No open-market insider purchases at S&P 500 / Nasdaq-100 companies in the last ${windowDays} days.`, 10);
   renderList("insider-sells-card", sells, insiderRow,
-    `No open-market insider sales at S&P 500 / Nasdaq-100 companies in the last ${windowDays} days.`);
+    `No open-market insider sales at S&P 500 / Nasdaq-100 companies in the last ${windowDays} days.`, 8);
 
   // ---------- Sector leaderboard (with SPY as the benchmark row) ----------
   {
@@ -546,18 +369,17 @@ function saveSettings() {
     }
     rows.sort((a, b) => (num(b.return_5d_pct) ?? -999) - (num(a.return_5d_pct) ?? -999));
     let rank = 0;
+    const cell = (v) => `<td class="num ${upDown(v)}">${markFor(v)} ${fmtPct(v)}</td>`;
     const tbody = rows.map((r) => {
       if (!r.benchmark) rank++;
       return `<tr class="${r.benchmark ? "benchmark" : ""}">
         <td class="rank">${r.benchmark ? "" : rank}</td>
         <td class="name">${esc(r.name)}<br><span class="sym">${esc(r.symbol)}</span></td>
-        <td class="num ${upDown(r.return_5d_pct)}">${fmtPct(r.return_5d_pct)}</td>
-        <td class="num ${upDown(r.return_20d_pct)}">${fmtPct(r.return_20d_pct)}</td>
-        <td class="num ${upDown(r.distance_from_sma150_pct)}">${fmtPct(r.distance_from_sma150_pct)}</td>
+        ${cell(r.return_5d_pct)}${cell(r.return_20d_pct)}${cell(r.distance_from_sma150_pct)}
       </tr>`;
     }).join("");
     $("#sector-table").innerHTML = rows.length ? `
-      <thead><tr><th></th><th>Sector</th><th style="text-align:right">5D</th><th style="text-align:right">20D</th><th style="text-align:right">vs<br>SMA150</th></tr></thead>
+      <thead><tr><th scope="col"><span class="visually-hidden">Rank</span></th><th scope="col">Sector</th><th scope="col" style="text-align:right">5 days</th><th scope="col" style="text-align:right">20 days</th><th scope="col" style="text-align:right">vs 150-day</th></tr></thead>
       <tbody>${tbody}</tbody>` : `<tbody><tr><td class="empty-note">No data yet.</td></tr></tbody>`;
     if (spy) {
       $("#asof-sectors").textContent = spy.in_session
@@ -584,7 +406,7 @@ function saveSettings() {
   ctlVol.value = settings.volRatio; ctlVolVal.textContent = settings.volRatio.toFixed(1);
   ctlMa.value = settings.maPct; ctlMaVal.textContent = settings.maPct.toFixed(1);
 
-  const chgHTML = (v) => (num(v) === null ? "" : `<span class="chg ${upDown(v)}">${fmtPct(v, 1)} day</span>`);
+  const chgHTML = (v) => (num(v) === null ? "" : `<span class="chg ${upDown(v)}">${markFor(v)} ${fmtPct(v, 1)} day</span>`);
 
   function renderStockScreens() {
     const hi52 = stocks
@@ -593,7 +415,7 @@ function saveSettings() {
       .slice(0, 30);
     renderList("hi52-list", hi52,
       (r) => stockRow(r.symbol, r.price, r.dist_hi52_pct === 0 ? "at the high" : `${r.dist_hi52_pct.toFixed(2)}% below high`, "up"),
-      `No stocks currently within ${settings.w52Pct}% of their 52-week high.`);
+      `No stocks are within ${settings.w52Pct}% of their 52-week high. Widen the range above to see more.`, 12);
 
     const lo52 = stocks
       .filter((s) => num(s.dist_lo52_pct) !== null && s.dist_lo52_pct <= settings.w52Pct)
@@ -601,7 +423,7 @@ function saveSettings() {
       .slice(0, 30);
     renderList("lo52-list", lo52,
       (r) => stockRow(r.symbol, r.price, r.dist_lo52_pct === 0 ? "at the low" : `${r.dist_lo52_pct.toFixed(2)}% above low`, "down"),
-      `No stocks currently within ${settings.w52Pct}% of their 52-week low.`);
+      `No stocks are within ${settings.w52Pct}% of their 52-week low. Widen the range above to see more.`, 12);
 
     const volSurge = stocks
       .filter((s) => num(s.volume_ratio) !== null && s.volume_ratio >= settings.volRatio)
@@ -609,7 +431,7 @@ function saveSettings() {
       .slice(0, 30);
     renderList("volume-list", volSurge,
       (r) => stockRow(r.symbol, r.price, `${r.volume_ratio.toFixed(1)}× avg${chgHTML(r.chg_1d_pct)}`, "neutral"),
-      `No stocks traded at ${settings.volRatio}× their average volume or more in the last session.`);
+      `No stocks traded at ${settings.volRatio}× their average volume or more last session. Lower the threshold above to see more.`, 12);
 
     [[selA.value, "sma-list-a"], [selB.value, "sma-list-b"]].forEach(([period, listId]) => {
       const near = stocks
@@ -624,7 +446,7 @@ function saveSettings() {
         (r) => stockRow(r.symbol, r.price,
           r.distPct >= 0 ? `${r.distPct.toFixed(2)}% above` : `${Math.abs(r.distPct).toFixed(2)}% below`,
           r.distPct >= 0 ? "up" : "down"),
-        `No stocks currently within ${settings.maPct}% of their ${period}-day SMA.`);
+        `No stocks are within ${settings.maPct}% of their ${period}-day average.`, 12);
     });
   }
 
@@ -645,7 +467,7 @@ function saveSettings() {
 
   if (!stocks.length) {
     ["hi52-list", "lo52-list", "volume-list", "sma-list-a", "sma-list-b"].forEach((id) => {
-      $("#" + id).innerHTML = `<div class="empty-note">No data yet.</div>`;
+      $("#" + id).innerHTML = `<div class="empty-note">No scan data yet. It arrives after the next market close.</div>`;
     });
   } else {
     renderStockScreens();
@@ -655,7 +477,8 @@ function saveSettings() {
   const allInsider = [...(insiders?.buys || []), ...(insiders?.sells || [])];
   function renderWatchlistSection() {
     const show = watchlist.size > 0;
-    ["#watchlist-title", "#watchlist-sub", "#watchlist-card"].forEach((id) => { $(id).style.display = show ? "" : "none"; });
+    $("#watchlist").hidden = !show;
+    $("#jump-watchlist").hidden = !show;
     if (!show) return;
 
     $("#watchlist-card").innerHTML = [...watchlist].sort().map((sym) => {
@@ -663,27 +486,27 @@ function saveSettings() {
       const hadBuy = allInsider.some((t) => t.symbol === sym && t.action === "Buy");
       const hadSell = allInsider.some((t) => t.symbol === sym && t.action === "Sell");
       const badge = hadBuy
-        ? `<span class="action-badge buy" style="margin-left:6px;">Insider buy</span>`
-        : hadSell ? `<span class="action-badge sell" style="margin-left:6px;">Insider sell</span>` : "";
+        ? `<span class="chip buy">${MARK.up}Insider buy</span>`
+        : hadSell ? `<span class="chip sell">${MARK.down}Insider sell</span>` : "";
       if (!stock) {
         return `
-        <div class="insider-row">
-          <div class="insider-left">
-            <div class="sym-role">${starButton(sym)}<span class="sym">${esc(sym)}</span>${badge}</div>
-            <div class="name">Not in this scan's S&amp;P 500 / Nasdaq-100 universe</div>
+        <div class="filing">
+          <div>
+            <div class="top">${starButton(sym)}<span class="sym">${esc(sym)}</span>${badge}</div>
+            <div class="who">Not in this scan's S&amp;P 500 / Nasdaq-100 universe</div>
           </div>
         </div>`;
       }
       const sma50 = num(stock.sma?.["50"]);
       const dist50 = sma50 ? ((stock.price - sma50) / sma50) * 100 : null;
       return `
-      <div class="insider-row">
-        <div class="insider-left">
-          <div class="sym-role">${starButton(sym)}<span class="sym">${esc(sym)}</span>${badge}</div>
-          <div class="name">${fmtPrice(stock.price)}${num(stock.chg_1d_pct) !== null ? ` (${fmtPct(stock.chg_1d_pct, 1)})` : ""}${dist50 !== null ? ` · ${fmtPct(dist50)} vs SMA50` : ""}</div>
+      <div class="filing">
+        <div>
+          <div class="top">${starButton(sym)}<span class="sym">${esc(sym)}</span>${badge}</div>
+          <div class="who">${fmtPrice(stock.price)}${num(stock.chg_1d_pct) !== null ? ` (${fmtPct(stock.chg_1d_pct, 1)})` : ""}${dist50 !== null ? ` · ${fmtPct(dist50)} vs 50-day` : ""}</div>
         </div>
-        <div class="insider-right">
-          <div class="detail">${num(stock.dist_hi52_pct) !== null ? `${stock.dist_hi52_pct.toFixed(1)}% below 52w high` : ""}</div>
+        <div class="right">
+          <div class="detail">${num(stock.dist_hi52_pct) !== null ? `${stock.dist_hi52_pct.toFixed(1)}% below 52-week high` : ""}</div>
           <div class="detail">${num(stock.volume_ratio) !== null ? `${stock.volume_ratio.toFixed(1)}× avg volume` : ""}</div>
         </div>
       </div>`;
@@ -701,15 +524,14 @@ function saveSettings() {
     $$(".star-btn").forEach((b) => {
       if (b.dataset.sym !== sym) return;
       b.classList.toggle("active", active);
-      b.textContent = active ? "★" : "☆";
+      b.setAttribute("aria-pressed", String(active));
+      b.innerHTML = STAR(active);
     });
     renderWatchlistSection();
   });
 
   renderWatchlistSection();
 })();
-
-document.addEventListener("touchstart", function () {}, { passive: true });
 
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
