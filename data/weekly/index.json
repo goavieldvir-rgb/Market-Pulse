@@ -1,6 +1,13 @@
 {
   "editions": [
     {
+      "week_of": "2026-10-19",
+      "label": "Oct 19–23, 2026",
+      "title": "AI’s debt scare breaks the chip trade",
+      "published": "2026-10-18",
+      "file": "data/weekly/2026-10-19.json"
+    },
+    {
       "week_of": "2026-10-12",
       "label": "Oct 12–16, 2026",
       "title": "A breakout led by the boring stocks",
