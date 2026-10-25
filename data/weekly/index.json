@@ -1,6 +1,13 @@
 {
   "editions": [
     {
+      "week_of": "2026-10-26",
+      "label": "Oct 26–30, 2026",
+      "title": "Black October hits the web as Meta’s cash burn hits AI stocks",
+      "published": "2026-10-25",
+      "file": "data/weekly/2026-10-26.json"
+    },
+    {
       "week_of": "2026-10-19",
       "label": "Oct 19–23, 2026",
       "title": "AI’s debt scare breaks the chip trade",
