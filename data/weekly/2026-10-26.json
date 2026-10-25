@@ -3,12 +3,12 @@
   "week_of": "2026-10-26",
   "label": "Oct 26–30, 2026",
   "published": "2026-10-25",
-  "title": "Meta’s cash burn sets up a Fed and megacap week",
-  "deck": "The S&P 500 slipped 0.5% for a second weekly loss and is resting on its 100-day line near 7,605. Meta’s first cash outflow in over a decade sank chip and AI stocks Thursday, while small caps rose 2% and Brent hit a six-month high. Next: the Fed, Microsoft and Alphabet on Wednesday, then GDP, PCE and Amazon on Thursday.",
+  "title": "Black October hits the web as Meta’s cash burn hits AI stocks",
+  "deck": "A wave of attacks on AI-found PHP flaws, dubbed Black October, knocked websites offline and lifted cybersecurity stocks about 6% Friday. A day earlier, Meta’s first cash outflow in over a decade sank chip and AI stocks. The S&P 500 slipped 0.5% and rests on its 100-day line near 7,605. Next: the Fed, Microsoft and Alphabet Wednesday, then GDP, PCE and Amazon Thursday.",
   "tldr": [
     {
       "label": "What changed",
-      "text": "Meta’s first cash outflow in a decade revived AI-spending fears. Communication stocks and chips fell; small caps and the equal-weight S&P rose."
+      "text": "Black October: attacks on AI-found PHP flaws knocked sites offline and lifted cyber stocks about 6% Friday. Meta’s cash outflow sank chips and AI; small caps and the equal-weight S&P rose."
     },
     {
       "label": "What’s next",
@@ -94,6 +94,12 @@
         "value": "Energy RSI 69, tech 38",
         "tone": "down",
         "note": "Energy, staples and health care are the most overbought; tech, chips and communications are oversold but not yet at extremes."
+      },
+      {
+        "label": "Cybersecurity stocks, Friday",
+        "value": "About +5% to +6.6%",
+        "tone": "up",
+        "note": "Palo Alto, Okta, Cloudflare, CrowdStrike and Zscaler rallied as the PHP attacks spread. Analysts expect more spending on patching and monitoring."
       }
     ],
     "takeaway": "Selling is still concentrated in AI spenders and the names that supply them. Microsoft, Alphabet and Amazon will show whether Meta’s cash squeeze is a one-off or a pattern."
@@ -230,7 +236,7 @@
                 "text": "CRWV ~$8.1M"
               }
             ],
-            "detail": "Bought 38,110 Meta shares on Oct 22, the day it fell about 7%, and sold Alphabet on Oct 23. The Teradyne sale is Oct 22 alone; more was sold Oct 20–21. Also added nuclear names Oklo and X-Energy.",
+            "detail": "Bought 38,110 Meta shares on Oct 22, the day it fell about 7%, and sold Alphabet on Oct 23. The Teradyne sale is Oct 22 alone; more was sold Oct 20–21. Also added nuclear names Oklo and X-Energy. On Oct 23 it also trimmed Cloudflare (about $3.9M) and CrowdStrike (about $0.9M) into the cyber rally.",
             "read": "Rotating within AI: into Meta after its drop, out of Alphabet before its report."
           },
           {
@@ -304,10 +310,19 @@
       {
         "name": "AI chips",
         "text": "Rep. Fields disclosed Nvidia and TSMC buys, while Burry’s chip-ETF puts bet against the same group."
+      },
+      {
+        "name": "Cybersecurity",
+        "text": "ARK trimmed Cloudflare and CrowdStrike into Friday’s rally, while Rep. Jackson’s filing shows a Datadog buy from Sept 28."
       }
     ]
   },
   "news": [
+    {
+      "headline": "Black October: AI-found PHP flaws hit the web",
+      "body": "Two critical PHP flaws found with AI help were patched Oct 21 and quickly exploited; PHP runs about 70% of websites. CISA urged patching or taking systems offline, and government sites in the US, UK and Europe went down to patch. Cloudflare’s CEO counted millions of exploit attempts within hours. Cyber stocks jumped Friday: Palo Alto +6.6%, Okta +6.3%, CrowdStrike +6.0%.",
+      "tone": "neutral"
+    },
     {
       "headline": "Meta’s spending turned its cash flow negative",
       "body": "Revenue rose 26% to $64.6B, but capex of $34.9B left free cash flow at minus $2.1B, its first cash outflow in over a decade. It guided 2026 capex to $135–145B. Thursday the Nasdaq fell 2.6%, its worst day since June, and the chip index fell 6.7%.",
@@ -496,6 +511,26 @@
     {
       "title": "CBS News: Iran live updates",
       "url": "https://www.cbsnews.com/live-updates/iran-war-trump-us-oil-gas-prices-strait-of-hormuz-midterms/"
+    },
+    {
+      "title": "CISA: critical PHP vulnerabilities alert, Oct 21",
+      "url": "https://www.cisa.gov/news-events/alerts/2026/10/21/critical-vulnerabilities-php-require-immediate-patching"
+    },
+    {
+      "title": "Tenable: PHP2Shell FAQ",
+      "url": "https://www.tenable.com/blog/php2shell-cve-2026-109618-cve-2026-109619-frequently-asked-questions-about-critical-php-remote"
+    },
+    {
+      "title": "JournalArta: Black October explained",
+      "url": "https://journalarta.com/en/2026/10/24/black-october-cybersecurity-experts-ai-hacking/"
+    },
+    {
+      "title": "TradingKey: cybersecurity stocks rally Oct 23",
+      "url": "https://www.tradingkey.com/analysis/stocks/us-stocks/262236289-cybersecurity-stocks-crowdstrike-cloudflare-rally-ai-vulnerability-discovery-php-flaw-tradingkey"
+    },
+    {
+      "title": "StockStory: cyber stocks jump on Black October",
+      "url": "https://www.financialcontent.com/article/stockstory-2026-10-23-qualys-tenable-cloudflare-crowdstrike-and-okta-shares-skyrocket-what-you-need-to-know"
     },
     {
       "title": "FXEmpire: the week ahead",
