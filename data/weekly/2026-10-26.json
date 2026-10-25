@@ -56,11 +56,6 @@
         "tone": "neutral"
       },
       {
-        "value": 7564,
-        "label": "Sept 16 low",
-        "tone": "down"
-      },
-      {
         "value": 7605,
         "label": "100-day, key support",
         "tone": "down"
@@ -436,8 +431,8 @@
     "headline": "Bitcoin is stuck under its short-term averages",
     "deck": "Spot ETFs took in about $301M on the week, but Thursday’s $636M exit erased much of the gains. Price ended Friday near $81K and was around $80.5K on Sunday, below its 20- and 50-day lines.",
     "map": {
-      "min": 76000,
-      "max": 88000,
+      "min": 77000,
+      "max": 86000,
       "marks": [
         {
           "value": 78451,
@@ -448,22 +443,12 @@
           "value": 80422,
           "label": "Week’s low",
           "tone": "down"
-        },
-        {
-          "value": 81861,
-          "label": "50-day line",
-          "tone": "neutral"
-        },
-        {
-          "value": 82364,
-          "label": "20-day line",
-          "tone": "neutral"
         }
       ],
       "zone": {
-        "from": 82077,
-        "to": 82281,
-        "label": "Resistance shelf"
+        "from": 81861,
+        "to": 82364,
+        "label": "50- and 20-day lines"
       }
     },
     "stats": [
