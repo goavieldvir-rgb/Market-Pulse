@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-28T20:21:38+00:00",
+  "generated_at": "2026-10-28T21:44:28+00:00",
   "market": {
     "state": "closed",
     "session_open": "2026-10-28T13:30:00+00:00",
@@ -46,20 +46,20 @@
   "vix": {
     "symbol": "^VIX",
     "date": "2026-10-28",
-    "close": 16.78,
+    "close": 16.91,
     "prev_close": 17.52,
-    "change_pct": -4.22,
-    "in_session": true,
+    "change_pct": -3.48,
+    "in_session": false,
     "close_from_quote": false,
-    "as_of": "2026-10-28T20:06:31+00:00",
+    "as_of": "2026-10-28T20:15:01+00:00",
     "sma150": 17.27,
-    "distance_from_sma150_pct": -2.83,
+    "distance_from_sma150_pct": -2.08,
     "streak_direction": "red",
-    "streak_count": 2,
-    "streak_through": "2026-10-27",
-    "return_5d_pct": 0.6,
-    "return_20d_pct": 2.69,
-    "percentile_1y": 44.4
+    "streak_count": 3,
+    "streak_through": "2026-10-28",
+    "return_5d_pct": 1.38,
+    "return_20d_pct": 3.49,
+    "percentile_1y": 47.2
   },
   "sectors": {
     "XLP": {
@@ -159,7 +159,7 @@
   "fear_greed": {
     "score": 35.9,
     "rating": "fear",
-    "as_of": "2026-10-28T19:58:34+00:00",
+    "as_of": "2026-10-28T21:28:46+00:00",
     "previous_close": 33.6,
     "previous_1_week": 30.3
   },
@@ -192,15 +192,6 @@
       "distance_from_sma150_pct": 1.34
     },
     {
-      "symbol": "XLE",
-      "name": "Energy",
-      "close": 68.48,
-      "change_pct": 0.4,
-      "return_5d_pct": 0.47,
-      "return_20d_pct": 11.35,
-      "distance_from_sma150_pct": 14.12
-    },
-    {
       "symbol": "XLV",
       "name": "Health Care",
       "close": 179.72,
@@ -208,6 +199,15 @@
       "return_5d_pct": 0.44,
       "return_20d_pct": 6.71,
       "distance_from_sma150_pct": 12.56
+    },
+    {
+      "symbol": "XLE",
+      "name": "Energy",
+      "close": 68.45,
+      "change_pct": 0.35,
+      "return_5d_pct": 0.43,
+      "return_20d_pct": 11.3,
+      "distance_from_sma150_pct": 14.07
     },
     {
       "symbol": "XLRE",
