@@ -1,6 +1,13 @@
 {
   "editions": [
     {
+      "week_of": "2026-11-02",
+      "label": "Nov 2–6, 2026",
+      "title": "Alphabet’s cash burn and Intel’s plunge break the S&P 500’s 100-day line",
+      "published": "2026-11-01",
+      "file": "data/weekly/2026-11-02.json"
+    },
+    {
       "week_of": "2026-10-26",
       "label": "Oct 26–30, 2026",
       "title": "Black October hits the web as Meta’s cash burn hits AI stocks",

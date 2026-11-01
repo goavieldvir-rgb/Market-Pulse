@@ -1,0 +1,1008 @@
+{
+  "schema": 1,
+  "week_of": "2026-11-02",
+  "label": "Nov 2–6, 2026",
+  "published": "2026-11-01",
+  "title": "Alphabet’s cash burn and Intel’s plunge break the S&P 500’s 100-day line",
+  "deck": "Alphabet fell 12.6% Thursday on $9.1B of negative free cash flow, and Intel had its worst day since 1974 on Friday. The S&P 500 fell 1.8% Friday to 7,580, its first close below the 100-day average since April, yet nine of 11 sectors rose on the week. Next: Apple Monday, the midterms and AMD Tuesday, and the October jobs report Friday.",
+  "tldr": [
+    {
+      "label": "What changed",
+      "text": "Alphabet’s cash burn and Intel’s 29% drop pushed the S&P 500 below its 100-day line. Under the surface, nine of 11 sectors rose and the equal-weight index beat the S&P 500 for a third week."
+    },
+    {
+      "label": "What’s next",
+      "text": "Apple and Palantir Monday, midterms and AMD Tuesday, jobs Friday (about 55K expected after 29K). December hike odds sit near 80–85% after two hawkish dissents."
+    },
+    {
+      "label": "Who’s buying",
+      "text": "ARK bought Robinhood and Coinbase as they fell and sold Eli Lilly, TSMC and AMD. Rep. Sessions disclosed a Microsoft sale; Rep. Hern sold Seagate, Texas Instruments and ASML."
+    }
+  ],
+  "scorecard": [
+    {
+      "call": "Microsoft and Alphabet on Fed day",
+      "outcome": "Split. Microsoft’s Azure grew 48% and the stock gave up less than 2% over two days. Alphabet reported negative free cash flow of $9.1B on $51.4B of capex and fell 12.6% Thursday, despite Google Cloud revenue more than doubling.",
+      "verdict": "Alphabet got the Meta treatment",
+      "tone": "down"
+    },
+    {
+      "call": "The 7,605 line",
+      "outcome": "Broke. The S&P 500 closed at 7,580.07 on Friday, its first close below the 100-day average since early April and its lowest close since Sept 16. The week’s low was 7,527.56.",
+      "verdict": "Support lost",
+      "tone": "down"
+    },
+    {
+      "call": "Oil and PCE",
+      "outcome": "September PCE came in at 3.6% as forecast, core at 3.1%. Front-month Brent settled at $117.64 Friday, a six-month high. The Fed held, with Cook and Hammack dissenting for a hike, and December hike odds rose to about 85%.",
+      "verdict": "The hawkish case held",
+      "tone": "down"
+    }
+  ],
+  "levels": {
+    "name": "S&P 500",
+    "now": 7580.07,
+    "record": 7818.93,
+    "min": 7200,
+    "max": 8050,
+    "range": [
+      7552,
+      7615
+    ],
+    "marks": [
+      {
+        "value": 7310,
+        "label": "200-day average",
+        "tone": "neutral"
+      },
+      {
+        "value": 7490,
+        "label": "July 31 close",
+        "tone": "down"
+      },
+      {
+        "value": 7552,
+        "label": "Sept 16 close, first support",
+        "tone": "down"
+      },
+      {
+        "value": 7615,
+        "label": "100-day, now overhead",
+        "tone": "neutral"
+      },
+      {
+        "value": 7697,
+        "label": "50-day",
+        "tone": "neutral"
+      },
+      {
+        "value": 7818.93,
+        "label": "Record close",
+        "tone": "up"
+      }
+    ],
+    "note": "Lance Roberts notes Friday’s close landed below both the 100-day near 7,615 and the lower Bollinger band, with RSI dropping from 50.8 to 40.1 in one session. A close back above 7,615 would make Friday look like a one-day shakeout. First support is the Sept 16 close near 7,552, then the July 31 close near 7,490; below that, he would tighten stops, with the 200-day near 7,310."
+  },
+  "sectors": {
+    "title": "Big Tech sank, the rest of the market rose",
+    "deck": "Nine of 11 sectors rose. Communication services fell 5.3% on Alphabet and tech fell 2.0% on Intel; health care led with a 3.1% gain and materials rose 2.8%.",
+    "flows": [
+      {
+        "label": "Equal-weight vs S&P 500",
+        "value": "+0.8% vs −0.6%",
+        "tone": "up",
+        "note": "A third straight week of the average stock beating the megacaps. The Russell 2000 rose 1.3%."
+      },
+      {
+        "label": "Growth vs value since Oct 7",
+        "value": "Growth −11.9%",
+        "tone": "neutral",
+        "note": "Per the Bull Bear Report, 17 sessions of growth losing to value pushed the ratio’s RSI to 28.6, below the 30 level usually read as washed out."
+      },
+      {
+        "label": "Stretch vs the S&P 500",
+        "value": "Energy +9.5%, tech −3.9%",
+        "tone": "down",
+        "note": "Relative to their 50-day averages, energy, health care and staples are the most overbought; communications (−8.4%) and tech are the most oversold."
+      },
+      {
+        "label": "Chip stocks",
+        "value": "SOXX −1.4% on the week",
+        "tone": "down",
+        "note": "Most of the damage came Friday: the VanEck semiconductor ETF fell 7.9% that day as Intel dropped 29% and AMD 12%."
+      }
+    ],
+    "takeaway": "Money left the AI spenders and their suppliers and spread into everything else. Apple, AMD and Qualcomm this week will test whether that rotation keeps running."
+  },
+  "big_money": {
+    "lag_note": "Congress has up to 45 days to report a trade, and Trump’s monthly reports arrive about six weeks after the month ends. Fund trades like ARK’s are published daily. These show what they bought, not what they’re buying today.",
+    "groups": [
+      {
+        "title": "Politicians",
+        "entries": [
+          {
+            "initials": "DT",
+            "who": "Donald Trump",
+            "role": "President",
+            "when": "Last report filed Oct 8, covering August",
+            "moves": [
+              {
+                "side": "hold",
+                "text": "No new filing found this week"
+              }
+            ],
+            "detail": "The Oct 8 report listed 517 trades from Aug 3–31, including Aug 28 buys of Microsoft ($100K–250K), Meta, Oracle and Uber ($50K–100K each) and sales of Home Depot, TJX and Intuitive Surgical ($100K–250K each).",
+            "read": "The September report is the next one due. The filings don’t say who directs each trade."
+          },
+          {
+            "initials": "NP",
+            "who": "Nancy Pelosi",
+            "role": "Rep., D-California",
+            "when": "No new stock filings as of Oct 30",
+            "moves": [
+              {
+                "side": "hold",
+                "text": "No new stock trades"
+              }
+            ],
+            "detail": "Her last stock filing, on Aug 21, showed Bloom Energy shares and calls plus Intel shares and calls, bought July 24 and 28.",
+            "read": "Nothing new to track from her this week. Intel, one of her July buys, fell 29% Friday."
+          },
+          {
+            "initials": "PS",
+            "who": "Pete Sessions",
+            "role": "Rep., R-Texas",
+            "when": "Microsoft sold Oct 2, disclosed Oct 27",
+            "moves": [
+              {
+                "side": "sell",
+                "text": "MSFT $250K–500K"
+              },
+              {
+                "side": "sell",
+                "text": "AMZN $15K–50K"
+              },
+              {
+                "side": "sell",
+                "text": "LOW $15K–50K"
+              },
+              {
+                "side": "sell",
+                "text": "BRK.B $15K–50K"
+              }
+            ],
+            "detail": "The Microsoft sale was from a trust account. Smaller sales followed between Oct 15 and Oct 28, including Amazon on Oct 27, Lowe’s on Oct 22 and Berkshire on Oct 15, plus $1K–15K lots of Disney, McDonald’s, Home Depot, PepsiCo and IBM.",
+            "read": "A broad trim of big consumer and tech names, with Amazon sold the week of its report."
+          },
+          {
+            "initials": "KH",
+            "who": "Kevin Hern",
+            "role": "Rep., R-Oklahoma",
+            "when": "Disclosed Oct 29",
+            "moves": [
+              {
+                "side": "sell",
+                "text": "STX, size not given"
+              },
+              {
+                "side": "sell",
+                "text": "TXN, size not given"
+              },
+              {
+                "side": "sell",
+                "text": "ASML, size not given"
+              }
+            ],
+            "detail": "The filing summary lists sales of Seagate, Texas Instruments and ASML; the trade dates and amount ranges were not in the reports we could see.",
+            "read": "Out of chip and storage names, the group that fell hardest this month."
+          }
+        ]
+      },
+      {
+        "title": "Investors and funds",
+        "entries": [
+          {
+            "initials": "CW",
+            "who": "Cathie Wood",
+            "role": "ARK Invest",
+            "when": "Traded Oct 28 and Oct 30",
+            "moves": [
+              {
+                "side": "sell",
+                "text": "LLY ~$24.2M"
+              },
+              {
+                "side": "buy",
+                "text": "TEM ~$12.0M"
+              },
+              {
+                "side": "buy",
+                "text": "HOOD ~$10.4M"
+              },
+              {
+                "side": "buy",
+                "text": "COIN ~$6.3M"
+              },
+              {
+                "side": "sell",
+                "text": "TSM ~$4.7M"
+              }
+            ],
+            "detail": "Oct 28: bought about $9.1M of Robinhood, its biggest HOOD buy since April, plus Archer and Joby; sold TSMC and about $3.3M of AMD. Oct 30, after the Binance hack: added Coinbase, Circle (about $6.0M) and $1.3M more Robinhood; sold Lilly and Bullish.",
+            "read": "Buying beaten-down crypto brokers and selling chips and Lilly after their runs."
+          },
+          {
+            "initials": "MB",
+            "who": "Michael Burry",
+            "role": "Scion, via his newsletter",
+            "when": "Post Oct 29, no new trades",
+            "moves": [
+              {
+                "side": "hold",
+                "text": "No new trades disclosed"
+              }
+            ],
+            "detail": "On Oct 29 he made a long case for Build-A-Bear, calling it a full 6% position first disclosed in September. He is still short Palantir heading into its Monday report, and in recent weeks wrote about moving to puts on Micron and Nebius.",
+            "read": "His bearish AI bets stand. Friday’s chip drop moved in their favor."
+          },
+          {
+            "initials": "BH",
+            "who": "Berkshire Hathaway",
+            "role": "Buffett’s company",
+            "when": "No new buys reported this week",
+            "moves": [
+              {
+                "side": "hold",
+                "text": "No new positions"
+              }
+            ],
+            "detail": "Its latest disclosed run was about $595M of Lennar from Sept 17 to Oct 2.",
+            "read": "Q3 results and the mid-November 13F will show what else it bought or sold."
+          },
+          {
+            "initials": "BA",
+            "who": "Bill Ackman",
+            "role": "Pershing Square",
+            "when": "No new trades reported",
+            "moves": [
+              {
+                "side": "hold",
+                "text": "No new positions"
+              }
+            ],
+            "detail": "No new position was disclosed this week.",
+            "read": "Nothing to track until the Q3 13F in mid-November."
+          },
+          {
+            "initials": "LA",
+            "who": "Leopold Aschenbrenner",
+            "role": "Situational Awareness",
+            "when": "No new filings found",
+            "moves": [
+              {
+                "side": "hold",
+                "text": "No new trades reported"
+              }
+            ],
+            "detail": "No new disclosures found this week.",
+            "read": "The Q3 13F in mid-November will be the first full look since the fund sold most of its public stock book to Citadel on July 30."
+          }
+        ]
+      }
+    ],
+    "overlaps": [
+      {
+        "name": "Microsoft",
+        "text": "Rep. Sessions sold $250K–500K on Oct 2; Trump’s August report showed a $100K–250K buy. It held up best of the megacaps after earnings."
+      },
+      {
+        "name": "Chips",
+        "text": "Rep. Hern sold TXN, ASML and Seagate, ARK sold TSMC and AMD, and Burry holds Micron puts: all leaning away before Friday’s chip drop."
+      },
+      {
+        "name": "Crypto brokers",
+        "text": "ARK bought Robinhood and Coinbase as they fell; Coinbase dropped 10.6% and Robinhood 7.2% Friday after the Binance hack."
+      },
+      {
+        "name": "Palantir",
+        "text": "Burry is still short and ARK sold about $16M the week before. It reports Monday after the close."
+      }
+    ]
+  },
+  "news": [
+    {
+      "headline": "Alphabet joined Meta in the cash-burn club",
+      "body": "Alphabet reported negative free cash flow of $9.1B on $51.4B of quarterly capex and fell 12.6% Thursday, a one-day loss of about $497B in market value. Google Cloud revenue more than doubled. Amazon’s AWS grew 39% but earnings missed; Microsoft’s Azure grew 48% and the stock barely moved.",
+      "tone": "down"
+    },
+    {
+      "headline": "Intel had its worst day since 1974",
+      "body": "Intel fell about 29% Friday after a weak fourth-quarter forecast, citing a PC slump and a factory accident in Israel. Reddit also fell about 29% and Twilio 17%. AMD fell 12% and Nvidia 5%, and the Nasdaq lost 2.9%, its worst day since June.",
+      "tone": "down"
+    },
+    {
+      "headline": "The Fed held, two voted to hike",
+      "body": "Rates stayed at 3.75–4.00% in a 10–2 vote, with Lisa Cook and Beth Hammack dissenting for a hike. September PCE inflation was 3.6% and core 3.1%; Q3 GDP grew 3.4% and wage growth slowed to 3.1%.",
+      "tone": "down"
+    },
+    {
+      "headline": "A $6.3B hack hit Binance",
+      "body": "Attackers took about $6.3B on Thursday, including 18,270 BTC; about $3B is frozen and Binance says it will cover losses. It paused withdrawals, aimed to resume them in phases by Sunday and plans a proof-of-reserves report Monday. Coinbase fell 10.6% and Strategy 7.8% Friday.",
+      "tone": "down"
+    },
+    {
+      "headline": "Iran talks continue as strike talk grows",
+      "body": "Iranian officials met Qatari mediators in Doha over a plan to reopen Hormuz. Trump said talks were going fine but not very reliable, and that the US still had sites to take care of. The US reportedly warned Gulf allies of a short, intense round after Tuesday’s midterms; Iran’s supreme leader promised an immediate response.",
+      "tone": "down"
+    },
+    {
+      "headline": "Oil at six-month highs; OPEC+ stood pat",
+      "body": "Front-month Brent settled at $117.64 Friday and WTI at $104.12, a fourth straight monthly gain, after at least 35 attacks on ships in October. On Sunday OPEC+ kept December output targets unchanged; most members are producing below target because of the war.",
+      "tone": "down"
+    },
+    {
+      "headline": "Midterms on Tuesday",
+      "body": "All 435 House seats and 35 Senate seats are up. Polymarket odds cited in the Bull Bear Report were about 94% for Democrats taking the House and 69% for the Senate.",
+      "tone": "neutral"
+    }
+  ],
+  "calendar": [
+    {
+      "day": "Mon 2",
+      "importance": 2,
+      "title": "Apple, Palantir, ISM manufacturing",
+      "body": "ISM manufacturing, with Fed’s Goolsbee speaking. Marriott before the open; Apple, Palantir and Vertex after. Binance plans its proof-of-reserves report."
+    },
+    {
+      "day": "Tue 3",
+      "importance": 3,
+      "title": "Midterm elections, AMD",
+      "body": "Election Day. JOLTS job openings and factory orders. Shopify and Pfizer before the open; AMD, Amgen, Arista and Booking after.",
+      "key": true
+    },
+    {
+      "day": "Wed 4",
+      "importance": 2,
+      "title": "ISM services, Qualcomm, Uber",
+      "body": "ISM services, ADP jobs and the Treasury’s quarterly refunding. Uber, CVS and Datadog before the open; Qualcomm, Arm, AppLovin and DoorDash after."
+    },
+    {
+      "day": "Thu 5",
+      "importance": 2,
+      "title": "Airbnb, Bank of England",
+      "body": "Jobless claims, Q3 productivity and Challenger job cuts; Fed’s Hammack speaks. Bank of England decides. ConocoPhillips and Cigna before the open; Airbnb and Cloudflare after."
+    },
+    {
+      "day": "Fri 6",
+      "importance": 3,
+      "title": "October jobs report",
+      "body": "Payrolls at 8:30am ET, plus University of Michigan sentiment. A soft number with inflation at 3.6% would test December hike bets.",
+      "key": true
+    }
+  ],
+  "consensus": [
+    {
+      "report": "Nonfarm payrolls, October",
+      "expected": "+55K",
+      "prior": "+29K",
+      "tone": "neutral"
+    },
+    {
+      "report": "Unemployment rate",
+      "expected": "4.2%",
+      "prior": "4.2%",
+      "tone": "neutral"
+    },
+    {
+      "report": "Average hourly earnings, monthly",
+      "expected": "+0.3%",
+      "prior": "+0.1%",
+      "tone": "neutral"
+    },
+    {
+      "report": "ISM manufacturing",
+      "expected": "54.7",
+      "prior": "54.5",
+      "tone": "up"
+    }
+  ],
+  "consensus_note": "Payroll and wage consensus via Tech Insider (CNBC and KPMG forecasts, range 45K–65K); ISM consensus from the Bull Bear Report, prior from PNC. December hike odds are futures pricing: about 85% per the Bull Bear Report and about 80% per Reuters’ week-ahead column.",
+  "fed_odds": [
+    {
+      "label": "Hike at the December meeting",
+      "pct": 85
+    }
+  ],
+  "further": "Further out: Q3 13F filings from Berkshire, Pershing Square and other funds in mid-November, and the next Fed meeting in December.",
+  "crypto": {
+    "headline": "Bitcoin lost $80K after the Binance hack",
+    "deck": "Spot ETFs took in about $441M over four days, then lost $643M on Friday after the hack, leaving the week about $202M negative. Bitcoin touched $76,141 Friday, its lowest since Sept 17, and was near $78K on Sunday.",
+    "map": {
+      "min": 71000,
+      "max": 84000,
+      "marks": [
+        {
+          "value": 72000,
+          "label": "Next support",
+          "tone": "down"
+        },
+        {
+          "value": 74886,
+          "label": "Support",
+          "tone": "down"
+        },
+        {
+          "value": 76141,
+          "label": "Week’s low",
+          "tone": "down"
+        },
+        {
+          "value": 80000,
+          "label": "First resistance",
+          "tone": "neutral"
+        }
+      ],
+      "zone": {
+        "from": 81500,
+        "to": 82500,
+        "label": "Supply zone"
+      }
+    },
+    "stats": [
+      {
+        "label": "Spot ETF net flow, Oct 26–30",
+        "value": "~−$202M",
+        "tone": "down",
+        "note": "Friday’s $643M exit was led by BlackRock’s IBIT (−$234M), Fidelity’s FBTC (−$201M) and ARK’s ARKB (−$130M)."
+      },
+      {
+        "label": "What drives it this week",
+        "tone": "neutral",
+        "note": "Binance’s withdrawal restart and Monday proof-of-reserves report, the midterms, and Friday’s jobs data."
+      }
+    ],
+    "signal": "Reclaiming $80K, then the $81.5K–82.5K supply zone, would ease the pressure. A daily close below the $74.9K–76K support band could open $72K, per CoinCentral."
+  },
+  "bottom_line": [
+    {
+      "title": "Apple and AMD after Alphabet",
+      "body": "Investors rewarded Microsoft, whose cash flow covers its AI spending, and punished Meta and Alphabet, whose didn’t. Apple Monday and AMD Tuesday face the same test of spending versus cash."
+    },
+    {
+      "title": "The 7,615 line, now overhead",
+      "body": "A close back above the 100-day near 7,615 would make Friday a shakeout. Below the Sept 16 close near 7,552, the next marks are 7,490 and then the 200-day near 7,310."
+    },
+    {
+      "title": "Midterms, then jobs",
+      "body": "The election lands Tuesday amid reports of possible Iran strikes afterward. Friday’s jobs report is expected near 55K; a soft print with 3.6% inflation would test December hike odds near 80–85%."
+    }
+  ],
+  "sources": [
+    {
+      "title": "Real Investment Advice: Bull Bear Report, week of Oct 30",
+      "url": "https://lanceroberts.substack.com/p/bull-bear-report-week-of-october-812"
+    },
+    {
+      "title": "TheStreet: stock market today, Oct 30",
+      "url": "https://www.thestreet.com/stock-market-today/stock-market-today-dow-jones-sp-500-nasdaq-updates-oct-30-2026"
+    },
+    {
+      "title": "Alain Guillot: stock market recap Oct 26–30",
+      "url": "https://www.alainguillot.com/stock-market-recap-october-26-30-2026/"
+    },
+    {
+      "title": "Al Jazeera: US-Iran negotiations, what we know",
+      "url": "https://www.aljazeera.com/news/2026/11/1/mediators-continue-us-iran-negotiations-amid-war-rhetoric-what-we-know"
+    },
+    {
+      "title": "The National: OPEC+ holds December targets",
+      "url": "https://www.thenationalnews.com/business/energy/2026/11/01/opec-holds-december-oil-output-targets-steady-as-iran-war-disrupts-supply/"
+    },
+    {
+      "title": "StockTitan: earnings calendar week of Nov 2",
+      "url": "https://www.stocktitan.net/articles/earnings-calendar-week-of-november-2-2026"
+    },
+    {
+      "title": "CMC Markets: the week ahead",
+      "url": "https://www.cmcmarkets.com/en-gb/news-and-analysis/the-week-ahead-ism-pmi-reports-us-jobs-report-apple-earnings"
+    },
+    {
+      "title": "Tech Insider: Apple, Palantir and the jobs report",
+      "url": "https://tech-insider.org/apple-palantir-earnings-october-jobs-report-week-ahead-2026/"
+    },
+    {
+      "title": "Tech Insider: midterms, jobs and Fed hike odds",
+      "url": "https://tech-insider.org/wall-st-week-ahead-midterms-jobs-fed-hike-odds-ai-market-2026"
+    },
+    {
+      "title": "KuCoin: macro outlook Nov 2–8",
+      "url": "https://www.kucoin.com/news/flash/macro-outlook-for-nov-2-8-us-midterms-nonfarm-payrolls-apple-and-amd-earnings"
+    },
+    {
+      "title": "PNC: ISM manufacturing, Oct 1",
+      "url": "https://www.pnc.com/content/dam/pnc-com/pdf/aboutpnc/EconomicReports/EconomicUpdates/2026/PNC_Economics_Research_ISM_Mfg_1_October_2026.pdf"
+    },
+    {
+      "title": "Signal: Donald Trump OGE disclosures",
+      "url": "https://getsignal.finance/president/donald-trump"
+    },
+    {
+      "title": "Quantral: Nancy Pelosi stock tracker",
+      "url": "https://quantral.com/blog/nancy-pelosi-stock-tracker"
+    },
+    {
+      "title": "MarketBeat: Rep. Sessions sells Microsoft",
+      "url": "https://marketbeat.com/instant-alerts/congress-microsoft-nasdaq-msft-stock-sale-reported-by-rep-pete-sessions-2026-10-29"
+    },
+    {
+      "title": "Quiver Quantitative: Rep. Kevin Hern trades",
+      "url": "https://www.quiverquant.com/news/Congress+Trade%3A+Representative+Kevin+Hern+Just+Disclosed+New+Stock+Trades"
+    },
+    {
+      "title": "Quiver Quantitative: congress trade news",
+      "url": "https://www.quiverquant.com/news/category/congress_trades_automated"
+    },
+    {
+      "title": "CoinDesk: ARK buys the dip on Robinhood",
+      "url": "https://www.coindesk.com/markets/2026/10/29/cathie-wood-s-ark-buys-the-dip-on-robinhood-in-its-largest-purchase-in-6-months-after-23-slump"
+    },
+    {
+      "title": "24/7 Wall St.: ARK shifts from AI chips to Robinhood",
+      "url": "https://247wallst.com/investing/2026/10/30/cathie-wood-shifts-from-ai-chips-to-robinhood-and-air-taxis-in-latest-ark-trades/"
+    },
+    {
+      "title": "Investing.com: ARK sells Eli Lilly, buys Tempus and Coinbase",
+      "url": "https://www.investing.com/news/company-news/cathie-woods-ark-sells-eli-lilly-stock-buys-tempus-ai-and-coinbase-93CH-4988958"
+    },
+    {
+      "title": "24/7 Wall St.: Burry on Build-A-Bear",
+      "url": "https://247wallst.com/investing/2026/10/30/burry-says-this-mall-dinosaur-has-a-physical-moat-that-is-hard-for-wall-street-to-understand/"
+    },
+    {
+      "title": "24/7 Wall St.: Burry is short Palantir",
+      "url": "https://247wallst.com/investing/2026/10/26/michael-burry-is-shorting-pltr-why-palantirs-earnings-next-monday-are-a-make-or-break-moment/"
+    },
+    {
+      "title": "Motley Fool: Burry deepens his bet",
+      "url": "https://www.fool.com/investing/2026/10/27/does-the-big-short-s-michael-burry-know-something-wall-street-doesn-t-he-s-deepened-his-bet-against-some-of-the-stock-market-s-biggest-winners/"
+    },
+    {
+      "title": "Billionaires.Africa: Berkshire’s Lennar buying",
+      "url": "https://www.billionaires.africa/2026/10/19/american-billionaire-warren-buffetts-berkshire-hathaway-puts-595-million-into-homebuilder-lennar/"
+    },
+    {
+      "title": "Dealroom: Situational Awareness sells its stock book to Citadel",
+      "url": "https://dealroom.co/news/142225-aschenbrenners-situational-awareness-sells-its-public-stock-book-to-cita/"
+    },
+    {
+      "title": "Bitcoin News Digest: Oct 31",
+      "url": "https://bitcoinnewsdigest.substack.com/p/bitcoin-news-digest-october-31-2026"
+    },
+    {
+      "title": "Analytics Insight: bitcoin ETF flows after the Binance hack",
+      "url": "https://www.analyticsinsight.net/news/bitcoin-etf-outflows-reach-usd-4095m-after-binances-usd-63b-hackle"
+    },
+    {
+      "title": "CoinCentral: bitcoin sinks as Binance is hacked",
+      "url": "https://coincentral.com/bitcoin-btc-price-sinks-to-76000-as-binance-loses-6-billion-in-historic-hack"
+    },
+    {
+      "title": "Blockchain.News: bitcoin levels Nov 1",
+      "url": "https://blockchain.news/news/20261101-price-prediction-btc-78k-compression-tests-lower-bollinger-band"
+    }
+  ],
+  "numbers": {
+    "generated_at": "2026-11-01T11:29:13+00:00",
+    "week_ending": "2026-10-30",
+    "indices": [
+      {
+        "symbol": "^GSPC",
+        "name": "S&P 500",
+        "date": "2026-10-30",
+        "close": 7580.07,
+        "prev_close": 7623.68,
+        "week_pct": -0.57,
+        "week_high": 7758.43,
+        "week_low": 7527.56
+      },
+      {
+        "symbol": "^IXIC",
+        "name": "Nasdaq",
+        "date": "2026-10-30",
+        "close": 25437.0,
+        "prev_close": 25955.34,
+        "week_pct": -2.0,
+        "week_high": 26587.34,
+        "week_low": 25177.33
+      },
+      {
+        "symbol": "^DJI",
+        "name": "Dow",
+        "date": "2026-10-30",
+        "close": 51770.31,
+        "prev_close": 52215.16,
+        "week_pct": -0.85,
+        "week_high": 52634.32,
+        "week_low": 51563.76
+      },
+      {
+        "symbol": "^RUT",
+        "name": "Russell 2000",
+        "date": "2026-10-30",
+        "close": 2811.84,
+        "prev_close": 2775.9,
+        "week_pct": 1.29,
+        "week_high": 2868.37,
+        "week_low": 2778.17
+      }
+    ],
+    "equal_weight": {
+      "rsp_week_pct": 0.82,
+      "spy_week_pct": -0.56
+    },
+    "sectors": [
+      {
+        "symbol": "XLK",
+        "name": "Technology",
+        "date": "2026-10-30",
+        "close": 179.51,
+        "prev_close": 183.23,
+        "week_pct": -2.03,
+        "week_high": 191.55,
+        "week_low": 176.92,
+        "weight": 33
+      },
+      {
+        "symbol": "XLF",
+        "name": "Financials",
+        "date": "2026-10-30",
+        "close": 56.51,
+        "prev_close": 55.9,
+        "week_pct": 1.09,
+        "week_high": 57.23,
+        "week_low": 55.75,
+        "weight": 13
+      },
+      {
+        "symbol": "XLY",
+        "name": "Consumer Discretionary",
+        "date": "2026-10-30",
+        "close": 115.38,
+        "prev_close": 113.1,
+        "week_pct": 2.02,
+        "week_high": 116.77,
+        "week_low": 113.82,
+        "weight": 10
+      },
+      {
+        "symbol": "XLC",
+        "name": "Communication Services",
+        "date": "2026-10-30",
+        "close": 99.9,
+        "prev_close": 105.51,
+        "week_pct": -5.32,
+        "week_high": 105.22,
+        "week_low": 99.32,
+        "weight": 10
+      },
+      {
+        "symbol": "XLV",
+        "name": "Health Care",
+        "date": "2026-10-30",
+        "close": 184.87,
+        "prev_close": 179.28,
+        "week_pct": 3.12,
+        "week_high": 187.99,
+        "week_low": 177.07,
+        "weight": 9
+      },
+      {
+        "symbol": "XLI",
+        "name": "Industrials",
+        "date": "2026-10-30",
+        "close": 167.4,
+        "prev_close": 164.62,
+        "week_pct": 1.69,
+        "week_high": 170.38,
+        "week_low": 165.44,
+        "weight": 8
+      },
+      {
+        "symbol": "XLP",
+        "name": "Consumer Staples",
+        "date": "2026-10-30",
+        "close": 89.42,
+        "prev_close": 88.26,
+        "week_pct": 1.31,
+        "week_high": 90.38,
+        "week_low": 86.36,
+        "weight": 5
+      },
+      {
+        "symbol": "XLE",
+        "name": "Energy",
+        "date": "2026-10-30",
+        "close": 70.02,
+        "prev_close": 69.33,
+        "week_pct": 1.0,
+        "week_high": 70.15,
+        "week_low": 67.98,
+        "weight": 3
+      },
+      {
+        "symbol": "XLU",
+        "name": "Utilities",
+        "date": "2026-10-30",
+        "close": 43.43,
+        "prev_close": 42.56,
+        "week_pct": 2.04,
+        "week_high": 43.65,
+        "week_low": 42.42,
+        "weight": 2.5
+      },
+      {
+        "symbol": "XLRE",
+        "name": "Real Estate",
+        "date": "2026-10-30",
+        "close": 43.17,
+        "prev_close": 42.57,
+        "week_pct": 1.41,
+        "week_high": 43.44,
+        "week_low": 41.78,
+        "weight": 2
+      },
+      {
+        "symbol": "XLB",
+        "name": "Materials",
+        "date": "2026-10-30",
+        "close": 52.74,
+        "prev_close": 51.31,
+        "week_pct": 2.79,
+        "week_high": 52.78,
+        "week_low": 51.21,
+        "weight": 2
+      }
+    ],
+    "semis": {
+      "symbol": "SOXX",
+      "name": "Semiconductors",
+      "date": "2026-10-30",
+      "close": 471.51,
+      "prev_close": 478.2,
+      "week_pct": -1.4,
+      "week_high": 523.93,
+      "week_low": 460.1
+    },
+    "rates": {
+      "us10y": {
+        "symbol": "^TNX",
+        "name": "10-year Treasury yield",
+        "date": "2026-10-30",
+        "close": 4.929,
+        "week_change_bp": -5.9,
+        "week_high": 5.049
+      }
+    },
+    "vix": {
+      "symbol": "^VIX",
+      "name": "VIX",
+      "date": "2026-10-30",
+      "close": 19.42,
+      "prev_close": 19.45,
+      "week_pct": -0.15,
+      "week_high": 23.93,
+      "week_low": 16.21
+    },
+    "commodities": [
+      {
+        "symbol": "CL=F",
+        "name": "WTI oil",
+        "date": "2026-10-30",
+        "close": 104.12,
+        "prev_close": 103.27,
+        "week_pct": 0.82,
+        "week_high": 104.99,
+        "week_low": 99.44
+      },
+      {
+        "symbol": "BZ=F",
+        "name": "Brent oil",
+        "date": "2026-10-30",
+        "close": 113.43,
+        "prev_close": 116.72,
+        "week_pct": -2.82,
+        "week_high": 117.42,
+        "week_low": 111.05
+      },
+      {
+        "symbol": "GC=F",
+        "name": "Gold",
+        "date": "2026-10-30",
+        "close": 3898.9,
+        "prev_close": 4007.9,
+        "week_pct": -2.72,
+        "week_high": 4097.2,
+        "week_low": 3879.3
+      }
+    ],
+    "crypto": {
+      "symbol": "BTC-USD",
+      "name": "Bitcoin",
+      "date": "2026-10-30",
+      "close": 77198.21,
+      "prev_close": 81074.19,
+      "week_pct": -4.78,
+      "week_high": 81889.95,
+      "week_low": 76189.88
+    },
+    "insiders": {
+      "window": [
+        "2026-10-24",
+        "2026-10-30"
+      ],
+      "top_buys": [
+        {
+          "symbol": "ACN",
+          "insider": "Julie Spellman Sweet",
+          "role": "Chair and CEO",
+          "action": "Buy",
+          "value": 3001041,
+          "shares": 12200,
+          "price": 245.99,
+          "date": "2026-10-26",
+          "filed": "2026-10-28",
+          "plan": false,
+          "others": []
+        },
+        {
+          "symbol": "TFC",
+          "insider": "Michael P. Lyons",
+          "role": "President & CEO",
+          "action": "Buy",
+          "value": 1209050,
+          "shares": 25000,
+          "price": 48.36,
+          "date": "2026-10-28",
+          "filed": "2026-10-29",
+          "plan": false,
+          "others": []
+        },
+        {
+          "symbol": "XYL",
+          "insider": "D Christian Koch",
+          "role": "Director",
+          "action": "Buy",
+          "value": 985600,
+          "shares": 11000,
+          "price": 89.6,
+          "date": "2026-10-29",
+          "filed": "2026-10-29",
+          "plan": false,
+          "others": []
+        },
+        {
+          "symbol": "HBAN",
+          "insider": "James D Rollins III",
+          "role": "Director",
+          "action": "Buy",
+          "value": 253720,
+          "shares": 14000,
+          "price": 18.12,
+          "date": "2026-10-26",
+          "filed": "2026-10-28",
+          "plan": false,
+          "others": []
+        },
+        {
+          "symbol": "ACN",
+          "insider": "Paula A Price",
+          "role": "Director",
+          "action": "Buy",
+          "value": 199848,
+          "shares": 800,
+          "price": 249.81,
+          "date": "2026-10-26",
+          "filed": "2026-10-28",
+          "plan": false,
+          "others": []
+        },
+        {
+          "symbol": "HBAN",
+          "insider": "Gary Torgow",
+          "role": "Director",
+          "action": "Buy",
+          "value": 199834,
+          "shares": 12700,
+          "price": 15.73,
+          "date": "2026-10-27",
+          "filed": "2026-10-29",
+          "plan": false,
+          "others": []
+        }
+      ],
+      "top_sells": [
+        {
+          "symbol": "DVA",
+          "insider": "Berkshire Hathaway Inc",
+          "role": "10% Owner",
+          "action": "Sell",
+          "value": 69026033,
+          "shares": 382563,
+          "price": 180.43,
+          "date": "2026-10-27",
+          "filed": "2026-10-29",
+          "plan": false,
+          "others": [
+            "Warren E Buffett"
+          ]
+        },
+        {
+          "symbol": "HLT",
+          "insider": "Kevin J Jacobs",
+          "role": "Officer",
+          "action": "Sell",
+          "value": 53802435,
+          "shares": 151050,
+          "price": 356.19,
+          "date": "2026-10-29",
+          "filed": "2026-10-30",
+          "plan": false,
+          "others": []
+        },
+        {
+          "symbol": "COF",
+          "insider": "Richard D Fairbank",
+          "role": "Chairman and CEO",
+          "action": "Sell",
+          "value": 18407891,
+          "shares": 90743,
+          "price": 202.86,
+          "date": "2026-10-27",
+          "filed": "2026-10-29",
+          "plan": true,
+          "others": []
+        },
+        {
+          "symbol": "SCHW",
+          "insider": "Charles R. Schwab",
+          "role": "Co-Chairman",
+          "action": "Sell",
+          "value": 18105625,
+          "shares": 203150,
+          "price": 89.12,
+          "date": "2026-10-29",
+          "filed": "2026-10-29",
+          "plan": false,
+          "others": []
+        },
+        {
+          "symbol": "DDOG",
+          "insider": "Alexis Le-Quoc",
+          "role": "Chief Technology Officer",
+          "action": "Sell",
+          "value": 12055042,
+          "shares": 43224,
+          "price": 278.9,
+          "date": "2026-10-28",
+          "filed": "2026-10-30",
+          "plan": true,
+          "others": []
+        },
+        {
+          "symbol": "GS",
+          "insider": "David M Solomon",
+          "role": "Chairman of the Board and CEO",
+          "action": "Sell",
+          "value": 10928695,
+          "shares": 12000,
+          "price": 910.72,
+          "date": "2026-10-27",
+          "filed": "2026-10-27",
+          "plan": false,
+          "others": []
+        }
+      ]
+    },
+    "notes": "Sector weights are approximate S&P 500 weights used only to size heatmap tiles."
+  }
+}
