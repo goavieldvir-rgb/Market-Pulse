@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-04T21:21:48+00:00",
+  "generated_at": "2026-11-04T22:41:55+00:00",
   "market": {
     "state": "closed",
     "session_open": "2026-11-04T14:30:00+00:00",
@@ -10,7 +10,7 @@
   "spy": {
     "symbol": "SPY",
     "date": "2026-11-04",
-    "close": 766.82,
+    "close": 766.81,
     "prev_close": 754.35,
     "change_pct": 1.65,
     "in_session": false,
@@ -46,20 +46,20 @@
   "vix": {
     "symbol": "^VIX",
     "date": "2026-11-04",
-    "close": 16.78,
+    "close": 16.61,
     "prev_close": 20.83,
-    "change_pct": -19.44,
-    "in_session": true,
+    "change_pct": -20.26,
+    "in_session": false,
     "close_from_quote": false,
-    "as_of": "2026-11-04T21:06:46+00:00",
+    "as_of": "2026-11-04T21:15:01+00:00",
     "sma150": 17.05,
-    "distance_from_sma150_pct": -1.57,
+    "distance_from_sma150_pct": -2.56,
     "streak_direction": "red",
-    "streak_count": 1,
-    "streak_through": "2026-11-03",
-    "return_5d_pct": -0.77,
-    "return_20d_pct": 11.27,
-    "percentile_1y": 44.4
+    "streak_count": 2,
+    "streak_through": "2026-11-04",
+    "return_5d_pct": -1.77,
+    "return_20d_pct": 10.15,
+    "percentile_1y": 41.7
   },
   "sectors": {
     "XLP": {
@@ -139,7 +139,7 @@
     "SPY": {
       "symbol": "SPY",
       "date": "2026-11-04",
-      "close": 766.82,
+      "close": 766.81,
       "prev_close": 754.35,
       "change_pct": 1.65,
       "in_session": false,
@@ -157,9 +157,9 @@
     "rsp_minus_spy_20d_pct": 7.38
   },
   "fear_greed": {
-    "score": 27.6,
+    "score": 27.3,
     "rating": "fear",
-    "as_of": "2026-11-04T20:54:31+00:00",
+    "as_of": "2026-11-04T22:13:19+00:00",
     "previous_close": 19.1,
     "previous_1_week": 34.4
   },
@@ -194,11 +194,11 @@
     {
       "symbol": "XLV",
       "name": "Health Care",
-      "close": 189.68,
-      "change_pct": 3.08,
-      "return_5d_pct": 5.54,
-      "return_20d_pct": 12.36,
-      "distance_from_sma150_pct": 17.81
+      "close": 189.66,
+      "change_pct": 3.06,
+      "return_5d_pct": 5.53,
+      "return_20d_pct": 12.35,
+      "distance_from_sma150_pct": 17.8
     },
     {
       "symbol": "XLF",
@@ -248,11 +248,11 @@
     {
       "symbol": "XLE",
       "name": "Energy",
-      "close": 63.53,
-      "change_pct": -4.72,
-      "return_5d_pct": -7.19,
-      "return_20d_pct": 0.27,
-      "distance_from_sma150_pct": 5.52
+      "close": 63.52,
+      "change_pct": -4.74,
+      "return_5d_pct": -7.2,
+      "return_20d_pct": 0.25,
+      "distance_from_sma150_pct": 5.51
     },
     {
       "symbol": "XLK",
