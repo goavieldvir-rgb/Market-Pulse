@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-03T22:23:16+00:00",
+  "generated_at": "2026-11-04T00:00:03+00:00",
   "market": {
     "state": "closed",
     "session_open": "2026-11-03T14:30:00+00:00",
@@ -157,9 +157,9 @@
     "rsp_minus_spy_20d_pct": 6.44
   },
   "fear_greed": {
-    "score": 19.0,
+    "score": 19.1,
     "rating": "extreme fear",
-    "as_of": "2026-11-03T20:53:47+00:00",
+    "as_of": "2026-11-03T23:44:32+00:00",
     "previous_close": 22.7,
     "previous_1_week": 32.9
   },
