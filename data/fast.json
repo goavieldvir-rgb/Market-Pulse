@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-05T21:29:11+00:00",
+  "generated_at": "2026-11-05T22:43:34+00:00",
   "market": {
     "state": "closed",
     "session_open": "2026-11-05T14:30:00+00:00",
@@ -46,19 +46,19 @@
   "vix": {
     "symbol": "^VIX",
     "date": "2026-11-05",
-    "close": 28.15,
+    "close": 28.18,
     "prev_close": 16.61,
-    "change_pct": 69.48,
+    "change_pct": 69.66,
     "in_session": false,
     "close_from_quote": false,
-    "as_of": "2026-11-05T21:14:01+00:00",
+    "as_of": "2026-11-05T21:15:01+00:00",
     "sma150": 17.06,
-    "distance_from_sma150_pct": 64.98,
+    "distance_from_sma150_pct": 65.15,
     "streak_direction": "green",
     "streak_count": 1,
     "streak_through": "2026-11-05",
-    "return_5d_pct": 63.66,
-    "return_20d_pct": 82.67,
+    "return_5d_pct": 63.84,
+    "return_20d_pct": 82.87,
     "percentile_1y": 98.8
   },
   "sectors": {
@@ -157,9 +157,9 @@
     "rsp_minus_spy_20d_pct": 7.65
   },
   "fear_greed": {
-    "score": 20.0,
+    "score": 19.9,
     "rating": "extreme fear",
-    "as_of": "2026-11-05T21:09:30+00:00",
+    "as_of": "2026-11-05T21:18:36+00:00",
     "previous_close": 27.3,
     "previous_1_week": 30.8
   },
@@ -203,11 +203,11 @@
     {
       "symbol": "XLF",
       "name": "Financials",
-      "close": 57.51,
-      "change_pct": -2.85,
-      "return_5d_pct": 1.0,
-      "return_20d_pct": 6.05,
-      "distance_from_sma150_pct": 5.24
+      "close": 57.5,
+      "change_pct": -2.87,
+      "return_5d_pct": 0.98,
+      "return_20d_pct": 6.03,
+      "distance_from_sma150_pct": 5.23
     },
     {
       "symbol": "XLV",
@@ -248,20 +248,20 @@
     {
       "symbol": "XLE",
       "name": "Energy",
-      "close": 61.68,
-      "change_pct": -2.9,
-      "return_5d_pct": -10.23,
-      "return_20d_pct": -5.46,
-      "distance_from_sma150_pct": 2.42
+      "close": 61.63,
+      "change_pct": -2.98,
+      "return_5d_pct": -10.3,
+      "return_20d_pct": -5.53,
+      "distance_from_sma150_pct": 2.34
     },
     {
       "symbol": "XLK",
       "name": "Technology",
-      "close": 162.31,
-      "change_pct": -8.04,
-      "return_5d_pct": -14.0,
-      "return_20d_pct": -17.93,
-      "distance_from_sma150_pct": -9.96
+      "close": 162.38,
+      "change_pct": -8.0,
+      "return_5d_pct": -13.97,
+      "return_20d_pct": -17.9,
+      "distance_from_sma150_pct": -9.93
     }
   ],
   "sector_rotation": {
