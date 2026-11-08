@@ -1,7 +1,9 @@
 /* Market Pulse — shared design system: "the market pages".
    Day edition on newsprint peach, night edition on ink-brown, chosen by the OS
    (or the reader's toggle). Blue and vermilion are reserved: they only ever mean
-   opportunity/up and caution/down, and always travel with a word or a direction mark. */
+   opportunity/up and caution/down, and always travel with a word or a direction mark.
+   English and Hebrew editions: Hebrew pages run right to left (dir="rtl", set by mp.js), so
+   layout uses logical sides (inline-start/end); number lines and charts stay left to right. */
 
 :root {
   --paper: #F5E4D3;
@@ -17,9 +19,11 @@
   --cau-tint: rgba(138, 49, 14, 0.12);
   --focus: #1B4C8C;
 
-  --serif: 'Source Serif 4', 'Source Serif Pro', Georgia, serif;
-  --sans: 'Barlow', system-ui, sans-serif;
-  --cond: 'Barlow Semi Condensed', 'Barlow', system-ui, sans-serif;
+  /* Hebrew letters fall through to Frank Ruhl Libre / Assistant (fonts.css limits them to Hebrew),
+     so Latin letters and digits look the same in both editions. */
+  --serif: 'Source Serif 4', 'Frank Ruhl Libre', 'Source Serif Pro', Georgia, serif;
+  --sans: 'Barlow', 'Assistant', system-ui, sans-serif;
+  --cond: 'Barlow Semi Condensed', 'Barlow', 'Assistant', system-ui, sans-serif;
 
   --step--1: 0.8125rem;   /* 13 */
   --step-0: 1rem;         /* 16 */
@@ -82,18 +86,20 @@ button, select, input { font: inherit; color: inherit; }
 .mast { display: flex; align-items: flex-end; justify-content: space-between; gap: var(--space-3); border-bottom: 3px solid var(--ink); padding: var(--space-2) 0 6px; }
 .mast .brand { font-family: var(--serif); font-weight: 800; font-size: clamp(1.75rem, 1.4rem + 1.6vw, 2.5rem); line-height: 1; letter-spacing: -0.012em; text-decoration: none; color: var(--ink); font-optical-sizing: auto; }
 .mast .mast-side { display: flex; align-items: center; gap: var(--space-3); font-family: var(--cond); font-weight: 600; font-size: var(--step--1); color: var(--ink-2); }
-.theme-btn {
+.theme-btn, .lang-btn {
   display: inline-flex; align-items: center; gap: 6px; min-height: 36px; padding: 0 10px;
   background: transparent; border: 1px solid var(--rule); border-radius: var(--radius);
   font-family: var(--cond); font-weight: 600; font-size: var(--step--1); color: var(--ink-2); cursor: pointer;
 }
-@media (hover: hover) { .theme-btn:hover { border-color: var(--ink-2); color: var(--ink); } }
-.theme-btn:active { border-color: var(--ink); color: var(--ink); }
+@media (hover: hover) { .theme-btn:hover, .lang-btn:hover { border-color: var(--ink-2); color: var(--ink); } }
+.theme-btn:active, .lang-btn:active { border-color: var(--ink); color: var(--ink); }
 .theme-btn svg { width: 15px; height: 15px; }
+/* The language button names the other language in its own script: עברית on English pages, English on Hebrew ones. */
+.lang-btn [lang="he"] { font-size: 0.9375rem; font-weight: 700; }
 
 .dateline { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2px var(--space-4); border-bottom: 1px solid var(--ink); padding: 6px 0; font-family: var(--cond); font-weight: 500; font-size: var(--step--1); color: var(--ink-2); }
 .dateline b { color: var(--ink); font-weight: 600; }
-.live-dot { display: inline-block; width: 8px; height: 8px; border-radius: 4px; background: var(--ink-3); margin-right: 6px; vertical-align: 1px; }
+.live-dot { display: inline-block; width: 8px; height: 8px; border-radius: 4px; background: var(--ink-3); margin-inline-end: 6px; vertical-align: 1px; }
 .live-dot.live { background: var(--opp); }
 .live-dot.warn { background: var(--cau); }
 @media (prefers-reduced-motion: no-preference) {
@@ -143,7 +149,8 @@ h1, h2, h3 { font-family: var(--serif); font-optical-sizing: auto; margin: 0; te
 @media (hover: hover) { .btn:hover { background: var(--ink); color: var(--paper); } }
 .btn:active { background: var(--ink); color: var(--paper); }
 .btn:disabled { opacity: 0.45; cursor: not-allowed; }
-select.select { min-height: 40px; padding: 0 30px 0 10px; background: var(--paper) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%2357483B' stroke-width='1.6'/%3E%3C/svg%3E") no-repeat right 10px center; border: 1px solid var(--ink-2); border-radius: var(--radius); font-family: var(--cond); font-weight: 600; appearance: none; cursor: pointer; }
+select.select { min-height: 40px; padding-block: 0; padding-inline: 10px 30px; background: var(--paper) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%2357483B' stroke-width='1.6'/%3E%3C/svg%3E") no-repeat right 10px center; border: 1px solid var(--ink-2); border-radius: var(--radius); font-family: var(--cond); font-weight: 600; appearance: none; cursor: pointer; }
+[dir="rtl"] select.select { background-position: left 10px center; }
 input[type="range"] { accent-color: var(--ink); height: 28px; cursor: pointer; }
 
 /* ---------- Section jump bar (Scanner, Weekly recap) ----------
@@ -201,9 +208,30 @@ input[type="range"] { accent-color: var(--ink); height: 28px; cursor: pointer; }
 
 @media (max-width: 400px) {
   .theme-btn span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-  .theme-btn { min-width: 44px; min-height: 44px; justify-content: center; }
+  .theme-btn, .lang-btn { min-width: 44px; min-height: 44px; justify-content: center; }
+}
+/* The smallest phones: keep the name and both buttons on one line. */
+@media (max-width: 359px) {
+  .mast .brand { font-size: 1.5rem; }
+  .mast .mast-side { gap: 6px; }
+  .lang-btn { padding: 0 8px; }
 }
 
 .visually-hidden { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
-@media print { .tabs, .theme-btn, .install, .jump { display: none; } }
+@media print { .tabs, .theme-btn, .lang-btn, .install, .jump { display: none; } }
+
+/* ---------- Hebrew edition ---------- */
+/* Hold the first paint until mp.js has swapped in the Hebrew text; show the page regardless
+   after 1.2s so a failed script never leaves it blank. */
+html.i18n-pending body { visibility: hidden; animation: mp-reveal 0s linear 1.2s forwards; }
+@keyframes mp-reveal { to { visibility: visible; } }
+
+/* Number lines and charts read left to right in both languages (−100 left, +100 right, time
+   left to right). Text inside them still takes the direction of its own first letter. */
+.ltr { direction: ltr; }
+.ltr .lbl, .ltr .lab, .ltr .nowlab { unicode-bidi: plaintext; }
+
+/* Hebrew has no capitals or italics, and tight tracking crowds its letters. */
+:root[lang="he"] .stamp { letter-spacing: 0.02em; }
+:root[lang="he"] .h-section { letter-spacing: 0; }

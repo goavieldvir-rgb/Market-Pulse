@@ -9,7 +9,7 @@ related_targets: ["opportunity.html","weekly.html"]
 
 Scope: index.html (Operate: today's market read), opportunity.html (Operate: screens and insider filings), weekly.html (Read: Sunday pre-open recap). One shared world.
 Audience/job: public retail traders checking on a phone around the US open; know the market's state in seconds, then the evidence.
-Constraints: static HTML/CSS/JS, no build; every reading shows freshness; "Not financial advice" on every page; must not rely on hue alone for up/down.
+Constraints: static HTML/CSS/JS, no build; every reading shows freshness; "Not financial advice" on every page; must not rely on hue alone for up/down; English and Hebrew editions (Hebrew right to left, charts left to right; terms in docs/hebrew.md).
 Memorable moment: the seven signals plotted as dots on one shared −100…+100 scale under a huge serif composite figure.
 Unresolved: none.
 

@@ -3,17 +3,17 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<title>Scanner — Market Pulse</title>
-<meta name="description" content="Insider buying and selling, sector leaders, 52-week highs and lows, volume surges and moving-average tests across the S&P 500 + Nasdaq 100." />
+<title data-he="סורק — Market Pulse">Scanner — Market Pulse</title>
+<meta name="description" content="Insider buying and selling, sector leaders, 52-week highs and lows, volume surges and moving-average tests across the S&P 500 + Nasdaq 100." data-he="קניות ומכירות של בעלי עניין, סקטורים מובילים, שיאים ושפלים של 52 שבועות, זינוקים במחזור המסחר ומניות שבוחנות ממוצעים נעים, במניות S&amp;P 500 ונאסד״ק 100." />
 <link rel="manifest" href="manifest.json" />
 <link rel="icon" href="icons/icon-192.png" />
 <link rel="apple-touch-icon" href="icons/icon-192.png" />
 <meta name="theme-color" content="#F5E4D3" media="(prefers-color-scheme: light)" />
 <meta name="theme-color" content="#17130F" media="(prefers-color-scheme: dark)" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
-<link rel="stylesheet" href="assets/fonts.css">
-<link rel="stylesheet" href="assets/mp.css?v=2" />
-<script src="assets/mp.js?v=2"></script>
+<link rel="stylesheet" href="assets/fonts.css?v=2">
+<link rel="stylesheet" href="assets/mp.css?v=3" />
+<script src="assets/mp.js?v=3"></script>
 <style>
   .intro { font-size: var(--step-0); color: var(--ink-2); max-width: var(--measure); margin: 0 0 var(--space-4); }
   .intro strong { color: var(--ink); }
@@ -33,17 +33,17 @@
   .row { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); min-height: 48px; border-bottom: 1px solid var(--rule); font-family: var(--cond); font-size: 0.9375rem; }
   .row .left { display: flex; align-items: center; gap: 6px; min-width: 0; }
   .row .sym { font-weight: 700; font-size: 1rem; letter-spacing: 0.01em; }
-  .row .price { color: var(--ink-3); font-weight: 500; margin-left: 4px; }
-  .row .metric { font-weight: 700; text-align: right; }
+  .row .price { color: var(--ink-3); font-weight: 500; margin-inline-start: 4px; }
+  .row .metric { font-weight: 700; text-align: end; }
   .metric.up { color: var(--opp); }
   .metric.down { color: var(--cau); }
   .metric.neutral { color: var(--ink); }
-  .metric .chg { font-weight: 500; font-size: 0.875rem; margin-left: 6px; }
+  .metric .chg { font-weight: 500; font-size: 0.875rem; margin-inline-start: 6px; }
   .metric .chg.up { color: var(--opp); }
   .metric .chg.down { color: var(--cau); }
   .empty-note { font-family: var(--cond); font-weight: 500; color: var(--ink-2); padding: var(--space-3) 0; border-bottom: 1px solid var(--rule); }
 
-  .star-btn { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; margin-left: -12px; background: none; border: none; border-radius: var(--radius); color: var(--ink-3); cursor: pointer; flex: none; }
+  .star-btn { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; margin-inline-start: -12px; background: none; border: none; border-radius: var(--radius); color: var(--ink-3); cursor: pointer; flex: none; }
   .star-btn svg { width: 18px; height: 18px; }
   @media (hover: hover) { .star-btn:hover { color: var(--ink); } }
   .star-btn.active { color: var(--ink); }
@@ -55,7 +55,7 @@
   .filing .role { font-family: var(--cond); font-weight: 500; font-size: var(--step--1); color: var(--ink-2); }
   .filing .who { font-size: 0.9375rem; margin-top: 2px; }
   .filing .others { font-size: var(--step--1); color: var(--ink-2); margin-top: 2px; }
-  .filing .right { text-align: right; font-family: var(--cond); }
+  .filing .right { text-align: end; font-family: var(--cond); }
   .filing .value { font-family: var(--serif); font-weight: 700; font-size: var(--step-1); line-height: 1.2; }
   .filing .detail { font-weight: 500; font-size: var(--step--1); color: var(--ink-2); }
   .filing .detail a { color: var(--ink-2); }
@@ -63,7 +63,7 @@
   @media (pointer: coarse) { .filing .detail a { display: inline-block; padding: 12px 8px; margin: -12px -8px; } }
   @media (max-width: 560px) {
     .filing { grid-template-columns: minmax(0, 1fr); }
-    .filing .right { text-align: left; display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 10px; }
+    .filing .right { text-align: start; display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 10px; }
   }
   .plan { font-family: var(--cond); font-weight: 600; font-size: 0.75rem; color: var(--ink-2); border: 1px solid var(--rule); border-radius: var(--radius); padding: 1px 6px; white-space: nowrap; }
   .more { margin-top: var(--space-3); }
@@ -71,19 +71,19 @@
   /* Sector leaderboard */
   .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
   .sector-table { width: 100%; border-collapse: collapse; font-family: var(--cond); font-size: 0.9375rem; }
-  .sector-table th { text-align: left; font-weight: 600; font-size: var(--step--1); color: var(--ink-2); padding: var(--space-2) var(--space-2) var(--space-2) 0; border-bottom: 2px solid var(--ink); white-space: nowrap; }
-  .sector-table td { padding: 10px var(--space-2) 10px 0; border-bottom: 1px solid var(--rule); }
+  .sector-table th { text-align: start; font-weight: 600; font-size: var(--step--1); color: var(--ink-2); padding-block: var(--space-2); padding-inline: 0 var(--space-2); border-bottom: 2px solid var(--ink); white-space: nowrap; }
+  .sector-table td { padding-block: 10px; padding-inline: 0 var(--space-2); border-bottom: 1px solid var(--rule); }
   .sector-table .rank { color: var(--ink-3); width: 28px; font-weight: 600; }
   .sector-table .name { font-weight: 600; }
   .sector-table .sym { color: var(--ink-3); font-weight: 500; font-size: var(--step--1); }
-  .sector-table .num { font-weight: 700; text-align: right; white-space: nowrap; }
+  .sector-table .num { font-weight: 700; text-align: end; white-space: nowrap; }
   .num.up { color: var(--opp); }
   .num.down { color: var(--cau); }
   .sector-table tr.benchmark td { background: var(--paper-2); }
   .sector-table tr.benchmark .name { font-weight: 500; color: var(--ink-2); }
   @media (max-width: 380px) {
     .sector-table { font-size: var(--step--1); }
-    .sector-table th, .sector-table td { padding-right: 5px; }
+    .sector-table th, .sector-table td { padding-inline-end: 5px; }
     .sector-table .rank { width: 18px; }
   }
   .sector-note { font-size: 0.875rem; color: var(--ink-2); margin-top: var(--space-2); max-width: var(--measure); }
@@ -94,116 +94,118 @@
 
 <header class="mast">
   <a class="brand" href="index.html">Market Pulse</a>
-  <div class="mast-side"><span>S&amp;P 500 · Nasdaq 100</span><button class="theme-btn" id="theme-btn" type="button">Edition</button></div>
+  <div class="mast-side"><span data-he="S&amp;P 500 · נאסד״ק 100">S&amp;P 500 · Nasdaq 100</span><button class="lang-btn" id="lang-btn" type="button"><span lang="he">עברית</span></button><button class="theme-btn" id="theme-btn" type="button">Edition</button></div>
 </header>
 <div class="dateline">
   <span id="today-date"></span>
-  <span id="updated-badge"><span class="live-dot" id="updated-dot"></span><span id="updated-text">Loading…</span></span>
+  <span id="updated-badge"><span class="live-dot" id="updated-dot"></span><span id="updated-text" data-he="טוען…">Loading…</span></span>
 </div>
-<nav class="tabs" aria-label="Sections">
-  <a href="index.html">Today</a>
-  <a href="opportunity.html" aria-current="page">Scanner</a>
-  <a href="weekly.html">Weekly recap</a>
+<nav class="tabs" aria-label="Sections" data-he-label="מדורים">
+  <a href="index.html" data-he="היום">Today</a>
+  <a href="opportunity.html" aria-current="page" data-he="סורק">Scanner</a>
+  <a href="weekly.html" data-he="סיכום שבועי">Weekly recap</a>
 </nav>
 
-<h1 class="visually-hidden">Scanner</h1>
-<p class="intro"><strong>A daily scan of the S&amp;P 500 and Nasdaq 100</strong> for setups worth a second look, plus official SEC insider-trading filings. A starting point for your own research, not a recommendation to buy or sell.</p>
+<h1 class="visually-hidden" data-he="סורק">Scanner</h1>
+<p class="intro" data-he-html="<strong>סריקה יומית של מניות S&amp;amp;P 500 ונאסד״ק 100</strong> לאיתור מצבים ששווה לבחון שוב, וגם הדיווחים הרשמיים ל-SEC על מסחר של בעלי עניין. נקודת פתיחה למחקר שלכם, לא המלצה לקנות או למכור."><strong>A daily scan of the S&amp;P 500 and Nasdaq 100</strong> for setups worth a second look, plus official SEC insider-trading filings. A starting point for your own research, not a recommendation to buy or sell.</p>
 
-<nav class="jump" aria-label="Jump to a screen">
-  <a href="#watchlist" id="jump-watchlist" hidden>My watchlist</a>
-  <a href="#insider-buying">Insider buying</a>
-  <a href="#insider-selling">Insider selling</a>
-  <a href="#sectors">Sector leaders</a>
-  <a href="#highs-lows">52-week highs &amp; lows</a>
-  <a href="#volume">Unusual volume</a>
-  <a href="#averages">Key averages</a>
+<nav class="jump" aria-label="Jump to a screen" data-he-label="מעבר לסריקה">
+  <a href="#watchlist" id="jump-watchlist" hidden data-he="רשימת המעקב שלי">My watchlist</a>
+  <a href="#insider-buying" data-he="קניות בעלי עניין">Insider buying</a>
+  <a href="#insider-selling" data-he="מכירות בעלי עניין">Insider selling</a>
+  <a href="#sectors" data-he="סקטורים מובילים">Sector leaders</a>
+  <a href="#highs-lows" data-he="שיאים ושפלים">52-week highs &amp; lows</a>
+  <a href="#volume" data-he="מחזור חריג">Unusual volume</a>
+  <a href="#averages" data-he="ממוצעים נעים">Key averages</a>
 </nav>
 
 <section class="section" id="watchlist" hidden>
-  <div class="section-head"><h2 class="h-section">My watchlist</h2><span class="asof">Saved on this device only, no account needed</span></div>
-  <p class="lede">Tap the star next to any ticker on this page to add or remove it here.</p>
+  <div class="section-head"><h2 class="h-section" data-he="רשימת המעקב שלי">My watchlist</h2><span class="asof" data-he="נשמרת רק במכשיר הזה, בלי צורך בחשבון">Saved on this device only, no account needed</span></div>
+  <p class="lede" data-he="הקישו על הכוכב שליד כל סימול בעמוד כדי להוסיף אותו לכאן או להסיר אותו.">Tap the star next to any ticker on this page to add or remove it here.</p>
   <div class="list" id="watchlist-card"></div>
 </section>
 
 <section class="section" id="insider-buying">
-  <div class="section-head"><h2 class="h-section">Insider buying</h2><span class="asof" id="asof-insiders"></span></div>
-  <p class="lede">Open-market purchases of $10K or more by officers, directors and 10%+ owners (official SEC Form 4 filings), last 30 days, largest first.</p>
+  <div class="section-head"><h2 class="h-section" data-he="קניות של בעלי עניין">Insider buying</h2><span class="asof" id="asof-insiders"></span></div>
+  <p class="lede" data-he="קניות בשוק הפתוח בהיקף של 10,000 דולר ומעלה, שביצעו נושאי משרה, דירקטורים ובעלי 10% ומעלה מהמניות (דיווחים רשמיים בטופס 4 ל-SEC), ב-30 הימים האחרונים, מהגדולה לקטנה.">Open-market purchases of $10K or more by officers, directors and 10%+ owners (official SEC Form 4 filings), last 30 days, largest first.</p>
   <div class="list" id="insider-buys-card"></div>
 </section>
 
 <section class="section" id="insider-selling">
-  <div class="section-head"><h2 class="h-section">Insider selling</h2></div>
-  <p class="lede">Largest open-market sales over the last 30 days. A noisier signal than buying: insiders sell for many reasons. Sales marked <b>10b5-1 plan</b> were scheduled in advance and say even less.</p>
+  <div class="section-head"><h2 class="h-section" data-he="מכירות של בעלי עניין">Insider selling</h2></div>
+  <p class="lede" data-he-html="המכירות הגדולות בשוק הפתוח ב-30 הימים האחרונים. אות רועש יותר מקניות: בעלי עניין מוכרים מסיבות רבות. מכירות שמסומנות <b>תוכנית 10b5-1</b> תוזמנו מראש, ואומרות עוד פחות.">Largest open-market sales over the last 30 days. A noisier signal than buying: insiders sell for many reasons. Sales marked <b>10b5-1 plan</b> were scheduled in advance and say even less.</p>
   <div class="list" id="insider-sells-card"></div>
 </section>
 
 <section class="section" id="sectors">
-  <div class="section-head"><h2 class="h-section">Sector leaderboard</h2><span class="asof" id="asof-sectors"></span></div>
-  <p class="lede">All 11 SPDR sector ETFs ranked by 5-day return, with the S&amp;P 500 (SPY) as the benchmark row.</p>
+  <div class="section-head"><h2 class="h-section" data-he="טבלת הסקטורים">Sector leaderboard</h2><span class="asof" id="asof-sectors"></span></div>
+  <p class="lede" data-he="כל 11 קרנות הסל הסקטוריאליות של SPDR, מדורגות לפי התשואה ב-5 ימים, עם ה-S&amp;P 500 (SPY) כשורת ייחוס.">All 11 SPDR sector ETFs ranked by 5-day return, with the S&amp;P 500 (SPY) as the benchmark row.</p>
   <div class="table-wrap"><table class="sector-table" id="sector-table"></table></div>
-  <p class="sector-note">Ranks are relative: in a down week the leaders can still be negative. What matters is whether a sector is beating SPY.</p>
+  <p class="sector-note" data-he="הדירוג יחסי: בשבוע של ירידות גם המובילים יכולים להיות בירידה. מה שחשוב הוא אם הסקטור מכה את SPY.">Ranks are relative: in a down week the leaders can still be negative. What matters is whether a sector is beating SPY.</p>
 </section>
 
 <section class="section" id="highs-lows">
-  <div class="section-head"><h2 class="h-section">52-week highs and lows</h2><span class="asof asof-scan"></span></div>
-  <p class="lede">Closing price vs the highest high and lowest low of the past 52 weeks. Near highs: momentum and breakout candidates. Near lows: beaten-down names for contrarian research.</p>
+  <div class="section-head"><h2 class="h-section" data-he="שיאים ושפלים של 52 שבועות">52-week highs and lows</h2><span class="asof asof-scan"></span></div>
+  <p class="lede" data-he="שער הנעילה ביחס לשיא ולשפל של 52 השבועות האחרונים. קרוב לשיא: מניות מומנטום ומועמדות לפריצה. קרוב לשפל: מניות שספגו מכה, למחקר בגישת נגד הזרם.">Closing price vs the highest high and lowest low of the past 52 weeks. Near highs: momentum and breakout candidates. Near lows: beaten-down names for contrarian research.</p>
   <div class="controls">
-    <label for="ctl-52w-pct">Within <b id="ctl-52w-pct-val">3.0</b>% of the 52-week extreme</label>
+    <label for="ctl-52w-pct" data-he-html="במרחק של עד <b id=&quot;ctl-52w-pct-val&quot;>3.0</b>% מהשיא או מהשפל">Within <b id="ctl-52w-pct-val">3.0</b>% of the 52-week extreme</label>
     <input type="range" id="ctl-52w-pct" min="0.5" max="10" step="0.5" value="3">
   </div>
   <div class="grid-2">
-    <div><h3 class="col-title">Near a 52-week high</h3><div class="list" id="hi52-list"></div></div>
-    <div><h3 class="col-title">Near a 52-week low</h3><div class="list" id="lo52-list"></div></div>
+    <div><h3 class="col-title" data-he="קרוב לשיא 52 שבועות">Near a 52-week high</h3><div class="list" id="hi52-list"></div></div>
+    <div><h3 class="col-title" data-he="קרוב לשפל 52 שבועות">Near a 52-week low</h3><div class="list" id="lo52-list"></div></div>
   </div>
 </section>
 
 <section class="section" id="volume">
-  <div class="section-head"><h2 class="h-section">Unusual volume</h2><span class="asof asof-scan"></span></div>
-  <p class="lede">The last session's volume vs its 20-day average, with that day's price move. Heavy volume on a big up day reads very differently from heavy volume on a big down day.</p>
+  <div class="section-head"><h2 class="h-section" data-he="מחזור מסחר חריג">Unusual volume</h2><span class="asof asof-scan"></span></div>
+  <p class="lede" data-he="מחזור המסחר ביום האחרון ביחס לממוצע של 20 הימים, לצד תנועת המחיר באותו יום. למחזור כבד ביום של עלייה חדה יש משמעות שונה מאוד מזו של מחזור כבד ביום של ירידה חדה.">The last session's volume vs its 20-day average, with that day's price move. Heavy volume on a big up day reads very differently from heavy volume on a big down day.</p>
   <div class="controls">
-    <label for="ctl-vol-ratio">At least <b id="ctl-vol-ratio-val">2.0</b>× average volume</label>
+    <label for="ctl-vol-ratio" data-he-html="לפחות פי <b id=&quot;ctl-vol-ratio-val&quot;>2.0</b> מהמחזור הממוצע">At least <b id="ctl-vol-ratio-val">2.0</b>× average volume</label>
     <input type="range" id="ctl-vol-ratio" min="1.2" max="5" step="0.1" value="2">
   </div>
   <div class="list" id="volume-list"></div>
 </section>
 
 <section class="section" id="averages">
-  <div class="section-head"><h2 class="h-section">Testing key averages</h2><span class="asof asof-scan"></span></div>
-  <p class="lede">Stocks sitting close to a moving average: just above it can act as support, just below as resistance. Pick the average and how close counts as near.</p>
+  <div class="section-head"><h2 class="h-section" data-he="מניות שבוחנות ממוצעים נעים">Testing key averages</h2><span class="asof asof-scan"></span></div>
+  <p class="lede" data-he="מניות שנסחרות קרוב לממוצע נע: מניה שנסחרת ממש מעל הממוצע עשויה למצוא בו תמיכה, ומניה שנסחרת ממש מתחתיו – התנגדות. בחרו את הממוצע ואת המרחק שנחשב קרוב.">Stocks sitting close to a moving average: just above it can act as support, just below as resistance. Pick the average and how close counts as near.</p>
   <div class="controls">
-    <label for="ctl-ma-pct">Within <b id="ctl-ma-pct-val">2.0</b>% of the average</label>
+    <label for="ctl-ma-pct" data-he-html="במרחק של עד <b id=&quot;ctl-ma-pct-val&quot;>2.0</b>% מהממוצע">Within <b id="ctl-ma-pct-val">2.0</b>% of the average</label>
     <input type="range" id="ctl-ma-pct" min="0.5" max="8" step="0.5" value="2">
   </div>
   <div class="grid-2">
-    <div><h3 class="col-title"><label for="ctl-ma-period-a">Near the</label> <select id="ctl-ma-period-a" class="select"></select> average</h3><div class="list" id="sma-list-a"></div></div>
-    <div><h3 class="col-title"><label for="ctl-ma-period-b">Near the</label> <select id="ctl-ma-period-b" class="select"></select> average</h3><div class="list" id="sma-list-b"></div></div>
+    <div><h3 class="col-title" data-he-html="<label for=&quot;ctl-ma-period-a&quot;>קרוב לממוצע</label> <select id=&quot;ctl-ma-period-a&quot; class=&quot;select&quot;></select>"><label for="ctl-ma-period-a">Near the</label> <select id="ctl-ma-period-a" class="select"></select> average</h3><div class="list" id="sma-list-a"></div></div>
+    <div><h3 class="col-title" data-he-html="<label for=&quot;ctl-ma-period-b&quot;>קרוב לממוצע</label> <select id=&quot;ctl-ma-period-b&quot; class=&quot;select&quot;></select>"><label for="ctl-ma-period-b">Near the</label> <select id="ctl-ma-period-b" class="select"></select> average</h3><div class="list" id="sma-list-b"></div></div>
   </div>
 </section>
 
 <footer class="footer">
-  <p><strong>Not financial advice.</strong> This page summarizes public technical data and official
+  <p data-he-html="<strong>אין באמור ייעוץ השקעות.</strong> העמוד מסכם נתונים טכניים פומביים ודיווחים רשמיים ל-SEC למטרות מידע בלבד. אין לראות בו המלצה לקנות או למכור נייר ערך כלשהו, ואין בו תחליף לייעוץ המותאם לנתונים ולצרכים של כל אדם."><strong>Not financial advice.</strong> This page summarizes public technical data and official
     SEC disclosures for informational purposes only. It is not a recommendation to buy or sell
     any security.</p>
-  <p>Data: Yahoo Finance (price, volume, moving averages) for S&amp;P 500 + Nasdaq 100 constituents;
+  <p data-he="מקורות: Yahoo Finance (מחיר, מחזור מסחר, ממוצעים נעים) למניות S&amp;P 500 ונאסד״ק 100; SEC EDGAR (דיווחים רשמיים בטופס 4 על מסחר של בעלי עניין). נתוני הסקטורים מתעדכנים בערך כל 10 דקות בזמן המסחר, סריקת המניות אחרי כל נעילה, ודיווחי בעלי העניין כל כמה שעות. ליד כל אזור מצוין מועד העדכון שלו.">Data: Yahoo Finance (price, volume, moving averages) for S&amp;P 500 + Nasdaq 100 constituents;
     SEC EDGAR (official Form 4 insider-trading filings). Sector data refreshes about every 10 minutes
     while the market is open; the stock scan after each close; insider filings every few hours. See
     each section's timestamp.</p>
-  <p><strong>Privacy.</strong> No accounts, cookies, ads or analytics. Your watchlist, scanner settings and day/night choice are saved only in your own browser. Fonts are served from this site. The site is hosted on GitHub Pages, which may log visits as described in <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" rel="noopener noreferrer">GitHub’s privacy statement</a>.</p>
-  <p>Independent project, not affiliated with or endorsed by S&amp;P Dow Jones Indices, Nasdaq, CNN, AAII, Yahoo or the SEC. Index and product names belong to their owners.</p>
+  <p data-he-html="<strong>פרטיות.</strong> אין כאן חשבונות משתמש, עוגיות, פרסומות או כלי אנליטיקה. רשימת המעקב, הגדרות הסורק, השפה ובחירת מהדורת היום או הלילה נשמרות רק בדפדפן שלכם. הגופנים נטענים מהאתר עצמו. האתר מאוחסן בשירות GitHub Pages, שעשוי לתעד ביקורים כמתואר ב<a href=&quot;https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement&quot; rel=&quot;noopener noreferrer&quot;>הצהרת הפרטיות של GitHub</a>."><strong>Privacy.</strong> No accounts, cookies, ads or analytics. Your watchlist, scanner settings, language and day/night choice are saved only in your own browser. Fonts are served from this site. The site is hosted on GitHub Pages, which may log visits as described in <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" rel="noopener noreferrer">GitHub’s privacy statement</a>.</p>
+  <p data-he="פרויקט עצמאי, שאינו קשור ל-S&amp;P Dow Jones Indices, ל-Nasdaq, ל-CNN, ל-AAII, ל-Yahoo או ל-SEC ואינו מאושר על ידם. שמות המדדים והמוצרים שייכים לבעליהם.">Independent project, not affiliated with or endorsed by S&amp;P Dow Jones Indices, Nasdaq, CNN, AAII, Yahoo or the SEC. Index and product names belong to their owners.</p>
 </footer>
 </div>
 
 <script>
+window.MP_APPLY();   // Hebrew page text first, so the code below finds the final elements
 const $ = (sel) => document.querySelector(sel);
 const $$ = (sel) => document.querySelectorAll(sel);
 const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 const num = (v) => (typeof v === "number" && Number.isFinite(v) ? v : null);
 const MARK = window.MP_MARK;
+const L = window.MP_L, BIDI = window.MP_BIDI;
 
 function fmtPct(v, digits = 2) {
   v = num(v);
   if (v === null) return "—";
-  return `${v > 0 ? "+" : ""}${v.toFixed(digits)}%`;
+  return BIDI(`${v > 0 ? "+" : v < 0 ? "−" : ""}${Math.abs(v).toFixed(digits)}%`);
 }
 const upDown = (v) => (num(v) === null || v === 0 ? "" : v > 0 ? "up" : "down");
 const markFor = (v) => (num(v) === null || v === 0 ? "" : v > 0 ? MARK.up : MARK.down);
@@ -219,21 +221,9 @@ function fmtPrice(v) {
   v = num(v);
   return v === null ? "—" : "$" + v.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 }
-function timeAgo(iso) {
-  const t = iso ? Date.parse(iso) : NaN;
-  if (!Number.isFinite(t)) return "no data yet";
-  const min = Math.round((Date.now() - t) / 60000);
-  if (min < 1) return "just now";
-  if (min < 60) return `${min}m ago`;
-  const h = Math.floor(min / 60);
-  if (h < 24) return `${h}h ${min % 60}m ago`;
-  return `${Math.floor(h / 24)}d ago`;
-}
-function fmtDay(isoDate) {
-  if (!isoDate || !/^\d{4}-\d{2}-\d{2}/.test(isoDate)) return "—";
-  const [y, m, d] = isoDate.slice(0, 10).split("-").map(Number);
-  return new Date(Date.UTC(y, m - 1, d)).toLocaleDateString("en-US", { month: "short", day: "numeric", timeZone: "UTC" });
-}
+// "5m ago" / "לפני 5 דק׳" and "Sep 29" / "29 בספט׳" (shared, in mp.js)
+const timeAgo = window.MP_AGO;
+const fmtDay = (isoDate) => window.MP_DAY(isoDate);
 async function loadJSON(path) {
   try {
     const res = await fetch(path + "?t=" + Date.now(), { cache: "no-store" });
@@ -261,7 +251,7 @@ const STAR = (on) => `<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2
 function starButton(sym) {
   if (!sym) return "";
   const active = watchlist.has(sym);
-  return `<button class="star-btn ${active ? "active" : ""}" type="button" data-sym="${esc(sym)}" aria-pressed="${active}" aria-label="Watch ${esc(sym)}">${STAR(active)}</button>`;
+  return `<button class="star-btn ${active ? "active" : ""}" type="button" data-sym="${esc(sym)}" aria-pressed="${active}" aria-label="${L("Watch", "מעקב אחר")} ${esc(sym)}">${STAR(active)}</button>`;
 }
 
 function stockRow(sym, price, metricHTML, cls = "neutral") {
@@ -277,7 +267,7 @@ function renderList(containerId, items, formatFn, emptyMsg, limit = 0) {
   if (!items || !items.length) { el.innerHTML = `<div class="empty-note">${esc(emptyMsg)}</div>`; return; }
   const shown = limit && items.length > limit ? items.slice(0, limit) : items;
   el.innerHTML = shown.map(formatFn).join("") + (shown.length < items.length
-    ? `<div class="more"><button class="btn" type="button" data-more="${esc(containerId)}">Show all ${items.length}</button></div>` : "");
+    ? `<div class="more"><button class="btn" type="button" data-more="${esc(containerId)}">${L(`Show all ${items.length}`, `הצגת כל ה-${items.length}`)}</button></div>` : "");
   if (shown.length < items.length) {
     el.querySelector("[data-more]").addEventListener("click", () => renderList(containerId, items, formatFn, emptyMsg, 0));
   }
@@ -287,30 +277,32 @@ function renderList(containerId, items, formatFn, emptyMsg, limit = 0) {
 function secLink(t) {
   if (!t.cik || !t.accession) return "";
   const acc = String(t.accession);
-  return `<a href="https://www.sec.gov/Archives/edgar/data/${encodeURIComponent(t.cik)}/${acc.replace(/-/g, "")}/${encodeURIComponent(acc)}-index.htm" target="_blank" rel="noopener">SEC filing</a>`;
+  return `<a href="https://www.sec.gov/Archives/edgar/data/${encodeURIComponent(t.cik)}/${acc.replace(/-/g, "")}/${encodeURIComponent(acc)}-index.htm" target="_blank" rel="noopener">${L("SEC filing", "הדיווח ל-SEC")}</a>`;
 }
 
 function insiderRow(t) {
   const isBuy = t.action === "Buy";
   const others = Array.isArray(t.others) ? t.others : [];
-  const traded = t.date_first && t.date_first !== t.date ? `${fmtDay(t.date_first)}–${fmtDay(t.date)}` : fmtDay(t.date);
-  const when = t.filed ? `Traded ${traded} · filed ${fmtDay(t.filed)}` : (t.date ? `Traded ${fmtDay(t.date)}` : "");
+  const traded = t.date_first && t.date_first !== t.date
+    ? L(`${fmtDay(t.date_first)}–${fmtDay(t.date)}`, `${fmtDay(t.date_first)} עד ${fmtDay(t.date)}`) : fmtDay(t.date);
+  const when = t.filed ? L(`Traded ${traded} · filed ${fmtDay(t.filed)}`, `העסקה: ${traded} · הדיווח: ${fmtDay(t.filed)}`)
+    : (t.date ? L(`Traded ${fmtDay(t.date)}`, `העסקה: ${fmtDay(t.date)}`) : "");
   return `
   <div class="filing">
     <div>
       <div class="top">
         ${starButton(t.symbol)}
-        <span class="chip ${isBuy ? "buy" : "sell"}">${isBuy ? MARK.up + "Buy" : MARK.down + "Sell"}</span>
-        <span class="sym" ${t.security ? `title="${esc(t.security)} shares of ${esc(t.symbol)}"` : ""}>${esc(t.security || t.symbol || "—")}</span>
-        <span class="role">${esc(t.role || "")}</span>
-        ${t.plan ? `<span class="plan" title="Made under a pre-arranged Rule 10b5-1 trading plan">10b5-1 plan</span>` : ""}
+        <span class="chip ${isBuy ? "buy" : "sell"}">${isBuy ? MARK.up + L("Buy", "קנייה") : MARK.down + L("Sell", "מכירה")}</span>
+        <span class="sym" ${t.security ? `title="${esc(L(`${t.security} shares of ${t.symbol}`, `מניות ${t.security} של ${t.symbol}`))}"` : ""}>${esc(t.security || t.symbol || "—")}</span>
+        <span class="role">${esc(window.MP_ROLE(t.role || ""))}</span>
+        ${t.plan ? `<span class="plan" title="${L("Made under a pre-arranged Rule 10b5-1 trading plan", "בוצעה במסגרת תוכנית מסחר שנקבעה מראש, לפי כלל 10b5-1")}">${L("10b5-1 plan", "תוכנית 10b5-1")}</span>` : ""}
       </div>
-      <div class="who">${esc(t.insider || "Unknown")}</div>
-      ${others.length ? `<div class="others">Also reported by ${esc(others.slice(0, 2).join(", "))}${others.length > 2 ? ` +${others.length - 2} more` : ""} (same trade)</div>` : ""}
+      <div class="who">${esc(t.insider || L("Unknown", "לא ידוע"))}</div>
+      ${others.length ? `<div class="others">${L("Also reported by", "דווח גם על ידי")} ${esc(others.slice(0, 2).join(", "))}${others.length > 2 ? L(` +${others.length - 2} more`, ` ועוד ${others.length - 2}`) : ""} ${L("(same trade)", "(אותה עסקה)")}</div>` : ""}
     </div>
     <div class="right">
       <div class="value">${fmtMoney(t.value)}</div>
-      <div class="detail">${num(t.shares) ? Math.round(t.shares).toLocaleString("en-US") + " sh @ " + fmtPrice(t.price) : ""}</div>
+      <div class="detail">${num(t.shares) ? L(`${Math.round(t.shares).toLocaleString("en-US")} sh @ ${fmtPrice(t.price)}`, `${Math.round(t.shares).toLocaleString("en-US")} מניות במחיר ${fmtPrice(t.price)}`) : ""}</div>
       <div class="detail">${esc(when)}</div>
       <div class="detail">${secLink(t)}</div>
     </div>
@@ -331,7 +323,7 @@ function saveSettings() {
 }
 
 (async function main() {
-  $("#updated-text").textContent = "Loading…";
+  $("#updated-text").textContent = L("Loading…", "טוען…");
   window.MP_JUMP($(".jump"));
 
   const [fast, opp, insiders] = await Promise.all([
@@ -343,11 +335,12 @@ function saveSettings() {
   // Dateline badge: what the stock screens are based on.
   const scanDay = opp?.as_of || null;
   $("#updated-text").innerHTML = scanDay
-    ? `<b>Stock scan</b> as of ${esc(fmtDay(scanDay))} close`
-    : (opp?.generated_at ? `Stock scan updated ${esc(timeAgo(opp.generated_at))}` : "Waiting for the first data run");
+    ? L(`<b>Stock scan</b> as of ${esc(fmtDay(scanDay))} close`, `<b>סריקת המניות</b> נכון לנעילה של ${esc(fmtDay(scanDay))}`)
+    : (opp?.generated_at ? L(`Stock scan updated ${esc(timeAgo(opp.generated_at))}`, `סריקת המניות עודכנה ${esc(timeAgo(opp.generated_at))}`)
+      : L("Waiting for the first data run", "ממתין לעדכון הנתונים הראשון"));
   if (opp) $("#updated-dot").classList.add("live");
   $$(".asof-scan").forEach((el) => {
-    el.textContent = scanDay ? `Based on the ${fmtDay(scanDay)} close · updated after each trading day` : "";
+    el.textContent = scanDay ? L(`Based on the ${fmtDay(scanDay)} close · updated after each trading day`, `לפי הנעילה של ${fmtDay(scanDay)} · מתעדכן אחרי כל יום מסחר`) : "";
   });
 
   // ---------- Insiders ----------
@@ -355,20 +348,22 @@ function saveSettings() {
   const sells = [...(insiders?.sells || [])].sort((a, b) => (b.value || 0) - (a.value || 0)).slice(0, 25);
   const windowDays = insiders?.window_days || 30;
   if (insiders) {
-    const covered = insiders.covered_from ? ` · complete since ${fmtDay(insiders.covered_from)}` : "";
-    $("#asof-insiders").textContent = `Checked ${timeAgo(insiders.generated_at)}${covered}`;
+    const covered = insiders.covered_from ? L(` · complete since ${fmtDay(insiders.covered_from)}`, ` · נתונים מלאים מאז ${fmtDay(insiders.covered_from)}`) : "";
+    $("#asof-insiders").textContent = L(`Checked ${timeAgo(insiders.generated_at)}`, `נבדק ${timeAgo(insiders.generated_at)}`) + covered;
   }
   renderList("insider-buys-card", buys, insiderRow,
-    `No open-market insider purchases at S&P 500 / Nasdaq-100 companies in the last ${windowDays} days.`, 10);
+    L(`No open-market insider purchases at S&P 500 / Nasdaq-100 companies in the last ${windowDays} days.`,
+      `לא דווחו קניות של בעלי עניין בשוק הפתוח בחברות S&P 500 ונאסד״ק 100 ב-${windowDays} הימים האחרונים.`), 10);
   renderList("insider-sells-card", sells, insiderRow,
-    `No open-market insider sales at S&P 500 / Nasdaq-100 companies in the last ${windowDays} days.`, 8);
+    L(`No open-market insider sales at S&P 500 / Nasdaq-100 companies in the last ${windowDays} days.`,
+      `לא דווחו מכירות של בעלי עניין בשוק הפתוח בחברות S&P 500 ונאסד״ק 100 ב-${windowDays} הימים האחרונים.`), 8);
 
   // ---------- Sector leaderboard (with SPY as the benchmark row) ----------
   {
     const rows = (fast?.sector_breakout || []).map((r) => ({ ...r }));
     const spy = fast?.spy;
     if (spy && rows.length) {
-      rows.push({ symbol: "SPY · benchmark", name: "S&P 500", benchmark: true, return_5d_pct: spy.return_5d_pct,
+      rows.push({ symbol: L("SPY · benchmark", "SPY · ייחוס"), name: "S&P 500", benchmark: true, return_5d_pct: spy.return_5d_pct,
         return_20d_pct: spy.return_20d_pct, distance_from_sma150_pct: spy.distance_from_sma150_pct });
     }
     rows.sort((a, b) => (num(b.return_5d_pct) ?? -999) - (num(a.return_5d_pct) ?? -999));
@@ -378,17 +373,17 @@ function saveSettings() {
       if (!r.benchmark) rank++;
       return `<tr class="${r.benchmark ? "benchmark" : ""}">
         <td class="rank">${r.benchmark ? "" : rank}</td>
-        <td class="name">${esc(r.name)}<br><span class="sym">${esc(r.symbol)}</span></td>
+        <td class="name">${esc(r.benchmark ? r.name : window.MP_SECTOR(r.symbol, r.name))}<br><span class="sym">${esc(r.symbol)}</span></td>
         ${cell(r.return_5d_pct)}${cell(r.return_20d_pct)}${cell(r.distance_from_sma150_pct)}
       </tr>`;
     }).join("");
     $("#sector-table").innerHTML = rows.length ? `
-      <thead><tr><th scope="col"><span class="visually-hidden">Rank</span></th><th scope="col">Sector</th><th scope="col" style="text-align:right">5 days</th><th scope="col" style="text-align:right">20 days</th><th scope="col" style="text-align:right">vs 150-day</th></tr></thead>
-      <tbody>${tbody}</tbody>` : `<tbody><tr><td class="empty-note">No data yet.</td></tr></tbody>`;
+      <thead><tr><th scope="col"><span class="visually-hidden">${L("Rank", "דירוג")}</span></th><th scope="col">${L("Sector", "סקטור")}</th><th scope="col" style="text-align:end">${L("5 days", "5 ימים")}</th><th scope="col" style="text-align:end">${L("20 days", "20 ימים")}</th><th scope="col" style="text-align:end">${L("vs 150-day", "מול ממוצע 150")}</th></tr></thead>
+      <tbody>${tbody}</tbody>` : `<tbody><tr><td class="empty-note">${L("No data yet.", "אין עדיין נתונים.")}</td></tr></tbody>`;
     if (spy) {
       $("#asof-sectors").textContent = spy.in_session
-        ? `Live · updated ${timeAgo(fast.generated_at)}`
-        : `As of ${fmtDay(spy.date)} close`;
+        ? L(`Live · updated ${timeAgo(fast.generated_at)}`, `בזמן אמת · עודכן ${timeAgo(fast.generated_at)}`)
+        : L(`As of ${fmtDay(spy.date)} close`, `נכון לנעילה של ${fmtDay(spy.date)}`);
     }
   }
 
@@ -398,7 +393,7 @@ function saveSettings() {
 
   const selA = $("#ctl-ma-period-a"), selB = $("#ctl-ma-period-b");
   [selA, selB].forEach((sel) => {
-    sel.innerHTML = periods.map((p) => `<option value="${p}">${p}-day</option>`).join("");
+    sel.innerHTML = periods.map((p) => `<option value="${p}">${L(`${p}-day`, `${p} ${+p > 10 ? "יום" : "ימים"}`)}</option>`).join("");
   });
   selA.value = periods.includes(String(settings.maPeriodA)) ? String(settings.maPeriodA) : "20";
   selB.value = periods.includes(String(settings.maPeriodB)) ? String(settings.maPeriodB) : "150";
@@ -410,7 +405,7 @@ function saveSettings() {
   ctlVol.value = settings.volRatio; ctlVolVal.textContent = settings.volRatio.toFixed(1);
   ctlMa.value = settings.maPct; ctlMaVal.textContent = settings.maPct.toFixed(1);
 
-  const chgHTML = (v) => (num(v) === null ? "" : `<span class="chg ${upDown(v)}">${markFor(v)} ${fmtPct(v, 1)} day</span>`);
+  const chgHTML = (v) => (num(v) === null ? "" : `<span class="chg ${upDown(v)}">${markFor(v)} ${fmtPct(v, 1)} ${L("day", "ביום")}</span>`);
 
   function renderStockScreens() {
     const hi52 = stocks
@@ -418,24 +413,27 @@ function saveSettings() {
       .sort((a, b) => a.dist_hi52_pct - b.dist_hi52_pct)
       .slice(0, 30);
     renderList("hi52-list", hi52,
-      (r) => stockRow(r.symbol, r.price, r.dist_hi52_pct === 0 ? "at the high" : `${r.dist_hi52_pct.toFixed(2)}% below high`, "up"),
-      `No stocks are within ${settings.w52Pct}% of their 52-week high. Widen the range above to see more.`, 12);
+      (r) => stockRow(r.symbol, r.price, r.dist_hi52_pct === 0 ? L("at the high", "בשיא") : L(`${r.dist_hi52_pct.toFixed(2)}% below high`, `${r.dist_hi52_pct.toFixed(2)}% מתחת לשיא`), "up"),
+      L(`No stocks are within ${settings.w52Pct}% of their 52-week high. Widen the range above to see more.`,
+        `אין מניות במרחק של עד ${settings.w52Pct}% משיא 52 השבועות שלהן. הרחיבו את הטווח שלמעלה כדי לראות עוד.`), 12);
 
     const lo52 = stocks
       .filter((s) => num(s.dist_lo52_pct) !== null && s.dist_lo52_pct <= settings.w52Pct)
       .sort((a, b) => a.dist_lo52_pct - b.dist_lo52_pct)
       .slice(0, 30);
     renderList("lo52-list", lo52,
-      (r) => stockRow(r.symbol, r.price, r.dist_lo52_pct === 0 ? "at the low" : `${r.dist_lo52_pct.toFixed(2)}% above low`, "down"),
-      `No stocks are within ${settings.w52Pct}% of their 52-week low. Widen the range above to see more.`, 12);
+      (r) => stockRow(r.symbol, r.price, r.dist_lo52_pct === 0 ? L("at the low", "בשפל") : L(`${r.dist_lo52_pct.toFixed(2)}% above low`, `${r.dist_lo52_pct.toFixed(2)}% מעל השפל`), "down"),
+      L(`No stocks are within ${settings.w52Pct}% of their 52-week low. Widen the range above to see more.`,
+        `אין מניות במרחק של עד ${settings.w52Pct}% משפל 52 השבועות שלהן. הרחיבו את הטווח שלמעלה כדי לראות עוד.`), 12);
 
     const volSurge = stocks
       .filter((s) => num(s.volume_ratio) !== null && s.volume_ratio >= settings.volRatio)
       .sort((a, b) => b.volume_ratio - a.volume_ratio)
       .slice(0, 30);
     renderList("volume-list", volSurge,
-      (r) => stockRow(r.symbol, r.price, `${r.volume_ratio.toFixed(1)}× avg${chgHTML(r.chg_1d_pct)}`, "neutral"),
-      `No stocks traded at ${settings.volRatio}× their average volume or more last session. Lower the threshold above to see more.`, 12);
+      (r) => stockRow(r.symbol, r.price, L(`${r.volume_ratio.toFixed(1)}× avg`, `פי ${r.volume_ratio.toFixed(1)} מהממוצע`) + chgHTML(r.chg_1d_pct), "neutral"),
+      L(`No stocks traded at ${settings.volRatio}× their average volume or more last session. Lower the threshold above to see more.`,
+        `אף מניה לא נסחרה ביום המסחר האחרון במחזור של פי ${settings.volRatio} מהממוצע או יותר. הורידו את הסף שלמעלה כדי לראות עוד.`), 12);
 
     [[selA.value, "sma-list-a"], [selB.value, "sma-list-b"]].forEach(([period, listId]) => {
       const near = stocks
@@ -448,9 +446,9 @@ function saveSettings() {
         .slice(0, 30);
       renderList(listId, near,
         (r) => stockRow(r.symbol, r.price,
-          r.distPct >= 0 ? `${r.distPct.toFixed(2)}% above` : `${Math.abs(r.distPct).toFixed(2)}% below`,
+          r.distPct >= 0 ? L(`${r.distPct.toFixed(2)}% above`, `${r.distPct.toFixed(2)}% מעל`) : L(`${Math.abs(r.distPct).toFixed(2)}% below`, `${Math.abs(r.distPct).toFixed(2)}% מתחת`),
           r.distPct >= 0 ? "up" : "down"),
-        `No stocks are within ${settings.maPct}% of their ${period}-day average.`, 12);
+        L(`No stocks are within ${settings.maPct}% of their ${period}-day average.`, `אין מניות במרחק של עד ${settings.maPct}% מהממוצע הנע שלהן ל-${period} ${+period > 10 ? "יום" : "ימים"}.`), 12);
     });
   }
 
@@ -471,7 +469,7 @@ function saveSettings() {
 
   if (!stocks.length) {
     ["hi52-list", "lo52-list", "volume-list", "sma-list-a", "sma-list-b"].forEach((id) => {
-      $("#" + id).innerHTML = `<div class="empty-note">No scan data yet. It arrives after the next market close.</div>`;
+      $("#" + id).innerHTML = `<div class="empty-note">${L("No scan data yet. It arrives after the next market close.", "אין עדיין נתוני סריקה. הם יגיעו אחרי הנעילה הבאה.")}</div>`;
     });
   } else {
     renderStockScreens();
@@ -490,14 +488,14 @@ function saveSettings() {
       const hadBuy = allInsider.some((t) => t.symbol === sym && t.action === "Buy");
       const hadSell = allInsider.some((t) => t.symbol === sym && t.action === "Sell");
       const badge = hadBuy
-        ? `<span class="chip buy">${MARK.up}Insider buy</span>`
-        : hadSell ? `<span class="chip sell">${MARK.down}Insider sell</span>` : "";
+        ? `<span class="chip buy">${MARK.up}${L("Insider buy", "קניית בעל עניין")}</span>`
+        : hadSell ? `<span class="chip sell">${MARK.down}${L("Insider sell", "מכירת בעל עניין")}</span>` : "";
       if (!stock) {
         return `
         <div class="filing">
           <div>
             <div class="top">${starButton(sym)}<span class="sym">${esc(sym)}</span>${badge}</div>
-            <div class="who">Not in this scan's S&amp;P 500 / Nasdaq-100 universe</div>
+            <div class="who">${L("Not in this scan's S&amp;P 500 / Nasdaq-100 universe", "לא נכללת בסריקה (S&amp;P 500 ונאסד״ק 100)")}</div>
           </div>
         </div>`;
       }
@@ -507,11 +505,11 @@ function saveSettings() {
       <div class="filing">
         <div>
           <div class="top">${starButton(sym)}<span class="sym">${esc(sym)}</span>${badge}</div>
-          <div class="who">${fmtPrice(stock.price)}${num(stock.chg_1d_pct) !== null ? ` (${fmtPct(stock.chg_1d_pct, 1)})` : ""}${dist50 !== null ? ` · ${fmtPct(dist50)} vs 50-day` : ""}</div>
+          <div class="who">${fmtPrice(stock.price)}${num(stock.chg_1d_pct) !== null ? ` (${fmtPct(stock.chg_1d_pct, 1)})` : ""}${dist50 !== null ? L(` · ${fmtPct(dist50)} vs 50-day`, ` · ${fmtPct(dist50)} מול ממוצע 50`) : ""}</div>
         </div>
         <div class="right">
-          <div class="detail">${num(stock.dist_hi52_pct) !== null ? `${stock.dist_hi52_pct.toFixed(1)}% below 52-week high` : ""}</div>
-          <div class="detail">${num(stock.volume_ratio) !== null ? `${stock.volume_ratio.toFixed(1)}× avg volume` : ""}</div>
+          <div class="detail">${num(stock.dist_hi52_pct) !== null ? L(`${stock.dist_hi52_pct.toFixed(1)}% below 52-week high`, `${stock.dist_hi52_pct.toFixed(1)}% מתחת לשיא 52 שבועות`) : ""}</div>
+          <div class="detail">${num(stock.volume_ratio) !== null ? L(`${stock.volume_ratio.toFixed(1)}× avg volume`, `מחזור פי ${stock.volume_ratio.toFixed(1)} מהממוצע`) : ""}</div>
         </div>
       </div>`;
     }).join("");

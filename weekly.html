@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<title>Weekly recap — Market Pulse</title>
-<meta name="description" content="The Sunday pre-open brief: the week's moves, sector rotation, notable trades by politicians, famous investors and insiders, the news, and the week ahead." />
+<title data-he="סיכום שבועי — Market Pulse">Weekly recap — Market Pulse</title>
+<meta name="description" content="The Sunday pre-open brief: the week's moves, sector rotation, notable trades by politicians, famous investors and insiders, the news, and the week ahead." data-he="התדריך של יום ראשון לפני פתיחת המסחר: תנועות השבוע, הרוטציה בין הסקטורים, עסקאות בולטות של פוליטיקאים, משקיעים מפורסמים ובעלי עניין, החדשות והשבוע שלפנינו." />
 <meta property="og:type" content="article" />
 <meta property="og:title" content="Weekly recap — Market Pulse" />
 <meta property="og:description" content="The Sunday pre-open brief: moves, rotation, big-money trades, news and the week ahead." />
@@ -17,9 +17,9 @@
 <meta name="theme-color" content="#F5E4D3" media="(prefers-color-scheme: light)" />
 <meta name="theme-color" content="#17130F" media="(prefers-color-scheme: dark)" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
-<link rel="stylesheet" href="assets/fonts.css">
-<link rel="stylesheet" href="assets/mp.css?v=2" />
-<script src="assets/mp.js?v=2"></script>
+<link rel="stylesheet" href="assets/fonts.css?v=2">
+<link rel="stylesheet" href="assets/mp.css?v=3" />
+<script src="assets/mp.js?v=3"></script>
 <style>
   /* Heat steps: caution 3..1, neutral, opportunity 1..3 */
   :root { --h-c3: #8E3410; --h-c2: #B9582F; --h-c1: #E5BCA3; --h-n: #DCC6B2; --h-o1: #BCC9DB; --h-o2: #4E76AB; --h-o3: #1B4C8C; --h-light: #FFFFFF; --h-dark: #1E1A16; }
@@ -41,7 +41,8 @@
   .pline-box { margin-top: var(--space-5); border: 1px solid var(--ink); background: var(--paper-2); border-radius: var(--radius); padding: var(--space-4); }
   .pline-head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px var(--space-4); align-items: baseline; }
   .pline-scroll { overflow-x: auto; }
-  .pline { position: relative; height: 118px; min-width: 620px; margin-top: var(--space-2); }
+  /* Tall enough for a two-line label under its value (a shorter line clipped the second line). */
+  .pline { position: relative; height: 128px; min-width: 620px; margin-top: var(--space-2); }
   .pline .base { position: absolute; left: 0; right: 0; top: 52px; height: 3px; background: var(--rule); }
   .pline .band { position: absolute; top: 44px; height: 19px; border: 1px solid var(--ink-3); background: var(--paper-3); }
   .pline .zone { position: absolute; top: 47px; height: 13px; background: var(--opp-tint); border: 1px solid var(--opp); }
@@ -63,8 +64,8 @@
   /* Ticker strip */
   .strip { overflow-x: auto; border-top: 2px solid var(--ink); border-bottom: 1px solid var(--ink); margin-top: var(--space-5); }
   .strip-in { display: flex; min-width: max-content; }
-  .tk { display: flex; flex-direction: column; gap: 1px; padding: var(--space-2) var(--space-4); border-right: 1px solid var(--rule); font-family: var(--cond); }
-  .tk:first-child { padding-left: 0; } .tk:last-child { border-right: none; }
+  .tk { display: flex; flex-direction: column; gap: 1px; padding: var(--space-2) var(--space-4); border-inline-end: 1px solid var(--rule); font-family: var(--cond); }
+  .tk:first-child { padding-inline-start: 0; } .tk:last-child { border-inline-end: none; }
   .tk .n { font-weight: 500; font-size: var(--step--1); color: var(--ink-2); }
   .tk .v { font-family: var(--serif); font-weight: 700; font-size: var(--step-1); }
   .tk .c { font-weight: 600; font-size: 0.875rem; color: var(--ink-2); }
@@ -72,10 +73,10 @@
   @media (max-width: 639px) {
     .strip { overflow: visible; }
     .strip-in { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); min-width: 0; }
-    .tk, .tk:first-child { padding: var(--space-2) 0; border-right: none; border-bottom: 1px solid var(--rule); }
-    .tk:nth-child(odd) { padding-right: var(--space-3); border-right: 1px solid var(--rule); }
-    .tk:nth-child(even) { padding-left: var(--space-3); }
-    .tk:last-child:nth-child(odd) { grid-column: 1 / -1; border-right: none; }
+    .tk, .tk:first-child { padding: var(--space-2) 0; border-inline-end: none; border-bottom: 1px solid var(--rule); }
+    .tk:nth-child(odd) { padding-inline-end: var(--space-3); border-inline-end: 1px solid var(--rule); }
+    .tk:nth-child(even) { padding-inline-start: var(--space-3); }
+    .tk:last-child:nth-child(odd) { grid-column: 1 / -1; border-inline-end: none; }
     .tk:last-child, .tk:nth-last-child(2):nth-child(odd) { border-bottom: none; }
   }
   .strip-note { font-family: var(--cond); font-weight: 500; font-size: var(--step--1); color: var(--ink-3); margin-top: 6px; }
@@ -84,7 +85,7 @@
   .tldr { display: grid; grid-template-columns: minmax(0, 1fr); gap: 0; border: 1px solid var(--ink); border-radius: var(--radius); margin-top: var(--space-5); background: var(--paper-2); }
   @media (min-width: 760px) { .tldr { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
   .tldr div { padding: var(--space-4); border-bottom: 1px solid var(--rule); }
-  @media (min-width: 760px) { .tldr div { border-bottom: none; border-right: 1px solid var(--rule); } .tldr div:last-child { border-right: none; } }
+  @media (min-width: 760px) { .tldr div { border-bottom: none; border-inline-end: 1px solid var(--rule); } .tldr div:last-child { border-inline-end: none; } }
   .tldr div:last-child { border-bottom: none; }
   .tldr h3 { font-weight: 700; font-size: var(--step-1); margin-bottom: 4px; }
   .tldr p { margin: 0; font-size: var(--step-0); }
@@ -114,11 +115,11 @@
   .hl-row { display: grid; grid-template-columns: minmax(0, 7.75rem) minmax(0, 1fr) 4.75rem; align-items: center; gap: var(--space-3); min-height: 42px; border-bottom: 1px solid var(--rule); font-family: var(--cond); font-size: 0.9375rem; }
   .hl-name { font-weight: 600; line-height: 1.15; padding: 4px 0; }
   .hl-name small { display: block; font-weight: 500; font-size: 0.75rem; color: var(--ink-3); }
-  .hl-row.hl-sub .hl-name { padding-left: var(--space-3); font-weight: 500; color: var(--ink-2); }
+  .hl-row.hl-sub .hl-name { padding-inline-start: var(--space-3); font-weight: 500; color: var(--ink-2); }
   .hl-track { position: relative; height: 14px; }
   .hl-track::before { content: ""; position: absolute; left: 50%; top: -5px; bottom: -5px; width: 1px; background: var(--ink-3); }
   .hl-bar { position: absolute; top: 0; bottom: 0; border-radius: 1px; }
-  .hl-val { text-align: right; font-weight: 700; white-space: nowrap; }
+  .hl-val { text-align: end; font-weight: 700; white-space: nowrap; }
   .only-narrow { display: none; }
   @media (max-width: 639px) {
     .heat-scroll { display: none; }
@@ -156,7 +157,7 @@
   .ledger-row .read { color: var(--ink-2); }
   .overlaps { margin-top: var(--space-4); border: 1px solid var(--ink); border-radius: var(--radius); padding: var(--space-3) var(--space-4); background: var(--paper-2); }
   .overlaps h3 { font-weight: 700; font-size: var(--step-1); margin-bottom: 4px; }
-  .overlaps ul { margin: 0; padding-left: 1.1em; }
+  .overlaps ul { margin: 0; padding-inline-start: 1.1em; }
 
   /* News */
   .news { display: grid; grid-template-columns: minmax(0, 1fr); column-gap: var(--space-6); }
@@ -182,10 +183,10 @@
   .side-box + .side-box { margin-top: var(--space-4); }
   .side-box h3 { font-weight: 700; font-size: var(--step-1); margin-bottom: var(--space-2); }
   .ctable { width: 100%; border-collapse: collapse; font-family: var(--cond); font-size: 0.9375rem; }
-  .ctable th { text-align: left; font-weight: 500; color: var(--ink-2); padding: 0 0 6px; border-bottom: 2px solid var(--ink); }
+  .ctable th { text-align: start; font-weight: 500; color: var(--ink-2); padding: 0 0 6px; border-bottom: 2px solid var(--ink); }
   .ctable td, .ctable tbody th { padding: 8px 0; border-bottom: 1px solid var(--rule); }
-  .ctable tbody th { font-weight: 600; text-align: left; }
-  .ctable .r { text-align: right; }
+  .ctable tbody th { font-weight: 600; text-align: start; }
+  .ctable .r { text-align: end; }
   .ctable td.exp { font-weight: 700; }
   .odds { margin-top: var(--space-3); }
   .odds .oh { display: flex; justify-content: space-between; font-family: var(--cond); font-weight: 600; }
@@ -212,11 +213,12 @@
   .bottom h3 { font-weight: 700; font-size: var(--step-1); }
   .bottom p { margin: 4px 0 0; color: var(--ink-2); }
 
-  .sources { columns: 2 280px; column-gap: var(--space-6); margin: var(--space-3) 0 0; padding-left: 1.1em; font-size: 0.9375rem; color: var(--ink-2); }
+  .sources { columns: 2 280px; column-gap: var(--space-6); margin: var(--space-3) 0 0; padding-inline-start: 1.1em; font-size: 0.9375rem; color: var(--ink-2); }
   .sources li { margin-bottom: 6px; break-inside: avoid; }
   @media (pointer: coarse) { .sources li { margin-bottom: var(--space-3); } }
 
   .loading .skel { margin-top: 12px; }
+  .src-note { font-family: var(--cond); font-weight: 500; font-size: var(--step--1); color: var(--ink-3); }
 </style>
 </head>
 <body>
@@ -224,16 +226,16 @@
 
 <header class="mast">
   <a class="brand" href="index.html">Market Pulse</a>
-  <div class="mast-side"><span>Weekly recap</span><button class="theme-btn" id="theme-btn" type="button">Edition</button></div>
+  <div class="mast-side"><span data-he="סיכום שבועי">Weekly recap</span><button class="lang-btn" id="lang-btn" type="button"><span lang="he">עברית</span></button><button class="theme-btn" id="theme-btn" type="button">Edition</button></div>
 </header>
 <div class="dateline">
   <span id="today-date"></span>
-  <span>Published every Sunday before the US open</span>
+  <span data-he="מתפרסם בכל יום ראשון, לפני פתיחת המסחר בארה״ב">Published every Sunday before the US open</span>
 </div>
-<nav class="tabs" aria-label="Sections">
-  <a href="index.html">Today</a>
-  <a href="opportunity.html">Scanner</a>
-  <a href="weekly.html" aria-current="page">Weekly recap</a>
+<nav class="tabs" aria-label="Sections" data-he-label="מדורים">
+  <a href="index.html" data-he="היום">Today</a>
+  <a href="opportunity.html" data-he="סורק">Scanner</a>
+  <a href="weekly.html" aria-current="page" data-he="סיכום שבועי">Weekly recap</a>
 </nav>
 
 <main id="edition" class="loading" aria-busy="true">
@@ -244,24 +246,33 @@
 </main>
 
 <footer class="footer">
-  <p><strong>Not financial advice.</strong> The weekly recap summarizes public market data, news and official
+  <p data-he-html="<strong>אין באמור ייעוץ השקעות.</strong> הסיכום השבועי מרכז נתוני שוק פומביים, חדשות ודיווחים רשמיים על עסקאות, למטרות מידע בלבד. אין לראות בדבר מהמוצג כאן המלצה לקנות או למכור נייר ערך כלשהו, ואין בו תחליף לייעוץ המותאם לנתונים ולצרכים של כל אדם."><strong>Not financial advice.</strong> The weekly recap summarizes public market data, news and official
     trade disclosures for informational purposes only. Nothing here is a recommendation to buy or sell any security.</p>
-  <p>Prices, sector moves, yields, commodities, bitcoin and the week's insider filings are computed from Yahoo Finance and SEC EDGAR data;
+  <p data-he="המחירים, תנועות הסקטורים, התשואות, הסחורות, הביטקוין ודיווחי בעלי העניין של השבוע מחושבים מנתוני Yahoo Finance ו-SEC EDGAR. החלקים הכתובים מנוסחים בכל יום ראשון בעזרת בינה מלאכותית, על סמך המקורות שמפורטים בכל גיליון, ונבדקים בידי העורך לפני הפרסום; הנוסח העברי נכתב על בסיס הגרסה האנגלית. עסקאות של פוליטיקאים מדווחות באיחור של עד שישה שבועות.">Prices, sector moves, yields, commodities, bitcoin and the week's insider filings are computed from Yahoo Finance and SEC EDGAR data;
     the written sections are drafted each Sunday with AI assistance from the sources listed in each edition and reviewed by the editor before publication. Politicians' trades are reported with delays of up to six weeks.</p>
-  <p><strong>Privacy.</strong> No accounts, cookies, ads or analytics. Your watchlist, scanner settings and day/night choice are saved only in your own browser. Fonts are served from this site. The site is hosted on GitHub Pages, which may log visits as described in <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" rel="noopener noreferrer">GitHub’s privacy statement</a>.</p>
-  <p>Independent project, not affiliated with or endorsed by S&amp;P Dow Jones Indices, Nasdaq, CNN, AAII, Yahoo or the SEC. Index and product names belong to their owners.</p>
+  <p data-he-html="<strong>פרטיות.</strong> אין כאן חשבונות משתמש, עוגיות, פרסומות או כלי אנליטיקה. רשימת המעקב, הגדרות הסורק, השפה ובחירת מהדורת היום או הלילה נשמרות רק בדפדפן שלכם. הגופנים נטענים מהאתר עצמו. האתר מאוחסן בשירות GitHub Pages, שעשוי לתעד ביקורים כמתואר ב<a href=&quot;https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement&quot; rel=&quot;noopener noreferrer&quot;>הצהרת הפרטיות של GitHub</a>."><strong>Privacy.</strong> No accounts, cookies, ads or analytics. Your watchlist, scanner settings, language and day/night choice are saved only in your own browser. Fonts are served from this site. The site is hosted on GitHub Pages, which may log visits as described in <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" rel="noopener noreferrer">GitHub’s privacy statement</a>.</p>
+  <p data-he="פרויקט עצמאי, שאינו קשור ל-S&amp;P Dow Jones Indices, ל-Nasdaq, ל-CNN, ל-AAII, ל-Yahoo או ל-SEC ואינו מאושר על ידם. שמות המדדים והמוצרים שייכים לבעליהם.">Independent project, not affiliated with or endorsed by S&amp;P Dow Jones Indices, Nasdaq, CNN, AAII, Yahoo or the SEC. Index and product names belong to their owners.</p>
 </footer>
 </div>
 
 <script>
+window.MP_APPLY();   // Hebrew page text first, so the code below finds the final elements
 const $ = (sel) => document.querySelector(sel);
 const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 const num = (v) => (typeof v === "number" && Number.isFinite(v) ? v : null);
 const MARK = window.MP_MARK;
+const HE = window.MP_HE, BIDI = window.MP_BIDI;
 const toneMark = (t) => (t === "up" ? MARK.up : t === "down" ? MARK.down : MARK.flat);
 const toneClass = (t) => (t === "up" ? "up" : t === "down" ? "down" : "");
 
-function fmtPct(v, d = 2) { v = num(v); return v === null ? "—" : `${v > 0 ? "+" : v < 0 ? "−" : ""}${Math.abs(v).toFixed(d)}%`; }
+// The edition renders in Hebrew when the page is Hebrew and the edition carries its Hebrew text
+// (the "he" block); otherwise in English, left to right, under a Hebrew note.
+let useHe = false;
+const T = (en, he) => (useHe ? he : en);
+// Edition text: escaped, with signed numbers kept whole in Hebrew and "S&P 500" kept on one line.
+const tx = (s) => esc(BIDI(s)).replace(/S&amp;P (?=500)/g, "S&amp;P&nbsp;");
+
+function fmtPct(v, d = 2) { v = num(v); return v === null ? "—" : BIDI(`${v > 0 ? "+" : v < 0 ? "−" : ""}${Math.abs(v).toFixed(d)}%`); }
 function fmtNum(v, d = 2) { v = num(v); return v === null ? "—" : v.toLocaleString("en-US", { minimumFractionDigits: d, maximumFractionDigits: d }); }
 function fmtMoney(v) {
   v = num(v); if (v === null) return "—";
@@ -270,12 +281,13 @@ function fmtMoney(v) {
   if (v >= 1e3) return "$" + (v / 1e3).toFixed(0) + "K";
   return "$" + v.toFixed(0);
 }
+// Dates follow the edition's language (an English edition inside the Hebrew page keeps English dates).
 function fmtDay(iso, opts = { month: "short", day: "numeric" }) {
   if (!iso || !/^\d{4}-\d{2}-\d{2}/.test(iso)) return "—";
   const [y, m, d] = iso.slice(0, 10).split("-").map(Number);
-  return new Date(Date.UTC(y, m - 1, d)).toLocaleDateString("en-US", { ...opts, timeZone: "UTC" });
+  return new Date(Date.UTC(y, m - 1, d)).toLocaleDateString(useHe ? "he-IL" : "en-US", { ...opts, timeZone: "UTC" });
 }
-const signed = (v, d = 1) => `${v > 0 ? "+" : v < 0 ? "−" : ""}${Math.abs(v).toFixed(d)}`;
+const signed = (v, d = 1) => BIDI(`${v > 0 ? "+" : v < 0 ? "−" : ""}${Math.abs(v).toFixed(d)}`);
 const move = (v, d = 2) => { v = num(v); return v === null ? "—" : `<span class="${v > 0 ? "up" : v < 0 ? "down" : ""}">${v > 0 ? MARK.up : v < 0 ? MARK.down : ""} ${fmtPct(v, d)}</span>`; };
 
 async function loadJSON(path) {
@@ -292,7 +304,7 @@ function priceLine({ min, max, now, nowLabel, band, zone, marks }) {
   // Keep labels inside the line: near an edge they anchor to that edge instead of centring.
   const anchor = (p) => (p < 9 ? "transform:translateX(0);text-align:left" : p > 91 ? "transform:translateX(-100%);text-align:right" : "");
   const fmt = (v) => v.toLocaleString("en-US");
-  const line = `<div class="pline-scroll"><div class="pline" role="img" aria-label="${esc(nowLabel)}; ${esc(marks.map((m) => `${m.label} ${fmt(m.value)}`).join(", "))}">
+  const line = `<div class="pline-scroll ltr"><div class="pline" role="img" aria-label="${esc(nowLabel)}; ${esc(marks.map((m) => `${m.label} ${fmt(m.value)}`).join(", "))}">
     <div class="base"></div>
     ${band ? `<div class="band" style="left:${pos(band[0]).toFixed(2)}%;width:${(pos(band[1]) - pos(band[0])).toFixed(2)}%"></div>` : ""}
     ${zone ? `<div class="zone" style="left:${pos(zone.from).toFixed(2)}%;width:${Math.max(0.8, pos(zone.to) - pos(zone.from)).toFixed(2)}%"></div>
@@ -311,6 +323,40 @@ function priceLine({ min, max, now, nowLabel, band, zone, marks }) {
     : `<div class="${toneClass(r.tone)}"><span>${esc(r.label)}</span><b>${esc(r.txt)}</b></div>`).join("")}</div>`;
   return line + ladder;
 }
+
+// Marks that sit close together on a price line would print their labels on top of each other.
+// Measure the labels on screen and move each one that collides down a row (works for both
+// languages and any width; the line is hidden on phones, where the ladder shows instead).
+const LAB_TOP = 70, LAB_ROW = 56, PLINE_H = 128;
+function untangle() {
+  document.querySelectorAll(".pline").forEach((pl) => {
+    if (!pl.offsetParent) return;
+    const labs = [...pl.querySelectorAll(".lab")];
+    labs.forEach((l) => { l.style.top = ""; });
+    const items = labs.map((l) => {
+      const rg = document.createRange();
+      rg.selectNodeContents(l);
+      const rs = [...rg.getClientRects()].filter((r) => r.width > 0);
+      return { l, x0: Math.min(...rs.map((r) => r.left)), x1: Math.max(...rs.map((r) => r.right)) };
+    }).filter((it) => Number.isFinite(it.x0)).sort((a, b) => a.x0 - b.x0);
+    const ends = [-Infinity, -Infinity, -Infinity];
+    let rows = 0;
+    for (const it of items) {
+      let row = ends.findIndex((end) => it.x0 >= end + 8);
+      if (row < 0) row = ends.length - 1;
+      ends[row] = Math.max(ends[row], it.x1);
+      if (row) it.l.style.top = `${LAB_TOP + row * LAB_ROW}px`;
+      rows = Math.max(rows, row);
+    }
+    pl.style.height = `${PLINE_H + rows * LAB_ROW}px`;
+  });
+}
+let untangleQueued = false;
+window.addEventListener("resize", () => {
+  if (untangleQueued) return;
+  untangleQueued = true;
+  requestAnimationFrame(() => { untangleQueued = false; untangle(); });
+});
 
 function heatClass(v) {
   if (v === null) return "h-n";
@@ -331,219 +377,269 @@ const HEAT_LAYOUT = {
   XLRE: ["11 / span 1", "4 / span 1", "sm", "Real estate"],
   XLB: ["12 / span 1", "4 / span 1", "sm", "Materials"],
 };
+// Short Hebrew names that fit the heatmap's small tiles.
+const HEAT_HE = { XLK: "טכנולוגיה", XLF: "פיננסים", XLY: "צריכה מחזורית", XLC: "תקשורת", XLV: "בריאות", XLI: "תעשייה",
+  XLP: "צריכה בסיסית", XLE: "אנרגיה", XLU: "תשתיות", XLRE: "נדל״ן", XLB: "חומרי גלם" };
+const shortName = (sym) => T(HEAT_LAYOUT[sym][3], HEAT_HE[sym]);
+const sectorName = (s) => (useHe ? window.MP_SECTOR(s.symbol, s.name) : s.name);
 function heatmap(numbers) {
   const sectors = numbers?.sectors || [];
   const semis = numbers?.semis;
   const tiles = sectors.filter((s) => HEAT_LAYOUT[s.symbol]).map((s) => {
-    const [col, row, size, short] = HEAT_LAYOUT[s.symbol];
+    const [col, row, size] = HEAT_LAYOUT[s.symbol];
     const v = num(s.week_pct);
     const inner = s.symbol === "XLK" && semis && num(semis.week_pct) !== null
-      ? `<div class="sub-tile ${heatClass(semis.week_pct)}"><span class="tn">Semiconductors (SOXX)</span><span class="tv">${fmtPct(semis.week_pct, 1)}</span></div>` : "";
-    return `<div class="tile ${size} ${heatClass(v)}" style="grid-column:${col};grid-row:${row}" title="${esc(s.name)} ${fmtPct(v)}">
-      <div><div class="tn">${esc(short)}</div><div class="tv">${fmtPct(v)}</div></div>${inner}</div>`;
+      ? `<div class="sub-tile ${heatClass(semis.week_pct)}"><span class="tn">${T("Semiconductors (SOXX)", "שבבים (SOXX)")}</span><span class="tv">${fmtPct(semis.week_pct, 1)}</span></div>` : "";
+    return `<div class="tile ${size} ${heatClass(v)}" style="grid-column:${col};grid-row:${row}" title="${esc(sectorName(s))} ${fmtPct(v)}">
+      <div><div class="tn">${esc(shortName(s.symbol))}</div><div class="tv">${fmtPct(v)}</div></div>${inner}</div>`;
   }).join("");
-  const desc = sectors.map((s) => `${s.name} ${fmtPct(s.week_pct)}`).join(", ") + (semis ? `, semiconductors ${fmtPct(semis.week_pct)}` : "");
+  const desc = sectors.map((s) => `${sectorName(s)} ${fmtPct(s.week_pct)}`).join(", ") + (semis ? `, ${T("semiconductors", "שבבים")} ${fmtPct(semis.week_pct)}` : "");
   // Ranked list for phones: same colours, bars drawn from a centre line, semiconductors under Technology.
   const ranked = sectors.filter((s) => HEAT_LAYOUT[s.symbol] && num(s.week_pct) !== null).sort((a, b) => b.week_pct - a.week_pct);
   const semiV = semis ? num(semis.week_pct) : null;
   const maxAbs = Math.max(0.5, ...ranked.map((s) => Math.abs(s.week_pct)), semiV !== null ? Math.abs(semiV) : 0);
   const bar = (v) => { const w = (Math.abs(v) / maxAbs) * 50; return `<span class="hl-track" aria-hidden="true"><i class="hl-bar ${heatClass(v)}" style="left:${(v < 0 ? 50 - w : 50).toFixed(2)}%;width:${Math.max(0.6, w).toFixed(2)}%"></i></span>`; };
-  const list = `<ol class="heat-list" aria-label="Sectors ranked by weekly change">${ranked.map((s) => `
-    <li class="hl-row"><span class="hl-name">${esc(HEAT_LAYOUT[s.symbol][3])}<small>${esc(s.symbol)}</small></span>${bar(s.week_pct)}<span class="hl-val">${move(s.week_pct)}</span></li>${s.symbol === "XLK" && semiV !== null ? `
-    <li class="hl-row hl-sub"><span class="hl-name">Semiconductors<small>SOXX · in Tech</small></span>${bar(semiV)}<span class="hl-val">${move(semiV, 1)}</span></li>` : ""}`).join("")}</ol>`;
-  return `<div class="heat-scroll"><div class="heat" role="img" aria-label="Sector heatmap for the week: ${esc(desc)}">${tiles}</div></div>${list}
-    <div class="legend"><span class="only-wide">Weekly change. Tile size roughly follows each sector's weight in the S&amp;P 500.</span><span class="only-narrow">Weekly change, best to worst. Bars start at zero.</span>
-      <span><span class="sw" aria-hidden="true"><i class="h-c3"></i><i class="h-c2"></i><i class="h-c1"></i><i class="h-n"></i><i class="h-o1"></i><i class="h-o2"></i><i class="h-o3"></i></span> −3% or worse to +2.5% or better</span></div>`;
+  const list = `<ol class="heat-list" aria-label="${T("Sectors ranked by weekly change", "הסקטורים לפי השינוי השבועי")}">${ranked.map((s) => `
+    <li class="hl-row"><span class="hl-name">${esc(shortName(s.symbol))}<small>${esc(s.symbol)}</small></span>${bar(s.week_pct)}<span class="hl-val">${move(s.week_pct)}</span></li>${s.symbol === "XLK" && semiV !== null ? `
+    <li class="hl-row hl-sub"><span class="hl-name">${T("Semiconductors", "שבבים")}<small>${T("SOXX · in Tech", "SOXX · בתוך טכנולוגיה")}</small></span>${bar(semiV)}<span class="hl-val">${move(semiV, 1)}</span></li>` : ""}`).join("")}</ol>`;
+  return `<div class="heat-scroll"><div class="heat" role="img" aria-label="${T("Sector heatmap for the week", "מפת החום של הסקטורים השבוע")}: ${esc(desc)}">${tiles}</div></div>${list}
+    <div class="legend"><span class="only-wide">${T("Weekly change. Tile size roughly follows each sector's weight in the S&amp;P 500.", "השינוי השבועי. גודל כל משבצת תואם בקירוב את משקל הסקטור ב-S&amp;P 500.")}</span><span class="only-narrow">${T("Weekly change, best to worst. Bars start at zero.", "השינוי השבועי, מהטוב לגרוע. העמודות יוצאות מאפס.")}</span>
+      <span><span class="sw" aria-hidden="true"><i class="h-c3"></i><i class="h-c2"></i><i class="h-c1"></i><i class="h-n"></i><i class="h-o1"></i><i class="h-o2"></i><i class="h-o3"></i></span> ${T("−3% or worse to +2.5% or better", "מירידה של 3% ויותר ועד עלייה של 2.5% ויותר")}</span></div>`;
 }
 
+// Index and commodity names as the numbers file spells them.
+const STRIP_HE = { "S&P 500": "S&P 500", "Nasdaq": "נאסד״ק", "Dow": "דאו ג׳ונס", "Russell 2000": "ראסל 2000",
+  "WTI oil": "נפט WTI", "Brent oil": "נפט ברנט", "Gold": "זהב" };
 function strip(numbers) {
   if (!numbers) return "";
   const items = [];
-  for (const i of numbers.indices || []) items.push({ n: i.name, v: fmtNum(i.close, i.close > 10000 ? 0 : 2), c: move(i.week_pct) + " wk" });
+  const wk = T(" wk", " בשבוע");
+  const nm = (n) => (useHe && STRIP_HE[n] ? STRIP_HE[n] : n);
+  for (const i of numbers.indices || []) items.push({ n: nm(i.name), v: fmtNum(i.close, i.close > 10000 ? 0 : 2), c: move(i.week_pct) + wk });
   const ten = numbers.rates?.us10y;
-  if (ten) items.push({ n: "10-year yield", v: `${fmtNum(ten.close, 2)}%`, c: `${signed(ten.week_change_bp, 0)} bp wk${num(ten.week_high) !== null ? ` · high ${fmtNum(ten.week_high, 2)}%` : ""}` });
-  if (numbers.vix) items.push({ n: "VIX", v: fmtNum(numbers.vix.close), c: move(numbers.vix.week_pct, 1) + " wk" });
-  for (const c of numbers.commodities || []) items.push({ n: c.name, v: "$" + fmtNum(c.close, c.close > 1000 ? 0 : 2), c: move(c.week_pct, 1) + " wk" });
-  if (numbers.crypto) items.push({ n: "Bitcoin", v: "$" + fmtNum(numbers.crypto.close, 0), c: move(numbers.crypto.week_pct, 1) + " wk" });
+  if (ten) items.push({ n: T("10-year yield", "תשואת 10 שנים"), v: `${fmtNum(ten.close, 2)}%`,
+    c: `${signed(ten.week_change_bp, 0)} ${T("bp wk", "נ״ב בשבוע")}${num(ten.week_high) !== null ? ` · ${T("high", "שיא")} ${fmtNum(ten.week_high, 2)}%` : ""}` });
+  if (numbers.vix) items.push({ n: "VIX", v: fmtNum(numbers.vix.close), c: move(numbers.vix.week_pct, 1) + wk });
+  for (const c of numbers.commodities || []) items.push({ n: nm(c.name), v: "$" + fmtNum(c.close, c.close > 1000 ? 0 : 2), c: move(c.week_pct, 1) + wk });
+  if (numbers.crypto) items.push({ n: T("Bitcoin", "ביטקוין"), v: "$" + fmtNum(numbers.crypto.close, 0), c: move(numbers.crypto.week_pct, 1) + wk });
+  const ending = fmtDay(numbers.week_ending, { weekday: "short", month: "short", day: "numeric" });
   return `<div class="strip"><div class="strip-in">${items.map((t) => `<div class="tk"><span class="n">${esc(t.n)}</span><span class="v">${esc(t.v)}</span><span class="c">${t.c}</span></div>`).join("")}</div></div>
-    <div class="strip-note">Closing values for the week ending ${fmtDay(numbers.week_ending, { weekday: "short", month: "short", day: "numeric" })}. Blue ${MARK.up} is up, vermilion ${MARK.down} is down.</div>`;
+    <div class="strip-note">${T(`Closing values for the week ending ${ending}. Blue ${MARK.up} is up, vermilion ${MARK.down} is down.`,
+      `ערכי הנעילה לשבוע שהסתיים ב${ending}. כחול ${MARK.up} – עלייה, אדום ${MARK.down} – ירידה.`)}</div>`;
 }
 
 function chip(side, text) {
   const cls = side === "buy" ? "buy" : side === "sell" || side === "short" ? "sell" : "quiet";
   const mk = side === "buy" ? MARK.up : side === "sell" || side === "short" ? MARK.down : "";
-  const word = side === "buy" ? "Buy " : side === "sell" ? "Sell " : side === "short" ? "Bet against " : "";
-  return `<span class="chip ${cls}">${mk}${esc(word)}${esc(text)}</span>`;
+  const word = side === "buy" ? T("Buy ", "קנייה: ") : side === "sell" ? T("Sell ", "מכירה: ") : side === "short" ? T("Bet against ", "הימור נגד: ") : "";
+  return `<span class="chip ${cls}">${mk}${esc(word)}${tx(text)}</span>`;
 }
 
 function insiderGroup(ins) {
   const rows = [...(ins?.top_buys || []).slice(0, 4), ...(ins?.top_sells || []).slice(0, 3)];
   if (!rows.length) return "";
-  return `<h3 class="group-title">Company insiders, filed this week (SEC Form 4)</h3>` + rows.map((t) => `
+  return `<h3 class="group-title">${T("Company insiders, filed this week (SEC Form 4)", "בעלי עניין בחברות: הדיווחים של השבוע (טופס 4 ל-SEC)")}</h3>` + rows.map((t) => `
     <article class="ledger-row">
       <div class="who"><span class="mono tick-box" aria-hidden="true">${esc((t.symbol || "?").slice(0, 5))}</span>
-        <div><div class="nm">${esc(t.insider || "Unknown")}</div><div class="rl">${esc(t.role || "")} · ${esc(t.symbol || "")}</div><div class="wh">Traded ${esc(fmtDay(t.date))}${t.filed ? ` · filed ${esc(fmtDay(t.filed))}` : ""}</div></div></div>
-      <div><div class="moves">${chip(t.action === "Buy" ? "buy" : "sell", `${t.symbol} ${fmtMoney(t.value)}`)}${t.plan ? `<span class="chip quiet">10b5-1 plan</span>` : ""}</div>
-        <p>${num(t.shares) ? `${Math.round(t.shares).toLocaleString("en-US")} shares at $${fmtNum(t.price)}` : ""}</p></div>
-      <p class="read">${t.action === "Buy" ? "An open-market purchase with the insider's own money." : t.plan ? "Scheduled in advance, so it says little." : "Insiders sell for many reasons; a weaker signal than buying."}</p>
-    </article>`).join("") + `<p class="small">From the Scanner's live SEC feed. <a href="opportunity.html#insider-buying">See all insider filings</a>.</p>`;
+        <div><div class="nm">${esc(t.insider || T("Unknown", "לא ידוע"))}</div><div class="rl">${esc(useHe ? window.MP_ROLE(t.role || "") : t.role || "")} · ${esc(t.symbol || "")}</div><div class="wh">${T("Traded", "העסקה:")} ${esc(fmtDay(t.date))}${t.filed ? ` · ${T("filed", "הדיווח:")} ${esc(fmtDay(t.filed))}` : ""}</div></div></div>
+      <div><div class="moves">${chip(t.action === "Buy" ? "buy" : "sell", `${t.symbol} ${fmtMoney(t.value)}`)}${t.plan ? `<span class="chip quiet">${T("10b5-1 plan", "תוכנית 10b5-1")}</span>` : ""}</div>
+        <p>${num(t.shares) ? T(`${Math.round(t.shares).toLocaleString("en-US")} shares at $${fmtNum(t.price)}`, `${Math.round(t.shares).toLocaleString("en-US")} מניות במחיר $${fmtNum(t.price)}`) : ""}</p></div>
+      <p class="read">${t.action === "Buy" ? T("An open-market purchase with the insider's own money.", "קנייה בשוק הפתוח, מכספו של בעל העניין.")
+        : t.plan ? T("Scheduled in advance, so it says little.", "המכירה תוזמנה מראש, ולכן היא אומרת מעט.")
+        : T("Insiders sell for many reasons; a weaker signal than buying.", "בעלי עניין מוכרים מסיבות רבות; אות חלש יותר מקנייה.")}</p>
+    </article>`).join("") + `<p class="small">${T(`From the Scanner's live SEC feed. <a href="opportunity.html#insider-buying">See all insider filings</a>.`, `מתוך עדכוני ה-SEC השוטפים בסורק. <a href="opportunity.html#insider-buying">לכל הדיווחים של בעלי העניין</a>.`)}</p>`;
 }
 
 // ---------- Edition ----------
-function renderEdition(ed, editions) {
+// The Hebrew block mirrors the English edition: same keys, lists in the same order, text only.
+// Codes, numbers, links and the computed numbers always come from the English.
+const KEEP = new Set(["schema", "week_of", "published", "tone", "side", "url", "numbers", "sources", "he"]);
+function overlay(base, tr) {
+  if (Array.isArray(base)) return base.map((b, i) => overlay(b, Array.isArray(tr) ? tr[i] : undefined));
+  if (base && typeof base === "object") {
+    const out = {};
+    for (const k of Object.keys(base)) out[k] = KEEP.has(k) || !tr || typeof tr !== "object" ? base[k] : overlay(base[k], tr[k]);
+    return out;
+  }
+  return typeof base === "string" && typeof tr === "string" && tr.trim() ? tr : base;
+}
+function renderEdition(en, editions) {
+  useHe = HE && !!en.he;
+  const ed = useHe ? overlay(en, en.he) : en;
   const nb = ed.numbers || {};
   const crypto = ed.crypto || {};
   const btcNow = num(nb.crypto?.close);
   const lv = ed.levels;
+  const label = useHe ? (en.he.label || window.MP_WEEK(en.week_of) || en.label) : en.label;
+  const range = (a, b) => T(`${a.toLocaleString("en-US")}–${b.toLocaleString("en-US")}`, `בין ${a.toLocaleString("en-US")} ל-${b.toLocaleString("en-US")}`);
 
-  document.title = `${ed.title} — Weekly recap — Market Pulse`;
-  const options = editions.map((e) => `<option value="${esc(e.week_of)}" ${e.week_of === ed.week_of ? "selected" : ""}>${esc(e.label)}</option>`).join("");
+  document.title = `${ed.title} — ${T("Weekly recap", "סיכום שבועי")} — Market Pulse`;
+  const options = editions.map((e) => `<option value="${esc(e.week_of)}" ${e.week_of === en.week_of ? "selected" : ""}>${esc(useHe ? window.MP_WEEK(e.week_of) || e.label : e.label)}</option>`).join("");
 
-  $("#edition").innerHTML = `
+  const main = $("#edition");
+  main.setAttribute("dir", useHe ? "rtl" : "ltr");
+  main.setAttribute("lang", useHe ? "he" : "en");
+  // A Hebrew reader opening an edition that has no Hebrew text yet gets the English, with a note.
+  const enOnly = HE && !useHe
+    ? `<div class="notice" role="note" dir="rtl" lang="he"><span class="stamp">אנגלית</span><span>הגיליון הזה זמין כרגע באנגלית בלבד. הגרסה העברית תעלה בהקדם.</span></div>` : "";
+
+  main.innerHTML = `${enOnly}
   <div class="edition-bar">
-    <span class="meta"><b>Week of ${esc(ed.label)}</b> · published ${esc(fmtDay(ed.published, { weekday: "long", month: "long", day: "numeric" }))}</span>
+    <span class="meta"><b>${T("Week of", "השבוע של")} ${esc(label)}</b> · ${esc(T("published ", "פורסם ב") + fmtDay(ed.published, { weekday: "long", month: "long", day: "numeric" }))}</span>
     <span class="actions">
-      ${editions.length > 1 ? `<label for="archive">Past editions</label><select class="select" id="archive">${options}</select>` : ""}
-      <button class="btn" type="button" id="share-btn">Share this recap</button>
+      ${editions.length > 1 ? `<label for="archive">${T("Past editions", "גיליונות קודמים")}</label><select class="select" id="archive">${options}</select>` : ""}
+      <button class="btn" type="button" id="share-btn">${T("Share this recap", "שיתוף הסיכום")}</button>
     </span>
   </div>
-  <h1 class="headline">${esc(ed.title)}</h1>
-  <p class="deck">${esc(ed.deck)}</p>
+  <h1 class="headline">${tx(ed.title)}</h1>
+  <p class="deck">${tx(ed.deck)}</p>
 
   <div class="pline-box">
-    <div class="pline-head"><h2 class="h-sub">Where the ${esc(lv.name)} sits</h2><span class="asof">Shaded: the trading range ${esc(lv.range[0].toLocaleString("en-US"))}–${esc(lv.range[1].toLocaleString("en-US"))}</span></div>
-    ${priceLine({ min: lv.min, max: lv.max, now: lv.now, nowLabel: `Now ${Math.round(lv.now).toLocaleString("en-US")}${num(lv.record) !== null ? ` · record ${Math.round(lv.record).toLocaleString("en-US")}` : ""}`, band: lv.range, marks: lv.marks })}
-    ${lv.note ? `<p class="pline-note">${esc(lv.note)}</p>` : ""}
+    <div class="pline-head"><h2 class="h-sub">${T(`Where the ${esc(lv.name)} sits`, `איפה עומד ${esc(lv.name)}`)}</h2><span class="asof">${T("Shaded: the trading range", "האזור המוצלל: טווח המסחר,")} ${esc(range(lv.range[0], lv.range[1]))}</span></div>
+    ${priceLine({ min: lv.min, max: lv.max, now: lv.now, nowLabel: `${T("Now", "עכשיו")} ${Math.round(lv.now).toLocaleString("en-US")}${num(lv.record) !== null ? ` · ${T("record", "שיא")} ${Math.round(lv.record).toLocaleString("en-US")}` : ""}`, band: lv.range, marks: lv.marks })}
+    ${lv.note ? `<p class="pline-note">${tx(lv.note)}</p>` : ""}
   </div>
 
   ${strip(nb)}
 
-  <nav class="jump" aria-label="Jump to a section">
-    <a href="#sectors">Sectors</a><a href="#big-money">Big money</a><a href="#news">News</a><a href="#week-ahead">Week ahead</a><a href="#bitcoin">Bitcoin</a>
+  <nav class="jump" aria-label="${T("Jump to a section", "מעבר למדור")}">
+    <a href="#sectors">${T("Sectors", "סקטורים")}</a><a href="#big-money">${T("Big money", "הכסף הגדול")}</a><a href="#news">${T("News", "חדשות")}</a><a href="#week-ahead">${T("Week ahead", "השבוע שלפנינו")}</a><a href="#bitcoin">${T("Bitcoin", "ביטקוין")}</a>
   </nav>
 
-  <div class="tldr">${ed.tldr.map((t) => `<div><h3>${esc(t.label)}</h3><p>${esc(t.text)}</p></div>`).join("")}</div>
+  <div class="tldr">${ed.tldr.map((t) => `<div><h3>${tx(t.label)}</h3><p>${tx(t.text)}</p></div>`).join("")}</div>
 
   <section class="section" aria-labelledby="calls-h">
-    <div class="section-head"><h2 class="h-section" id="calls-h">Last week's calls, checked</h2></div>
-    ${ed.scorecard.map((s) => `<div class="score-row"><span class="call">${esc(s.call)}</span><p>${esc(s.outcome)}</p><span class="chip ${s.tone === "up" ? "buy" : s.tone === "down" ? "sell" : "quiet"}">${toneMark(s.tone)}${esc(s.verdict)}</span></div>`).join("")}
+    <div class="section-head"><h2 class="h-section" id="calls-h">${T("Last week's calls, checked", "מה אמרנו בשבוע שעבר, ומה קרה בפועל")}</h2></div>
+    ${ed.scorecard.map((s) => `<div class="score-row"><span class="call">${tx(s.call)}</span><p>${tx(s.outcome)}</p><span class="chip ${s.tone === "up" ? "buy" : s.tone === "down" ? "sell" : "quiet"}">${toneMark(s.tone)}${tx(s.verdict)}</span></div>`).join("")}
   </section>
 
   <section class="section" id="sectors" aria-labelledby="sectors-h">
-    <div class="section-head"><h2 class="h-section" id="sectors-h">${esc(ed.sectors.title)}</h2></div>
-    <p class="lede">${esc(ed.sectors.deck)}</p>
+    <div class="section-head"><h2 class="h-section" id="sectors-h">${tx(ed.sectors.title)}</h2></div>
+    <p class="lede">${tx(ed.sectors.deck)}</p>
     <div class="sector-layout">
       <div>${heatmap(nb)}</div>
       <div class="flows-wrap">
         <div class="flows">
-          ${num(nb.equal_weight?.rsp_week_pct) !== null ? `<div class="flow"><div class="fh"><span class="fl">Equal-weight S&amp;P vs S&amp;P 500</span><span class="fv">${fmtPct(nb.equal_weight.rsp_week_pct)} vs ${fmtPct(nb.equal_weight.spy_week_pct)}</span></div><p>${nb.equal_weight.rsp_week_pct > nb.equal_weight.spy_week_pct ? "The average stock beat the giants this week." : "The giants beat the average stock this week: leadership stayed narrow."}</p></div>` : ""}
-          ${ed.sectors.flows.map((f) => `<div class="flow"><div class="fh"><span class="fl">${esc(f.label)}</span><span class="fv ${toneClass(f.tone)}">${esc(f.value)}</span></div><p>${esc(f.note)}</p></div>`).join("")}
+          ${num(nb.equal_weight?.rsp_week_pct) !== null ? `<div class="flow"><div class="fh"><span class="fl">${T("Equal-weight S&amp;P vs S&amp;P 500", "S&amp;P שווה משקל מול S&amp;P 500")}</span><span class="fv">${fmtPct(nb.equal_weight.rsp_week_pct)} ${T("vs", "מול")} ${fmtPct(nb.equal_weight.spy_week_pct)}</span></div><p>${nb.equal_weight.rsp_week_pct > nb.equal_weight.spy_week_pct
+            ? T("The average stock beat the giants this week.", "המניה הממוצעת הכתה השבוע את הענקיות.")
+            : T("The giants beat the average stock this week: leadership stayed narrow.", "הענקיות הכו השבוע את המניה הממוצעת: ההובלה נשארה צרה.")}</p></div>` : ""}
+          ${ed.sectors.flows.map((f) => `<div class="flow"><div class="fh"><span class="fl">${tx(f.label)}</span><span class="fv ${toneClass(f.tone)}">${tx(f.value)}</span></div><p>${tx(f.note)}</p></div>`).join("")}
         </div>
-        ${ed.sectors.takeaway ? `<p class="takeaway">${esc(ed.sectors.takeaway)}</p>` : ""}
+        ${ed.sectors.takeaway ? `<p class="takeaway">${tx(ed.sectors.takeaway)}</p>` : ""}
       </div>
     </div>
   </section>
 
   <section class="section" id="big-money" aria-labelledby="money-h">
-    <div class="section-head"><h2 class="h-section" id="money-h">Big money moves</h2></div>
-    <p class="lede">What the people traders follow have bought and sold: politicians' disclosures, famous investors, and company insiders.</p>
-    <p class="lag"><b>Mind the lag.</b> ${esc(ed.big_money.lag_note)}</p>
+    <div class="section-head"><h2 class="h-section" id="money-h">${T("Big money moves", "מהלכי הכסף הגדול")}</h2></div>
+    <p class="lede">${T("What the people traders follow have bought and sold: politicians' disclosures, famous investors, and company insiders.", "מה קנו ומה מכרו האנשים שהסוחרים עוקבים אחריהם: דיווחים של פוליטיקאים, משקיעים מפורסמים ובעלי עניין בחברות.")}</p>
+    <p class="lag"><b>${T("Mind the lag.", "שימו לב לפער הזמנים.")}</b> ${tx(ed.big_money.lag_note)}</p>
     ${ed.big_money.groups.map((g) => `
-      <h3 class="group-title">${esc(g.title)}</h3>
+      <h3 class="group-title">${tx(g.title)}</h3>
       ${g.entries.map((e) => `
       <article class="ledger-row">
-        <div class="who"><span class="mono" aria-hidden="true">${esc(e.initials)}</span><div><div class="nm">${esc(e.who)}</div><div class="rl">${esc(e.role)}</div><div class="wh">${esc(e.when)}</div></div></div>
-        <div><div class="moves">${e.moves.map((m) => chip(m.side, m.text)).join("")}</div><p>${esc(e.detail)}</p></div>
-        <p class="read">${esc(e.read)}</p>
+        <div class="who"><span class="mono" aria-hidden="true">${esc(e.initials)}</span><div><div class="nm">${tx(e.who)}</div><div class="rl">${tx(e.role)}</div><div class="wh">${tx(e.when)}</div></div></div>
+        <div><div class="moves">${e.moves.map((m) => chip(m.side, m.text)).join("")}</div><p>${tx(e.detail)}</p></div>
+        <p class="read">${tx(e.read)}</p>
       </article>`).join("")}`).join("")}
     ${insiderGroup(nb.insiders)}
-    ${(ed.big_money.overlaps || []).length ? `<div class="overlaps"><h3>Names showing up twice</h3><ul>${ed.big_money.overlaps.map((o) => `<li><b>${esc(o.name)}</b>: ${esc(o.text)}</li>`).join("")}</ul></div>` : ""}
+    ${(ed.big_money.overlaps || []).length ? `<div class="overlaps"><h3>${T("Names showing up twice", "שמות שמופיעים יותר מפעם אחת")}</h3><ul>${ed.big_money.overlaps.map((o) => `<li><b>${tx(o.name)}</b>: ${tx(o.text)}</li>`).join("")}</ul></div>` : ""}
   </section>
 
   <section class="section" id="news" aria-labelledby="news-h">
-    <div class="section-head"><h2 class="h-section" id="news-h">What moved markets</h2></div>
-    <div class="news">${ed.news.map((n) => `<article class="story"><h3><span class="${toneClass(n.tone)}">${toneMark(n.tone)}</span>${esc(n.headline)}</h3><p>${esc(n.body)}</p></article>`).join("")}</div>
+    <div class="section-head"><h2 class="h-section" id="news-h">${T("What moved markets", "מה הזיז את השווקים")}</h2></div>
+    <div class="news">${ed.news.map((n) => `<article class="story"><h3><span class="${toneClass(n.tone)}">${toneMark(n.tone)}</span>${tx(n.headline)}</h3><p>${tx(n.body)}</p></article>`).join("")}</div>
   </section>
 
   <section class="section" id="week-ahead" aria-labelledby="week-h">
-    <div class="section-head"><h2 class="h-section" id="week-h">The week ahead</h2><span class="asof">Dots show how much each day matters</span></div>
+    <div class="section-head"><h2 class="h-section" id="week-h">${T("The week ahead", "השבוע שלפנינו")}</h2><span class="asof">${T("Dots show how much each day matters", "הנקודות מראות עד כמה כל יום חשוב")}</span></div>
     <div class="week-layout">
       <div>${ed.calendar.map((c) => { const imp = [1, 2, 3].includes(c.importance) ? c.importance : 1; return `
         <div class="day ${c.key ? "key" : ""}">
-          <div><div class="dn">${esc(c.day)}</div><div class="pips" role="img" aria-label="Importance ${imp} of 3">${[1, 2, 3].map((i) => `<i class="${i <= imp ? "on" : ""}"></i>`).join("")}</div></div>
-          <div><div class="dt">${esc(c.title)}</div>${c.body ? `<p>${esc(c.body)}</p>` : ""}</div>
+          <div><div class="dn">${tx(c.day)}</div><div class="pips" role="img" aria-label="${T(`Importance ${imp} of 3`, `חשיבות ${imp} מתוך 3`)}">${[1, 2, 3].map((i) => `<i class="${i <= imp ? "on" : ""}"></i>`).join("")}</div></div>
+          <div><div class="dt">${tx(c.title)}</div>${c.body ? `<p>${tx(c.body)}</p>` : ""}</div>
         </div>`; }).join("")}</div>
       <div>
-        ${(ed.consensus || []).length ? `<div class="side-box"><h3>The numbers to beat</h3>
-          <table class="ctable"><thead><tr><th scope="col">Report</th><th scope="col" class="r">Expected</th><th scope="col" class="r">Prior</th></tr></thead>
-          <tbody>${ed.consensus.map((c) => `<tr><th scope="row">${esc(c.report)}</th><td class="r exp ${toneClass(c.tone)}">${esc(c.expected)}</td><td class="r">${esc(c.prior)}</td></tr>`).join("")}</tbody></table>
-          ${ed.consensus_note ? `<p class="small">${esc(ed.consensus_note)}</p>` : ""}</div>` : ""}
-        ${(ed.fed_odds || []).length ? `<div class="side-box"><h3>Odds of another Fed hike</h3>
-          ${ed.fed_odds.map((f) => `<div class="odds"><div class="oh"><span>${esc(f.label)}</span><span>~${esc(f.pct)}%</span></div><div class="bar"><span style="width:${Math.max(0, Math.min(100, f.pct))}%"></span></div></div>`).join("")}
-          ${ed.further ? `<p class="small">${esc(ed.further)}</p>` : ""}</div>` : ""}
+        ${(ed.consensus || []).length ? `<div class="side-box"><h3>${T("The numbers to beat", "הצפי בשוק")}</h3>
+          <table class="ctable"><thead><tr><th scope="col">${T("Report", "נתון")}</th><th scope="col" class="r">${T("Expected", "צפי")}</th><th scope="col" class="r">${T("Prior", "קודם")}</th></tr></thead>
+          <tbody>${ed.consensus.map((c) => `<tr><th scope="row">${tx(c.report)}</th><td class="r exp ${toneClass(c.tone)}">${tx(c.expected)}</td><td class="r">${tx(c.prior)}</td></tr>`).join("")}</tbody></table>
+          ${ed.consensus_note ? `<p class="small">${tx(ed.consensus_note)}</p>` : ""}</div>` : ""}
+        ${(ed.fed_odds || []).length ? `<div class="side-box"><h3>${T("Odds of another Fed hike", "הסיכוי להעלאת ריבית נוספת של הפד")}</h3>
+          ${ed.fed_odds.map((f) => `<div class="odds"><div class="oh"><span>${tx(f.label)}</span><span>${BIDI(`~${esc(f.pct)}%`)}</span></div><div class="bar"><span style="width:${Math.max(0, Math.min(100, f.pct))}%"></span></div></div>`).join("")}
+          ${ed.further ? `<p class="small">${tx(ed.further)}</p>` : ""}</div>` : ""}
       </div>
     </div>
   </section>
 
   <section class="section" id="bitcoin" aria-labelledby="btc-h">
-    <div class="section-head"><h2 class="h-section" id="btc-h">${esc(crypto.headline)}</h2></div>
+    <div class="section-head"><h2 class="h-section" id="btc-h">${tx(crypto.headline)}</h2></div>
     <div class="crypto-top">
-      <p class="lede" style="margin:4px 0 0">${esc(crypto.deck)}</p>
-      ${btcNow !== null ? `<div><span class="crypto-price">$${fmtNum(btcNow / 1000, 1)}K</span> <span class="c">${move(nb.crypto?.week_pct, 1)} wk</span></div>` : ""}
+      <p class="lede" style="margin:4px 0 0">${tx(crypto.deck)}</p>
+      ${btcNow !== null ? `<div><span class="crypto-price">$${fmtNum(btcNow / 1000, 1)}K</span> <span class="c">${move(nb.crypto?.week_pct, 1)}${T(" wk", " בשבוע")}</span></div>` : ""}
     </div>
     <div class="pline-box">
-      ${priceLine({ min: crypto.map.min, max: crypto.map.max, now: btcNow, nowLabel: btcNow !== null ? `Now ~${fmtNum(btcNow / 1000, 1)}K` : "", zone: crypto.map.zone, marks: crypto.map.marks })}
-      <p class="pline-note">${esc(crypto.signal)}</p>
+      ${priceLine({ min: crypto.map.min, max: crypto.map.max, now: btcNow, nowLabel: btcNow !== null ? BIDI(`${T("Now", "עכשיו")} ~${fmtNum(btcNow / 1000, 1)}K`) : "", zone: crypto.map.zone, marks: crypto.map.marks })}
+      <p class="pline-note">${tx(crypto.signal)}</p>
     </div>
-    <div class="stats">${crypto.stats.map((s) => `<div class="stat"><div class="sl">${esc(s.label)}</div>${s.value ? `<div class="sv ${toneClass(s.tone)}">${esc(s.value)}</div>` : ""}<p>${esc(s.note)}</p></div>`).join("")}</div>
+    <div class="stats">${crypto.stats.map((s) => `<div class="stat"><div class="sl">${tx(s.label)}</div>${s.value ? `<div class="sv ${toneClass(s.tone)}">${tx(s.value)}</div>` : ""}<p>${tx(s.note)}</p></div>`).join("")}</div>
   </section>
 
   <section class="bottom" aria-labelledby="bottom-h">
-    <h2 class="h-section" id="bottom-h">Three things that decide the week</h2>
-    <ol>${ed.bottom_line.map((b) => `<li><div><h3>${esc(b.title)}</h3><p>${esc(b.body)}</p></div></li>`).join("")}</ol>
+    <h2 class="h-section" id="bottom-h">${T("Three things that decide the week", "שלושה דברים שיכריעו את השבוע")}</h2>
+    <ol>${ed.bottom_line.map((b) => `<li><div><h3>${tx(b.title)}</h3><p>${tx(b.body)}</p></div></li>`).join("")}</ol>
   </section>
 
   <section class="section" aria-labelledby="src-h">
-    <div class="section-head"><h2 class="h-sub" id="src-h">Sources</h2></div>
-    <ul class="sources">${ed.sources.map((s) => /^https?:\/\//i.test(String(s.url || "")) ? `<li><a href="${esc(s.url)}" target="_blank" rel="noopener noreferrer">${esc(s.title)}</a></li>` : `<li>${esc(s.title)}</li>`).join("")}</ul>
+    <div class="section-head"><h2 class="h-sub" id="src-h">${T("Sources", "מקורות")}</h2>${useHe ? `<span class="src-note">הכתבות המקוריות, באנגלית</span>` : ""}</div>
+    <ul class="sources" ${useHe ? 'dir="ltr" lang="en"' : ""}>${ed.sources.map((s) => /^https?:\/\//i.test(String(s.url || "")) ? `<li><a href="${esc(s.url)}" target="_blank" rel="noopener noreferrer">${esc(s.title)}</a></li>` : `<li>${esc(s.title)}</li>`).join("")}</ul>
   </section>`;
 
-  $("#edition").classList.remove("loading");
-  $("#edition").removeAttribute("aria-busy");
+  main.classList.remove("loading");
+  main.removeAttribute("aria-busy");
 
   const sel = $("#archive");
   if (sel) sel.addEventListener("change", () => { location.search = "?week=" + encodeURIComponent(sel.value); });
   $("#share-btn").addEventListener("click", async () => {
-    const url = location.origin + location.pathname + "?week=" + encodeURIComponent(ed.week_of);
+    // Hebrew readers share the Hebrew edition.
+    const url = location.origin + location.pathname + "?week=" + encodeURIComponent(en.week_of) + (HE ? "&lang=he" : "");
     const btn = $("#share-btn");
+    const idle = btn.textContent;
     try {
-      if (navigator.share) { await navigator.share({ title: ed.title, text: `Market Pulse weekly recap: ${ed.title}`, url }); return; }
+      if (navigator.share) { await navigator.share({ title: ed.title, text: T(`Market Pulse weekly recap: ${ed.title}`, `הסיכום השבועי של Market Pulse: ${ed.title}`), url }); return; }
       await navigator.clipboard.writeText(url);
-      btn.textContent = "Link copied";
+      btn.textContent = T("Link copied", "הקישור הועתק");
     } catch (e) {
       if (e && e.name === "AbortError") return;
-      btn.textContent = "Copy failed: use the address bar";
+      btn.textContent = T("Copy failed: use the address bar", "ההעתקה נכשלה: העתיקו מסרגל הכתובות");
     }
-    setTimeout(() => { btn.textContent = "Share this recap"; }, 2500);
+    setTimeout(() => { btn.textContent = idle; }, 2500);
   });
 }
 
 function renderError(msg) {
-  $("#edition").classList.remove("loading");
-  $("#edition").removeAttribute("aria-busy");
-  $("#edition").innerHTML = `<div class="notice" role="alert"><span class="stamp">Missing</span><span>${esc(msg)} <a href="index.html">Go to today's market read</a>.</span></div>`;
+  const main = $("#edition");
+  main.classList.remove("loading");
+  main.removeAttribute("aria-busy");
+  main.innerHTML = `<div class="notice" role="alert"><span class="stamp">${window.MP_L("Missing", "חסר")}</span><span>${esc(msg)} <a href="index.html">${window.MP_L("Go to today's market read", "למצב השוק היום")}</a>.</span></div>`;
 }
 
 (async function main() {
+  const L = window.MP_L;
   const idx = await loadJSON("data/weekly/index.json");
   const editions = (idx?.editions || []).filter((e) => /^\d{4}-\d{2}-\d{2}$/.test(e.week_of || ""));
-  if (!editions.length) { renderError("No weekly recap has been published yet. The first one arrives on a Sunday before the US open."); return; }
+  if (!editions.length) { renderError(L("No weekly recap has been published yet. The first one arrives on a Sunday before the US open.", "עדיין לא פורסם סיכום שבועי. הראשון יגיע ביום ראשון, לפני פתיחת המסחר בארה״ב.")); return; }
   const want = new URLSearchParams(location.search).get("week");
   const pick = editions.find((e) => e.week_of === want) || editions[0];
+  const name = HE ? window.MP_WEEK(pick.week_of) || pick.label || pick.week_of : pick.label || pick.week_of;
   const ed = await loadJSON(`data/weekly/${pick.week_of}.json`);
-  if (!ed || ed.schema !== 1) { renderError(`The recap for ${pick.label || pick.week_of} couldn't be loaded. Try refreshing.`); return; }
-  try { renderEdition(ed, editions); window.MP_JUMP($(".jump")); }
-  catch (e) { console.error(e); renderError(`The recap for ${pick.label || pick.week_of} has a formatting problem and couldn't be shown.`); }
+  if (!ed || ed.schema !== 1) { renderError(L(`The recap for ${name} couldn't be loaded. Try refreshing.`, `לא הצלחנו לטעון את הסיכום של ${name}. נסו לרענן את העמוד.`)); return; }
+  try {
+    renderEdition(ed, editions);
+    window.MP_JUMP($(".jump"));
+    untangle();
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(untangle);   // widths change once the fonts arrive
+  }
+  catch (e) { console.error(e); renderError(L(`The recap for ${name} has a formatting problem and couldn't be shown.`, `בסיכום של ${name} יש בעיה בעיצוב הנתונים, ולכן לא ניתן להציג אותו.`)); }
 })();
 
 if ("serviceWorker" in navigator) {

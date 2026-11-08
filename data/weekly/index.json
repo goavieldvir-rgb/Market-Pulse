@@ -5,35 +5,40 @@
       "label": "Nov 9–13, 2026",
       "title": "A Democratic sweep and a chip crash push the S&P 500 down to its 200-day line",
       "published": "2026-11-08",
-      "file": "data/weekly/2026-11-09.json"
+      "file": "data/weekly/2026-11-09.json",
+      "title_he": "ניצחון סוחף לדמוקרטים וקריסה בשבבים הפילו את ה-S&P 500 עד הממוצע הנע ל-200 יום"
     },
     {
       "week_of": "2026-11-02",
       "label": "Nov 2–6, 2026",
       "title": "Alphabet’s cash burn and Intel’s plunge break the S&P 500’s 100-day line",
       "published": "2026-11-01",
-      "file": "data/weekly/2026-11-02.json"
+      "file": "data/weekly/2026-11-02.json",
+      "title_he": "שריפת המזומנים של אלפבית וצניחת אינטל מפילות את ה-S&P 500 מתחת לממוצע הנע ל-100 יום"
     },
     {
       "week_of": "2026-10-26",
       "label": "Oct 26–30, 2026",
       "title": "Black October hits the web as Meta’s cash burn hits AI stocks",
       "published": "2026-10-25",
-      "file": "data/weekly/2026-10-26.json"
+      "file": "data/weekly/2026-10-26.json",
+      "title_he": "גל מתקפות סייבר מכה ברשת, ושריפת המזומנים של מטא מכה במניות ה-AI"
     },
     {
       "week_of": "2026-10-19",
       "label": "Oct 19–23, 2026",
       "title": "AI’s debt scare breaks the chip trade",
       "published": "2026-10-18",
-      "file": "data/weekly/2026-10-19.json"
+      "file": "data/weekly/2026-10-19.json",
+      "title_he": "בהלת החוב ב-AI שוברת את ההימור על השבבים"
     },
     {
       "week_of": "2026-10-12",
       "label": "Oct 12–16, 2026",
       "title": "A breakout led by the boring stocks",
       "published": "2026-10-11",
-      "file": "data/weekly/2026-10-12.json"
+      "file": "data/weekly/2026-10-12.json",
+      "title_he": "פריצה בהובלת המניות המשעממות"
     }
   ]
 }

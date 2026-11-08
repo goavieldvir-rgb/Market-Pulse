@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<title>Market Pulse — SPY / QQQ market health, at a glance</title>
-<meta name="description" content="One contrarian read of the US market: five sentiment and positioning signals for SPY/QQQ on one scale, with every reading's freshness shown." />
+<title data-he="Market Pulse — מצב השוק האמריקאי (SPY / QQQ) במבט אחד">Market Pulse — SPY / QQQ market health, at a glance</title>
+<meta name="description" content="One contrarian read of the US market: five sentiment and positioning signals for SPY/QQQ on one scale, with every reading's freshness shown." data-he="מצב שוק המניות האמריקאי בציון אחד, בגישת נגד הזרם: חמישה אינדיקטורים של סנטימנט ופוזיציות בסולם אחד, וליד כל נתון – עד כמה הוא עדכני." />
 
 <meta property="og:type" content="website" />
 <meta property="og:title" content="Market Pulse — SPY / QQQ market health, at a glance" />
@@ -26,9 +26,9 @@
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="MktPulse" />
-<link rel="stylesheet" href="assets/fonts.css">
-<link rel="stylesheet" href="assets/mp.css?v=2" />
-<script src="assets/mp.js?v=2"></script>
+<link rel="stylesheet" href="assets/fonts.css?v=2">
+<link rel="stylesheet" href="assets/mp.css?v=3" />
+<script src="assets/mp.js?v=3"></script>
 <style>
   /* ---------- Lead: the glance box and the shared signal scale ---------- */
   .lead { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-6); }
@@ -73,7 +73,7 @@
   .drow .dot.cau { background: var(--cau); }
   .drow .name { display: flex; flex-direction: column; line-height: 1.2; padding: 6px 0; }
   .drow .name small { font-weight: 500; font-size: 0.75rem; color: var(--ink-3); }
-  .drow .reading { display: flex; flex-direction: column; align-items: flex-end; line-height: 1.2; padding: 6px 0; text-align: right; }
+  .drow .reading { display: flex; flex-direction: column; align-items: flex-end; line-height: 1.2; padding: 6px 0; text-align: end; }
   .drow .reading b { font-weight: 700; color: var(--ink); white-space: nowrap; }
   .drow .reading small { font-weight: 600; font-size: 0.75rem; color: var(--ink-3); white-space: nowrap; }
   .drow .reading small.opp { color: var(--opp); }
@@ -108,7 +108,7 @@
   .mini { position: relative; height: 34px; margin-top: var(--space-2); }
   .mini .rail { position: absolute; left: 0; right: 0; top: 6px; height: 4px; background: linear-gradient(90deg, var(--cau) 0 25%, var(--rule) 25% 75%, var(--opp) 75%); }
   .mini .pin { position: absolute; top: 0; width: 3px; height: 16px; margin-left: -1.5px; background: var(--ink); transition: left 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
-  .mini .ends { position: absolute; left: 0; right: 0; top: 18px; display: flex; justify-content: space-between; font-family: var(--cond); font-weight: 500; font-size: 0.75rem; color: var(--ink-2); }
+  .mini .ends { position: absolute; left: 0; right: 0; top: 18px; display: flex; justify-content: space-between; gap: var(--space-3); font-family: var(--cond); font-weight: 500; font-size: 0.75rem; color: var(--ink-2); }
 
   .kv { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: var(--space-2) var(--space-4); margin: var(--space-3) 0 0; padding-top: var(--space-2); border-top: 1px dotted var(--rule); }
   .kv div { min-width: 0; }
@@ -125,76 +125,78 @@
 
 <header class="mast">
   <a class="brand" href="index.html">Market Pulse</a>
-  <div class="mast-side"><span>SPY · QQQ</span><button class="theme-btn" id="theme-btn" type="button">Edition</button></div>
+  <div class="mast-side"><span>SPY · QQQ</span><button class="lang-btn" id="lang-btn" type="button"><span lang="he">עברית</span></button><button class="theme-btn" id="theme-btn" type="button">Edition</button></div>
 </header>
 <div class="dateline">
   <span id="today-date"></span>
-  <span id="updated-badge"><span class="live-dot" id="updated-dot"></span><span id="updated-text">Loading…</span></span>
+  <span id="updated-badge"><span class="live-dot" id="updated-dot"></span><span id="updated-text" data-he="טוען…">Loading…</span></span>
 </div>
-<nav class="tabs" aria-label="Sections">
-  <a href="index.html" aria-current="page">Today</a>
-  <a href="opportunity.html">Scanner</a>
-  <a href="weekly.html">Weekly recap</a>
+<nav class="tabs" aria-label="Sections" data-he-label="מדורים">
+  <a href="index.html" aria-current="page" data-he="היום">Today</a>
+  <a href="opportunity.html" data-he="סורק">Scanner</a>
+  <a href="weekly.html" data-he="סיכום שבועי">Weekly recap</a>
 </nav>
 
 <div id="health-banner-slot"></div>
 
 <div class="lead">
   <section class="glance box" aria-labelledby="glance-title">
-    <h1 class="box-title" id="glance-title">Markets at a glance: the composite contrarian read</h1>
+    <h1 class="box-title" id="glance-title" data-he="השוק במבט אחד: ציון משולב בגישת נגד הזרם">Markets at a glance: the composite contrarian read</h1>
     <div class="figure-row">
       <span class="figure-xl" id="gauge-score" aria-live="polite"><span class="skel" style="width:120px;height:72px;display:inline-block"></span></span>
       <div>
-        <div class="zone-word" id="gauge-label">Loading data…</div>
+        <div class="zone-word" id="gauge-label" data-he="טוען נתונים…">Loading data…</div>
         <div class="basis" id="gauge-basis"></div>
       </div>
     </div>
     <div id="gauge-wrap"></div>
-    <p class="explain">A score, not an index level: the average of the five contrarian signals’ scores, from −100 (caution) to +100 (opportunity). A contrarian read, not a forecast: it leans toward opportunity when fear, pessimism or oversold conditions dominate, and toward caution when comfort, greed or crowding dominate.</p>
+    <p class="explain" data-he="זהו ציון, לא רמת מדד: ממוצע הציונים של חמשת האינדיקטורים, בסולם שבין מינוס 100 (זהירות) לפלוס 100 (הזדמנות). זו הערכה בגישת נגד הזרם, לא תחזית: הציון נוטה להזדמנות כשבשוק שולטים פחד, פסימיות או מכירת יתר, ונוטה לזהירות כששולטות שאננות, חמדנות או התנהגות עדר.">A score, not an index level: the average of the five contrarian signals’ scores, from −100 (caution) to +100 (opportunity). A contrarian read, not a forecast: it leans toward opportunity when fear, pessimism or oversold conditions dominate, and toward caution when comfort, greed or crowding dominate.</p>
     <div id="sparkline-slot"></div>
     <div id="weekly-slot"></div>
   </section>
 
   <section aria-labelledby="scale-title">
-    <h2 class="h-section" id="scale-title">Five signals, one scale</h2>
-    <p class="lede">On the right is each signal’s actual reading. The dot is the score that reading gets on one shared −100…+100 scale: left of centre leans caution, right leans opportunity.</p>
+    <h2 class="h-section" id="scale-title" data-he="חמישה אינדיקטורים, סולם אחד">Five signals, one scale</h2>
+    <p class="lede" data-he="בצד שמאל מופיע הערך בפועל של כל אינדיקטור. הנקודה מראה את הציון שהערך הזה מקבל בסולם משותף, ממינוס 100 עד פלוס 100: משמאל למרכז – נטייה לזהירות, מימין למרכז – נטייה להזדמנות.">On the right is each signal’s actual reading. The dot is the score that reading gets on one shared −100…+100 scale: left of centre leans caution, right leans opportunity.</p>
     <div class="dotplot" id="signal-scale"></div>
-    <div class="scale-axis" aria-hidden="true"><span>Score</span><span class="ends"><span>−100</span><span>0</span><span>+100</span></span><span style="text-align:right">Reading</span></div>
+    <div class="scale-axis" aria-hidden="true"><span data-he="ציון">Score</span><span class="ends ltr"><span>−100</span><span>0</span><span>+100</span></span><span style="text-align:end" data-he="ערך">Reading</span></div>
   </section>
 </div>
 
 <section class="section" aria-labelledby="evidence-title">
-  <div class="section-head"><h2 class="h-section" id="evidence-title">The evidence</h2><span class="asof">Each reading, how it is scored, and how fresh it is</span></div>
+  <div class="section-head"><h2 class="h-section" id="evidence-title" data-he="מה עומד מאחורי הציון">The evidence</h2><span class="asof" data-he="כל נתון, איך הוא מקבל ציון ועד כמה הוא עדכני">Each reading, how it is scored, and how fresh it is</span></div>
   <div class="entries" id="card-grid"></div>
 </section>
 
-<p class="install"><strong>Add it to your home screen.</strong> On iPhone, tap the Share icon, then “Add to Home Screen”. On Android or Chrome, open the menu and choose “Add to Home screen” or “Install app”.</p>
+<p class="install" data-he-html="<strong>אפשר להוסיף את האתר למסך הבית.</strong> באייפון: הקישו על סמל השיתוף ובחרו בהוספה למסך הבית. באנדרואיד או בכרום: פתחו את התפריט ובחרו בהוספה למסך הבית או בהתקנת האפליקציה."><strong>Add it to your home screen.</strong> On iPhone, tap the Share icon, then “Add to Home Screen”. On Android or Chrome, open the menu and choose “Add to Home screen” or “Install app”.</p>
 
 <footer class="footer">
-  <p><strong>Not financial advice.</strong> This dashboard summarizes public market data for
+  <p data-he-html="<strong>אין באמור ייעוץ השקעות.</strong> העמוד מסכם נתוני שוק פומביים למטרות מידע בלבד. הציון המשולב הוא כלל אצבע פשוט, לא איתות לקנות או למכור דבר, ואין בו תחליף לייעוץ המותאם לנתונים ולצרכים של כל אדם."><strong>Not financial advice.</strong> This dashboard summarizes public market data for
     informational purposes only. Composite scoring is a simplified heuristic, not a signal to
     buy or sell anything.</p>
-  <p>Data: Yahoo Finance (price, moving averages, VIX, sectors), CNN Fear &amp; Greed (unofficial public endpoint),
+  <p data-he="מקורות: Yahoo Finance (מחירים, ממוצעים נעים, VIX, סקטורים), מדד הפחד והחמדנות של CNN (ממשק ציבורי לא רשמי), AAII.com (סקר הסנטימנט השבועי) ורשימת מניות ה-S&amp;P 500 שמתחזקת הקהילה, לחישוב רוחב השוק. חלק מהנתונים הם קירוב של מדדים קנייניים (למשל רוחב השוק בסגנון S5FI); הפרטים בהערה של כל נתון.">Data: Yahoo Finance (price, moving averages, VIX, sectors), CNN Fear &amp; Greed (unofficial public endpoint),
     AAII.com (weekly sentiment survey), a community-maintained S&amp;P 500 constituent list for breadth.
     Some figures are best-effort approximations of proprietary index tickers (e.g. the S5FI-style
     breadth reading); see each entry's note.</p>
-  <p>Prices refresh about every 10 minutes while the US market is open; breadth updates after each
+  <p data-he="המחירים מתעדכנים בערך כל 10 דקות בזמן המסחר בארה״ב; רוחב השוק מתעדכן אחרי כל נעילה, וסקר AAII פעם בשבוע. ליד כל נתון מצוין עד כמה הוא עדכני.">Prices refresh about every 10 minutes while the US market is open; breadth updates after each
     close and AAII weekly. Every entry shows how current its data is.</p>
-  <p><strong>Privacy.</strong> No accounts, cookies, ads or analytics. Your watchlist, scanner settings and day/night choice are saved only in your own browser. Fonts are served from this site. The site is hosted on GitHub Pages, which may log visits as described in <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" rel="noopener noreferrer">GitHub’s privacy statement</a>.</p>
-  <p>Independent project, not affiliated with or endorsed by S&amp;P Dow Jones Indices, Nasdaq, CNN, AAII, Yahoo or the SEC. Index and product names belong to their owners.</p>
+  <p data-he-html="<strong>פרטיות.</strong> אין כאן חשבונות משתמש, עוגיות, פרסומות או כלי אנליטיקה. רשימת המעקב, הגדרות הסורק, השפה ובחירת מהדורת היום או הלילה נשמרות רק בדפדפן שלכם. הגופנים נטענים מהאתר עצמו. האתר מאוחסן בשירות GitHub Pages, שעשוי לתעד ביקורים כמתואר ב<a href=&quot;https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement&quot; rel=&quot;noopener noreferrer&quot;>הצהרת הפרטיות של GitHub</a>."><strong>Privacy.</strong> No accounts, cookies, ads or analytics. Your watchlist, scanner settings, language and day/night choice are saved only in your own browser. Fonts are served from this site. The site is hosted on GitHub Pages, which may log visits as described in <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" rel="noopener noreferrer">GitHub’s privacy statement</a>.</p>
+  <p data-he="פרויקט עצמאי, שאינו קשור ל-S&amp;P Dow Jones Indices, ל-Nasdaq, ל-CNN, ל-AAII, ל-Yahoo או ל-SEC ואינו מאושר על ידם. שמות המדדים והמוצרים שייכים לבעליהם.">Independent project, not affiliated with or endorsed by S&amp;P Dow Jones Indices, Nasdaq, CNN, AAII, Yahoo or the SEC. Index and product names belong to their owners.</p>
 </footer>
 </div>
 
 <script>
+window.MP_APPLY();   // Hebrew page text first, so the code below finds the final elements
 const $ = (sel) => document.querySelector(sel);
 const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 const num = (v) => (typeof v === "number" && Number.isFinite(v) ? v : null);
 const MARK = window.MP_MARK;
+const L = window.MP_L, HE = window.MP_HE, BIDI = window.MP_BIDI;
 
 function fmtPct(v, digits = 2) {
   v = num(v);
   if (v === null) return "—";
-  return `${v > 0 ? "+" : v < 0 ? "−" : ""}${Math.abs(v).toFixed(digits)}%`;
+  return BIDI(`${v > 0 ? "+" : v < 0 ? "−" : ""}${Math.abs(v).toFixed(digits)}%`);
 }
 function fmtNum(v, digits = 2) {
   v = num(v);
@@ -202,7 +204,7 @@ function fmtNum(v, digits = 2) {
 }
 function fmtScore(v) {
   const r = Math.round(v);
-  return r > 0 ? `+${r}` : r < 0 ? `−${Math.abs(r)}` : "0";
+  return BIDI(r > 0 ? `+${r}` : r < 0 ? `−${Math.abs(r)}` : "0");
 }
 function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
 
@@ -212,22 +214,9 @@ function ageMs(iso) {
   const t = iso ? Date.parse(iso) : NaN;
   return Number.isFinite(t) ? Date.now() - t : Infinity;
 }
-function timeAgo(iso) {
-  const ms = ageMs(iso);
-  if (!Number.isFinite(ms)) return "no data yet";
-  const min = Math.round(ms / 60000);
-  if (min < 1) return "just now";
-  if (min < 60) return `${min}m ago`;
-  const h = Math.floor(min / 60);
-  if (h < 24) return `${h}h ${min % 60}m ago`;
-  return `${Math.floor(h / 24)}d ago`;
-}
-// "2026-09-29" -> "Sep 29" (a calendar date, so no time-zone shifting)
-function fmtDay(isoDate) {
-  if (!isoDate || !/^\d{4}-\d{2}-\d{2}/.test(isoDate)) return "—";
-  const [y, m, d] = isoDate.slice(0, 10).split("-").map(Number);
-  return new Date(Date.UTC(y, m - 1, d)).toLocaleDateString("en-US", { month: "short", day: "numeric", timeZone: "UTC" });
-}
+// "5m ago" / "לפני 5 דק׳" and "Sep 29" / "29 בספט׳" (shared with the other pages, in mp.js)
+const timeAgo = window.MP_AGO;
+const fmtDay = (isoDate) => window.MP_DAY(isoDate);
 function daysSince(isoDate) {
   if (!isoDate) return Infinity;
   const [y, m, d] = isoDate.slice(0, 10).split("-").map(Number);
@@ -263,13 +252,14 @@ const SIGNALS = {
 const MIN_SIGNALS = 3; // the composite needs at least this many fresh signals
 const SIGNAL_COUNT = Object.keys(SIGNALS).length;
 const SIGNAL_NAMES = {
-  trend: "Trend vs 150-day", aaii: "AAII sentiment", vix: "VIX",
-  breadth: "Breadth", feargreed: "Fear & Greed",
+  trend: L("Trend vs 150-day", "מגמה מול ממוצע 150"), aaii: L("AAII sentiment", "סנטימנט AAII"), vix: "VIX",
+  breadth: L("Breadth", "רוחב שוק"), feargreed: L("Fear & Greed", "פחד וחמדנות"),
 };
 // What each reading measures, shown under the name in the scale rows.
 const SIGNAL_UNITS = {
-  trend: "SPY vs its 150-day average", aaii: "bulls minus bears", vix: "volatility index level",
-  breadth: "S&P stocks above 50-day", feargreed: "CNN index, 0 to 100",
+  trend: L("SPY vs its 150-day average", "SPY מול הממוצע הנע ל-150 יום"), aaii: L("bulls minus bears", "שוורים פחות דובים"),
+  vix: L("volatility index level", "רמת מדד התנודתיות"), breadth: L("S&P stocks above 50-day", "מניות S&P מעל ממוצע 50 יום"),
+  feargreed: L("CNN index, 0 to 100", "מדד של CNN, מ-0 עד 100"),
 };
 
 function scoreFrom(key, x) {
@@ -286,12 +276,12 @@ function scoreFrom(key, x) {
 
 // Five zones, shared by entries and the composite.
 function zoneOf(score) {
-  if (score === null || score === undefined) return { status: "neutral", tag: "No data", label: "Not enough data" };
-  if (score >= 50) return { status: "opportunity", tag: "Opportunity", label: "Opportunity zone" };
-  if (score >= 20) return { status: "lean-opportunity", tag: "Leaning opportunity", label: "Leaning opportunity" };
-  if (score > -20) return { status: "neutral", tag: "Neutral", label: "Neutral, mixed signals" };
-  if (score > -50) return { status: "lean-caution", tag: "Leaning caution", label: "Leaning caution" };
-  return { status: "caution", tag: "Caution", label: "Caution zone" };
+  if (score === null || score === undefined) return { status: "neutral", tag: L("No data", "אין נתונים"), label: L("Not enough data", "אין מספיק נתונים") };
+  if (score >= 50) return { status: "opportunity", tag: L("Opportunity", "הזדמנות"), label: L("Opportunity zone", "אזור הזדמנות") };
+  if (score >= 20) return { status: "lean-opportunity", tag: L("Leaning opportunity", "נוטה להזדמנות"), label: L("Leaning opportunity", "נוטה להזדמנות") };
+  if (score > -20) return { status: "neutral", tag: L("Neutral", "ניטרלי"), label: L("Neutral, mixed signals", "ניטרלי, תמונה מעורבת") };
+  if (score > -50) return { status: "lean-caution", tag: L("Leaning caution", "נוטה לזהירות"), label: L("Leaning caution", "נוטה לזהירות") };
+  return { status: "caution", tag: L("Caution", "זהירות"), label: L("Caution zone", "אזור זהירות") };
 }
 const toneOf = (score) => (score === null ? "" : score >= 20 ? "opp" : score <= -20 ? "cau" : "");
 
@@ -304,14 +294,15 @@ function aaiiPlausible(a) {
 const posOf = (s) => clamp(((s + 100) / 200) * 100, 0, 100);
 
 function renderGauge() {
+  // The scale runs left to right in both languages; each label keeps its number at the outer end.
   $("#gauge-wrap").innerHTML = `
-  <div class="scale" role="img" aria-label="Composite position on the −100 to +100 scale" id="composite-scale">
+  <div class="scale" role="img" aria-label="${L("Composite position on the −100 to +100 scale", "מיקום הציון המשולב בסולם שבין מינוס 100 לפלוס 100")}" id="composite-scale">
     <div class="seg c"></div><div class="seg n"></div><div class="seg o"></div>
     <div class="tick" style="left:50%"></div>
     <div class="marker" id="gauge-needle" style="left:50%"></div>
-    <span class="lab" style="left:0">−100 Caution</span>
-    <span class="lab" style="left:50%;transform:translateX(-50%)">0 Neutral</span>
-    <span class="lab" style="right:0">Opportunity +100</span>
+    <span class="lab" style="left:0">${L("−100 Caution", 'זהירות <bdi dir="ltr">−100</bdi>')}</span>
+    <span class="lab" style="left:50%;transform:translateX(-50%)">${L("0 Neutral", "0 ניטרלי")}</span>
+    <span class="lab" style="right:0">${L("Opportunity +100", '<bdi dir="ltr">+100</bdi> הזדמנות')}</span>
   </div>`;
 }
 
@@ -326,7 +317,8 @@ function animateGaugeTo(targetScore) {
   const start = performance.now();
   const easeOut = (t) => 1 - Math.pow(1 - t, 4);
   marker.style.left = posOf(targetScore).toFixed(1) + "%";
-  $("#composite-scale").setAttribute("aria-label", `Composite ${fmtScore(targetScore)} on the −100 (caution) to +100 (opportunity) scale`);
+  $("#composite-scale").setAttribute("aria-label", L(`Composite ${fmtScore(targetScore)} on the −100 (caution) to +100 (opportunity) scale`,
+    `הציון המשולב: ${fmtScore(targetScore)}, בסולם שבין מינוס 100 (זהירות) לפלוס 100 (הזדמנות)`));
   scoreEl.className = "figure-xl " + (targetScore >= 50 ? "opportunity" : targetScore <= -50 ? "caution" : "");
   function frame(now) {
     const t = duration ? Math.min((now - start) / duration, 1) : 1;
@@ -343,13 +335,13 @@ function renderScale(rows) {
   $("#signal-scale").innerHTML = sorted.map((r) => {
     const name = `<span class="name">${esc(r.name)}<small>${esc(SIGNAL_UNITS[r.key] || "")}</small></span>`;
     if (r.score === null) {
-      return `<div class="drow">${name}<span><span class="stamp">${esc(r.reason || "No data")}</span></span><span class="reading"><b>${esc(r.reading || "—")}</b><small>not scored</small></span></div>`;
+      return `<div class="drow">${name}<span><span class="stamp">${esc(r.reason || L("No data", "אין נתונים"))}</span></span><span class="reading"><b>${esc(r.reading || "—")}</b><small>${L("not scored", "ללא ציון")}</small></span></div>`;
     }
     const tone = toneOf(r.score);
-    return `<div class="drow" title="${esc(r.name)}: reading ${esc(r.reading || "—")}, score ${fmtScore(r.score)} of ±100">
+    return `<div class="drow" title="${esc(r.name)}: ${L("reading", "ערך")} ${esc(r.reading || "—")}, ${L(`score ${fmtScore(r.score)} of ±100`, `ציון ${fmtScore(r.score)} מתוך ±100`)}">
       ${name}
       <span class="track"><span class="dot ${tone}" style="left:${posOf(r.score).toFixed(1)}%"></span></span>
-      <span class="reading"><b>${esc(r.reading || "—")}</b><small class="${tone}">score ${fmtScore(r.score)}</small></span>
+      <span class="reading"><b>${esc(r.reading || "—")}</b><small class="${tone}">${L("score", "ציון")} ${fmtScore(r.score)}</small></span>
     </div>`;
   }).join("");
 }
@@ -365,21 +357,21 @@ function miniMeter(score, leftLabel, rightLabel) {
   if (num(score) === null) return "";
   const pct = clamp(posOf(score), 1, 99);
   return `
-  <div class="mini" title="Score ${fmtScore(score)} of ±100">
+  <div class="mini ltr" title="${L(`Score ${fmtScore(score)} of ±100`, `ציון ${fmtScore(score)} מתוך ±100`)}">
     <div class="rail"></div><div class="pin" style="left:${pct.toFixed(1)}%"></div>
-    <div class="ends"><span>${esc(leftLabel)}</span><span>${esc(rightLabel)}</span></div>
+    <div class="ends"><span class="lbl">${esc(leftLabel)}</span><span class="lbl">${esc(rightLabel)}</span></div>
   </div>`;
 }
 
-function card({ title, code, score = null, context = false, value, valueStyle = "", unit = "", note, sub = [], asOf, stale = false, meterLabels = ["Caution", "Opportunity"] }) {
-  const zone = context ? { status: "context", tag: "Context only" } : zoneOf(score);
+function card({ title, code, score = null, context = false, value, valueStyle = "", unit = "", note, sub = [], asOf, stale = false, meterLabels = [L("Caution", "זהירות"), L("Opportunity", "הזדמנות")] }) {
+  const zone = context ? { status: "context", tag: L("Context only", "להקשר בלבד") } : zoneOf(score);
   const strong = zone.status === "opportunity" || zone.status === "caution";
   const subHTML = sub.length
     ? `<dl class="kv">${sub.map(([k, v]) => `<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join("")}</dl>`
     : "";
   return `
   <article class="entry" data-kind="${context ? "context" : "scored"}">
-    <div class="entry-head"><h3>${esc(title)}</h3>${stale ? `<span class="stamp">Stale</span>` : statusTag(zone.status, context || num(score) === null ? zone.tag : `${zone.tag} · score ${fmtScore(score)}`)}</div>
+    <div class="entry-head"><h3>${esc(title)}</h3>${stale ? `<span class="stamp">${L("Stale", "לא עדכני")}</span>` : statusTag(zone.status, context || num(score) === null ? zone.tag : `${zone.tag} · ${L("score", "ציון")} ${fmtScore(score)}`)}</div>
     ${code ? `<div class="entry-code">${esc(code)}</div>` : ""}
     <div class="entry-figure"><span class="val ${strong ? zone.status : ""}" style="${valueStyle}">${esc(value)}</span>${unit ? `<span class="unit">${esc(unit)}</span>` : ""}</div>
     ${context ? "" : miniMeter(score, meterLabels[0], meterLabels[1])}
@@ -403,8 +395,8 @@ function skeletonCard() {
 // "Live · updated 4m ago" mid-session, otherwise "As of Sep 29 close"
 function priceAsOf(fast, block) {
   if (!block) return null;
-  if (block.in_session) return `Live · updated ${timeAgo(fast?.generated_at)}`;
-  return `As of ${fmtDay(block.date)} close`;
+  if (block.in_session) return L(`Live · updated ${timeAgo(fast?.generated_at)}`, `בזמן אמת · עודכן ${timeAgo(fast?.generated_at)}`);
+  return L(`As of ${fmtDay(block.date)} close`, `נכון לנעילה של ${fmtDay(block.date)}`);
 }
 
 // ---------- Data quality ----------
@@ -435,12 +427,13 @@ function assess(fast, breadth, aaii) {
     aaiiValid,
     aaiiOk: aaiiValid && aaiiAge <= LIMITS.aaiiDays + 2,
     problems: [
-      fast && fastAge > LIMITS.fastDays ? `<b>Price, VIX and sector data</b> hasn't updated since ${timeAgo(fast.generated_at)}` : null,
-      fast && fastFresh && lagged ? `<b>Some price data</b> is still on the ${fmtDay(lagged.date)} close because Yahoo hasn't posted the ${fmtDay(etDate(lagged.as_of))} close yet` : null,
-      breadth && breadthAge > LIMITS.breadthDays ? `<b>S&amp;P 500 breadth</b> hasn't updated since ${timeAgo(breadth.generated_at)}` : null,
-      aaii && !aaiiValid ? `<b>AAII sentiment</b>: the latest survey couldn't be read reliably` : null,
-      aaii && aaiiValid && aaiiAge > LIMITS.aaiiDays ? `<b>AAII sentiment</b>: the latest survey is from ${fmtDay(aaii.survey_date)}` : null,
-      fg && fgAge > LIMITS.fgDays ? `<b>CNN Fear &amp; Greed</b> hasn't updated since ${timeAgo(fg.as_of)}` : null,
+      fast && fastAge > LIMITS.fastDays ? L(`<b>Price, VIX and sector data</b> hasn't updated since ${timeAgo(fast.generated_at)}`, `<b>נתוני המחירים, ה-VIX והסקטורים</b> עודכנו לאחרונה ${timeAgo(fast.generated_at)}`) : null,
+      fast && fastFresh && lagged ? L(`<b>Some price data</b> is still on the ${fmtDay(lagged.date)} close because Yahoo hasn't posted the ${fmtDay(etDate(lagged.as_of))} close yet`,
+        `<b>חלק מנתוני המחירים</b> עדיין מבוססים על הנעילה של ${fmtDay(lagged.date)}, כי Yahoo טרם פרסמה את נתוני הנעילה של ${fmtDay(etDate(lagged.as_of))}`) : null,
+      breadth && breadthAge > LIMITS.breadthDays ? L(`<b>S&amp;P 500 breadth</b> hasn't updated since ${timeAgo(breadth.generated_at)}`, `<b>רוחב השוק ב-S&amp;P 500</b> עודכן לאחרונה ${timeAgo(breadth.generated_at)}`) : null,
+      aaii && !aaiiValid ? L(`<b>AAII sentiment</b>: the latest survey couldn't be read reliably`, `<b>סנטימנט AAII</b>: לא הצלחנו לקרוא באופן אמין את הסקר האחרון`) : null,
+      aaii && aaiiValid && aaiiAge > LIMITS.aaiiDays ? L(`<b>AAII sentiment</b>: the latest survey is from ${fmtDay(aaii.survey_date)}`, `<b>סנטימנט AAII</b>: הסקר האחרון הוא מ-${fmtDay(aaii.survey_date)}`) : null,
+      fg && fgAge > LIMITS.fgDays ? L(`<b>CNN Fear &amp; Greed</b> hasn't updated since ${timeAgo(fg.as_of)}`, `<b>מדד הפחד והחמדנות של CNN</b> עודכן לאחרונה ${timeAgo(fg.as_of)}`) : null,
     ].filter(Boolean),
   };
 }
@@ -469,8 +462,8 @@ function renderSparkline(daily, live) {
   const last = points[points.length - 1];
   slot.innerHTML = `
     <div class="history">
-      <div class="history-head"><span>Composite since ${fmtDay(points[0].d)}</span><span>range ${fmtScore(lo)} to ${fmtScore(hi)}</span></div>
-      <svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Composite history since ${fmtDay(points[0].d)}, between ${fmtScore(lo)} and ${fmtScore(hi)}">
+      <div class="history-head"><span>${L(`Composite since ${fmtDay(points[0].d)}`, `הציון המשולב מאז ${fmtDay(points[0].d)}`)}</span><span>${L(`range ${fmtScore(lo)} to ${fmtScore(hi)}`, `טווח: ${fmtScore(lo)} עד ${fmtScore(hi)}`)}</span></div>
+      <svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="${L(`Composite history since ${fmtDay(points[0].d)}, between ${fmtScore(lo)} and ${fmtScore(hi)}`, `הציון המשולב מאז ${fmtDay(points[0].d)}, בין ${fmtScore(lo)} ל-${fmtScore(hi)}`)}">
         <line x1="${pad}" y1="${y(0).toFixed(1)}" x2="${w - pad}" y2="${y(0).toFixed(1)}" stroke="currentColor" stroke-opacity="0.35" stroke-width="1" stroke-dasharray="3 4" vector-effect="non-scaling-stroke"/>
         <path d="${pathD}" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
         <circle cx="${(pad + (points.length - 1) * stepX).toFixed(1)}" cy="${y(last.v).toFixed(1)}" r="3.5" fill="currentColor"/>
@@ -489,16 +482,19 @@ function renderBadge() {
   const fast = latestFast;
   const dot = $("#updated-dot"), text = $("#updated-text");
   dot.className = "live-dot";
-  if (!fast) { text.textContent = "Waiting for the first data run"; return; }
+  if (!fast) { text.textContent = L("Waiting for the first data run", "ממתין לעדכון הנתונים הראשון"); return; }
   const m = fast.market || {};
   const age = ageMs(fast.generated_at);
   if (m.state === "open") {
     const fresh = age < 30 * 60000;
     dot.classList.add(fresh ? "live" : "warn");
-    text.innerHTML = `<b>Market open</b> · updated ${esc(timeAgo(fast.generated_at))}`;
+    text.innerHTML = L(`<b>Market open</b> · updated ${esc(timeAgo(fast.generated_at))}`, `<b>המסחר פתוח</b> · עודכן ${esc(timeAgo(fast.generated_at))}`);
   } else {
-    const when = fast.spy?.date ? `${fmtDay(fast.spy.date)} close` : timeAgo(fast.generated_at);
-    text.innerHTML = `<b>${m.state === "pre" ? "Pre-market" : "Market closed"}</b> · prices as of ${esc(when)}`;
+    const state = m.state === "pre" ? L("Pre-market", "טרום מסחר") : L("Market closed", "המסחר סגור");
+    const when = fast.spy?.date
+      ? L(`prices as of ${fmtDay(fast.spy.date)} close`, `מחירי הנעילה של ${fmtDay(fast.spy.date)}`)
+      : L(`prices as of ${timeAgo(fast.generated_at)}`, `המחירים עודכנו ${timeAgo(fast.generated_at)}`);
+    text.innerHTML = `<b>${state}</b> · ${esc(when)}`;
   }
 }
 
@@ -507,10 +503,12 @@ async function renderWeeklyLink() {
   const idx = await loadJSON("data/weekly/index.json");
   const latest = idx?.editions?.[0];
   if (!latest) return;
+  const label = HE ? window.MP_WEEK(latest.week_of) || latest.label : latest.label;
+  const title = HE ? latest.title_he || "לקריאת הסיכום השבועי" : latest.title || "Read the weekly recap";
   $("#weekly-slot").innerHTML = `
     <a class="weekly-link" href="weekly.html">
-      <span class="wl-k">This week's recap · ${esc(latest.label || "")}</span>
-      <span class="wl-t">${esc(latest.title || "Read the weekly recap")}</span>
+      <span class="wl-k">${L("This week's recap", "הסיכום השבועי")} · ${esc(label || "")}</span>
+      <span class="wl-t">${esc(title)}</span>
     </a>`;
 }
 
@@ -525,8 +523,10 @@ function render({ fast, breadth, aaii, daily }) {
 
   $("#health-banner-slot").innerHTML = q.problems.length ? `
     <div class="notice" role="status">
-      <span class="stamp">Stale</span>
-      <span>${q.problems.join("; ")}. ${q.problems.length > 1 ? "These readings are" : "That reading is"} left out of the composite until ${q.problems.length > 1 ? "they refresh" : "it refreshes"}.</span>
+      <span class="stamp">${L("Stale", "לא עדכני")}</span>
+      <span>${q.problems.join("; ")}. ${q.problems.length > 1
+        ? L("These readings are left out of the composite until they refresh.", "הנתונים האלה לא נכללים בציון המשולב עד שיתעדכנו.")
+        : L("That reading is left out of the composite until it refreshes.", "הנתון הזה לא נכלל בציון המשולב עד שיתעדכן.")}</span>
     </div>` : "";
 
   const spy = fast?.spy, qqq = fast?.qqq;
@@ -537,14 +537,15 @@ function render({ fast, breadth, aaii, daily }) {
     const score = q.pricesOk(spy) ? scoreFrom("trend", d) : null;
     scores.trend = score;
     readings.trend = fmtPct(d);
-    if (score === null && fast) reasons.trend = "Stale";
+    if (score === null && fast) reasons.trend = L("Stale", "לא עדכני");
     cards.push(card({
-      title: "Trend: distance from the 150-day average",
-      code: "SPY and QQQ vs their 150-day average",
-      score, value: fmtPct(d), unit: "SPY vs SMA150", stale: !!fast && !q.pricesOk(spy),
-      meterLabels: ["Extended (caution)", "Below trend (opportunity)"],
-      sub: [["SPY", fmtNum(spy?.close)], ["SPY SMA150", fmtNum(spy?.sma150)], ["QQQ vs SMA150", fmtPct(qqq?.distance_from_sma150_pct)]],
-      note: "Scored on SPY. More than 8% above its 150-day average = stretched (caution). More than 3% below = a pullback where buyers have historically stepped in (opportunity), though a deep break can also mean trend damage.",
+      title: L("Trend: distance from the 150-day average", "מגמה: המרחק מהממוצע הנע ל-150 יום"),
+      code: L("SPY and QQQ vs their 150-day average", "SPY ו-QQQ מול הממוצע הנע שלהם ל-150 יום"),
+      score, value: fmtPct(d), unit: L("SPY vs SMA150", "SPY מול SMA150"), stale: !!fast && !q.pricesOk(spy),
+      meterLabels: [L("Extended (caution)", "מתוח (זהירות)"), L("Below trend (opportunity)", "מתחת למגמה (הזדמנות)")],
+      sub: [["SPY", fmtNum(spy?.close)], [L("SPY SMA150", "SMA150 של SPY"), fmtNum(spy?.sma150)], [L("QQQ vs SMA150", "QQQ מול SMA150"), fmtPct(qqq?.distance_from_sma150_pct)]],
+      note: L("Scored on SPY. More than 8% above its 150-day average = stretched (caution). More than 3% below = a pullback where buyers have historically stepped in (opportunity), though a deep break can also mean trend damage.",
+        "הציון מחושב לפי SPY. יותר מ-8% מעל הממוצע ל-150 יום – השוק מתוח (זהירות). יותר מ-3% מתחתיו – ירידה שבעבר משכה קונים (הזדמנות), אם כי שבירה עמוקה יכולה להעיד גם על פגיעה במגמה."),
       asOf: priceAsOf(fast, spy),
     }));
   }
@@ -553,23 +554,32 @@ function render({ fast, breadth, aaii, daily }) {
   {
     const dir = spy?.streak_direction;
     const cnt = num(spy?.streak_count) ?? 0;
-    const label = dir === "green" ? `up day${cnt === 1 ? "" : "s"} in a row` : dir === "red" ? `down day${cnt === 1 ? "" : "s"} in a row` : "flat close";
+    const label = HE
+      ? (dir === "green" ? (cnt === 1 ? "יום עלייה" : "ימי עלייה ברצף") : dir === "red" ? (cnt === 1 ? "יום ירידה" : "ימי ירידה ברצף") : "נעילה ללא שינוי")
+      : (dir === "green" ? `up day${cnt === 1 ? "" : "s"} in a row` : dir === "red" ? `down day${cnt === 1 ? "" : "s"} in a row` : "flat close");
     const qDir = qqq?.streak_direction;
+    // "3 ימי עלייה", "יומיים של ירידה", "יום עלייה אחד"
+    const heStreak = (n, d) => {
+      if (d !== "green" && d !== "red") return "ללא שינוי";
+      const w = d === "green" ? "עלייה" : "ירידה";
+      return n === 1 ? `יום ${w} אחד` : n === 2 ? `יומיים של ${w}` : `${n} ימי ${w}`;
+    };
     const sub = [
-      ["QQQ streak", qqq ? `${qqq.streak_count} ${qDir === "green" ? "up" : qDir === "red" ? "down" : "flat"}` : "—"],
-      ["SPY 5-day", fmtPct(spy?.return_5d_pct)],
+      [L("QQQ streak", "רצף QQQ"), qqq ? L(`${qqq.streak_count} ${qDir === "green" ? "up" : qDir === "red" ? "down" : "flat"}`, heStreak(qqq.streak_count, qDir)) : "—"],
+      [L("SPY 5-day", "SPY ב-5 ימים"), fmtPct(spy?.return_5d_pct)],
     ];
-    if (spy?.in_session) sub.push(["SPY today (so far)", fmtPct(spy?.change_pct)]);
+    if (spy?.in_session) sub.push([L("SPY today (so far)", "SPY היום (עד כה)"), fmtPct(spy?.change_pct)]);
     cards.push(card({
-      title: "Momentum streak",
-      code: "Consecutive up or down closes",
+      title: L("Momentum streak", "רצף מומנטום"),
+      code: L("Consecutive up or down closes", "נעילות רצופות בעלייה או בירידה"),
       context: true,
       value: String(cnt),
       valueStyle: `color:${dir === "green" ? "var(--opp)" : dir === "red" ? "var(--cau)" : "var(--ink)"}`,
       unit: `${label} (SPY)`,
       sub,
-      note: "Counts completed sessions only; today's move is shown separately until the close. Long streaks tend to mean-revert. Context only: not part of the composite.",
-      asOf: spy ? `Through ${fmtDay(spy.streak_through || spy.date)} close` : null,
+      note: L("Counts completed sessions only; today's move is shown separately until the close. Long streaks tend to mean-revert. Context only: not part of the composite.",
+        "נספרים רק ימי מסחר שהסתיימו; התנועה של היום מוצגת בנפרד עד הנעילה. רצפים ארוכים נוטים לחזור לממוצע. להקשר בלבד: לא חלק מהציון המשולב."),
+      asOf: spy ? L(`Through ${fmtDay(spy.streak_through || spy.date)} close`, `עד הנעילה של ${fmtDay(spy.streak_through || spy.date)}`) : null,
     }));
   }
 
@@ -579,23 +589,27 @@ function render({ fast, breadth, aaii, daily }) {
     const spread = valid ? Math.round((aaii.bullish_pct - aaii.bearish_pct) * 10) / 10 : null;
     const score = q.aaiiOk ? scoreFrom("aaii", spread) : null;
     scores.aaii = score;
-    readings.aaii = spread === null ? "—" : `${spread > 0 ? "+" : ""}${spread.toFixed(1)} pts`;
-    if (score === null && aaii) reasons.aaii = valid ? "Stale" : "Unreadable";
+    // Signed with a true minus, like every other reading.
+    const spreadTxt = spread === null ? "—" : BIDI(`${spread > 0 ? "+" : spread < 0 ? "−" : ""}${Math.abs(spread).toFixed(1)}`);
+    readings.aaii = spread === null ? "—" : `${spreadTxt} ${L("pts", "נק׳")}`;
+    if (score === null && aaii) reasons.aaii = valid ? L("Stale", "לא עדכני") : L("Unreadable", "לא קריא");
     const avg = aaii?.historical_avg || { bullish: 37.5, neutral: 31.5, bearish: 31.0 };
     cards.push(card({
-      title: "AAII investor sentiment",
-      code: "Bull minus bear spread, weekly survey",
-      score, value: spread === null ? "—" : `${spread > 0 ? "+" : ""}${spread.toFixed(1)}`, unit: "pts", stale: !!aaii && valid && !q.aaiiOk,
-      meterLabels: ["More bulls (caution)", "More bears (opportunity)"],
+      title: L("AAII investor sentiment", "סנטימנט המשקיעים של AAII"),
+      code: L("Bull minus bear spread, weekly survey", "הפער בין השוורים לדובים, סקר שבועי"),
+      score, value: spreadTxt, unit: L("pts", "נק׳"), stale: !!aaii && valid && !q.aaiiOk,
+      meterLabels: [L("More bulls (caution)", "עודף שוורים (זהירות)"), L("More bears (opportunity)", "עודף דובים (הזדמנות)")],
       sub: valid ? [
-        ["Bullish", `${aaii.bullish_pct}% (avg ${avg.bullish})`],
-        ["Neutral", `${aaii.neutral_pct}%`],
-        ["Bearish", `${aaii.bearish_pct}% (avg ${avg.bearish})`],
+        [L("Bullish", "שוורים"), `${aaii.bullish_pct}% (${L("avg", "ממוצע")} ${avg.bullish})`],
+        [L("Neutral", "ניטרליים"), `${aaii.neutral_pct}%`],
+        [L("Bearish", "דובים"), `${aaii.bearish_pct}% (${L("avg", "ממוצע")} ${avg.bearish})`],
       ] : [],
       note: valid
-        ? "Contrarian: a crowd of bulls is a warning, a crowd of bears has historically come before gains. Scored against the long-run average spread of +6.5: above +24 = caution, below −11 = opportunity."
-        : "This week's survey couldn't be read reliably, so it's left out of the composite until the next update.",
-      asOf: valid && aaii.survey_date ? `Week ending ${fmtDay(aaii.survey_date)} · weekly (Thu)` : null,
+        ? L("Contrarian: a crowd of bulls is a warning, a crowd of bears has historically come before gains. Scored against the long-run average spread of +6.5: above +24 = caution, below −11 = opportunity.",
+          BIDI("נגד הזרם: עודף של שוורים הוא סימן אזהרה, ועודף של דובים הקדים בעבר עליות. הציון נמדד מול הפער הממוצע לאורך זמן, פלוס 6.5 נק׳: מעל פלוס 24 – זהירות; מתחת למינוס 11 – הזדמנות."))
+        : L("This week's survey couldn't be read reliably, so it's left out of the composite until the next update.",
+          "לא הצלחנו לקרוא באופן אמין את הסקר של השבוע, ולכן הוא לא נכלל בציון המשולב עד העדכון הבא."),
+      asOf: valid && aaii.survey_date ? L(`Week ending ${fmtDay(aaii.survey_date)} · weekly (Thu)`, `השבוע שהסתיים ב-${fmtDay(aaii.survey_date)} · מתפרסם מדי יום חמישי`) : null,
     }));
   }
 
@@ -605,18 +619,19 @@ function render({ fast, breadth, aaii, daily }) {
     const score = q.pricesOk(fast?.vix) ? scoreFrom("vix", v) : null;
     scores.vix = score;
     readings.vix = fmtNum(v);
-    if (score === null && fast) reasons.vix = "Stale";
+    if (score === null && fast) reasons.vix = L("Stale", "לא עדכני");
     const pctile = num(fast?.vix?.percentile_1y);
     cards.push(card({
-      title: "VIX volatility index",
-      code: "Cboe S&P 500 volatility",
+      title: L("VIX volatility index", "מדד התנודתיות VIX"),
+      code: L("Cboe S&P 500 volatility", "התנודתיות הצפויה ב-S&P 500, לפי Cboe"),
       score, value: fmtNum(v), stale: !!fast && !q.pricesOk(fast?.vix),
-      meterLabels: ["Calm (caution)", "Fearful (opportunity)"],
+      meterLabels: [L("Calm (caution)", "רגוע (זהירות)"), L("Fearful (opportunity)", "מפוחד (הזדמנות)")],
       sub: [
-        ...(pctile !== null ? [["Past year", `Higher than ${Math.round(pctile)}% of days`]] : []),
-        ...(fast?.vix?.change_pct !== undefined ? [[fast.vix.in_session ? "Today" : "Last session", fmtPct(fast.vix.change_pct)]] : []),
+        ...(pctile !== null ? [[L("Past year", "בשנה האחרונה"), L(`Higher than ${Math.round(pctile)}% of days`, `גבוה מ-${Math.round(pctile)}% מהימים`)]] : []),
+        ...(fast?.vix?.change_pct !== undefined ? [[fast.vix.in_session ? L("Today", "היום") : L("Last session", "יום המסחר האחרון"), fmtPct(fast.vix.change_pct)]] : []),
       ],
-      note: "Below 14 = complacency (caution). Above 25 = fear is priced in, historically a better entry window (opportunity). The long-run median is about 18.",
+      note: L("Below 14 = complacency (caution). Above 25 = fear is priced in, historically a better entry window (opportunity). The long-run median is about 18.",
+        "מתחת ל-14 – שאננות (זהירות). מעל 25 – הפחד כבר מגולם במחירים, ובעבר זה היה חלון כניסה טוב יותר (הזדמנות). החציון לאורך זמן הוא כ-18."),
       asOf: priceAsOf(fast, fast?.vix),
     }));
   }
@@ -626,11 +641,12 @@ function render({ fast, breadth, aaii, daily }) {
     const rel = num(fast?.participation?.rsp_minus_spy_20d_pct);
     const rsp = fast?.participation?.RSP;
     cards.push(card({
-      title: "Market participation",
-      code: "Equal-weight RSP vs cap-weight SPY, 20 sessions",
+      title: L("Market participation", "השתתפות בשוק"),
+      code: L("Equal-weight RSP vs cap-weight SPY, 20 sessions", "RSP (משקל שווה) מול SPY (משקל לפי שווי שוק), 20 ימי מסחר"),
       context: true, value: fmtPct(rel), unit: "RSP − SPY", stale: !!fast && !q.pricesOk(rsp, spy),
-      sub: [["RSP 20-day", fmtPct(rsp?.return_20d_pct)], ["SPY 20-day", fmtPct(spy?.return_20d_pct)]],
-      note: "How the average stock is doing next to the giants. Lagging by more than 2 points means gains are concentrated in a few mega-caps; leading by 2+ means broad participation. Context only: a market-health measure, not part of the contrarian composite.",
+      sub: [[L("RSP 20-day", "RSP ב-20 יום"), fmtPct(rsp?.return_20d_pct)], [L("SPY 20-day", "SPY ב-20 יום"), fmtPct(spy?.return_20d_pct)]],
+      note: L("How the average stock is doing next to the giants. Lagging by more than 2 points means gains are concentrated in a few mega-caps; leading by 2+ means broad participation. Context only: a market-health measure, not part of the contrarian composite.",
+        "איך המניה הממוצעת מתפקדת לעומת הענקיות. פיגור של יותר מ-2 נקודות אומר שהעליות מרוכזות בכמה מניות ענק; הובלה של 2 נקודות ויותר מעידה על השתתפות רחבה. להקשר בלבד: מדד לבריאות השוק, לא חלק מהציון המשולב."),
       asOf: priceAsOf(fast, rsp),
     }));
   }
@@ -641,20 +657,22 @@ function render({ fast, breadth, aaii, daily }) {
     const score = q.breadthOk ? scoreFrom("breadth", pct) : null;
     scores.breadth = score;
     readings.breadth = pct === null ? "—" : `${pct}%`;
-    if (score === null && breadth) reasons.breadth = "Stale";
+    if (score === null && breadth) reasons.breadth = L("Stale", "לא עדכני");
     const series = (breadth?.series || []).map((p) => p.v).filter((v) => num(v) !== null);
     const pctile = series.length >= 120 ? percentileRank(series, pct) : null;
     const sub = [];
-    if (num(breadth?.count_above_sma50) !== null) sub.push(["Stocks above", `${breadth.count_above_sma50} of ${breadth.universe_size_matched}`]);
-    if (pctile !== null) sub.push(["Past year", `Higher than ${pctile}% of days`]);
+    if (num(breadth?.count_above_sma50) !== null) sub.push([L("Stocks above", "מניות מעל הממוצע"), L(`${breadth.count_above_sma50} of ${breadth.universe_size_matched}`, `${breadth.count_above_sma50} מתוך ${breadth.universe_size_matched}`)]);
+    if (pctile !== null) sub.push([L("Past year", "בשנה האחרונה"), L(`Higher than ${pctile}% of days`, `גבוה מ-${pctile}% מהימים`)]);
     cards.push(card({
-      title: "S&P 500 stocks above their 50-day",
-      code: "S5FI-style breadth",
+      title: L("S&P 500 stocks above their 50-day", "מניות S&P 500 מעל הממוצע הנע ל-50 יום"),
+      code: L("S5FI-style breadth", "רוחב שוק בסגנון S5FI"),
       score, value: pct === null ? "—" : `${pct}%`, stale: !!breadth && !q.breadthOk,
-      meterLabels: ["Overextended (caution)", "Oversold (opportunity)"],
+      meterLabels: [L("Overextended (caution)", "מתוח מדי (זהירות)"), L("Oversold (opportunity)", "מכירת יתר (הזדמנות)")],
       sub,
-      note: "Above 70% = most stocks already extended, the danger zone (caution). Below 15% = broad, severe fear, historically a strong buying zone (opportunity).",
-      asOf: breadth?.as_of ? `As of ${fmtDay(breadth.as_of)} close · daily` : (breadth?.generated_at ? `Updated ${timeAgo(breadth.generated_at)} · daily` : null),
+      note: L("Above 70% = most stocks already extended, the danger zone (caution). Below 15% = broad, severe fear, historically a strong buying zone (opportunity).",
+        "מעל 70% – רוב המניות כבר מתוחות, אזור הסכנה (זהירות). מתחת ל-15% – פחד חריף ורחב, שהיה בעבר אזור קנייה חזק (הזדמנות)."),
+      asOf: breadth?.as_of ? L(`As of ${fmtDay(breadth.as_of)} close · daily`, `נכון לנעילה של ${fmtDay(breadth.as_of)} · מתעדכן מדי יום`)
+        : (breadth?.generated_at ? L(`Updated ${timeAgo(breadth.generated_at)} · daily`, `עודכן ${timeAgo(breadth.generated_at)} · מתעדכן מדי יום`) : null),
     }));
   }
 
@@ -666,11 +684,12 @@ function render({ fast, breadth, aaii, daily }) {
     const spread = num(fast?.sector_rotation?.defensive_minus_cyclical_20d_pct) ??
       (def !== null && r20("XLY") !== null ? Math.round((def - r20("XLY")) * 100) / 100 : null);
     cards.push(card({
-      title: "Defensive sector rotation",
-      code: "Utilities + Staples vs Discretionary, 20 sessions",
-      context: true, value: fmtPct(spread), unit: "defensive − cyclical", stale: !!fast && !q.pricesOk(s.XLU, s.XLP, s.XLY),
-      sub: [["XLU 20-day", fmtPct(r20("XLU"))], ["XLP 20-day", fmtPct(r20("XLP"))], ["XLY 20-day", fmtPct(r20("XLY"))]],
-      note: "When Utilities and Staples outrun Discretionary by 3+ points, money is hiding in safety; Discretionary leading by 3+ shows healthy risk appetite. Context only: a market-health measure, not part of the contrarian composite.",
+      title: L("Defensive sector rotation", "רוטציה לסקטורים דפנסיביים"),
+      code: L("Utilities + Staples vs Discretionary, 20 sessions", "תשתיות וצריכה בסיסית מול צריכה מחזורית, 20 ימי מסחר"),
+      context: true, value: fmtPct(spread), unit: L("defensive − cyclical", "דפנסיבי פחות מחזורי"), stale: !!fast && !q.pricesOk(s.XLU, s.XLP, s.XLY),
+      sub: [[L("XLU 20-day", "XLU ב-20 יום"), fmtPct(r20("XLU"))], [L("XLP 20-day", "XLP ב-20 יום"), fmtPct(r20("XLP"))], [L("XLY 20-day", "XLY ב-20 יום"), fmtPct(r20("XLY"))]],
+      note: L("When Utilities and Staples outrun Discretionary by 3+ points, money is hiding in safety; Discretionary leading by 3+ shows healthy risk appetite. Context only: a market-health measure, not part of the contrarian composite.",
+        "כשתשתיות וצריכה בסיסית מכות את הצריכה המחזורית ב-3 נקודות או יותר, הכסף מחפש מקלט; כשהצריכה המחזורית מובילה ב-3 נקודות או יותר, יש תיאבון בריא לסיכון. להקשר בלבד: מדד לבריאות השוק, לא חלק מהציון המשולב."),
       asOf: priceAsOf(fast, s.XLY),
     }));
   }
@@ -681,19 +700,20 @@ function render({ fast, breadth, aaii, daily }) {
     const v = num(fg?.score);
     const score = q.fgOk ? scoreFrom("feargreed", v) : null;
     scores.feargreed = score;
-    readings.feargreed = v === null ? "—" : `${v.toFixed(0)}${fg?.rating ? " " + fg.rating.replace(/^./, (c) => c.toUpperCase()) : ""}`;
-    if (score === null && fg) reasons.feargreed = "Stale";
+    readings.feargreed = v === null ? "—" : `${v.toFixed(0)}${fg?.rating ? " " + window.MP_RATING(fg.rating) : ""}`;
+    if (score === null && fg) reasons.feargreed = L("Stale", "לא עדכני");
     const sub = [];
-    if (num(fg?.previous_close) !== null) sub.push(["Previous close", String(fg.previous_close)]);
-    if (num(fg?.previous_1_week) !== null) sub.push(["1 week ago", String(fg.previous_1_week)]);
+    if (num(fg?.previous_close) !== null) sub.push([L("Previous close", "בנעילה הקודמת"), String(fg.previous_close)]);
+    if (num(fg?.previous_1_week) !== null) sub.push([L("1 week ago", "לפני שבוע"), String(fg.previous_1_week)]);
     cards.push(card({
-      title: "CNN Fear & Greed Index",
-      code: "Composite sentiment, 0–100",
-      score, value: v === null ? "—" : v.toFixed(0), unit: fg?.rating || "", stale: !!fg && score === null && v !== null,
-      meterLabels: ["Extreme greed (caution)", "Extreme fear (opportunity)"],
+      title: L("CNN Fear & Greed Index", "מדד הפחד והחמדנות של CNN"),
+      code: L("Composite sentiment, 0–100", "סנטימנט משולב, בסולם של 0 עד 100"),
+      score, value: v === null ? "—" : v.toFixed(0), unit: HE ? window.MP_RATING(fg?.rating) : fg?.rating || "", stale: !!fg && score === null && v !== null,
+      meterLabels: [L("Extreme greed (caution)", "חמדנות קיצונית (זהירות)"), L("Extreme fear (opportunity)", "פחד קיצוני (הזדמנות)")],
       sub,
-      note: "CNN's blend of seven market gauges. Using CNN's own bands: 25 or below = Extreme Fear (opportunity), 75 or above = Extreme Greed (caution).",
-      asOf: fg?.as_of ? `CNN · updated ${timeAgo(fg.as_of)}` : null,
+      note: L("CNN's blend of seven market gauges. Using CNN's own bands: 25 or below = Extreme Fear (opportunity), 75 or above = Extreme Greed (caution).",
+        "שילוב של שבעה מדדי שוק שמחשבת CNN. לפי הטווחים של CNN עצמה: 25 ומטה – פחד קיצוני (הזדמנות); 75 ומעלה – חמדנות קיצונית (זהירות)."),
+      asOf: fg?.as_of ? L(`CNN · updated ${timeAgo(fg.as_of)}`, `CNN · עודכן ${timeAgo(fg.as_of)}`) : null,
     }));
   }
 
@@ -701,7 +721,7 @@ function render({ fast, breadth, aaii, daily }) {
   const scored = cards.filter((c) => c.includes('data-kind="scored"'));
   const contextCards = cards.filter((c) => c.includes('data-kind="context"'));
   $("#card-grid").innerHTML = scored.join("") +
-    (contextCards.length ? `<h3 class="entries-divider">Context: shown for reference, not part of the composite</h3>${contextCards.join("")}` : "");
+    (contextCards.length ? `<h3 class="entries-divider">${L("Context: shown for reference, not part of the composite", "להקשר: מוצג לעיון, לא חלק מהציון המשולב")}</h3>${contextCards.join("")}` : "");
   renderScale(Object.keys(SIGNALS).map((k) => ({ key: k, name: SIGNAL_NAMES[k], score: scores[k], reason: reasons[k], reading: readings[k] })));
 
   // Composite
@@ -712,13 +732,13 @@ function render({ fast, breadth, aaii, daily }) {
     animateGaugeTo(composite);
     $("#gauge-label").textContent = zoneOf(composite).label;
     $("#gauge-basis").textContent = used.length === SIGNAL_COUNT
-      ? `Average of all ${SIGNAL_COUNT} signals, all fresh`
-      : `Average of ${used.length} of ${SIGNAL_COUNT} signals (the rest are missing or out of date)`;
+      ? L(`Average of all ${SIGNAL_COUNT} signals, all fresh`, `ממוצע של כל ${SIGNAL_COUNT} האינדיקטורים, כולם עדכניים`)
+      : L(`Average of ${used.length} of ${SIGNAL_COUNT} signals (the rest are missing or out of date)`, `ממוצע של ${used.length} מתוך ${SIGNAL_COUNT} האינדיקטורים (השאר חסרים או לא עדכניים)`);
     renderSparkline(daily, { d: fast?.spy?.date || "9999-12-31", v: composite });
   } else {
-    $("#gauge-score").textContent = "N/A";
+    $("#gauge-score").textContent = L("N/A", "—");
     $("#gauge-score").style.opacity = "0.4";
-    $("#gauge-label").textContent = fast ? "Not enough fresh data" : "Waiting for the first data run";
+    $("#gauge-label").textContent = fast ? L("Not enough fresh data", "אין מספיק נתונים עדכניים") : L("Waiting for the first data run", "ממתין לעדכון הנתונים הראשון");
     $("#gauge-basis").textContent = "";
     renderSparkline(daily, null);
   }
