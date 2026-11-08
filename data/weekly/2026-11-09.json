@@ -79,8 +79,8 @@
     "note": "Lance Roberts puts the close 0.7% above the 200-day near 7,325, with the July swing low at 7,316 just under it; a decisive close below 7,316 opens 7,200. Resistance is the 100-, 20- and 50-day cluster at 7,620–7,680. RSI is 35, and Thursday’s close sat 3.1 standard deviations below the 20-day average. In 23 of 27 similar cases since 1950, it was higher a month later."
   },
   "sectors": {
-    "title": "Chips and energy crashed, the rest held up",
-    "deck": "Five of 11 sectors rose. Communication services led with a 4.9% gain, and real estate and consumer discretionary each rose 1.9%. Technology fell 8.2% and energy 12.0%.",
+    "title": "Tech and energy crashed, and only five of 11 sectors rose",
+    "deck": "Communication services led with a 4.9% gain, and real estate and consumer discretionary each rose 1.9%. Energy fell 12.0%, technology 8.2% and industrials 2.8%.",
     "flows": [
       {
         "label": "Equal-weight vs S&P 500",
