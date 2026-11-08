@@ -51,15 +51,10 @@
     ],
     "marks": [
       {
-        "value": 7316,
-        "label": "July swing low",
-        "tone": "down"
-      },
-      {
-        "value": 7325,
-        "label": "200-day average",
-        "tone": "neutral"
-      },
+   "value": 7316,
+   "label": "July low (200-day at 7,325)",
+   "tone": "down"
+  },
       {
         "value": 7490,
         "label": "Broken sell-rule line",
