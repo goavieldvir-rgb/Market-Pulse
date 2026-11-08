@@ -3,7 +3,7 @@
 The site reads like the market-data section of a financial paper turned into a working tool:
 one headline figure, then honest, dense evidence. All three pages (`index.html` Today,
 `opportunity.html` Scanner, `weekly.html` Weekly recap) share one stylesheet, `assets/mp.css`,
-and one small script, `assets/mp.js` (day/night toggle, dateline, direction marks).
+and one small script, `assets/mp.js` (language and day/night toggles, dateline, direction marks).
 
 ## Editions
 
@@ -11,6 +11,23 @@ and one small script, `assets/mp.js` (day/night toggle, dateline, direction mark
 - **Night edition:** ink-brown paper, warm cream text.
 - The OS setting picks the edition; the masthead button overrides it and remembers the choice
   per device (`localStorage` key `mp-theme`).
+
+## Languages
+
+- **English** and **Hebrew**. The masthead's language button (beside the edition button) names the
+  other language in its own script, עברית or English, and remembers the choice per device
+  (`localStorage` key `mp-lang`). A `?lang=he` / `?lang=en` link sets it too, and a browser whose
+  first language is Hebrew opens in Hebrew. Shared weekly-recap links carry `&lang=he` from a Hebrew page.
+- Hebrew pages run right to left (`<html dir="rtl">`, set before first paint). Layout uses logical
+  sides (`margin-inline-start`, `text-align: end`), so the whole page mirrors: masthead, tabs, tables,
+  grids. Number lines and charts do not mirror: −100 stays left, +100 right, time runs left to right
+  (`.ltr` containers; their labels take the direction of their own text).
+- Hebrew text keeps signed numbers whole (a left-to-right mark before the sign), never breaks a line
+  between a prefix hyphen and its number or Latin word (ב-2.7%, ה-S&P 500), and keeps index names on
+  one line (`MP_BIDI` in `mp.js`).
+- Weekly price lines move a label down a row when it would collide with its neighbour, in either
+  language (`untangle` in `weekly.html`).
+- The Hebrew is written, not machine-translated: wording, terms and names follow `docs/hebrew.md`.
 
 ## Color tokens (`:root` in `assets/mp.css`)
 
@@ -35,13 +52,17 @@ including chips on `--paper-2`.
 
 - **Source Serif 4:** masthead, headings, the big composite figure and recap headlines.
 - **Barlow / Barlow Semi Condensed:** every label, number and data row, with tabular lining figures.
+- **Hebrew:** Frank Ruhl Libre (the classic Hebrew newspaper serif) under Source Serif 4, and
+  Assistant under Barlow. Their font files hold only Hebrew letters, so Latin text and every digit
+  look the same in both languages. All fonts are served from this site.
 - Scale: 13 / 16 / 19 / 24 / 32 px, plus one oversized figure per page.
 
 ## Structure
 
 - 3px masthead rule, 1px dateline rule, 2px section rules, hairlines between rows.
 - Square-ish 2px corners, no shadows, no gradients.
-- Tabs **Today / Scanner / Weekly recap** sit under the dateline on every page (44px touch targets).
+- Tabs **Today / Scanner / Weekly recap** (היום / סורק / סיכום שבועי) sit under the dateline on every
+  page (44px touch targets).
 - Every reading shows its as-of time. Stale data gets a vermilion **STALE** stamp and a notice;
   it is never silently hidden.
 - "Not financial advice" sits in every footer.
@@ -67,7 +88,8 @@ so every signal is compared on the same axis.
 
 The page renders `data/weekly/*.json` editions (see `docs/weekly-recap.md`). Company-insider
 rows come automatically from `data/weekly_numbers.json`; the written sections come from each
-Sunday's pull request.
+Sunday's pull request, in English with a Hebrew `he` block. An edition without its Hebrew shows in
+English (left to right) on a Hebrew page, under a short Hebrew note.
 
 ## Images
 

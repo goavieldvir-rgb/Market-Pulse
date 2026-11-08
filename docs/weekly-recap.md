@@ -10,11 +10,13 @@ the index points to, and `weekly.html?week=YYYY-MM-DD` opens an archived one.
 |---|---|---|
 | Numbers: index and sector moves, equal-weight vs SPY, semis, 10-year yield, VIX, oil, gold, bitcoin, the week's top insider trades | `scripts/fetch_weekly.py` via `.github/workflows/update-weekly.yml` → `data/weekly_numbers.json` | Saturday (Sunday back-up) |
 | Writing: headline, TL;DR, last week's calls checked, levels, sector story, big-money trades, news, calendar, consensus, Fed odds, bitcoin levels, bottom line, sources | Researched each Sunday, committed as `data/weekly/<monday>.json` in a pull request | Sunday, before futures reopen (18:00 ET) |
+| Hebrew: the same written fields in Hebrew, as the edition's `he` block | Written with the English, following `docs/hebrew.md` | Same pull request |
 | Approval | The site owner merges the pull request | Sunday |
 
 ## Publishing an edition
 
-1. Write `data/weekly/<monday-of-the-coming-week>.json` following the format below (copy the latest edition as a template).
+1. Write `data/weekly/<monday-of-the-coming-week>.json` following the format below (copy the latest edition as a template),
+   including its Hebrew `he` block (see "The Hebrew block" below).
 2. Run `python3 scripts/weekly_edition.py publish data/weekly/<date>.json`. It copies the current
    `data/weekly_numbers.json` into the edition (so archives never change later), validates everything,
    and updates `data/weekly/index.json`. It refuses to write anything if the edition is invalid.
@@ -29,6 +31,32 @@ the index points to, and `weekly.html?week=YYYY-MM-DD` opens an archived one.
 - `side`: `buy` and `sell` are disclosed trades; `short` is a bet against a stock (short sale or put options); `hold` means nothing new was reported.
 - `tone` is `up` (good for stocks / buying / opportunity), `down` (pressure / selling / caution) or `neutral`.
 - Not financial advice: describe conditions and what was disclosed; never tell readers to buy or sell.
+
+## The Hebrew block
+
+Every edition carries a `he` object: the Hebrew text of every written field, in exactly the same shape
+as the English (same keys, same list lengths, same order), holding strings only. Leave out what is not
+text: `schema`, `week_of`, `published`, `tone`, `side`, `url`, numbers (`now`, `value`, `range`, `pct`,
+`importance`, `key`), `numbers` and `sources` (source titles stay in English; they name English articles).
+Leave out `label` (the page builds the Hebrew date range) and `initials` (monograms keep the English
+initials, like the tickers beside them).
+
+Write it as an Israeli financial journalist would, never word for word: the terms, names, numbers and
+direction rules are in `docs/hebrew.md`. Same facts and numbers as the English; nothing added.
+`validate` and `publish` check the block field by field (missing or extra fields, wrong list lengths,
+English left untranslated, `<`, `>` or straight double quotes). Look at `weekly.html?lang=he` as well as
+the English page before opening the pull request.
+
+```jsonc
+"he": {
+  "title": "…", "deck": "…",
+  "tldr": [ { "label": "מה השתנה", "text": "…" }, { "label": "מה הלאה", "text": "…" }, { "label": "מי קונה", "text": "…" } ],
+  "scorecard": [ { "call": "…", "outcome": "…", "verdict": "…" } ],
+  "levels": { "name": "מדד S&P 500", "marks": [ { "label": "הממוצע ל-200 יום" } ], "note": "…" },
+  "calendar": [ { "day": "שני 9", "title": "…", "body": "…" } ],
+  "…": "every other written field, same shape"
+}
+```
 
 ## Format (schema 1)
 
@@ -64,6 +92,7 @@ the index points to, and `weekly.html?week=YYYY-MM-DD` opens an archived one.
               "stats": [ { "label": "…", "value": "…", "tone": "…", "note": "…" } ] },
   "bottom_line": [ { "title": "…", "body": "…" } ],                          // exactly 3
   "sources": [ { "title": "…", "url": "https://…" } ],
+  "he": { },                                                                // the Hebrew block (above)
   "numbers": { }                                                            // added by `publish`
 }
 ```
