@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-11-10T03:51:42+00:00",
+  "generated_at": "2026-11-10T08:29:35+00:00",
   "market": {
     "state": "closed",
-    "session_open": "2026-11-09T14:30:00+00:00",
-    "session_close": "2026-11-09T21:00:00+00:00",
+    "session_open": "2026-11-10T14:30:00+00:00",
+    "session_close": "2026-11-10T21:00:00+00:00",
     "as_of": "2026-11-09T21:00:00+00:00",
     "session_date": "2026-11-09"
   },
@@ -157,11 +157,11 @@
     "rsp_minus_spy_20d_pct": 6.91
   },
   "fear_greed": {
-    "score": 31.7,
+    "score": 33.2,
     "rating": "fear",
-    "as_of": "2026-11-09T23:59:52+00:00",
-    "previous_close": 22.1,
-    "previous_1_week": 19.4
+    "as_of": "2026-11-10T01:59:58+00:00",
+    "previous_close": 31.7,
+    "previous_1_week": 23.5
   },
   "sector_breakout": [
     {
