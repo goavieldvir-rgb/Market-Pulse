@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-10T21:20:41+00:00",
+  "generated_at": "2026-11-10T22:25:58+00:00",
   "market": {
     "state": "closed",
     "session_open": "2026-11-10T14:30:00+00:00",
@@ -46,19 +46,19 @@
   "vix": {
     "symbol": "^VIX",
     "date": "2026-11-10",
-    "close": 19.48,
+    "close": 19.46,
     "prev_close": 19.92,
-    "change_pct": -2.21,
-    "in_session": true,
+    "change_pct": -2.31,
+    "in_session": false,
     "close_from_quote": false,
-    "as_of": "2026-11-10T21:05:31+00:00",
+    "as_of": "2026-11-10T21:15:01+00:00",
     "sma150": 17.1,
-    "distance_from_sma150_pct": 13.93,
+    "distance_from_sma150_pct": 13.81,
     "streak_direction": "red",
-    "streak_count": 2,
-    "streak_through": "2026-11-09",
-    "return_5d_pct": -6.48,
-    "return_20d_pct": 27.57,
+    "streak_count": 3,
+    "streak_through": "2026-11-10",
+    "return_5d_pct": -6.58,
+    "return_20d_pct": 27.44,
     "percentile_1y": 76.6
   },
   "sectors": {
@@ -157,9 +157,9 @@
     "rsp_minus_spy_20d_pct": 7.16
   },
   "fear_greed": {
-    "score": 33.3,
+    "score": 33.5,
     "rating": "fear",
-    "as_of": "2026-11-10T21:05:19+00:00",
+    "as_of": "2026-11-10T22:01:46+00:00",
     "previous_close": 31.7,
     "previous_1_week": 23.5
   },
@@ -185,11 +185,11 @@
     {
       "symbol": "XLV",
       "name": "Health Care",
-      "close": 188.91,
-      "change_pct": 0.31,
-      "return_5d_pct": 2.66,
-      "return_20d_pct": 11.35,
-      "distance_from_sma150_pct": 16.57
+      "close": 188.88,
+      "change_pct": 0.29,
+      "return_5d_pct": 2.64,
+      "return_20d_pct": 11.33,
+      "distance_from_sma150_pct": 16.55
     },
     {
       "symbol": "XLP",
@@ -248,11 +248,11 @@
     {
       "symbol": "XLK",
       "name": "Technology",
-      "close": 168.93,
-      "change_pct": -1.14,
-      "return_5d_pct": -4.29,
-      "return_20d_pct": -13.93,
-      "distance_from_sma150_pct": -6.6
+      "close": 168.91,
+      "change_pct": -1.15,
+      "return_5d_pct": -4.31,
+      "return_20d_pct": -13.94,
+      "distance_from_sma150_pct": -6.61
     },
     {
       "symbol": "XLE",
