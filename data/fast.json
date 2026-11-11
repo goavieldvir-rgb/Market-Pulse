@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-11-11T01:31:44+00:00",
+  "generated_at": "2026-11-11T07:48:22+00:00",
   "market": {
     "state": "closed",
-    "session_open": "2026-11-10T14:30:00+00:00",
-    "session_close": "2026-11-10T21:00:00+00:00",
+    "session_open": "2026-11-11T14:30:00+00:00",
+    "session_close": "2026-11-11T21:00:00+00:00",
     "as_of": "2026-11-10T21:00:00+00:00",
     "session_date": "2026-11-10"
   },
@@ -14,7 +14,7 @@
     "prev_close": 752.69,
     "change_pct": -0.37,
     "in_session": false,
-    "close_from_quote": true,
+    "close_from_quote": false,
     "as_of": "2026-11-10T21:00:00+00:00",
     "sma150": 749.67,
     "distance_from_sma150_pct": 0.03,
@@ -32,7 +32,7 @@
     "prev_close": 679.35,
     "change_pct": -0.68,
     "in_session": false,
-    "close_from_quote": true,
+    "close_from_quote": false,
     "as_of": "2026-11-10T21:00:01+00:00",
     "sma150": 708.05,
     "distance_from_sma150_pct": -4.7,
@@ -69,7 +69,7 @@
       "prev_close": 90.89,
       "change_pct": 0.15,
       "in_session": false,
-      "close_from_quote": true,
+      "close_from_quote": false,
       "as_of": "2026-11-10T21:00:00+00:00",
       "sma150": 84.6,
       "distance_from_sma150_pct": 7.6,
@@ -87,7 +87,7 @@
       "prev_close": 43.79,
       "change_pct": -0.14,
       "in_session": false,
-      "close_from_quote": true,
+      "close_from_quote": false,
       "as_of": "2026-11-10T21:00:00+00:00",
       "sma150": 43.87,
       "distance_from_sma150_pct": -0.32,
@@ -105,7 +105,7 @@
       "prev_close": 121.01,
       "change_pct": 0.03,
       "in_session": false,
-      "close_from_quote": true,
+      "close_from_quote": false,
       "as_of": "2026-11-10T21:00:00+00:00",
       "sma150": 115.8,
       "distance_from_sma150_pct": 4.53,
@@ -125,7 +125,7 @@
       "prev_close": 220.95,
       "change_pct": -0.03,
       "in_session": false,
-      "close_from_quote": true,
+      "close_from_quote": false,
       "as_of": "2026-11-10T21:00:00+00:00",
       "sma150": 212.02,
       "distance_from_sma150_pct": 4.18,
@@ -143,7 +143,7 @@
       "prev_close": 752.69,
       "change_pct": -0.37,
       "in_session": false,
-      "close_from_quote": true,
+      "close_from_quote": false,
       "as_of": "2026-11-10T21:00:00+00:00",
       "sma150": 749.67,
       "distance_from_sma150_pct": 0.03,
@@ -157,11 +157,11 @@
     "rsp_minus_spy_20d_pct": 7.16
   },
   "fear_greed": {
-    "score": 33.5,
+    "score": 33.4,
     "rating": "fear",
-    "as_of": "2026-11-10T23:59:51+00:00",
-    "previous_close": 31.7,
-    "previous_1_week": 23.5
+    "as_of": "2026-11-11T01:00:00+00:00",
+    "previous_close": 33.5,
+    "previous_1_week": 34.2
   },
   "sector_breakout": [
     {
