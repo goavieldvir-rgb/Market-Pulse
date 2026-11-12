@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-11-11T07:48:19+00:00",
+  "generated_at": "2026-11-12T02:34:55+00:00",
   "as_of": "2026-11-10",
   "universe_size_requested": 503,
   "universe_size_matched": 502,
-  "pct_above_sma50": 68.7,
-  "count_above_sma50": 345,
+  "pct_above_sma50": 69.5,
+  "count_above_sma50": 349,
   "series": [
     {
       "d": "2025-10-29",
