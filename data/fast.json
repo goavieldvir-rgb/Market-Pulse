@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-13T21:27:42+00:00",
+  "generated_at": "2026-11-13T22:42:58+00:00",
   "market": {
     "state": "closed",
     "session_open": "2026-11-13T14:30:00+00:00",
@@ -10,20 +10,20 @@
   "spy": {
     "symbol": "SPY",
     "date": "2026-11-13",
-    "close": 754.21,
+    "close": 754.37,
     "prev_close": 757.12,
-    "change_pct": -0.38,
+    "change_pct": -0.36,
     "in_session": false,
     "close_from_quote": false,
     "as_of": "2026-11-13T21:00:00+00:00",
     "sma150": 751.18,
-    "distance_from_sma150_pct": 0.4,
+    "distance_from_sma150_pct": 0.42,
     "streak_direction": "red",
     "streak_count": 2,
     "streak_through": "2026-11-13",
-    "return_5d_pct": 2.57,
-    "return_20d_pct": -1.18,
-    "percentile_1y": 69.7
+    "return_5d_pct": 2.59,
+    "return_20d_pct": -1.16,
+    "percentile_1y": 70.5
   },
   "qqq": {
     "symbol": "QQQ",
@@ -46,20 +46,20 @@
   "vix": {
     "symbol": "^VIX",
     "date": "2026-11-13",
-    "close": 19.34,
+    "close": 19.3,
     "prev_close": 18.7,
-    "change_pct": 3.42,
+    "change_pct": 3.21,
     "in_session": false,
     "close_from_quote": false,
-    "as_of": "2026-11-13T21:12:31+00:00",
+    "as_of": "2026-11-13T21:15:01+00:00",
     "sma150": 17.1,
-    "distance_from_sma150_pct": 13.12,
+    "distance_from_sma150_pct": 12.88,
     "streak_direction": "green",
     "streak_count": 2,
     "streak_through": "2026-11-13",
-    "return_5d_pct": -24.57,
-    "return_20d_pct": -3.25,
-    "percentile_1y": 75.8
+    "return_5d_pct": -24.73,
+    "return_20d_pct": -3.45,
+    "percentile_1y": 75.4
   },
   "sectors": {
     "XLP": {
@@ -139,27 +139,27 @@
     "SPY": {
       "symbol": "SPY",
       "date": "2026-11-13",
-      "close": 754.21,
+      "close": 754.37,
       "prev_close": 757.12,
-      "change_pct": -0.38,
+      "change_pct": -0.36,
       "in_session": false,
       "close_from_quote": false,
       "as_of": "2026-11-13T21:00:00+00:00",
       "sma150": 751.18,
-      "distance_from_sma150_pct": 0.4,
+      "distance_from_sma150_pct": 0.42,
       "streak_direction": "red",
       "streak_count": 2,
       "streak_through": "2026-11-13",
-      "return_5d_pct": 2.57,
-      "return_20d_pct": -1.18,
-      "percentile_1y": 69.7
+      "return_5d_pct": 2.59,
+      "return_20d_pct": -1.16,
+      "percentile_1y": 70.5
     },
-    "rsp_minus_spy_20d_pct": 4.48
+    "rsp_minus_spy_20d_pct": 4.46
   },
   "fear_greed": {
     "score": 38.6,
     "rating": "fear",
-    "as_of": "2026-11-13T21:09:43+00:00",
+    "as_of": "2026-11-13T22:25:15+00:00",
     "previous_close": 39.8,
     "previous_1_week": 24.4
   },
@@ -167,11 +167,11 @@
     {
       "symbol": "XLE",
       "name": "Energy",
-      "close": 64.93,
-      "change_pct": 0.93,
-      "return_5d_pct": 5.37,
-      "return_20d_pct": -4.85,
-      "distance_from_sma150_pct": 7.47
+      "close": 64.96,
+      "change_pct": 0.98,
+      "return_5d_pct": 5.42,
+      "return_20d_pct": -4.81,
+      "distance_from_sma150_pct": 7.52
     },
     {
       "symbol": "XLI",
@@ -194,11 +194,11 @@
     {
       "symbol": "XLK",
       "name": "Technology",
-      "close": 170.23,
-      "change_pct": -2.04,
-      "return_5d_pct": 3.33,
-      "return_20d_pct": -7.22,
-      "distance_from_sma150_pct": -6.18
+      "close": 170.28,
+      "change_pct": -2.01,
+      "return_5d_pct": 3.36,
+      "return_20d_pct": -7.19,
+      "distance_from_sma150_pct": -6.16
     },
     {
       "symbol": "XLF",
@@ -257,11 +257,11 @@
     {
       "symbol": "XLB",
       "name": "Materials",
-      "close": 52.22,
-      "change_pct": -0.23,
-      "return_5d_pct": 0.52,
-      "return_20d_pct": 2.55,
-      "distance_from_sma150_pct": 1.69
+      "close": 52.23,
+      "change_pct": -0.21,
+      "return_5d_pct": 0.54,
+      "return_20d_pct": 2.57,
+      "distance_from_sma150_pct": 1.71
     }
   ],
   "sector_rotation": {
