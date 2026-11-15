@@ -1,0 +1,1600 @@
+{
+  "schema": 1,
+  "week_of": "2026-11-16",
+  "label": "Nov 16–20, 2026",
+  "published": "2026-11-15",
+  "title": "Stocks bounce 2.5% as Nvidia loses its CEO and the 10-year yield tops 5%",
+  "deck": "The S&P 500 rose 2.51% to 7,561.67 and all 11 sectors gained, but most of it came Monday and the index fell in three of five sessions. Jensen Huang resigned as Nvidia’s CEO and the stock lost 12.75%. A hot CPI lifted the 10-year yield 29.5 bp to 5.15%, and a December hike is now fully priced. Bitcoin fell 9.9%. Next: Nvidia Tuesday, retail sales, Fed minutes, Walmart.",
+  "tldr": [
+    {
+      "label": "What changed",
+      "text": "Chip stocks bounced (SOXX +9.35%) while Nvidia fell 12.75% after Jensen Huang resigned. October CPI ran hot, the 10-year yield rose every day to 5.15%, and futures now fully price a December hike. All 11 sectors rose, led by energy."
+    },
+    {
+      "label": "What’s next",
+      "text": "Nvidia reports Tuesday after the close, its first report under interim CEO Colette Kress. Also Tuesday: October retail sales (+0.2% expected). Fed minutes Wednesday; Walmart and a Trump–Xi meeting Thursday."
+    },
+    {
+      "label": "Who’s buying",
+      "text": "ARK bought Nvidia and CoreWeave and sold Palantir. Burry doubled his Nasdaq-100 puts. Q3 filings show Renaissance nearly left Nvidia and Soros made Intel its top stock. Berkshire’s 13F is due Monday."
+    }
+  ],
+  "scorecard": [
+    {
+      "call": "CPI on Tuesday",
+      "outcome": "It came in hot: +0.4% headline and +0.3% core, against +0.3% and +0.2% expected. Instead of easing, the roughly 80% odds of a December hike went to a fully priced 25 bp hike, with about an 11% chance of 50 bp. The 10-year yield rose every session to 5.15%.",
+      "verdict": "Hot print, hike now fully priced",
+      "tone": "down"
+    },
+    {
+      "call": "The 200-day line",
+      "outcome": "It was never tested. The week’s low was 7,422.24, about 80 points above the 200-day. The S&P 500 jumped 2.35% Monday, closed at 7,619.38 Wednesday and hit 7,652.76 inside the 7,620–7,680 resistance band, but stalled under the 50-day and ended at 7,561.67, up 2.51%.",
+      "verdict": "Held, then stalled at resistance",
+      "tone": "up"
+    },
+    {
+      "call": "Chip spenders report",
+      "outcome": "CoreWeave beat, lifted its backlog to $132.5B and rose 14.5% on the week. Cisco beat and raised its full-year outlook. Applied Materials grew revenue 53% and guided higher, yet fell Friday as at least 10 firms cut price targets. Nvidia, not data center demand, became the problem.",
+      "verdict": "Spending held up; Nvidia didn’t",
+      "tone": "up"
+    }
+  ],
+  "levels": {
+    "name": "S&P 500",
+    "now": 7561.67,
+    "record": 7818.93,
+    "min": 7250,
+    "max": 7900,
+    "range": [
+      7500,
+      7667
+    ],
+    "marks": [
+      {
+        "value": 7316,
+        "label": "July low (200-day at 7,340)",
+        "tone": "down"
+      },
+      {
+        "value": 7500,
+        "label": "Friday low, first support",
+        "tone": "neutral"
+      },
+      {
+        "value": 7613,
+        "label": "20-day average",
+        "tone": "neutral"
+      },
+      {
+        "value": 7667,
+        "label": "50-day, key resistance",
+        "tone": "neutral"
+      },
+      {
+        "value": 7818.93,
+        "label": "Record close",
+        "tone": "up"
+      }
+    ],
+    "note": "Per the Bull Bear Report, the index failed at the 50-day near 7,667 Thursday (high 7,653) and closed below its 20-day at 7,613. Support is Friday’s low near 7,500, then 7,340–7,350, where the Nov 5 low meets the rising 200-day, and the July low at 7,316. RSI is 47, up from 33.5 on Nov 5, and MACD sits just below its signal line."
+  },
+  "sectors": {
+    "title": "All 11 sectors rose, led by energy, as chips bounced and Nvidia sank",
+    "deck": "Energy led with a 5.42% gain, followed by industrials (+3.76%), communication services (+3.72%) and technology (+3.36%). Real estate (+0.84%) and materials (+0.54%) barely moved. Every other sector rose between 2.0% and 2.7%.",
+    "flows": [
+      {
+        "label": "Equal-weight vs SPY",
+        "value": "+2.37% vs +2.59%",
+        "tone": "neutral",
+        "note": "The cap-weighted index beat the average stock by 0.2 points, after four weeks the other way. Small caps lagged: the Russell 2000 rose 1.32%."
+      },
+      {
+        "label": "Chip stocks",
+        "value": "SOXX +9.35% on the week",
+        "tone": "up",
+        "note": "AMD rose 18.93%, Broadcom 18.16% and Micron 12.80%, but Nvidia fell 12.75%, and chips led Friday’s 1.22% Nasdaq-100 drop. Semis remain about 31% below their June high, per the Bull Bear Report."
+      },
+      {
+        "label": "Energy",
+        "value": "XLE +5.42%",
+        "tone": "neutral",
+        "note": "The best sector of the week, even though Brent fell 2.52% to $95.84 and WTI 2.5% to $88.56."
+      },
+      {
+        "label": "Rates and havens",
+        "value": "10-year +29.5 bp",
+        "tone": "down",
+        "note": "The 10-year yield ended at 5.15% and the dollar index rose 1.1%. Gold fell 4.63% to $3,886.30. The VIX dropped 24.73% to 19.30."
+      }
+    ],
+    "takeaway": "Every sector rose, but the gains came Monday and Wednesday, and the S&P 500 stalled under its 50-day as yields climbed. Money went back into the chip names sold a week earlier, except Nvidia, which carries its own leadership question into Tuesday’s report."
+  },
+  "big_money": {
+    "lag_note": "Congress has up to 45 days to report a trade, and Trump’s reports run weeks behind. 13F filings show holdings on Sep 30, six weeks ago, and are due Monday, Nov 16. ARK publishes daily; Burry posts in his newsletter. These show past moves, not what is being bought today.",
+    "groups": [
+      {
+        "title": "Politicians",
+        "entries": [
+          {
+            "initials": "DT",
+            "who": "Donald Trump",
+            "role": "President",
+            "when": "No new report found",
+            "moves": [
+              {
+                "side": "hold",
+                "text": "No new filing found this week"
+              }
+            ],
+            "detail": "The latest report found covers Aug 3–31, with about 517 trades; the largest was a Meta buy on Aug 21 ($5M–25M). Sources disagree on its filing date (Sep 25 vs Oct 8).",
+            "read": "A report covering September trades has not appeared yet."
+          },
+          {
+            "initials": "NP",
+            "who": "Nancy Pelosi",
+            "role": "Rep., D-California",
+            "when": "Last filing Nov 6, trade Oct 7",
+            "moves": [
+              {
+                "side": "hold",
+                "text": "No new discretionary trades"
+              }
+            ],
+            "detail": "Her Nov 6 filing shows a Warner Bros. Discovery sale ($50K–100K) dated Oct 7, the cash-out when the Paramount Skydance merger closed. Reps. Julie Johnson and David Kustoff disclosed the same Oct 7 cash-out this week.",
+            "read": "A merger payout, not a call on a stock."
+          },
+          {
+            "initials": "DT",
+            "who": "David Taylor",
+            "role": "Rep., R-Ohio",
+            "when": "Traded Nov 3 and 5, disclosed Nov 12",
+            "moves": [
+              {
+                "side": "buy",
+                "text": "LRCX $1K–15K"
+              },
+              {
+                "side": "buy",
+                "text": "AVGO $1K–15K"
+              },
+              {
+                "side": "buy",
+                "text": "GOOGL $1K–15K"
+              },
+              {
+                "side": "sell",
+                "text": "LLY $1K–15K"
+              },
+              {
+                "side": "sell",
+                "text": "PG $1K–15K"
+              },
+              {
+                "side": "sell",
+                "text": "HD $1K–15K"
+              }
+            ],
+            "detail": "He also bought Eaton, AT&T and Installed Building Products and sold Amgen, Visa and Kroger, all $1K–15K. The Lam Research and Broadcom buys are dated Nov 5, the day chips crashed.",
+            "read": "Small lots, tilted toward chips and away from health care and staples."
+          },
+          {
+            "initials": "GC",
+            "who": "Gilbert Cisneros",
+            "role": "Rep., D-California",
+            "when": "63 trades dated Oct 27–Nov 4, disclosed Nov 10",
+            "moves": [
+              {
+                "side": "buy",
+                "text": "California municipal COP $250K–500K"
+              },
+              {
+                "side": "sell",
+                "text": "California municipal bonds $100K–250K"
+              },
+              {
+                "side": "sell",
+                "text": "PTC $15K–50K"
+              }
+            ],
+            "detail": "Smaller buys of BridgeBio, argenx and MACOM and sales of Illumina and Revvity, $1K–15K each.",
+            "read": "The largest congressional trade we found this week was a municipal bond, not a stock."
+          }
+        ]
+      },
+      {
+        "title": "Investors and funds",
+        "entries": [
+          {
+            "initials": "CW",
+            "who": "Cathie Wood",
+            "role": "ARK Invest",
+            "when": "Traded Nov 9–13, published daily",
+            "moves": [
+              {
+                "side": "buy",
+                "text": "NVDA ~$16.9M"
+              },
+              {
+                "side": "buy",
+                "text": "CRWV ~$16–17M"
+              },
+              {
+                "side": "sell",
+                "text": "PLTR ~$10M"
+              },
+              {
+                "side": "buy",
+                "text": "TWST ~$8–9M"
+              },
+              {
+                "side": "buy",
+                "text": "ACHR ~$8.8M"
+              },
+              {
+                "side": "sell",
+                "text": "TER, exited ARKK"
+              }
+            ],
+            "detail": "Nov 9: bought 90,443 Nvidia shares and SoFi, sold Block and Tempus. Nov 10–11: sold the last Teradyne in ARKK. Nov 12: bought CoreWeave after its report and sold Palantir. Also added Rocket Lab and kept selling BYD. Values are estimates.",
+            "read": "Buying the AI infrastructure dip and taking profit in Palantir."
+          },
+          {
+            "initials": "MB",
+            "who": "Michael Burry",
+            "role": "Scion, via his newsletter",
+            "when": "Posted Nov 11–12",
+            "moves": [
+              {
+                "side": "short",
+                "text": "Nasdaq-100 puts, doubled"
+              },
+              {
+                "side": "short",
+                "text": "SMH puts, the 25% sold rebought"
+              }
+            ],
+            "detail": "The new Nasdaq-100 puts have strikes about 20% below current levels and expire in early 2027. He expects a strong Nvidia report but slower growth and lower margins, and names Broadcom and AMD as winners from Huang’s exit. No SEC filing confirms these.",
+            "read": "A week after taking profit, he is back to his full bet against chips, and bigger against the Nasdaq-100."
+          },
+          {
+            "initials": "RT",
+            "who": "Renaissance Technologies",
+            "role": "Quant fund, Q3 13F",
+            "when": "Holdings at Sep 30, filed Nov 12",
+            "moves": [
+              {
+                "side": "sell",
+                "text": "NVDA −99.7%"
+              },
+              {
+                "side": "buy",
+                "text": "AMD +$695M, to $1.2B"
+              },
+              {
+                "side": "buy",
+                "text": "MU to 1.52M shares ($1.62B)"
+              },
+              {
+                "side": "buy",
+                "text": "SPCX, new $620M"
+              }
+            ],
+            "detail": "Nvidia fell from 7.09 million shares to 23,170. Micron rose from 211,580 shares, and the SpaceX stake of 4.11 million shares was new.",
+            "read": "Six-week-old data, but the fund had nearly left Nvidia before the CEO news."
+          },
+          {
+            "initials": "SF",
+            "who": "Soros Fund Management",
+            "role": "Q3 13F",
+            "when": "Holdings at Sep 30, filed Nov 13",
+            "moves": [
+              {
+                "side": "buy",
+                "text": "INTC to 2.83M shares ($340M)"
+              },
+              {
+                "side": "sell",
+                "text": "NVDA −19%"
+              },
+              {
+                "side": "short",
+                "text": "NVDA puts, 350K shares"
+              },
+              {
+                "side": "short",
+                "text": "XLE puts $670M, XOP $328M"
+              }
+            ],
+            "detail": "Intel grew from 100,000 shares to become its largest stock holding. Intel has since fallen about 50%, including a 28.6% drop on Oct 30. The filing does not show whether it still holds the shares.",
+            "read": "A big Intel bet made before the stock halved, and large bets against energy."
+          },
+          {
+            "initials": "PT",
+            "who": "Peter Thiel",
+            "role": "Founders Fund, 13G/A",
+            "when": "Filed Nov 13",
+            "moves": [
+              {
+                "side": "sell",
+                "text": "SpaceX stake −26%"
+              }
+            ],
+            "detail": "Founders Fund’s SpaceX Class A holding fell from 427.3 million to 314.4 million shares, about $17B left. The filing does not say whether the shares were sold or distributed.",
+            "read": "Less SpaceX at Founders Fund, while Renaissance and ARK added."
+          },
+          {
+            "initials": "BH",
+            "who": "Berkshire Hathaway",
+            "role": "Greg Abel’s company",
+            "when": "Q3 13F due Nov 16",
+            "moves": [
+              {
+                "side": "hold",
+                "text": "13F not filed yet"
+              }
+            ],
+            "detail": "The Q3 report (Nov 7) showed $2.4B of stock bought, about $2.8B sold and $9.6B of buybacks, without naming companies.",
+            "read": "Monday’s 13F should name what it bought and sold."
+          },
+          {
+            "initials": "BA",
+            "who": "Bill Ackman",
+            "role": "Pershing Square",
+            "when": "No new trades; 13F due Nov 16",
+            "moves": [
+              {
+                "side": "hold",
+                "text": "No new positions disclosed"
+              }
+            ],
+            "detail": "His Q3 letter said the fund made seven new investments in 2026 and started an eighth after Q3, without naming them. He says freeing Fannie Mae and Freddie Mac could unlock about $500B; both stocks rose at least 23% in a month.",
+            "read": "Monday’s 13F may name the new stakes."
+          },
+          {
+            "initials": "LA",
+            "who": "Leopold Aschenbrenner",
+            "role": "Situational Awareness",
+            "when": "Q3 13F due Nov 16",
+            "moves": [
+              {
+                "side": "hold",
+                "text": "No new trades reported"
+              }
+            ],
+            "detail": "No new disclosures found this week.",
+            "read": "The Q3 13F will be the first full look since the fund sold most of its public stock book to Citadel on July 30."
+          }
+        ]
+      }
+    ],
+    "overlaps": [
+      {
+        "name": "Nvidia",
+        "text": "ARK bought about $16.9M on Nov 9. At Sep 30, Renaissance had nearly exited and Soros had cut 19% and held puts. Burry’s puts bet against it."
+      },
+      {
+        "name": "SpaceX",
+        "text": "In Q3, Renaissance opened a $620M stake and ARK raised its stake 51%, while Thiel’s Founders Fund held 26% fewer shares."
+      },
+      {
+        "name": "Broadcom and AMD",
+        "text": "Rep. Taylor bought Broadcom Nov 5 and ARK trimmed it Nov 9. Burry named both as winners; Renaissance added AMD."
+      },
+      {
+        "name": "Warner Bros. Discovery",
+        "text": "Pelosi, Johnson and Kustoff all show Oct 7 sales: merger cash-outs, not trading decisions."
+      }
+    ]
+  },
+  "news": [
+    {
+      "headline": "Jensen Huang resigned as Nvidia’s CEO",
+      "body": "Nvidia said Thursday that Huang left as CEO, president and director, effective immediately. CFO Colette Kress is interim CEO and Harvey Jones became the first board chair. The release gave no reason; the Bull Bear Report says it followed a board investigation into his personal conduct. The stock opened down 13%, closed down 4.3% that day and fell 12.75% on the week to $162.85.",
+      "tone": "down"
+    },
+    {
+      "headline": "Hot CPI left a December hike fully priced",
+      "body": "October CPI rose 0.4% and core 0.3%, both a tenth above forecasts. PPI rose 0.3% against 0.4% expected, but 6.5% from a year earlier, the most since November 2022. Waller said a half-point hike should be considered, and Logan called for at least two more quarter-point hikes. Futures fully price a December hike.",
+      "tone": "down"
+    },
+    {
+      "headline": "Chips led a Monday rebound that did most of the week’s work",
+      "body": "The S&P 500 jumped 2.35% Monday as analysts called the prior week’s AI rout overdone and Brent fell after Trump said new strikes on Iran were unlikely if talks progressed. The index then fell Tuesday, Thursday and Friday. On the week AMD rose 18.93%, Broadcom 18.16% and Micron 12.80%.",
+      "tone": "up"
+    },
+    {
+      "headline": "Earnings: Cisco and CoreWeave rewarded, Applied Materials sold",
+      "body": "Cisco’s revenue rose 24% to $18.5B and it raised its full-year outlook; shares rose about 4% after hours. CoreWeave beat with a $132.5B backlog, though it carries nearly $47B of debt. Applied Materials grew revenue 53% to $10.41B and guided to $11.1B, yet fell Friday along with KLA and Lam Research.",
+      "tone": "neutral"
+    },
+    {
+      "headline": "Weekend: mines in Hormuz and drones over Bahrain",
+      "body": "Iran says three tankers, one a supertanker, hit mines and caught fire in the Strait of Hormuz on Saturday; the US says it has cleared the main routes. On Sunday the Revolutionary Guards said drones targeted a US radar in Bahrain, which says it intercepted the attack. Trump said Thursday the US does not need a deal. Brent ended the week at $95.84.",
+      "tone": "down"
+    },
+    {
+      "headline": "US and China talk tariff cuts before a Trump–Xi meeting",
+      "body": "A new US–China trade council met for the first time by video Friday and discussed reciprocal tariff cuts on $30B of goods from each side, plus farm trade. Trump and Xi are due to meet Thursday at APEC in Shenzhen.",
+      "tone": "up"
+    }
+  ],
+  "calendar": [
+    {
+      "day": "Mon 16",
+      "importance": 1,
+      "title": "Empire State survey, Warsh speaks",
+      "body": "Empire State manufacturing at 8:30am ET (19 expected, 25.5 prior). Fed Chair Kevin Warsh speaks at noon ET. Baidu, Tyson and XPeng report before the open. Q3 13F filings are due."
+    },
+    {
+      "day": "Tue 17",
+      "importance": 3,
+      "title": "Nvidia, retail sales",
+      "body": "October retail sales at 8:30am ET, industrial production at 9:15. Home Depot and Disney before the open. Nvidia after the close, about 4:20pm ET with the call at 5pm: revenue near $109B expected, against guidance of about $108B. Waller speaks.",
+      "key": true
+    },
+    {
+      "day": "Wed 18",
+      "importance": 2,
+      "title": "Fed minutes, Target, Lowe’s",
+      "body": "Housing starts at 8:30am ET. Minutes of the Oct 27–28 meeting at 2pm, where Cook and Hammack dissented for a hike; they predate the hot CPI. 20-year bond auction. Target, Lowe’s and TJX before the open; Palo Alto Networks after."
+    },
+    {
+      "day": "Thu 19",
+      "importance": 3,
+      "title": "Walmart, Trump–Xi at APEC",
+      "body": "Walmart at 7am ET, plus Alibaba and PDD before the open. Jobless claims and the Philly Fed survey at 8:30. Trump and Xi meet in Shenzhen. Intuit and Ross after the close.",
+      "key": true
+    },
+    {
+      "day": "Fri 20",
+      "importance": 1,
+      "title": "Michigan sentiment",
+      "body": "Final November consumer sentiment at 10am ET (53.3 expected). Waller and Cook speak. About $1.8B of bitcoin options expire on Deribit."
+    }
+  ],
+  "consensus": [
+    {
+      "report": "Retail sales, monthly",
+      "expected": "+0.2%",
+      "prior": "+0.8%",
+      "tone": "neutral"
+    },
+    {
+      "report": "Retail sales control group",
+      "expected": "+0.4%",
+      "prior": "+0.1%",
+      "tone": "neutral"
+    },
+    {
+      "report": "Housing starts, annual rate",
+      "expected": "1.240M",
+      "prior": "1.221M",
+      "tone": "neutral"
+    },
+    {
+      "report": "Initial jobless claims",
+      "expected": "197K",
+      "prior": "200K",
+      "tone": "neutral"
+    },
+    {
+      "report": "Philly Fed survey",
+      "expected": "23",
+      "prior": "20.9",
+      "tone": "neutral"
+    }
+  ],
+  "consensus_note": "Retail sales: Newsquawk (the Bull Bear Report lists 0.8%, which is September’s figure). Other figures: Economic Weekly. Hike odds: CME FedWatch via InvestmentNews and bitcoin.com, Nov 13–14; LSEG shows about the same.",
+  "fed_odds": [
+    {
+      "label": "25 bp hike at the Dec 9 decision",
+      "pct": 89
+    },
+    {
+      "label": "50 bp hike at the Dec 9 decision",
+      "pct": 11
+    }
+  ],
+  "further": "Further out: October PCE on Nov 25, the November jobs report on Dec 4, the Fed decision on Dec 9, November CPI on Dec 10 and the Dec 11 government funding deadline.",
+  "crypto": {
+    "headline": "Bitcoin fell 9.9% and touched $62K Sunday as ETFs lost $1.07B",
+    "deck": "Spot bitcoin ETFs lost about $1.07B, with outflows every day; BlackRock’s IBIT accounted for $908M. Bitcoin ended Friday at about $68,250, down 9.9%, broke below its 200-week average Saturday, touched about $62,080 Sunday and traded near $64,400.",
+    "map": {
+      "min": 56000,
+      "max": 80000,
+      "marks": [
+        {
+          "value": 58570,
+          "label": "July low",
+          "tone": "down"
+        },
+        {
+          "value": 60000,
+          "label": "Support",
+          "tone": "down"
+        },
+        {
+          "value": 62000,
+          "label": "Sunday low",
+          "tone": "down"
+        },
+        {
+          "value": 73000,
+          "label": "Nov 20 options max pain",
+          "tone": "neutral"
+        },
+        {
+          "value": 77600,
+          "label": "50-day average",
+          "tone": "neutral"
+        }
+      ],
+      "zone": {
+        "from": 65600,
+        "to": 70000,
+        "label": "Resistance zone"
+      }
+    },
+    "stats": [
+      {
+        "label": "Spot ETF net flow, Nov 9–13",
+        "value": "~−$1.07B",
+        "tone": "down",
+        "note": "Outflows of $201.0M Monday, $95.0M Tuesday, $299.8M Wednesday, $284.1M Thursday and $185.4M Friday, per Farside. Seven straight outflow days since Nov 5 total about $1.91B."
+      },
+      {
+        "label": "What drives it this week",
+        "tone": "neutral",
+        "note": "Nvidia’s report Tuesday, the fully priced December hike and a 10-year yield above 5%. About 28,300 BTC of options expire Friday, with max pain at $73,000."
+      }
+    ],
+    "signal": "Daily RSI is 22.5, deep in oversold territory, per crypto.news. Support is $62K, then $60K; resistance is $65.6K, then $68K–70K, with the 200-week average near $67.8K–68.0K. The July low at $58,570 is the last level from this year."
+  },
+  "bottom_line": [
+    {
+      "title": "Nvidia on Tuesday",
+      "body": "The first report under an interim CEO. Analysts expect about $109B of revenue against guidance of about $108B. Burry expects a strong quarter but slower growth and lower margins. The stock is about 32% below its October record."
+    },
+    {
+      "title": "7,667 above, 7,316 below",
+      "body": "The S&P 500 failed at its 50-day near 7,667 Thursday. A close above it reopens the path to the 7,818.93 record; a close below the July low at 7,316 would break the pattern of higher lows."
+    },
+    {
+      "title": "Rates at 5%",
+      "body": "A December hike is fully priced, with about an 11% chance of 50 bp. Tuesday’s retail sales and Wednesday’s minutes decide whether that grows; a weak control group would be the first sign higher rates are reaching shoppers."
+    }
+  ],
+  "sources": [
+    {
+      "title": "Real Investment Advice: Bull Bear Report, week of Nov 13",
+      "url": "https://lanceroberts.substack.com/p/bull-bear-report-week-of-november-00f"
+    },
+    {
+      "title": "The Glass Desk: weekly market review, Nov 13",
+      "url": "https://theglassdesk.substack.com/p/weekly-market-review-nov-13-2026"
+    },
+    {
+      "title": "Nvidia: CEO transition announcement",
+      "url": "https://nvidianews.nvidia.com/news/nvidia-announces-ceo-transition"
+    },
+    {
+      "title": "Alain Guillot: stock market recap, Nov 13",
+      "url": "https://www.alainguillot.com/stock-market-recap-november-13-2026/"
+    },
+    {
+      "title": "StockAnalysis: Nasdaq 100 rallies after AI selloff",
+      "url": "https://stockanalysis.com/news/nasdaq-100-rallies-after-ai-selloff-nvidia-falls/"
+    },
+    {
+      "title": "StockAnalysis: US CPI rises in October",
+      "url": "https://stockanalysis.com/news/us-cpi-rises-october-2026/"
+    },
+    {
+      "title": "InvestmentNews: PPI still uncomfortably high",
+      "url": "https://www.investmentnews.com/equities/ppi-still-uncomfortably-high-as-december-rate-hike-looms/269002"
+    },
+    {
+      "title": "Newsquawk: week in focus, Nov 16–20",
+      "url": "https://www.newsquawk.com/headlines/week-in-focus--16-20th-november-2026-highlights-include-us-retail-sales-fomc-minutes-chinese-activity-data-pboc-lpr-rba-minutes-uk-inflation-and-uk-jobs"
+    },
+    {
+      "title": "Economic Weekly: Nov 13",
+      "url": "https://economicweekly.substack.com/p/economic-weekly-november-13-2026"
+    },
+    {
+      "title": "Investing.com: December hike odds at 88% after hot CPI",
+      "url": "https://www.investing.com/news/economy-news/fed-rate-hike-odds-in-december-at-88-after-hot-cpi-cme-fedwatch-5017585"
+    },
+    {
+      "title": "Bitcoin.com: Fed hike odds near certainty",
+      "url": "https://news.bitcoin.com/market-updates/fed-rate-hike-odds-reach-near-certainty-as-bitcoin-price-falls-to-65k/"
+    },
+    {
+      "title": "Federal Reserve: November calendar",
+      "url": "https://www.federalreserve.gov/newsevents/2026-November.htm"
+    },
+    {
+      "title": "Yahoo Finance: Cisco shares climb on beat and raise",
+      "url": "https://sg.finance.yahoo.com/news/cisco-shares-climb-4-strong-214347073.html"
+    },
+    {
+      "title": "24/7 Wall St.: Applied Materials drops despite beat and raise",
+      "url": "https://247wallst.com/investing/2026/11/13/applied-materials-drops-6-despite-beat-and-raise-quarter-as-jpmorgan-and-goldman-sachs-cut-price-targets-kla-falls-6-lam-research-retreats-5/"
+    },
+    {
+      "title": "AI Weekly: CoreWeave Q3 revenue and backlog",
+      "url": "https://aiweekly.co/alerts/coreweave-q3-revenue-jumps-168-yoy-to-366b-as-backlog-climbs-to-1325b-and-debt"
+    },
+    {
+      "title": "Manila Times: Iran says 3 tankers hit mines in Hormuz",
+      "url": "https://www.manilatimes.net/2026/11/15/world/americas-emea/iran-3-oil-tankers-hit-naval-mines-in-strait-of-hormuz/2470080"
+    },
+    {
+      "title": "Iran International: live blog, Nov 14–15",
+      "url": "https://www.iranintl.com/en/liveblog/202611143682"
+    },
+    {
+      "title": "CNBC: oil jumps after Trump says no Iran deal needed",
+      "url": "https://www.cnbc.com/2026/11/12/oil-prices-jump-after-trump-says-no-iran-deal-needed-weve-got-their-strait.html"
+    },
+    {
+      "title": "Tribune India: US and China discuss $30B tariff cuts",
+      "url": "https://www.tribuneindia.com/news/agricultural-trade/china-and-us-discuss-usd-30-bn-reciprocal-tariff-cuts-ahead-of-trump-xi-meeting"
+    },
+    {
+      "title": "StockTitan: earnings calendar, week of Nov 16",
+      "url": "https://www.stocktitan.net/articles/earnings-calendar-week-of-november-16-2026"
+    },
+    {
+      "title": "TradingKey: week ahead, Nvidia, retail sales, FOMC minutes",
+      "url": "https://www.tradingkey.com/analysis/stocks/us-stocks/262305825-week-ahead-nvidia-q3-earnings-us-october-retail-sales-fomc-minutes-walmart-tradingkey"
+    },
+    {
+      "title": "Open Cabinet: Donald Trump disclosures",
+      "url": "https://open-cabinet.org/officials/trump-donald-j"
+    },
+    {
+      "title": "Kadoa: Nancy Pelosi filings",
+      "url": "https://www.kadoa.com/congress/filer/house_nancy_pelosi"
+    },
+    {
+      "title": "Signal: congress trading tracker",
+      "url": "https://getsignal.finance/congress-trading-tracker"
+    },
+    {
+      "title": "Investing.com: ARK sells Palantir, buys Nvidia",
+      "url": "https://uk.investing.com/news/stock-market-news/cathie-woods-ark-sells-palantir-buys-nvidia-stock-amid-strategic-shifts-93CH-4970093"
+    },
+    {
+      "title": "24/7 Wall St.: Cathie Wood dumps the last of Teradyne",
+      "url": "https://247wallst.com/investing/2026/11/12/cathie-wood-dumps-the-last-of-teradyne-from-her-flagship-fund/"
+    },
+    {
+      "title": "CoinCentral: ARK buys CoreWeave dip, sells Palantir",
+      "url": "https://coincentral.com/cathie-woods-ark-buys-coreweave-dip-and-sells-palantir-despite-strong-earnings-beat"
+    },
+    {
+      "title": "Stocktwits: how ARK’s trading week unfolded",
+      "url": "https://stocktwits.com/news-articles/markets/equity/cathie-wood-bets-2-ai-firms-nvidia-huang-upheaval-how-trading-week-unfolded/cNbbpHTR9Ol"
+    },
+    {
+      "title": "BigGo Finance: Burry doubles Nasdaq-100 puts",
+      "url": "https://finance.biggo.com/news/3744e289-232e-4117-8999-60e7a45a0df9"
+    },
+    {
+      "title": "Michael Burry: Trading Post and Prattle, Nov 11",
+      "url": "https://michaeljburry.substack.com/p/trading-post-and-prattle-november"
+    },
+    {
+      "title": "TheStreet: Renaissance Technologies 13F",
+      "url": "https://www.thestreet.com/investing/stocks/renaissance-technologies-nvidia-13f"
+    },
+    {
+      "title": "24/7 Wall St.: Soros fund made Intel its biggest stock bet",
+      "url": "https://247wallst.com/investing/2026/11/14/soros-fund-made-intel-its-biggest-stock-bet-right-before-it-halved/"
+    },
+    {
+      "title": "24/7 Wall St.: $17B of SpaceX stock left Thiel’s fund",
+      "url": "https://247wallst.com/investing/2026/11/14/17-billion-of-spacex-stock-left-peter-thiels-fund-last-quarter/"
+    },
+    {
+      "title": "Yahoo Finance: watch for Berkshire’s 13F",
+      "url": "https://finance.yahoo.com/markets/stocks/articles/watch-berkshire-hathaway-files-13f-163542466.html"
+    },
+    {
+      "title": "Investing.com: Pershing Square adds seven investments",
+      "url": "https://www.investing.com/news/stock-market-news/ackmans-pershing-squareadds-seven-investments-in-2026-reports-q3-loss-4993496"
+    },
+    {
+      "title": "Motley Fool: Ackman on Fannie Mae and Freddie Mac",
+      "url": "https://www.fool.com/investing/2026/11/14/bill-ackman-says-freeing-fannie-mae-and-freddie-mac-from-government-control-could-unlock-usd500-billion-in-value-just-as-both-stocks-have-jumped-over-23-in-the-past-month-is-now-the-time-to-bet-on/"
+    },
+    {
+      "title": "KuCoin News: 13F filing deadline Nov 16",
+      "url": "https://www.kucoin.com/news/flash/major-investors-face-13f-filing-deadline-on-nov-16-new-reports-fill-gaps"
+    },
+    {
+      "title": "Dealroom: Situational Awareness sells its stock book to Citadel",
+      "url": "https://dealroom.co/news/142225-aschenbrenners-situational-awareness-sells-its-public-stock-book-to-cita/"
+    },
+    {
+      "title": "CryptoTicker: bitcoin week ahead, Nov 16–22",
+      "url": "https://cryptoticker.io/en/bitcoin-week-ahead-november-16-22-2026/"
+    },
+    {
+      "title": "crypto.news: bitcoin falls to $62,000",
+      "url": "https://crypto.news/bitcoin-price-falls-62000-etf-outflows-liquidations"
+    }
+  ],
+  "he": {
+    "title": "המניות התאוששו ב-2.5%, אף שאנבידיה איבדה את המנכ״ל והתשואה ל-10 שנים עברה את ה-5%",
+    "deck": "ה-S&P 500 עלה ב-2.51% ל-7,561.67 נקודות, וכל 11 הסקטורים עלו, אבל רוב העלייה נרשמה ביום שני, והמדד ירד בשלושה מחמשת ימי המסחר. ג׳נסן הואנג התפטר מתפקיד מנכ״ל אנבידיה, והמניה איבדה 12.75%. מדד מחירים לצרכן חם מהצפוי העלה את התשואה ל-10 שנים ב-29.5 נ״ב ל-5.15%, והעלאת ריבית בדצמבר מתומחרת כעת במלואה. הביטקוין ירד ב-9.9%. בהמשך: אנבידיה ביום שלישי, המכירות הקמעונאיות, פרוטוקול הפד ווולמארט.",
+    "tldr": [
+      {
+        "label": "מה השתנה",
+        "text": "מניות השבבים התאוששו (SOXX עלתה ב-9.35%), ואילו אנבידיה ירדה ב-12.75% אחרי התפטרות ג׳נסן הואנג. מדד המחירים לצרכן לאוקטובר היה חם מהצפוי, התשואה ל-10 שנים עלתה בכל יום עד 5.15%, והחוזים העתידיים מתמחרים במלואה העלאת ריבית בדצמבר. כל 11 הסקטורים עלו, בהובלת האנרגיה."
+      },
+      {
+        "label": "מה הלאה",
+        "text": "אנבידיה תפרסם דוחות ביום שלישי אחרי הנעילה, הדוח הראשון תחת המנכ״לית הזמנית קולט קרס. גם ביום שלישי: המכירות הקמעונאיות לאוקטובר (צפי לעלייה של 0.2%). פרוטוקול הפד ביום רביעי; וולמארט ופגישת טראמפ–שי ביום חמישי."
+      },
+      {
+        "label": "מי קונה",
+        "text": "ARK קנתה אנבידיה וקורוויב ומכרה פלנטיר. מייקל ברי הכפיל את אופציות הפוט שלו על נאסד״ק 100. דוחות הרבעון השלישי מראים שרנסנס כמעט יצאה מאנבידיה, ושקרן סורוס הפכה את אינטל לאחזקה הגדולה שלה. דוח ה-13F של ברקשייר צפוי ביום שני."
+      }
+    ],
+    "scorecard": [
+      {
+        "call": "מדד המחירים ביום שלישי",
+        "outcome": "הנתון יצא חם: עלייה של 0.4% במדד הכללי ושל 0.3% במדד הליבה, לעומת צפי של 0.3% ו-0.2%. במקום להירגע, הסיכוי של כ-80% להעלאת ריבית בדצמבר הפך להעלאה של 25 נ״ב שמתומחרת במלואה, עם סיכוי של כ-11% ל-50 נ״ב. התשואה ל-10 שנים עלתה בכל יום מסחר עד 5.15%.",
+        "verdict": "נתון חם, וההעלאה כבר מתומחרת"
+      },
+      {
+        "call": "הממוצע ל-200 יום",
+        "outcome": "הוא לא נבחן כלל. השפל השבועי היה 7,422.24, כ-80 נקודות מעל הממוצע ל-200 יום. ה-S&P 500 זינק ב-2.35% ביום שני, ננעל ב-7,619.38 ביום רביעי ונגע ב-7,652.76, בתוך אזור ההתנגדות שבין 7,620 ל-7,680, אבל נעצר מתחת לממוצע ל-50 יום וסיים ב-7,561.67, בעלייה של 2.51%.",
+        "verdict": "החזיק, ונעצר בהתנגדות"
+      },
+      {
+        "call": "הדוחות של לקוחות השבבים",
+        "outcome": "קורוויב עקפה את התחזיות, העלתה את צבר ההזמנות ל-132.5 מיליארד דולר ועלתה ב-14.5% בשבוע. סיסקו עקפה את התחזיות והעלתה את התחזית השנתית. ההכנסות של אפלייד מטריאלס צמחו ב-53% והתחזית עלתה, אבל המניה ירדה ביום שישי כשלפחות 10 בתים הורידו מחיר יעד. הבעיה התבררה כאנבידיה, לא הביקוש למרכזי נתונים.",
+        "verdict": "ההשקעות החזיקו, אנבידיה לא"
+      }
+    ],
+    "levels": {
+      "name": "מדד S&P 500",
+      "marks": [
+        {
+          "label": "שפל יולי (ממוצע 200 ב-7,340)"
+        },
+        {
+          "label": "שפל יום שישי, תמיכה ראשונה"
+        },
+        {
+          "label": "ממוצע 20"
+        },
+        {
+          "label": "ממוצע 50, התנגדות מרכזית"
+        },
+        {
+          "label": "נעילת שיא"
+        }
+      ],
+      "note": "לפי ה-Bull Bear Report, המדד נכשל ביום חמישי בממוצע ל-50 יום, סביב 7,667 (שיא יומי של 7,653), וננעל מתחת לממוצע ל-20 יום, ב-7,613. התמיכה היא השפל של יום שישי, סביב 7,500, אחריו האזור שבין 7,340 ל-7,350, שבו השפל של 5 בנובמבר פוגש את הממוצע ל-200 יום העולה, ושפל יולי ב-7,316. ה-RSI עומד על 47, לעומת 33.5 ב-5 בנובמבר, וה-MACD נמצא מעט מתחת לקו האות."
+    },
+    "sectors": {
+      "title": "כל 11 הסקטורים עלו בהובלת האנרגיה, השבבים התאוששו ואנבידיה שקעה",
+      "deck": "האנרגיה הובילה עם עלייה של 5.42%, ואחריה התעשייה (3.76%), שירותי התקשורת (3.72%) והטכנולוגיה (3.36%). הנדל״ן (0.84%) וחומרי הגלם (0.54%) כמעט לא זזו. כל שאר הסקטורים עלו בין 2.0% ל-2.7%.",
+      "flows": [
+        {
+          "label": "שווה משקל מול SPY",
+          "value": "+2.37% מול +2.59%",
+          "note": "המדד המשוקלל לפי שווי גבר על המניה הממוצעת ב-0.2 נקודות האחוז, אחרי ארבעה שבועות בכיוון ההפוך. המניות הקטנות פיגרו: מדד ראסל 2000 עלה ב-1.32%."
+        },
+        {
+          "label": "מניות השבבים",
+          "value": "SOXX +9.35% בשבוע",
+          "note": "AMD עלתה ב-18.93%, ברודקום ב-18.16% ומיקרון ב-12.80%, אבל אנבידיה ירדה ב-12.75%, והשבבים הובילו את הירידה של 1.22% בנאסד״ק 100 ביום שישי. לפי ה-Bull Bear Report, מניות השבבים עדיין נסחרות כ-31% מתחת לשיא של יוני."
+        },
+        {
+          "label": "אנרגיה",
+          "value": "XLE +5.42%",
+          "note": "הסקטור הטוב ביותר בשבוע, אף שהברנט ירד ב-2.52% ל-95.84 דולר וה-WTI ב-2.5% ל-88.56 דולר."
+        },
+        {
+          "label": "ריביות ונכסי מקלט",
+          "value": "10 שנים +29.5 נ״ב",
+          "note": "התשואה ל-10 שנים סיימה ב-5.15%, ומדד הדולר עלה ב-1.1%. הזהב ירד ב-4.63% ל-3,886.30 דולר. מדד ה-VIX צנח ב-24.73% ל-19.30."
+        }
+      ],
+      "takeaway": "כל הסקטורים עלו, אבל העליות נרשמו בימים שני ורביעי, וה-S&P 500 נעצר מתחת לממוצע ל-50 יום כשהתשואות טיפסו. הכסף חזר למניות השבבים שנמכרו שבוע קודם, חוץ מאנבידיה, שמגיעה לדוח של יום שלישי עם סימן שאלה משלה על ההנהגה."
+    },
+    "big_money": {
+      "lag_note": "לחברי הקונגרס יש עד 45 יום לדווח על עסקה, והדוחות של טראמפ מגיעים באיחור של שבועות. דוחות 13F מציגים את האחזקות ב-30 בספטמבר, לפני שישה שבועות, והמועד האחרון להגשתם הוא יום שני, 16 בנובמבר. ARK מפרסמת את העסקאות מדי יום, וברי מפרסם בניוזלטר שלו. אלה מהלכי עבר, לא מה שנקנה היום.",
+      "groups": [
+        {
+          "title": "פוליטיקאים",
+          "entries": [
+            {
+              "who": "דונלד טראמפ",
+              "role": "נשיא ארה״ב",
+              "when": "לא נמצא דוח חדש",
+              "moves": [
+                {
+                  "text": "לא נמצא דיווח חדש השבוע"
+                }
+              ],
+              "detail": "הדוח האחרון שנמצא מכסה את 3 עד 31 באוגוסט, עם כ-517 עסקאות; הגדולה שבהן הייתה קניית מטא ב-21 באוגוסט (בין 5 ל-25 מיליון דולר). המקורות חלוקים לגבי מועד הגשתו (25 בספטמבר או 8 באוקטובר).",
+              "read": "דוח על העסקאות של ספטמבר עדיין לא פורסם."
+            },
+            {
+              "who": "ננסי פלוסי",
+              "role": "חברת בית הנבחרים, דמוקרטית מקליפורניה",
+              "when": "דיווח אחרון ב-6 בנובמבר, עסקה ב-7 באוקטובר",
+              "moves": [
+                {
+                  "text": "אין עסקאות חדשות ביוזמתה"
+                }
+              ],
+              "detail": "הדיווח שלה מ-6 בנובמבר מציג מכירה של וורנר ברוס. דיסקברי (בין 50 ל-100 אלף דולר) ב-7 באוקטובר, הפדיון במזומן עם השלמת המיזוג עם פרמאונט סקיידאנס. חברי בית הנבחרים ג׳ולי ג׳ונסון ודייוויד קוסטוף דיווחו השבוע על אותו פדיון מ-7 באוקטובר.",
+              "read": "תשלום ממיזוג, לא הימור על מניה."
+            },
+            {
+              "who": "דייוויד טיילור",
+              "role": "חבר בית הנבחרים, רפובליקני מאוהיו",
+              "when": "עסקאות ב-3 וב-5 בנובמבר, דווחו ב-12 בנובמבר",
+              "moves": [
+                {
+                  "text": "LRCX $1K–15K"
+                },
+                {
+                  "text": "AVGO $1K–15K"
+                },
+                {
+                  "text": "GOOGL $1K–15K"
+                },
+                {
+                  "text": "LLY $1K–15K"
+                },
+                {
+                  "text": "PG $1K–15K"
+                },
+                {
+                  "text": "HD $1K–15K"
+                }
+              ],
+              "detail": "הוא גם קנה את איטון, AT&T ו-Installed Building Products ומכר את אמג׳ן, ויזה וקרוגר, כולן בין אלף ל-15 אלף דולר. הקניות של לאם ריסרץ׳ וברודקום רשומות ב-5 בנובמבר, יום הקריסה בשבבים.",
+              "read": "סכומים קטנים, עם הטיה לשבבים והתרחקות מבריאות ומצריכה בסיסית."
+            },
+            {
+              "who": "גילברט סיסנרוס",
+              "role": "חבר בית הנבחרים, דמוקרטי מקליפורניה",
+              "when": "63 עסקאות בין 27 באוקטובר ל-4 בנובמבר, דווחו ב-10 בנובמבר",
+              "moves": [
+                {
+                  "text": "אג״ח מוניציפלי בקליפורניה $250K–500K"
+                },
+                {
+                  "text": "אג״ח מוניציפליות בקליפורניה $100K–250K"
+                },
+                {
+                  "text": "PTC $15K–50K"
+                }
+              ],
+              "detail": "קניות קטנות יותר של ברידג׳ביו, ארג׳נקס ו-MACOM ומכירות של אילומינה ורביטי, בין אלף ל-15 אלף דולר כל אחת.",
+              "read": "העסקה הגדולה ביותר שמצאנו השבוע בקונגרס הייתה באג״ח מוניציפלי, לא במניה."
+            }
+          ]
+        },
+        {
+          "title": "משקיעים וקרנות",
+          "entries": [
+            {
+              "who": "קתי ווד",
+              "role": "ARK Invest",
+              "when": "עסקאות בין 9 ל-13 בנובמבר, בפרסום יומי",
+              "moves": [
+                {
+                  "text": "NVDA ~$16.9M"
+                },
+                {
+                  "text": "CRWV ~$16–17M"
+                },
+                {
+                  "text": "PLTR ~$10M"
+                },
+                {
+                  "text": "TWST ~$8–9M"
+                },
+                {
+                  "text": "ACHR ~$8.8M"
+                },
+                {
+                  "text": "TER, יציאה מלאה מ-ARKK"
+                }
+              ],
+              "detail": "ב-9 בנובמבר קנתה 90,443 מניות אנבידיה ומניות SoFi, ומכרה בלוק וטמפוס. ב-10 וב-11 בנובמבר מכרה את יתרת טרדיין ב-ARKK. ב-12 בנובמבר קנתה קורוויב אחרי הדוח ומכרה פלנטיר. היא גם הוסיפה רוקט לאב והמשיכה למכור BYD. הסכומים הם הערכות.",
+              "read": "קונה את הירידה בתשתית הבינה המלאכותית ומממשת רווחים בפלנטיר."
+            },
+            {
+              "who": "מייקל ברי",
+              "role": "Scion, דרך הניוזלטר שלו",
+              "when": "פורסם ב-11 וב-12 בנובמבר",
+              "moves": [
+                {
+                  "text": "פוט על נאסד״ק 100, הוכפלו"
+                },
+                {
+                  "text": "פוט על SMH, ה-25% שנמכרו נקנו בחזרה"
+                }
+              ],
+              "detail": "מחירי המימוש של אופציות הפוט החדשות על נאסד״ק 100 נמוכים בכ-20% מהרמות הנוכחיות, והן פוקעות בתחילת 2027. הוא צופה דוח חזק מאנבידיה, אבל צמיחה איטית יותר ושולי רווח נמוכים יותר, ומציין את ברודקום ו-AMD כמרוויחות מעזיבת הואנג. אין דיווח ל-SEC שמאשר זאת.",
+              "read": "שבוע אחרי מימוש רווח, הוא חזר להימור המלא נגד השבבים, ומגדיל את ההימור נגד נאסד״ק 100."
+            },
+            {
+              "who": "רנסנס טכנולוגיות",
+              "role": "קרן כמותית, דוח 13F לרבעון השלישי",
+              "when": "אחזקות ב-30 בספטמבר, הוגש ב-12 בנובמבר",
+              "moves": [
+                {
+                  "text": "NVDA −99.7%"
+                },
+                {
+                  "text": "AMD +$695M, ל-$1.2B"
+                },
+                {
+                  "text": "MU ל-1.52 מיליון מניות ($1.62B)"
+                },
+                {
+                  "text": "SPCX, אחזקה חדשה $620M"
+                }
+              ],
+              "detail": "האחזקה באנבידיה ירדה מ-7.09 מיליון מניות ל-23,170. האחזקה במיקרון עלתה מ-211,580 מניות, והאחזקה בספייס-אקס, 4.11 מיליון מניות, חדשה.",
+              "read": "נתונים בני שישה שבועות, אבל הקרן כמעט יצאה מאנבידיה עוד לפני הידיעה על המנכ״ל."
+            },
+            {
+              "who": "קרן סורוס",
+              "role": "דוח 13F לרבעון השלישי",
+              "when": "אחזקות ב-30 בספטמבר, הוגש ב-13 בנובמבר",
+              "moves": [
+                {
+                  "text": "INTC ל-2.83 מיליון מניות ($340M)"
+                },
+                {
+                  "text": "NVDA −19%"
+                },
+                {
+                  "text": "פוט על NVDA, 350 אלף מניות"
+                },
+                {
+                  "text": "פוט על XLE $670M, XOP $328M"
+                }
+              ],
+              "detail": "האחזקה באינטל גדלה מ-100 אלף מניות והפכה לאחזקה הגדולה של הקרן במניות. מאז ירדה אינטל בכ-50%, כולל צניחה של 28.6% ב-30 באוקטובר. הדוח לא מראה אם הקרן עדיין מחזיקה במניות.",
+              "read": "הימור גדול על אינטל לפני שהמניה נחתכה בחצי, והימורים גדולים נגד האנרגיה."
+            },
+            {
+              "who": "פיטר ת׳יל",
+              "role": "Founders Fund, דוח 13G/A",
+              "when": "הוגש ב-13 בנובמבר",
+              "moves": [
+                {
+                  "text": "אחזקה בספייס-אקס −26%"
+                }
+              ],
+              "detail": "האחזקה של Founders Fund במניות Class A של ספייס-אקס ירדה מ-427.3 מיליון ל-314.4 מיליון מניות, ושוויה כ-17 מיליארד דולר. הדיווח לא מציין אם המניות נמכרו או חולקו.",
+              "read": "פחות ספייס-אקס ב-Founders Fund, בזמן שרנסנס ו-ARK הוסיפו."
+            },
+            {
+              "who": "ברקשייר האת׳וויי",
+              "role": "החברה של גרג אייבל",
+              "when": "דוח 13F לרבעון השלישי צפוי ב-16 בנובמבר",
+              "moves": [
+                {
+                  "text": "דוח 13F טרם הוגש"
+                }
+              ],
+              "detail": "הדוח הרבעוני (7 בנובמבר) הראה קניות מניות ב-2.4 מיליארד דולר, מכירות בכ-2.8 מיליארד ורכישה עצמית של מניות ב-9.6 מיליארד, בלי לנקוב בשמות החברות.",
+              "read": "דוח ה-13F של יום שני אמור לחשוף מה נקנה ומה נמכר."
+            },
+            {
+              "who": "ביל אקמן",
+              "role": "פרשינג סקוור",
+              "when": "אין עסקאות חדשות; דוח 13F צפוי ב-16 בנובמבר",
+              "moves": [
+                {
+                  "text": "לא דווחו פוזיציות חדשות"
+                }
+              ],
+              "detail": "במכתב לרבעון השלישי נכתב שהקרן ביצעה שבע השקעות חדשות ב-2026 והתחילה שמינית אחרי הרבעון, בלי לנקוב בשמות. לדבריו, שחרור פאני מיי ופרדי מאק עשוי לשחרר ערך של כ-500 מיליארד דולר; שתי המניות עלו ביותר מ-23% בחודש.",
+              "read": "דוח ה-13F של יום שני עשוי לחשוף את האחזקות החדשות."
+            },
+            {
+              "who": "לאופולד אשנברנר",
+              "role": "Situational Awareness",
+              "when": "דוח 13F לרבעון השלישי צפוי ב-16 בנובמבר",
+              "moves": [
+                {
+                  "text": "לא דווחו עסקאות חדשות"
+                }
+              ],
+              "detail": "לא נמצאו דיווחים חדשים השבוע.",
+              "read": "דוח ה-13F לרבעון השלישי יהיה המבט המלא הראשון מאז שהקרן מכרה את רוב תיק המניות הסחירות שלה לסיטדל ב-30 ביולי."
+            }
+          ]
+        }
+      ],
+      "overlaps": [
+        {
+          "name": "אנבידיה",
+          "text": "ARK קנתה בכ-16.9 מיליון דולר ב-9 בנובמבר. ב-30 בספטמבר רנסנס כמעט יצאה, וסורוס קיצצה ב-19% והחזיקה פוט. אופציות הפוט של ברי מהמרות נגדה."
+        },
+        {
+          "name": "ספייס-אקס",
+          "text": "ברבעון השלישי פתחה רנסנס אחזקה של 620 מיליון דולר ו-ARK הגדילה את שלה ב-51%, ואילו Founders Fund של ת׳יל החזיקה 26% פחות מניות."
+        },
+        {
+          "name": "ברודקום ו-AMD",
+          "text": "חבר בית הנבחרים טיילור קנה ברודקום ב-5 בנובמבר, ו-ARK קיצצה בה ב-9 בנובמבר. ברי ציין את שתיהן כמרוויחות; רנסנס הגדילה את AMD."
+        },
+        {
+          "name": "וורנר ברוס. דיסקברי",
+          "text": "אצל פלוסי, ג׳ונסון וקוסטוף רשומות מכירות ב-7 באוקטובר: פדיון במזומן במיזוג, לא החלטות מסחר."
+        }
+      ]
+    },
+    "news": [
+      {
+        "headline": "ג׳נסן הואנג התפטר מתפקיד מנכ״ל אנבידיה",
+        "body": "אנבידיה הודיעה ביום חמישי שהואנג עוזב את תפקידי המנכ״ל, הנשיא והדירקטור, בתוקף מיידי. סמנכ״לית הכספים קולט קרס מכהנת כמנכ״לית זמנית, והארווי ג׳ונס מונה ליו״ר הדירקטוריון הראשון של החברה. ההודעה לא פירטה סיבה; לפי ה-Bull Bear Report, ההתפטרות באה אחרי בדיקה של הדירקטוריון בעניין התנהלותו האישית. המניה נפתחה בירידה של 13%, ננעלה באותו יום בירידה של 4.3% וירדה ב-12.75% בשבוע, ל-162.85 דולר."
+      },
+      {
+        "headline": "מדד מחירים חם הותיר העלאת ריבית בדצמבר מתומחרת במלואה",
+        "body": "מדד המחירים לצרכן לאוקטובר עלה ב-0.4% ומדד הליבה ב-0.3%, שניהם עשירית מעל התחזיות. מדד המחירים ליצרן עלה ב-0.3%, לעומת צפי של 0.4%, אבל ב-6.5% בהשוואה לשנה שעברה, הקצב הגבוה ביותר מאז נובמבר 2022. וולר אמר שיש לשקול העלאה של חצי נקודת אחוז, ולוגן קרא לשתי העלאות נוספות לפחות של רבע נקודה. החוזים העתידיים מתמחרים במלואה העלאה בדצמבר."
+      },
+      {
+        "headline": "השבבים הובילו ביום שני התאוששות שעשתה את רוב העבודה של השבוע",
+        "body": "ה-S&P 500 זינק ב-2.35% ביום שני, כשאנליסטים העריכו שגל המכירות ב-AI בשבוע הקודם היה מוגזם, והברנט ירד אחרי שטראמפ אמר שתקיפות חדשות באיראן לא סבירות אם המגעים יתקדמו. בהמשך ירד המדד בימים שלישי, חמישי ושישי. בסיכום השבוע עלתה AMD ב-18.93%, ברודקום ב-18.16% ומיקרון ב-12.80%."
+      },
+      {
+        "headline": "דוחות: סיסקו וקורוויב תוגמלו, אפלייד מטריאלס נמכרה",
+        "body": "ההכנסות של סיסקו עלו ב-24% ל-18.5 מיליארד דולר והחברה העלתה את התחזית השנתית; המניה עלתה בכ-4% במסחר המאוחר. קורוויב עקפה את התחזיות עם צבר הזמנות של 132.5 מיליארד דולר, אף שהיא נושאת חוב של כמעט 47 מיליארד דולר. ההכנסות של אפלייד מטריאלס צמחו ב-53% ל-10.41 מיליארד דולר והתחזית עומדת על 11.1 מיליארד, אבל המניה ירדה ביום שישי, יחד עם KLA ולאם ריסרץ׳."
+      },
+      {
+        "headline": "סוף השבוע: מוקשים בהורמוז ורחפנים מעל בחריין",
+        "body": "איראן טוענת ששלוש מכליות, אחת מהן מכלית־על, עלו על מוקשים ועלו באש במצר הורמוז ביום שבת; ארה״ב אומרת שפינתה ממוקשים את נתיבי השיט המרכזיים. ביום ראשון הודיעו משמרות המהפכה שרחפנים כוונו למכ״ם אמריקאי בבחריין, שלדבריה יירטה את התקיפה. טראמפ אמר ביום חמישי שארה״ב לא צריכה הסכם. הברנט סיים את השבוע ב-95.84 דולר."
+      },
+      {
+        "headline": "ארה״ב וסין דנות בהורדת מכסים לפני פגישת טראמפ–שי",
+        "body": "מועצת סחר חדשה של ארה״ב וסין התכנסה לראשונה, בשיחת וידאו, ביום שישי, ודנה בהורדה הדדית של מכסים על סחורות בשווי 30 מיליארד דולר מכל צד, וגם בסחר החקלאי. טראמפ ושי ג׳ינפינג צפויים להיפגש ביום חמישי בפסגת APEC בשנג׳ן."
+      }
+    ],
+    "calendar": [
+      {
+        "day": "שני 16",
+        "title": "סקר אמפייר סטייט, נאום של וורש",
+        "body": "מדד הייצור של אמפייר סטייט ב-8:30 בבוקר שעון ניו יורק (צפי של 19, לעומת 25.5 בחודש הקודם). יו״ר הפד קווין וורש נואם בצהריים שעון ניו יורק. באידו, טייסון ו-XPeng מדווחות לפני הפתיחה. המועד האחרון להגשת דוחות 13F לרבעון השלישי."
+      },
+      {
+        "day": "שלישי 17",
+        "title": "אנבידיה, המכירות הקמעונאיות",
+        "body": "המכירות הקמעונאיות לאוקטובר ב-8:30 בבוקר שעון ניו יורק (15:30 שעון ישראל), הייצור התעשייתי ב-9:15. הום דיפו ודיסני לפני הפתיחה. אנבידיה אחרי הנעילה, בסביבות 16:20 שעון ניו יורק (23:20 שעון ישראל), והשיחה ב-17:00: צפי להכנסות של כ-109 מיליארד דולר, לעומת תחזית החברה של כ-108 מיליארד. וולר נואם."
+      },
+      {
+        "day": "רביעי 18",
+        "title": "פרוטוקול הפד, טארגט, לואוס",
+        "body": "התחלות הבנייה ב-8:30 בבוקר שעון ניו יורק. פרוטוקול הישיבה של 27–28 באוקטובר ב-14:00, ישיבה שבה קוק והמק התנגדו ודרשו העלאה; הוא קודם למדד המחירים החם. מכרז אג״ח ל-20 שנה. טארגט, לואוס ו-TJX לפני הפתיחה; פאלו אלטו נטוורקס אחרי הנעילה."
+      },
+      {
+        "day": "חמישי 19",
+        "title": "וולמארט, טראמפ ושי בפסגת APEC",
+        "body": "וולמארט ב-7:00 בבוקר שעון ניו יורק, וגם עליבאבא ו-PDD לפני הפתיחה. תביעות האבטלה וסקר הפד של פילדלפיה ב-8:30. טראמפ ושי נפגשים בשנג׳ן. אינטואיט ורוס אחרי הנעילה."
+      },
+      {
+        "day": "שישי 20",
+        "title": "סנטימנט הצרכנים של מישיגן",
+        "body": "הנתון הסופי של סנטימנט הצרכנים לנובמבר ב-10:00 בבוקר שעון ניו יורק (צפי של 53.3). וולר וקוק נואמים. אופציות על ביטקוין בשווי של כ-1.8 מיליארד דולר פוקעות בבורסת Deribit."
+      }
+    ],
+    "consensus": [
+      {
+        "report": "מכירות קמעונאיות, חודשי",
+        "expected": "+0.2%",
+        "prior": "+0.8%"
+      },
+      {
+        "report": "מכירות קמעונאיות, קבוצת הליבה",
+        "expected": "+0.4%",
+        "prior": "+0.1%"
+      },
+      {
+        "report": "התחלות בנייה, בקצב שנתי",
+        "expected": "1.240M",
+        "prior": "1.221M"
+      },
+      {
+        "report": "תביעות אבטלה ראשונות",
+        "expected": "197K",
+        "prior": "200K"
+      },
+      {
+        "report": "סקר הפד של פילדלפיה",
+        "expected": "23",
+        "prior": "20.9"
+      }
+    ],
+    "consensus_note": "המכירות הקמעונאיות: Newsquawk (ב-Bull Bear Report מופיע 0.8%, שהוא נתון ספטמבר). שאר הנתונים: Economic Weekly. הסיכוי להעלאת ריבית: CME FedWatch דרך InvestmentNews ו-bitcoin.com, 13–14 בנובמבר; LSEG מראה תמונה דומה.",
+    "fed_odds": [
+      {
+        "label": "העלאה של 25 נ״ב בהחלטת הריבית ב-9 בדצמבר"
+      },
+      {
+        "label": "העלאה של 50 נ״ב בהחלטת הריבית ב-9 בדצמבר"
+      }
+    ],
+    "further": "בהמשך: מדד ה-PCE לאוקטובר ב-25 בנובמבר, דוח התעסוקה לנובמבר ב-4 בדצמבר, החלטת הריבית ב-9 בדצמבר, מדד המחירים לצרכן לנובמבר ב-10 בדצמבר ומועד היעד למימון הממשל ב-11 בדצמבר.",
+    "crypto": {
+      "headline": "הביטקוין ירד ב-9.9% ונגע ב-62 אלף דולר ביום ראשון, ומקרנות הסל יצאו 1.07 מיליארד",
+      "deck": "מקרנות הסל על ביטקוין יצאו כ-1.07 מיליארד דולר, עם יציאות בכל יום; IBIT של בלקרוק אחראית ל-908 מיליון דולר מהסכום. הביטקוין סיים את יום שישי סביב 68,250 דולר, בירידה של 9.9%, נשבר מתחת לממוצע ל-200 שבועות ביום שבת, נגע בכ-62,080 דולר ביום ראשון ונסחר סביב 64,400 דולר.",
+      "map": {
+        "marks": [
+          {
+            "label": "שפל יולי"
+          },
+          {
+            "label": "תמיכה"
+          },
+          {
+            "label": "שפל יום ראשון"
+          },
+          {
+            "label": "כאב מקסימלי, פקיעה ב-20 בנובמבר"
+          },
+          {
+            "label": "ממוצע 50"
+          }
+        ],
+        "zone": {
+          "label": "אזור התנגדות"
+        }
+      },
+      "stats": [
+        {
+          "label": "תזרים נטו בקרנות הסל, בין 9 ל-13 בנובמבר",
+          "value": "~−$1.07B",
+          "note": "יציאות כספים של 201.0 מיליון דולר ביום שני, 95.0 מיליון ביום שלישי, 299.8 מיליון ביום רביעי, 284.1 מיליון ביום חמישי ו-185.4 מיליון ביום שישי, לפי Farside. שבעה ימי יציאות רצופים מאז 5 בנובמבר מסתכמים בכ-1.91 מיליארד דולר."
+        },
+        {
+          "label": "מה יניע את הביטקוין השבוע",
+          "note": "הדוח של אנבידיה ביום שלישי, העלאת הריבית בדצמבר שכבר מתומחרת במלואה ותשואה ל-10 שנים מעל 5%. ביום שישי פוקעות אופציות על כ-28,300 ביטקוין, ונקודת הכאב המקסימלי היא 73,000 דולר."
+        }
+      ],
+      "signal": "לפי crypto.news, ה-RSI היומי עומד על 22.5, עמוק באזור מכירת היתר. התמיכה ב-62 אלף דולר ואחריה 60 אלף; ההתנגדות ב-65.6 אלף ואחריה האזור שבין 68 ל-70 אלף, כשהממוצע ל-200 שבועות סביב 67.8 עד 68 אלף. שפל יולי, 58,570 דולר, הוא הרמה האחרונה מהשנה הזו."
+    },
+    "bottom_line": [
+      {
+        "title": "אנבידיה ביום שלישי",
+        "body": "הדוח הראשון תחת מנכ״לית זמנית. האנליסטים צופים הכנסות של כ-109 מיליארד דולר, לעומת תחזית החברה של כ-108 מיליארד. ברי צופה רבעון חזק, אבל צמיחה איטית יותר ושולי רווח נמוכים יותר. המניה נסחרת כ-32% מתחת לשיא של אוקטובר."
+      },
+      {
+        "title": "7,667 למעלה, 7,316 למטה",
+        "body": "ה-S&P 500 נכשל ביום חמישי בממוצע ל-50 יום, סביב 7,667. נעילה מעליו תפתח מחדש את הדרך לשיא של 7,818.93; נעילה מתחת לשפל יולי, 7,316, תשבור את רצף השפלים העולים."
+      },
+      {
+        "title": "ריבית של 5%",
+        "body": "העלאת ריבית בדצמבר מתומחרת במלואה, עם סיכוי של כ-11% ל-50 נ״ב. המכירות הקמעונאיות ביום שלישי והפרוטוקול ביום רביעי יכריעו אם הסיכוי הזה יגדל; קבוצת ליבה חלשה תהיה הסימן הראשון לכך שהריבית הגבוהה מגיעה לצרכנים."
+      }
+    ]
+  },
+  "numbers": {
+    "generated_at": "2026-11-15T12:15:57+00:00",
+    "week_ending": "2026-11-13",
+    "indices": [
+      {
+        "symbol": "^GSPC",
+        "name": "S&P 500",
+        "date": "2026-11-13",
+        "close": 7561.67,
+        "prev_close": 7376.86,
+        "week_pct": 2.51,
+        "week_high": 7652.76,
+        "week_low": 7422.24
+      },
+      {
+        "symbol": "^IXIC",
+        "name": "Nasdaq",
+        "date": "2026-11-13",
+        "close": 25136.27,
+        "prev_close": 24579.43,
+        "week_pct": 2.27,
+        "week_high": 25649.85,
+        "week_low": 24762.57
+      },
+      {
+        "symbol": "^DJI",
+        "name": "Dow",
+        "date": "2026-11-13",
+        "close": 52347.55,
+        "prev_close": 51285.73,
+        "week_pct": 2.07,
+        "week_high": 52751.22,
+        "week_low": 51643.01
+      },
+      {
+        "symbol": "^RUT",
+        "name": "Russell 2000",
+        "date": "2026-11-13",
+        "close": 2790.49,
+        "prev_close": 2754.11,
+        "week_pct": 1.32,
+        "week_high": 2852.69,
+        "week_low": 2763.72
+      }
+    ],
+    "equal_weight": {
+      "rsp_week_pct": 2.37,
+      "spy_week_pct": 2.59
+    },
+    "sectors": [
+      {
+        "symbol": "XLK",
+        "name": "Technology",
+        "date": "2026-11-13",
+        "close": 170.28,
+        "prev_close": 164.74,
+        "week_pct": 3.36,
+        "week_high": 176.49,
+        "week_low": 165.3,
+        "weight": 33
+      },
+      {
+        "symbol": "XLF",
+        "name": "Financials",
+        "date": "2026-11-13",
+        "close": 58.68,
+        "prev_close": 57.16,
+        "week_pct": 2.66,
+        "week_high": 59.08,
+        "week_low": 57.26,
+        "weight": 13
+      },
+      {
+        "symbol": "XLY",
+        "name": "Consumer Discretionary",
+        "date": "2026-11-13",
+        "close": 119.98,
+        "prev_close": 117.58,
+        "week_pct": 2.04,
+        "week_high": 122.22,
+        "week_low": 119.27,
+        "weight": 10
+      },
+      {
+        "symbol": "XLC",
+        "name": "Communication Services",
+        "date": "2026-11-13",
+        "close": 108.69,
+        "prev_close": 104.79,
+        "week_pct": 3.72,
+        "week_high": 109.26,
+        "week_low": 106.22,
+        "weight": 10
+      },
+      {
+        "symbol": "XLV",
+        "name": "Health Care",
+        "date": "2026-11-13",
+        "close": 188.85,
+        "prev_close": 184.8,
+        "week_pct": 2.19,
+        "week_high": 190.66,
+        "week_low": 185.36,
+        "weight": 9
+      },
+      {
+        "symbol": "XLI",
+        "name": "Industrials",
+        "date": "2026-11-13",
+        "close": 168.78,
+        "prev_close": 162.67,
+        "week_pct": 3.76,
+        "week_high": 171.6,
+        "week_low": 165.05,
+        "weight": 8
+      },
+      {
+        "symbol": "XLP",
+        "name": "Consumer Staples",
+        "date": "2026-11-13",
+        "close": 92.35,
+        "prev_close": 90.08,
+        "week_pct": 2.52,
+        "week_high": 92.35,
+        "week_low": 89.8,
+        "weight": 5
+      },
+      {
+        "symbol": "XLE",
+        "name": "Energy",
+        "date": "2026-11-13",
+        "close": 64.96,
+        "prev_close": 61.62,
+        "week_pct": 5.42,
+        "week_high": 64.97,
+        "week_low": 60.43,
+        "weight": 3
+      },
+      {
+        "symbol": "XLU",
+        "name": "Utilities",
+        "date": "2026-11-13",
+        "close": 44.04,
+        "prev_close": 43.13,
+        "week_pct": 2.11,
+        "week_high": 44.14,
+        "week_low": 43.15,
+        "weight": 2.5
+      },
+      {
+        "symbol": "XLRE",
+        "name": "Real Estate",
+        "date": "2026-11-13",
+        "close": 44.37,
+        "prev_close": 44.0,
+        "week_pct": 0.84,
+        "week_high": 44.93,
+        "week_low": 44.13,
+        "weight": 2
+      },
+      {
+        "symbol": "XLB",
+        "name": "Materials",
+        "date": "2026-11-13",
+        "close": 52.23,
+        "prev_close": 51.95,
+        "week_pct": 0.54,
+        "week_high": 53.39,
+        "week_low": 51.95,
+        "weight": 2
+      }
+    ],
+    "semis": {
+      "symbol": "SOXX",
+      "name": "Semiconductors",
+      "date": "2026-11-13",
+      "close": 149.3,
+      "prev_close": 136.53,
+      "week_pct": 9.35,
+      "week_high": 158.58,
+      "week_low": 137.97
+    },
+    "rates": {
+      "us10y": {
+        "symbol": "^TNX",
+        "name": "10-year Treasury yield",
+        "date": "2026-11-13",
+        "close": 5.154,
+        "week_change_bp": 29.5,
+        "week_high": 5.174
+      }
+    },
+    "vix": {
+      "symbol": "^VIX",
+      "name": "VIX",
+      "date": "2026-11-13",
+      "close": 19.3,
+      "prev_close": 25.64,
+      "week_pct": -24.73,
+      "week_high": 25.08,
+      "week_low": 17.33
+    },
+    "commodities": [
+      {
+        "symbol": "CL=F",
+        "name": "WTI oil",
+        "date": "2026-11-13",
+        "close": 88.56,
+        "prev_close": 90.83,
+        "week_pct": -2.5,
+        "week_high": 91.42,
+        "week_low": 83.88
+      },
+      {
+        "symbol": "BZ=F",
+        "name": "Brent oil",
+        "date": "2026-11-13",
+        "close": 95.84,
+        "prev_close": 98.32,
+        "week_pct": -2.52,
+        "week_high": 98.42,
+        "week_low": 89.15
+      },
+      {
+        "symbol": "GC=F",
+        "name": "Gold",
+        "date": "2026-11-13",
+        "close": 3886.3,
+        "prev_close": 4074.9,
+        "week_pct": -4.63,
+        "week_high": 4157.7,
+        "week_low": 3856.7
+      }
+    ],
+    "crypto": {
+      "symbol": "BTC-USD",
+      "name": "Bitcoin",
+      "date": "2026-11-13",
+      "close": 68249.27,
+      "prev_close": 75746.93,
+      "week_pct": -9.9,
+      "week_high": 76138.68,
+      "week_low": 67653.07
+    },
+    "insiders": {
+      "window": [
+        "2026-11-07",
+        "2026-11-13"
+      ],
+      "top_buys": [
+        {
+          "symbol": "AKAM",
+          "insider": "F Thomson Leighton",
+          "role": "Chief Executive Officer",
+          "action": "Buy",
+          "value": 2552400,
+          "shares": 30000,
+          "price": 85.08,
+          "date": "2026-11-13",
+          "filed": "2026-11-13",
+          "plan": false,
+          "others": []
+        },
+        {
+          "symbol": "TEAM",
+          "insider": "Michael Cannon-Brookes",
+          "role": "CEO, Co-Founder",
+          "action": "Buy",
+          "value": 2013990,
+          "shares": 13400,
+          "price": 150.3,
+          "date": "2026-11-11",
+          "filed": "2026-11-12",
+          "plan": true,
+          "others": []
+        },
+        {
+          "symbol": "TEAM",
+          "insider": "Michael Cannon-Brookes",
+          "role": "CEO, Co-Founder",
+          "action": "Buy",
+          "value": 2004422,
+          "shares": 13400,
+          "price": 149.58,
+          "date": "2026-11-12",
+          "filed": "2026-11-13",
+          "plan": true,
+          "others": []
+        },
+        {
+          "symbol": "ROK",
+          "insider": "Blake D. Moret",
+          "role": "President and CEO",
+          "action": "Buy",
+          "value": 1545450,
+          "shares": 4000,
+          "price": 386.36,
+          "date": "2026-11-09",
+          "filed": "2026-11-09",
+          "plan": false,
+          "others": []
+        },
+        {
+          "symbol": "COHR",
+          "insider": "James Robert Anderson",
+          "role": "CEO",
+          "action": "Buy",
+          "value": 997400,
+          "shares": 5000,
+          "price": 199.48,
+          "date": "2026-11-09",
+          "filed": "2026-11-12",
+          "plan": false,
+          "others": []
+        },
+        {
+          "symbol": "CRH",
+          "insider": "Richard H Fearon",
+          "role": "Director",
+          "action": "Buy",
+          "value": 569700,
+          "shares": 6000,
+          "price": 94.95,
+          "date": "2026-11-06",
+          "filed": "2026-11-10",
+          "plan": false,
+          "others": []
+        }
+      ],
+      "top_sells": [
+        {
+          "symbol": "SYK",
+          "insider": "Ronda E Stryker",
+          "role": "Director",
+          "action": "Sell",
+          "value": 178924731,
+          "shares": 550000,
+          "price": 325.32,
+          "date": "2026-11-06",
+          "filed": "2026-11-09",
+          "plan": false,
+          "others": []
+        },
+        {
+          "symbol": "RCL",
+          "insider": "Arne Alexander Wilhelmsen",
+          "role": "Director",
+          "action": "Sell",
+          "value": 159824006,
+          "shares": 476674,
+          "price": 335.29,
+          "date": "2026-11-10",
+          "filed": "2026-11-10",
+          "plan": false,
+          "others": []
+        },
+        {
+          "symbol": "PLTR",
+          "insider": "Shyam Sankar",
+          "role": "Officer",
+          "action": "Sell",
+          "value": 64933199,
+          "shares": 384680,
+          "price": 168.8,
+          "date": "2026-11-11",
+          "filed": "2026-11-13",
+          "plan": true,
+          "others": []
+        },
+        {
+          "symbol": "RCL",
+          "insider": "Arne Alexander Wilhelmsen",
+          "role": "Director",
+          "action": "Sell",
+          "value": 62109253,
+          "shares": 185000,
+          "price": 335.73,
+          "date": "2026-11-12",
+          "filed": "2026-11-13",
+          "plan": false,
+          "others": []
+        },
+        {
+          "symbol": "ILMN",
+          "insider": "Keith A. Meister",
+          "role": "Director",
+          "action": "Sell",
+          "value": 61093040,
+          "shares": 280091,
+          "price": 218.12,
+          "date": "2026-11-11",
+          "filed": "2026-11-12",
+          "plan": false,
+          "others": []
+        },
+        {
+          "symbol": "ANET",
+          "insider": "Andreas Bechtolsheim",
+          "role": "10% Owner",
+          "action": "Sell",
+          "value": 43928304,
+          "shares": 260000,
+          "price": 168.96,
+          "date": "2026-11-06",
+          "filed": "2026-11-10",
+          "plan": true,
+          "others": []
+        }
+      ]
+    },
+    "notes": "Sector weights are approximate S&P 500 weights used only to size heatmap tiles."
+  }
+}

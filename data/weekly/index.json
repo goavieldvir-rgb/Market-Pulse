@@ -1,6 +1,14 @@
 {
   "editions": [
     {
+      "week_of": "2026-11-16",
+      "label": "Nov 16–20, 2026",
+      "title": "Stocks bounce 2.5% as Nvidia loses its CEO and the 10-year yield tops 5%",
+      "published": "2026-11-15",
+      "file": "data/weekly/2026-11-16.json",
+      "title_he": "המניות התאוששו ב-2.5%, אף שאנבידיה איבדה את המנכ״ל והתשואה ל-10 שנים עברה את ה-5%"
+    },
+    {
       "week_of": "2026-11-09",
       "label": "Nov 9–13, 2026",
       "title": "A Democratic sweep and a chip crash push the S&P 500 down to its 200-day line",
