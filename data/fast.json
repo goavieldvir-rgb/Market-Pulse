@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-17T21:24:36+00:00",
+  "generated_at": "2026-11-17T21:57:02+00:00",
   "market": {
     "state": "closed",
     "session_open": "2026-11-17T14:30:00+00:00",
@@ -46,20 +46,20 @@
   "vix": {
     "symbol": "^VIX",
     "date": "2026-11-17",
-    "close": 25.57,
+    "close": 25.46,
     "prev_close": 22.91,
-    "change_pct": 11.61,
-    "in_session": true,
+    "change_pct": 11.13,
+    "in_session": false,
     "close_from_quote": false,
-    "as_of": "2026-11-17T21:09:31+00:00",
+    "as_of": "2026-11-17T21:15:01+00:00",
     "sma150": 17.18,
-    "distance_from_sma150_pct": 48.8,
+    "distance_from_sma150_pct": 48.17,
     "streak_direction": "green",
-    "streak_count": 3,
-    "streak_through": "2026-11-16",
-    "return_5d_pct": 31.4,
-    "return_20d_pct": 47.72,
-    "percentile_1y": 94.8
+    "streak_count": 4,
+    "streak_through": "2026-11-17",
+    "return_5d_pct": 30.83,
+    "return_20d_pct": 47.08,
+    "percentile_1y": 94.4
   },
   "sectors": {
     "XLP": {
@@ -121,19 +121,19 @@
     "RSP": {
       "symbol": "RSP",
       "date": "2026-11-17",
-      "close": 215.8,
+      "close": 215.76,
       "prev_close": 218.93,
-      "change_pct": -1.43,
+      "change_pct": -1.45,
       "in_session": false,
       "close_from_quote": false,
       "as_of": "2026-11-17T21:00:00+00:00",
-      "sma150": 212.73,
-      "distance_from_sma150_pct": 1.45,
+      "sma150": 212.72,
+      "distance_from_sma150_pct": 1.43,
       "streak_direction": "red",
       "streak_count": 2,
       "streak_through": "2026-11-17",
-      "return_5d_pct": -2.3,
-      "return_20d_pct": -0.03,
+      "return_5d_pct": -2.32,
+      "return_20d_pct": -0.05,
       "percentile_1y": 81.3
     },
     "SPY": {
@@ -154,12 +154,12 @@
       "return_20d_pct": -4.76,
       "percentile_1y": 47.8
     },
-    "rsp_minus_spy_20d_pct": 4.73
+    "rsp_minus_spy_20d_pct": 4.71
   },
   "fear_greed": {
-    "score": 25.1,
+    "score": 25.2,
     "rating": "fear",
-    "as_of": "2026-11-17T21:13:52+00:00",
+    "as_of": "2026-11-17T21:07:04+00:00",
     "previous_close": 31.0,
     "previous_1_week": 37.4
   },
@@ -203,11 +203,11 @@
     {
       "symbol": "XLF",
       "name": "Financials",
-      "close": 57.08,
-      "change_pct": -1.89,
-      "return_5d_pct": -2.08,
-      "return_20d_pct": 2.44,
-      "distance_from_sma150_pct": 3.75
+      "close": 57.07,
+      "change_pct": -1.91,
+      "return_5d_pct": -2.09,
+      "return_20d_pct": 2.42,
+      "distance_from_sma150_pct": 3.74
     },
     {
       "symbol": "XLRE",
