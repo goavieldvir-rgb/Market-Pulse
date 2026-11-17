@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-11-17T04:16:17+00:00",
+  "generated_at": "2026-11-17T09:16:54+00:00",
   "market": {
-    "state": "closed",
-    "session_open": "2026-11-16T14:30:00+00:00",
-    "session_close": "2026-11-16T21:00:00+00:00",
+    "state": "pre",
+    "session_open": "2026-11-17T14:30:00+00:00",
+    "session_close": "2026-11-17T21:00:00+00:00",
     "as_of": "2026-11-16T21:00:00+00:00",
     "session_date": "2026-11-16"
   },
@@ -45,21 +45,21 @@
   },
   "vix": {
     "symbol": "^VIX",
-    "date": "2026-11-16",
-    "close": 22.91,
-    "prev_close": 19.3,
-    "change_pct": 18.7,
-    "in_session": false,
+    "date": "2026-11-17",
+    "close": 23.51,
+    "prev_close": 22.91,
+    "change_pct": 2.62,
+    "in_session": true,
     "close_from_quote": false,
-    "as_of": "2026-11-16T21:15:01+00:00",
-    "sma150": 17.13,
-    "distance_from_sma150_pct": 33.74,
+    "as_of": "2026-11-17T09:01:46+00:00",
+    "sma150": 17.17,
+    "distance_from_sma150_pct": 36.92,
     "streak_direction": "green",
     "streak_count": 3,
     "streak_through": "2026-11-16",
-    "return_5d_pct": 15.01,
-    "return_20d_pct": 24.24,
-    "percentile_1y": 88.5
+    "return_5d_pct": 20.81,
+    "return_20d_pct": 35.82,
+    "percentile_1y": 89.3
   },
   "sectors": {
     "XLP": {
@@ -157,11 +157,11 @@
     "rsp_minus_spy_20d_pct": 6.05
   },
   "fear_greed": {
-    "score": 31.0,
+    "score": 30.0,
     "rating": "fear",
-    "as_of": "2026-11-16T23:59:54+00:00",
-    "previous_close": 38.6,
-    "previous_1_week": 31.5
+    "as_of": "2026-11-17T08:53:31+00:00",
+    "previous_close": 31.0,
+    "previous_1_week": 37.4
   },
   "sector_breakout": [
     {
