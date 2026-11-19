@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-11-19T02:51:23+00:00",
-  "survey_date": "2026-11-11",
-  "bullish_pct": 30.8,
-  "neutral_pct": 17.8,
-  "bearish_pct": 51.4,
-  "bull_bear_spread": -20.6,
+  "generated_at": "2026-11-19T08:52:30+00:00",
+  "survey_date": "2026-11-18",
+  "bullish_pct": 33.3,
+  "neutral_pct": 24.4,
+  "bearish_pct": 42.2,
+  "bull_bear_spread": -8.9,
   "historical_avg": {
     "bullish": 37.5,
     "neutral": 31.5,
@@ -178,6 +178,12 @@
       "bullish": 30.8,
       "neutral": 17.8,
       "bearish": 51.4
+    },
+    {
+      "date": "2026-11-18",
+      "bullish": 33.3,
+      "neutral": 24.4,
+      "bearish": 42.2
     }
   ],
   "source": "https://www.aaii.com/sentimentsurvey",
