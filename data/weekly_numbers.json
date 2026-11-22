@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-21T14:43:19+00:00",
+  "generated_at": "2026-11-22T12:51:26+00:00",
   "week_ending": "2026-11-20",
   "indices": [
     {
@@ -205,21 +205,21 @@
       "symbol": "CL=F",
       "name": "WTI oil",
       "date": "2026-11-20",
-      "close": 83.98,
+      "close": 83.41,
       "prev_close": 88.56,
-      "week_pct": -5.17,
+      "week_pct": -5.82,
       "week_high": 89.49,
-      "week_low": 81.55
+      "week_low": 80.78
     },
     {
       "symbol": "BZ=F",
       "name": "Brent oil",
       "date": "2026-11-20",
-      "close": 92.57,
+      "close": 89.95,
       "prev_close": 95.84,
-      "week_pct": -3.41,
+      "week_pct": -6.15,
       "week_high": 96.76,
-      "week_low": 90.06
+      "week_low": 87.7
     },
     {
       "symbol": "GC=F",
