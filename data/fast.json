@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-24T23:18:08+00:00",
+  "generated_at": "2026-11-24T23:56:44+00:00",
   "market": {
     "state": "closed",
     "session_open": "2026-11-24T14:30:00+00:00",
@@ -159,7 +159,7 @@
   "fear_greed": {
     "score": 17.4,
     "rating": "extreme fear",
-    "as_of": "2026-11-24T22:55:13+00:00",
+    "as_of": "2026-11-24T23:38:55+00:00",
     "previous_close": 17.0,
     "previous_1_week": 26.0
   },
