@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-24T23:56:44+00:00",
+  "generated_at": "2026-11-25T01:28:16+00:00",
   "market": {
     "state": "closed",
     "session_open": "2026-11-24T14:30:00+00:00",
@@ -14,7 +14,7 @@
     "prev_close": 722.29,
     "change_pct": -0.49,
     "in_session": false,
-    "close_from_quote": false,
+    "close_from_quote": true,
     "as_of": "2026-11-24T21:00:00+00:00",
     "sma150": 751.97,
     "distance_from_sma150_pct": -4.41,
@@ -32,7 +32,7 @@
     "prev_close": 651.03,
     "change_pct": -1.99,
     "in_session": false,
-    "close_from_quote": false,
+    "close_from_quote": true,
     "as_of": "2026-11-24T21:00:00+00:00",
     "sma150": 709.65,
     "distance_from_sma150_pct": -10.08,
@@ -69,7 +69,7 @@
       "prev_close": 90.38,
       "change_pct": 1.66,
       "in_session": false,
-      "close_from_quote": false,
+      "close_from_quote": true,
       "as_of": "2026-11-24T21:00:00+00:00",
       "sma150": 85.22,
       "distance_from_sma150_pct": 7.82,
@@ -87,7 +87,7 @@
       "prev_close": 43.32,
       "change_pct": 0.18,
       "in_session": false,
-      "close_from_quote": false,
+      "close_from_quote": true,
       "as_of": "2026-11-24T21:00:00+00:00",
       "sma150": 43.7,
       "distance_from_sma150_pct": -0.68,
@@ -105,7 +105,7 @@
       "prev_close": 116.93,
       "change_pct": 0.68,
       "in_session": false,
-      "close_from_quote": false,
+      "close_from_quote": true,
       "as_of": "2026-11-24T21:00:00+00:00",
       "sma150": 115.86,
       "distance_from_sma150_pct": 1.61,
@@ -114,7 +114,7 @@
       "streak_through": "2026-11-24",
       "return_5d_pct": 0.53,
       "return_20d_pct": 1.97,
-      "percentile_1y": 59.4
+      "percentile_1y": 59.0
     }
   },
   "participation": {
@@ -125,7 +125,7 @@
       "prev_close": 212.82,
       "change_pct": 0.54,
       "in_session": false,
-      "close_from_quote": false,
+      "close_from_quote": true,
       "as_of": "2026-11-24T21:00:00+00:00",
       "sma150": 213.05,
       "distance_from_sma150_pct": 0.43,
@@ -134,7 +134,7 @@
       "streak_through": "2026-11-24",
       "return_5d_pct": -0.83,
       "return_20d_pct": -1.64,
-      "percentile_1y": 74.5
+      "percentile_1y": 74.1
     },
     "SPY": {
       "symbol": "SPY",
@@ -143,7 +143,7 @@
       "prev_close": 722.29,
       "change_pct": -0.49,
       "in_session": false,
-      "close_from_quote": false,
+      "close_from_quote": true,
       "as_of": "2026-11-24T21:00:00+00:00",
       "sma150": 751.97,
       "distance_from_sma150_pct": -4.41,
@@ -159,7 +159,7 @@
   "fear_greed": {
     "score": 17.4,
     "rating": "extreme fear",
-    "as_of": "2026-11-24T23:38:55+00:00",
+    "as_of": "2026-11-24T23:59:52+00:00",
     "previous_close": 17.0,
     "previous_1_week": 26.0
   },
