@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-26T09:36:11+00:00",
+  "generated_at": "2026-11-26T21:59:44+00:00",
   "market": {
     "state": "closed",
     "session_open": "2026-11-25T14:30:00+00:00",
@@ -46,20 +46,20 @@
   "vix": {
     "symbol": "^VIX",
     "date": "2026-11-26",
-    "close": 27.12,
+    "close": 26.8,
     "prev_close": 28.29,
-    "change_pct": -4.14,
-    "in_session": true,
+    "change_pct": -5.27,
+    "in_session": false,
     "close_from_quote": false,
-    "as_of": "2026-11-26T09:21:01+00:00",
+    "as_of": "2026-11-26T16:30:00+00:00",
     "sma150": 17.62,
-    "distance_from_sma150_pct": 53.88,
-    "streak_direction": "green",
+    "distance_from_sma150_pct": 52.08,
+    "streak_direction": "red",
     "streak_count": 1,
-    "streak_through": "2026-11-25",
-    "return_5d_pct": -4.64,
-    "return_20d_pct": 57.67,
-    "percentile_1y": 96.0
+    "streak_through": "2026-11-26",
+    "return_5d_pct": -5.77,
+    "return_20d_pct": 55.81,
+    "percentile_1y": 95.6
   },
   "sectors": {
     "XLP": {
